@@ -2,10 +2,10 @@
 # Book settings
 # Learn more at https://jupyterbook.org/customize/config.html
 
-title: My sample book
+title: ECE447 Coruse Webpage
 author: DFEC
 logo: logo.png
-copyright: '2023'
+copyright: '2025'
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
