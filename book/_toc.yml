@@ -12,4 +12,5 @@ parts:
     chapters:
       - file: downloads
   - caption: Assignments and Labs
+    chapters:
       - file: labs/Lab1
