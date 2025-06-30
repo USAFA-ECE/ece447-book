@@ -1,6 +1,6 @@
 # ECE447 GitHub Page
 
-[https://usafa-ece.github.io/ece447-book/]([https://docs.github.com/en/actions](https://usafa-ece.github.io/ece447-book/)).
+https://usafa-ece.github.io/ece447-book/
 
 
 
