@@ -1,4 +1,3 @@
-[//]: # (# Welcome to ECE447!)
 # Welcome to ECE447, _Communication Systems_!
 
 This website hosts the course syllabus, readings, slides, projects, homework, and more! The course Teams page is used for official course communication, recording lessons, and helping each other via the Discussions channel.
