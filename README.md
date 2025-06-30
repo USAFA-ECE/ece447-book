@@ -1,12 +1,9 @@
-# Jupyter Book Template for GitHub Pages
+# ECE447 GitHub Page
 
-A simple demo of how to deploy a [Jupyter Book](https://jupyterbook.org/en/stable/intro.html) static website to [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/about-github-pages) that is automatically built with [GitHub Actions](https://docs.github.com/en/actions).
+[https://usafa-ece.github.io/ece447-book/]([https://docs.github.com/en/actions](https://usafa-ece.github.io/ece447-book/)).
 
-Pages are deployed to `<username>.github.io/<repository-name>`. The live example of this demo is at https://usafa-ece.github.io/jupyterbook-template/
 
-- Recommend reading [Structure the Table of Contents](https://jupyterbook.org/en/stable/structure/toc.html) for the `book/_toc.yml` file
-- Recommend reading [Markdown files](https://jupyterbook.org/en/stable/file-types/markdown.html) in Jupyter Books
-- Recommend reading [Configuration reference](https://jupyterbook.org/en/stable/customize/config.html) for the `book/_config.yml` file
+
 
 ## How it works
 
