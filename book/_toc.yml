@@ -10,6 +10,6 @@ parts:
       - file: schedule
   - caption: Course Downloads
     chapters:
-      - file: _downloads
+      - file: downloads
   - caption: Assignments and Labs
       - file: labs/Lab1
