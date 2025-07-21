@@ -3,13 +3,13 @@
 
 ## Overview
 
-The USB dongles we passed out in class can directly digitize a 3.2 MHz segment of the RF spectrum, from 27 MHz up to 1.7 GHz. This can capture a large part of the RF spectrum, which we can then process in Matlab, and extract the signals we want.
+The USB dongles we passed out in class can directly digitize a 3.2 MHz segment of the RF spectrum, from 27 MHz up to 1.7 GHz. This can capture a large part of the RF spectrum, which we can then process in MATLAB or Python and extract the signals we want.
 
-In this lab we will install the USB software for your computer, and then use a real time spectral display to look at some of the different signals that are all around you.
+In this lab we will install the USB software for your computer and then use a real time spectral display to look at some of the different signals that are all around you.
 
 ## Aims of the Lab
 
-This lab is aimed getting your software working, and starting to look around at all of the signals that you are constantly being bombarded with. The main requirement of the lab is to take a screen shot of your display at the end of the lab and submit it to Gradescope.
+This lab is aimed getting your software working and starting to look around at all of the signals that you are constantly being bombarded with. The main requirement of the lab is to take a screen shot of your display at the end of the lab and submit it to Gradescope.
 
 This will show you have gotten everything going! Find an interesting frequency, and try to identify what is happening there. Next week there will be more to do.
 
