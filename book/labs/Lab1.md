@@ -57,15 +57,15 @@ Initial Display
 
 ![](graphics/gqrx_init.png)  
 
-This is a previous version of gqrx, but it should look similar. Set the frequency offset in the upper right to 0.000 kHz, and then set the receiver frequency in the upper left to 88.500 000 MHz. This is KQED, which is a nice clean signal. Change the “Mode” pulldown on the right side of the screen to “Wide FM (Stereo)”. The display should look like this:
+This is a previous version of gqrx, but it should look similar. Set the frequency offset in the upper right to 0.000 kHz, and then set the receiver frequency in the upper left to 97.700 000 MHz. This is KAFA, which is a nice clean signal. Change the “Mode” pulldown on the right side of the screen to “Wide FM (Stereo)”. The display should look like this:
 
-Tuned to KQED
+Tuned to KAFA
 
 ![](graphics/gqrx_kqed_init.png)  
 
-Now click the big button in the upper left corner. It looks like an on/off power button. With any luck, you should be listening to KQED!
+Now click the big button in the upper left corner. It looks like an on/off power button. With any luck, you should be listening to KAFA!
 
-Tuned to KQED
+Tuned to KAFA
 
 ![](graphics/gqrx_885.png)  
 
@@ -85,9 +85,9 @@ Try setting the center frequency to other stations that you know (such as 99.7, 
 
 Select any of them by clicking on them in the top panel. That will set the receiver offset.
 
-The SDR# version looks like this, when tuned to KQED:
+The SDR# version looks like this, when tuned to KAFA:
 
-### SDR# Tuned to KQED
+### SDR# Tuned to KAFA
 
 ![](graphics/sdrsharp_885.png)  
 
