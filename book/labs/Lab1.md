@@ -77,7 +77,7 @@ One useful setting is the receiver gain. To change this click on “Input Contro
 
 Go back to the “Receiver Options”. The top “Filter” pulldown sets how wide a bandwidth we are listening to. This is the shaded region on the live spectrum plot. On “Normal” it chooses something reasonable for whatever modulation we are receiving, so generally leave it there. The middle “Mode” pulldown selects how the receiver decodes the signal. Common choice are “AM”, used for aircraft and air traffic control, “Narrow FM” used for police and fire radio, and “Wide FM” used for commercial FM radio. We will talk about the other options later. The bottom “AGC” pulldown sets how rapidly the receiver adjusts for amplitude variations in the signal.
 
-Try setting the center frequency to other stations that you know (such as 99.7, my daughter Rachel's favorite, or 105.3). Often you will see several stations in the plot, as shown below:
+Try setting the center frequency to other stations that you may know (such as 92.9 out of Pueblo or 98.1 classic rock). Often you will see several stations in the plot, as shown below:
 
 ### Tuned to 99.7
 
@@ -98,9 +98,9 @@ We will come back to commercial FM in a couple of labs.
 ## Police, Fire, and Amateur Radio
 
 There are several frequency bands that are used for public services, such as local police and fire. For Palo Alto, the police, fire, and utilities frequencies are
-
+![](graphics/PA_Police.png)
 and for the Stanford Police are
-
+![](graphics/Stanford_Police.png)
 These are from
 
 [http://radioreference.com](http://radioreference.com/)
