@@ -1,0 +1,780 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 8: Digital Packet Radio – APRS &#8212; ECE447 Coruse Webpage</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/Lab8';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Lab 7: Automatic Dependent Surveillance-Broadcast (ADS-B)" href="Lab7.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="ECE447 Coruse Webpage - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="ECE447 Coruse Webpage - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to ECE447, Communication Systems!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Course Schedule</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab4.html">Lab 4: Narrowband FM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: Commercial FM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: A Few Different Digital Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 8: Digital Packet Radio – APRS</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2Flabs/Lab8.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/labs/Lab8.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 8: Digital Packet Radio – APRS</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-aprs">Structure of APRS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-transforming-aprs-rf-signals-into-bits">Part 1: Transforming APRS RF Signals into Bits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-decoding-aprs-packets">Part 2: Decoding APRS Packets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-aprs-rf-decoding">Part 1: APRS RF Decoding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-sychronous-detection">Non-Sychronous Detection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-extraction">Timing Extraction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Part 2: Decoding APRS packets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-encoding">Line Encoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronization">Synchronization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bit-stuffing">Bit Stuffing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-packets">Additional Packets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-8-digital-packet-radio-aprs">
+<h1>Lab 8: Digital Packet Radio – APRS<a class="headerlink" href="#lab-8-digital-packet-radio-aprs" title="Link to this heading">#</a></h1>
+<p>(Adapted from Dr. John Pauly’s Stanford University EE179 course website: <a class="reference external" href="https://web.stanford.edu/class/ee179/Homework.html.">https://web.stanford.edu/class/ee179/Homework.html.</a>)</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>This lab is a condensed version of a final project from a previous quarter. In it, we will capture and decode digital packet radio signals. The specific system we will look at is the Automatic Packet Reporting System, or APRS. This is an amateur radio combination of Twitter and Find My Friends.</p>
+<p>The idea behind APRS is that an APRS user can transmit a digital radio packet anywhere in the world, with a payload of 256 bytes. This will be retransmitted by digital repeaters (digipeaters) for a specified number of hops. This allows direct digital radio connections over long distances, such as most of northern California.</p>
+<p>Beyond this, internet nodes (i-gates) pick up the packets and forward them to a web site where they can be viewed with a browser (<a class="reference external" href="http://aprs.fi">aprs.fi</a>). This provides global coverage. If you want to have some independent device to report from somewhere out in the world, this a a great resource. One common device is a weather station. Another group that uses APRS is high altitude balloons. You can also make a tracker for your bike, so that you can find it when it is stolen!</p>
+<p>A map of active APRS sites on 5-24-17 in our area looks like this:</p>
+<p><img alt="" src="labs/aprs_AB.png" /></p>
+<p>People who fly high altitude balloons also often rely on APRS. The 256 byte payload allows reporting of position, altitude, temperature, battery status, among others. These are all available at the <a class="reference external" href="http://habhub.org">habhub.org</a> web site. The balloons that are up over North America on a typical day are shown here</p>
+<p><img alt="" src="labs/habhub.png" /></p>
+<p>Some days are busier than others. Can you guess what was happening on this day?</p>
+<p><img alt="" src="labs/Eclipse_Balloons.png" /></p>
+<p>If you want make a small device that you can send out into the world, so that you can track it and receive data from it, APRS is a very inexpensive (free) and capable solution. For example, there are arduino shields that do APRS. Anything you do with an ardiuno can be tracked and accessed anywhere in the world.</p>
+<p>In this lab we will look at the APRS packet network, and examine how to decode APRS packets.</p>
+<section id="structure-of-aprs">
+<h3>Structure of APRS<a class="headerlink" href="#structure-of-aprs" title="Link to this heading">#</a></h3>
+<p>APRS is based on a shared frequency. Packets are all sent asychronously, and can interfere, just as in baseband ethernet. In the U.S. the frequency is 144.39 MHz. With ethernet, collisions are detected, and packets retransmitted. With APRS the receivers are all varying distances from the source. Most packets are picked up by some station, and the overall packet loss is low. Packets are either detected or lost.</p>
+</section>
+<section id="part-1-transforming-aprs-rf-signals-into-bits">
+<h3>Part 1: Transforming APRS RF Signals into Bits<a class="headerlink" href="#part-1-transforming-aprs-rf-signals-into-bits" title="Link to this heading">#</a></h3>
+<p>In the first part of the lab, we will look at turning the APRS RF waveform into bits. The APRS packets are transmitted using the Bell 202 1200 bit/second modem protocol. This uses a standard called AFSK1200, for Audio Frequency Shift Keying, 1200 baud. The packet itself is encoding using the AX.25 protocol. This is an RF extension of the X.25 protocol which is an ITU standard, and an alternative to IP. In the first part of the this lab we will detect the bits that are transmitted in a packet.</p>
+</section>
+<section id="part-2-decoding-aprs-packets">
+<h3>Part 2: Decoding APRS Packets<a class="headerlink" href="#part-2-decoding-aprs-packets" title="Link to this heading">#</a></h3>
+<p>In the second part of the lab, we will look at decoding the bit stream from the first part, and turning this into digital ascii data that we can interpret.</p>
+</section>
+</section>
+<section id="part-1-aprs-rf-decoding">
+<h2>Part 1: APRS RF Decoding<a class="headerlink" href="#part-1-aprs-rf-decoding" title="Link to this heading">#</a></h2>
+<p>APRS uses the Bell 202 standard for sending bits over a bandwidth limited line. At the simplest level, a ’1’ is sent as a tone at 1200 Hz, and a ’0’ as a tone at 2200 Hz. At 1200 bits/second, each bit is 0.83 ms, and a ’1’ goes through 1 cycle over one bit at 1200 Hz, and a ’0’ 1.8 cycles over one bit at 2200 Hz. This is enough to be able to distinguish the bit pattern of the input waveform.</p>
+<p>If we use an rtl_sdr, we can acquire APRS data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">rtl_sdr</span> <span class="o">-</span><span class="n">f</span> <span class="mi">144390000</span> <span class="o">-</span><span class="n">n</span> <span class="mi">41920000</span> <span class="o">-</span><span class="n">g</span> <span class="mi">30</span> <span class="n">aprs</span><span class="o">.</span><span class="n">dat</span>
+
+</pre></div>
+</div>
+<p>This is centered on the APRS frequency, and collects 20 s of data with a receiver gain of 30 dB. However, the devices that produce APRS packets are quite variable, and some packets are much more difficult to decode than others. To get started, use this sample file acquired at 2.048 MHz is</p>
+<p><a class="reference internal" href="#aprs23.dat"><span class="xref myst">aprs23.dat</span></a></p>
+<p>This has two well defined, well separated packets to look at. First load the data, and decimate by a factor of 64 to 32 kHz.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dd</span> <span class="o">=</span> <span class="n">decimate</span><span class="p">(</span><span class="n">decimate</span><span class="p">(</span><span class="n">loadFile</span><span class="p">(</span><span class="s1">&#39;aprs23.dat&#39;</span><span class="p">),</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;fir&#39;</span><span class="p">),</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;fir&#39;</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="n">dd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 					<span class="o">%</span> <span class="n">suppress</span> <span class="n">transient</span>
+
+</pre></div>
+</div>
+<p>This reduces the sampling rate to 2048000/64 = 32000 Hz. The result looks like</p>
+<p><img alt="" src="labs/dd23.png" /></p>
+<p>We can extract the first packet with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">dp</span> <span class="o">=</span> <span class="n">dd</span><span class="p">(</span><span class="mf">3.8e5</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">16384</span><span class="p">));</span>
+<span class="o">&gt;&gt;</span> <span class="n">dp</span> <span class="o">=</span> <span class="n">dp</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="o">/</span><span class="n">length</span><span class="p">(</span><span class="n">dp</span><span class="p">);</span>
+
+</pre></div>
+</div>
+<p>This extracts the packet, and then subtracts off the DC bias (this was acquired right on the APRS frequency).</p>
+<p>Since we ultimately want to sample at 1200 bits/second, we want to resample at some multiple of that rate. We will choose 24000 samples per second, so that each physical sample will be 20 samples of the RF waveform. Since we are already sampled at 32000 samples/second, We then need to downsample by a factor of 3/4.</p>
+<p>&gt;&gt; dps = resample(dp,3,4);</p>
+<p>At this point, we can use narrowband FM decoding to resolve the input signal into two frequencies</p>
+<p>Plotting the result for the whole waveform on the left, and the first part on the right:</p>
+<p><img alt="" src="labs/dpfW.png" /> <img alt="" src="labs/dpfZ.png" /></p>
+<p>You can easily see the two different frequencies for the two different bits.</p>
+<section id="non-sychronous-detection">
+<h3>Non-Sychronous Detection<a class="headerlink" href="#non-sychronous-detection" title="Link to this heading">#</a></h3>
+<p>An efficient way to do the decoding is to use matched filters for the two different waveforms we are looking for</p>
+<p><img alt="" src="labs/MF_aprs.png" /></p>
+<p>One matched filter is one cycle of a complex exponential over 20 samples (the 1200 Hz Bit) and the other is 1.8 cycles over 20 samples (the 2200 Hz bit).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">t20</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span><span class="o">/</span><span class="mi">20</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">mf1200</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">t20</span><span class="o">*</span><span class="mf">1.0</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">mf2200</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">t20</span><span class="o">*</span><span class="mf">1.8</span><span class="p">);</span>
+
+</pre></div>
+</div>
+<p>If we convolve the input signal with each of these, and take the absolute value afterwards, we can isolate the two cases. One of the two channels may be sufficient, but combining the two by subtracting improves noise performance.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d12</span> <span class="o">=</span> <span class="n">conv</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">mf1200</span><span class="p">,</span><span class="s1">&#39;same&#39;</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">d22</span> <span class="o">=</span> <span class="n">conv</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">mf2200</span><span class="p">,</span><span class="s1">&#39;same&#39;</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">ddif</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d12</span><span class="p">)</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">d22</span><span class="p">);</span>
+
+</pre></div>
+</div>
+<p>The result is shown below, where the top plot shows the entire packet, and the bottom plot zooms on on the beginning of the packet:</p>
+<p><img alt="" src="labs/aprs_sigs.png" /></p>
+</section>
+<section id="timing-extraction">
+<h3>Timing Extraction<a class="headerlink" href="#timing-extraction" title="Link to this heading">#</a></h3>
+<p>A major concern is synchronization with the individual symbols. We want to make sure we sample when we can best discriminate between the two symbols. In practice we want this to be done automatically, but for this lab we’ll just do it by hand using the eye diagram.</p>
+<p>We choose a starting sample in the framing bytes, and an ending sample somewhere in the packet</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n1</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
+<span class="o">&gt;&gt;</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="mi">20</span><span class="o">*</span><span class="mi">256</span> <span class="o">-</span> <span class="mi">1</span>
+
+</pre></div>
+</div>
+<p>Choose n2 to be an integer number of samples into the packet (here 256). We can then make an eye diagram with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">boff</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">9</span><span class="p">];</span>
+<span class="o">&gt;&gt;</span> <span class="n">eyed</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">ddif</span><span class="p">((</span><span class="n">n1</span><span class="p">:</span><span class="n">n2</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span><span class="p">),</span><span class="mi">20</span><span class="p">,</span><span class="mi">256</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="n">boff</span><span class="p">,</span><span class="n">eyed</span><span class="p">);</span>
+
+</pre></div>
+</div>
+<p>The -10 shifts the bits to the center of the plot. You will see something like the plot below on the left,</p>
+<p><img alt="" src="labs/eye_diag.png" /></p>
+<p>Shifting six samples earlier lines the eye up directly in the middle, shown in the plot above on the right.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">eyedm6</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">ddif</span><span class="p">((</span><span class="n">n1</span><span class="p">:</span><span class="n">n2</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">6</span><span class="p">),</span><span class="mi">20</span><span class="p">,</span><span class="mi">256</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="n">boff</span><span class="p">,</span><span class="n">eyedm6</span><span class="p">);</span>
+
+</pre></div>
+</div>
+<p>This shows that we have a timing tolerance of about +/- 5 samples at a decision level of 0. This also shows that synchronization isn’t an issue, or the eye would be blurred, and the opening would close. The sampled bits are then</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">bts</span> <span class="o">=</span> <span class="n">ddif</span><span class="p">((</span><span class="mi">7</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="n">end</span><span class="p">)</span><span class="o">-</span><span class="mi">6</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
+
+</pre></div>
+</div>
+<p>We’ve dropped the -10 so that we will sample in the middle of the symbol.</p>
+<p>If you plot the first 250 samples, you should see something like this:</p>
+<p><img alt="" src="labs/bts.png" /></p>
+<p>There are some initial bits where the radio is powering up, then a sequence of frame bytes for synchronization, followed by the data bytes.</p>
+</section>
+</section>
+<section id="id1">
+<h2>Part 2: Decoding APRS packets<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
+<p>APRS packets are encoded as a sequence of bits, grouped into 8 bit bytes. Each byte is an ascii character. To decode the stream of bits we have detected in part 1, we have to process them to undo the line encoding used, synchronize with frame bytes, undo bit stuffing, group the bits into bytes, and then find the characters.</p>
+<p>In order to skip some of the obscure details of APRS, we will give you an m-file that does the APRS packet decoding</p>
+<p><a class="reference internal" href="#aprs_decode.m"><span class="xref myst">aprs_decode.m</span></a></p>
+<p>This calls several m-files that implement key elements of the protocol that you will need to write. These are described below.</p>
+<section id="line-encoding">
+<h3>Line Encoding<a class="headerlink" href="#line-encoding" title="Link to this heading">#</a></h3>
+<p>The APRS packets use a non-return to zero, inverted (NRZI) line encoding. Output bits are decoded by</p>
+<ul class="simple">
+<li><p>If the input bit is the same as the previous input bit, “11” or “00”, the output is 1.</p></li>
+<li><p>If the input bit is different than the previous bit, “01” or “10”, the output is 0.</p></li>
+<li><p>Start with an input bit of “0” for one of the timing frames</p></li>
+</ul>
+<p>This is best illustrated with the timing frame bytes at the beginning of the packet. The bits before NRZI encoding are “01111110”. The specification says there should be one byte like this at the start and the end of the packet, but usually there are several at the start, and often none at the end. The result of NRZI encoding is shown below, as well as the decoding,</p>
+<p><img alt="" src="labs/NRZI_decode.png" /></p>
+<p>Write an mfile</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="p">[</span> <span class="n">db</span> <span class="p">]</span> <span class="o">=</span> <span class="n">decode_NRZI</span><span class="p">(</span> <span class="n">bts</span> <span class="p">)</span>
+<span class="o">%</span>
+<span class="o">%</span> <span class="n">Decode</span> <span class="n">an</span> <span class="n">NRZI</span> <span class="n">bits</span> <span class="n">stream</span> <span class="n">bts</span>
+<span class="o">%</span>
+
+</pre></div>
+</div>
+<p>Then apply it to the bit stream from the first part.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">db</span> <span class="o">=</span> <span class="n">decode_NRZI</span><span class="p">(</span><span class="n">bts</span><span class="p">);</span>
+
+</pre></div>
+</div>
+<p>You should get something that looks like this</p>
+<p><img alt="" src="labs/NRZI_decoded_bits.png" /></p>
+<p>You can clearly see the frame bytes at the beginning. Make sure there are six ones, with zeros on either end (so there are two zeros in a row for adjacent frames).</p>
+</section>
+<section id="synchronization">
+<h3>Synchronization<a class="headerlink" href="#synchronization" title="Link to this heading">#</a></h3>
+<p>In the first part we used the eye diagram to synchronize with the individual bits. Here we use the frame bytes to find the beginning of the packet. The frame bytes are [0 1 1 1 1 1 1 0 ] after the NRZI decoding. We can tell if a frame byte starts at a position kk by</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">fb</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span><span class="s1">&#39;;</span>
+<span class="o">&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="o">~</span><span class="n">xor</span><span class="p">(</span><span class="n">db</span><span class="p">(</span><span class="n">kk</span><span class="p">:</span><span class="n">kk</span><span class="o">+</span><span class="mi">7</span><span class="p">),</span> <span class="n">fb</span><span class="p">))</span> <span class="o">==</span> <span class="mi">8</span>
+
+</pre></div>
+</div>
+<p>If we do this for the first part of the packet, the result is</p>
+<p><img alt="" src="labs/frame_bytes.png" /></p>
+<p>The packet data starts with the first data byte after the last frame byte.</p>
+<p>Write an m-file to synchronize to the frame bytes</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="p">[</span> <span class="n">dbs</span> <span class="p">]</span> <span class="o">=</span> <span class="n">frame_byte_sync</span><span class="p">(</span> <span class="n">db</span> <span class="p">)</span>
+<span class="o">%</span>
+<span class="o">%</span> <span class="n">Take</span> <span class="n">a</span> <span class="n">packet</span> <span class="n">that</span> <span class="n">has</span> <span class="n">been</span> <span class="n">NRZI</span> <span class="n">decoded</span><span class="p">,</span> <span class="ow">and</span> <span class="n">synchronize</span> <span class="n">to</span> <span class="n">the</span> <span class="n">frame</span> <span class="nb">bytes</span>
+<span class="o">%</span>    <span class="n">Find</span> <span class="n">the</span> <span class="n">first</span> <span class="n">frame</span> <span class="n">byte</span>
+<span class="o">%</span>    <span class="n">Skip</span> <span class="n">over</span> <span class="nb">all</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">frame</span> <span class="nb">bytes</span>
+<span class="o">%</span>    <span class="n">Return</span> <span class="n">the</span> <span class="n">bit</span> <span class="n">stream</span> <span class="n">following</span> <span class="n">the</span> <span class="n">last</span> <span class="n">frame</span> <span class="nb">bytes</span>
+<span class="o">%</span>
+
+</pre></div>
+</div>
+<p>This will find the first frame byte by scanning a bit at a time, and then eliminate subsequent frame bytes a byte at a time. It returns the bit sequence starting at the first bit of the packet.</p>
+</section>
+<section id="bit-stuffing">
+<h3>Bit Stuffing<a class="headerlink" href="#bit-stuffing" title="Link to this heading">#</a></h3>
+<p>The APRS packets also limit the number of “1”’s that can be transmitted in sequence to 5 bits. After 5 bits are transmitted, an extra zero is forced into the bit stream. During encoding, this is done before NRZI encoding is done. As a result, we have to throw away those extra zeros at this point.</p>
+<p>Bit stuffing is illustrated below. In the original bit sequence we want to transmit there are 8 “1” bits in a row. Since we can only transmit 5 “1” bits in a row, a stuffed “0” is inserted, and all of the subsequent bits delayed by 1 sample.</p>
+<p><img alt="" src="labs/stuffed_bit.png" /></p>
+<p>When we receive the bit stream, we need to detect when 5 “1”’s in a row were sent, so we can delete the bit stuffed “0”, and move all the subsequent bits up by one bit.</p>
+<p>If we look at the NRZI decoded bit stream from the previous section, and convolve it with five ones</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="n">conv</span><span class="p">(</span><span class="n">dbs</span><span class="p">,</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
+
+</pre></div>
+</div>
+<p>We get this</p>
+<p><img alt="" src="labs/debitstuff.png" /></p>
+<p>This effectively adds every set of five bits, and outputs a 5 if they are all ones. We see several times where there are 5 bits in a row, where we are going to have to eliminate bit-stuffed zeros. There are two samples that are 6 bits in a row towards the end of the packed (the convolution is 5 for two adjacent samples). These are frame bytes that are sent out to indicate the end of the packet.</p>
+<p>Write an mfile to do this</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="p">[</span> <span class="n">dbsd</span> <span class="p">]</span> <span class="o">=</span> <span class="n">de_bit_stuff</span><span class="p">(</span> <span class="n">dbs</span> <span class="p">)</span>
+<span class="o">%</span>
+<span class="o">%</span> <span class="n">Take</span> <span class="n">a</span> <span class="n">bit</span> <span class="n">stuffed</span> <span class="n">sequence</span> <span class="n">of</span> <span class="n">bits</span><span class="p">,</span> <span class="ow">and</span> <span class="n">eliminate</span> <span class="n">the</span> <span class="n">stuffed</span> <span class="n">zero</span> <span class="n">bits</span>
+<span class="o">%</span>
+
+</pre></div>
+</div>
+<p>At this point we have decoded the packet bits. We just need to collect them into bytes, and convert them to characters. The bits are transmitted least significant bit first. If 8 bits are in an array b, the byte value, and the ascii character are</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bv</span> <span class="o">=</span> <span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">4</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="mi">16</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">*</span><span class="mi">32</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">*</span><span class="mi">64</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="mi">128</span><span class="p">;</span>
+<span class="n">c</span> <span class="o">=</span> <span class="n">char</span><span class="p">(</span><span class="n">bv</span><span class="p">);</span>
+
+</pre></div>
+</div>
+<p>Write an mfile that takes your decoded bitstream and returns the ascii string that the packet decodes to,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="p">[</span> <span class="n">cs</span> <span class="p">]</span> <span class="o">=</span> <span class="n">bits_to_char</span><span class="p">(</span> <span class="n">b</span> <span class="p">)</span>
+<span class="o">%</span>
+<span class="o">%</span> <span class="n">Take</span> <span class="n">a</span> <span class="n">bit</span> <span class="n">stream</span> <span class="ow">and</span> <span class="n">convert</span> <span class="n">it</span> <span class="n">to</span> <span class="n">ascii</span> <span class="n">characters</span>
+<span class="o">%</span>
+
+</pre></div>
+</div>
+<p>You can tell if you are close when you start seeing call signs (KD7LED for example). Some of the payloads are actually numeric values, that give you funny characters. If you are getting mostly real characters, you are probably doing everything right. Include what you find with your report.</p>
+</section>
+<section id="additional-packets">
+<h3>Additional Packets<a class="headerlink" href="#additional-packets" title="Link to this heading">#</a></h3>
+<p>Another capture with two packets is here</p>
+<p><a class="reference internal" href="#aprs22.dat"><span class="xref myst">aprs22.dat</span></a></p>
+<p>These are longer, and a little more interesting. There is a web site in the first packet, and a location in the second packet.</p>
+</section>
+</section>
+<section id="lab-report">
+<h2>Lab Report<a class="headerlink" href="#lab-report" title="Link to this heading">#</a></h2>
+<p>For your report include</p>
+<ul class="simple">
+<li><p>Your m-files for the NRZI decoding, frame synchronization, bit destuffing, and converting bits to characters</p></li>
+<li><p>A plot of the first 200 bits of your packet after NRZI, synchronization, and bit destuffing,</p></li>
+<li><p>The decoded packet characters for this packet,</p></li>
+<li><p>Your decode of one of the packets in aprs22.mat above.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./labs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lab7.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lab 7: Automatic Dependent Surveillance-Broadcast (ADS-B)</p>
+      </div>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-aprs">Structure of APRS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-transforming-aprs-rf-signals-into-bits">Part 1: Transforming APRS RF Signals into Bits</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-decoding-aprs-packets">Part 2: Decoding APRS Packets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-aprs-rf-decoding">Part 1: APRS RF Decoding</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-sychronous-detection">Non-Sychronous Detection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-extraction">Timing Extraction</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Part 2: Decoding APRS packets</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-encoding">Line Encoding</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronization">Synchronization</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bit-stuffing">Bit Stuffing</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-packets">Additional Packets</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By DFEC
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

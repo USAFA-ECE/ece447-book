@@ -1,0 +1,646 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Lab 6: A Few Different Digital Signals &#8212; ECE447 Coruse Webpage</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/Lab6';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lab 7: Automatic Dependent Surveillance-Broadcast (ADS-B)" href="Lab7.html" />
+    <link rel="prev" title="Lab 5: Commercial FM" href="Lab5.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="ECE447 Coruse Webpage - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="ECE447 Coruse Webpage - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to ECE447, Communication Systems!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Course Schedule</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab4.html">Lab 4: Narrowband FM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: Commercial FM</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 6: A Few Different Digital Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab8.html">Lab 8: Digital Packet Radio – APRS</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2Flabs/Lab6.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/labs/Lab6.md" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.md</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Lab 6: A Few Different Digital Signals</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-car-s-remote">Your Car’s Remote</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digital-data-packets">Digital Data Packets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digital-radio">Digital Radio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-6-a-few-different-digital-signals">
+<h1>Lab 6: A Few Different Digital Signals<a class="headerlink" href="#lab-6-a-few-different-digital-signals" title="Link to this heading">#</a></h1>
+<p>(Adapted from Dr. John Pauly’s Stanford University EE179 course website: <a class="reference external" href="https://web.stanford.edu/class/ee179/Homework.html.">https://web.stanford.edu/class/ee179/Homework.html.</a>)</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>For this lab, we will look at a few different digital signals that you can capture with your SDR. Digital signals are interesting because there are so many different ways that information is encoded, and it is fun to try to sort out what a particular signal does. However, getting beyond decoding the digital data is hard, because then we need to know what the communication protocol is. In this lab we’ll just decode the digital data, and leave it at that.</p>
+<p>We’ll look at three different signals. The first is the signal your key fob emits to communicate with your car. The second is a look at some of the packet data that is sent in the 915 MHz ISM band. Finally we’ll look at a digital radio signal.</p>
+</section>
+<section id="aims-of-the-lab">
+<h2>Aims of the Lab<a class="headerlink" href="#aims-of-the-lab" title="Link to this heading">#</a></h2>
+<p>The goal of the lab is to find, identify, and decode different digital signals.</p>
+</section>
+<section id="your-car-s-remote">
+<h2>Your Car’s Remote<a class="headerlink" href="#your-car-s-remote" title="Link to this heading">#</a></h2>
+<p>The first signal we’ll look at is that generated by your wireless car key fob. This is call a Remote Keyless System (RKS). In the U.S. these operate at 315 MHz, +/- 2.5 MHz. My Subaru key turned out to be at 312.590 MHz.</p>
+<p>To capture signals from your key fob, first you need to figure out what frequency it transmits on. Connect your SDR and use GQRX or SDR# to monitor the spectrum. When you push a button on the fob, you should see a brief jump in the spectrum. You may need to shift the frequency band up or down by a couple of MHz to find the signal, mine was almost 2.5 MHz low.</p>
+<p>One word of caution. Don’t get too carried away pushing the button! The RKS system uses a rolling pseudo-randomly generated code. Both the key fob and the car keep in synch, so that the car recognizes the next code. However, if the key fob gets too far ahead in the sequence (100s of button pushes) the car won’t recognize it. That makes the key (and the car) considerably less useful!</p>
+<p>Here is the command to capture data for my car:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="o">./</span><span class="n">rtl_sdr</span> <span class="o">-</span><span class="n">f</span> <span class="mi">312590000</span> <span class="o">-</span><span class="n">s</span> <span class="mi">2048000</span> <span class="o">-</span><span class="n">n</span> <span class="mi">20480000</span> <span class="o">-</span><span class="n">g</span> <span class="mf">29.7</span> <span class="n">rks312590</span><span class="o">.</span><span class="n">dat</span>
+</pre></div>
+</div>
+<p>I specified the gain to be 29.7 dB (one of the values you see with you run rtl_test), because if it auto ranged (the default) it sets the gain for the background noise, and then completely saturates with the key fob signal appears. A sample data set for my car is here:</p>
+<p><a class="reference internal" href="#rke312590.dat"><span class="xref myst">rke312590.dat</span></a></p>
+<p>First we need to find where the signals are. We can find them by plotting the magnitude of the signal</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dk</span> <span class="o">=</span> <span class="n">loadFile</span><span class="p">(</span><span class="s1">&#39;rks312590.dat&#39;</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="n">fs</span> <span class="o">=</span> <span class="mi">2048000</span><span class="p">;</span>				<span class="c1"># Sampling Frequency</span>
+<span class="o">&gt;</span> <span class="n">t</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">dk</span><span class="p">])</span><span class="o">/</span><span class="mi">2048000</span><span class="p">;</span>		<span class="c1"># Time</span>
+<span class="o">&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span><span class="n">end</span><span class="p">),</span><span class="nb">abs</span><span class="p">(</span><span class="n">dk</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span><span class="n">end</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>where we skipping by 1000 samples to keep the plot manageable. The result is shown below</p>
+<p><img alt="" src="labs/graphics/rks_sig.png" /></p>
+<p>The total width of the plot is 10 seconds, so you can see there is one key press shortly after 2 seconds, and another shortly after 5 seconds.</p>
+<p>If we plot 100 ms starting at 2 seconds, we can see the digital signal we are looking for:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">fs</span><span class="p">:</span><span class="mf">2.1</span><span class="o">*</span><span class="n">fs</span><span class="p">),</span><span class="nb">abs</span><span class="p">(</span><span class="n">dk</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">fs</span><span class="p">:</span><span class="mf">2.1</span><span class="o">*</span><span class="n">fs</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p>which looks like this</p>
+<p><img alt="" src="labs/graphics/rks_zoom1.png" /></p>
+<p>Zooming in to the first couple of bits, we get</p>
+<p><img alt="" src="labs/graphics/rks_zoom2.png" /></p>
+<p>The bits are easy to identify. A decision threshold of 15 will give almost perfect detection (your data will have a different level)</p>
+<p>If we do this, and then plot first part of the digital data for the two key presses, we get this</p>
+<p><img alt="" src="labs/graphics/rks_digital.png" /></p>
+<p>Although the two start the same, they rapidly diverge. This is fortunate, because if the signal was the same every time, you’d have enough information to steal my car now!</p>
+<p>Convert each key press logical waveforms to sequence of bits. You will need one value (1 or 0) for each bit. Determine the width of each bit, and the number of total bits. Include the bit pattern for this data, or your data, in your report.</p>
+<p>This is a simple on-off-keying signal (OOK).</p>
+</section>
+<section id="digital-data-packets">
+<h2>Digital Data Packets<a class="headerlink" href="#digital-data-packets" title="Link to this heading">#</a></h2>
+<p>The next signals we will look at are digital packets that are transmitted in the 915 MHz ISM band. This goes from 902 MHz to 928 MHz. ISM stands for “Industrial, Scientific, and Medical”, and is largely unregulated. Almost all of the radio wave commutation you care about is in an ISM band! This includes WiFi, bluetooth, cordless phones and speakers, and microwave ovens. This is also the 33 cm an amateur band. There is lots of different traffic from the usual FM repeaters, to amateur TV, and digital radio.</p>
+<p>If we use GQRX or SDR# to monitor the spectrum we see the spectrum jump around every once in a while, with different frequencies and spectra. We won’t see a continuous communication at a single frequency, as we did with the previous analog signals.</p>
+<p>Capture 10 seconds of data to take a look at, centered at 910 MHz. Here is a file I captured at home:</p>
+<p><a class="reference internal" href="#ism910.dat"><span class="xref myst">ism910.dat</span></a></p>
+<p>Your environment probably has more traffic, and will be more interesting than this!</p>
+<p>If we compute a spectrogram with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">di</span> <span class="o">=</span> <span class="n">loadFile</span><span class="p">(</span><span class="s1">&#39;ism910.dat&#39;</span><span class="p">);</span>
+<span class="o">&gt;</span> <span class="n">msg</span><span class="p">(</span><span class="n">di</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">512</span><span class="p">,</span><span class="mi">2048</span><span class="p">);</span>
+
+</pre></div>
+</div>
+<p>we will get something like this</p>
+<p><img alt="" src="labs/graphics/ism_spect.png" /></p>
+<p>This is about a half second of data. What we see are lots of different digital packets, each with different frequencies and encoding patterns. Every once in a while they interfere. We’ll just look at a couple of packets to see how they are encoded. At this level it is hard to tell what is happening.</p>
+<p>We can get a better idea of the timing of the packets by plotting the magnitude of the signal. If we plot every 1000th sample of the first 1/8th of the data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">di</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">1000</span><span class="p">:</span><span class="n">end</span><span class="o">/</span><span class="mi">8</span><span class="p">)));</span>
+
+
+</pre></div>
+</div>
+<p>we get something like this</p>
+<p><img alt="" src="labs/graphics/ism_abs.png" /></p>
+<p>There are lots of different packets to look at. If we zoom in, we can see that there is an isolated packet starting at 1160. Since we skipped 1000 samples per plot point, this corresponds to sample 1160000 in the raw data. In the spectrogram above we can’t really sort out what the signal is doing because we used a frame size of 512 samples to compute the frequency spectrum for each line, and it is changing more quickly than that. If we decrease the frame size to 128 samples, and limit the dynamic range of the spectrogram to 20 dB, we get a very nice depiction of the digital data for this packet,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">msg</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">1160000</span><span class="p">,</span><span class="mi">128</span><span class="p">,</span><span class="mi">512</span><span class="p">,</span><span class="mi">20</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p>which looks like this:</p>
+<p><img alt="" src="labs/graphics/ism_pkt.png" /></p>
+<p>The digital data is easy to identify here. This uses frequency shift keying (FSK), with each bit being either +f0 or -f0, after an initial calibration interval at a frequency of 0.</p>
+<p>Choose another packet in the data, and see if you can figure out how to decode it’s contents. Some of the packets are much easier than others to decode. You need to set the frame size small enough to resolve individual bits, but large enough to spectrally resolve the frequencies used to encode the bits. Include a plot of the spectrogram for the packet of interest in your report.</p>
+</section>
+<section id="digital-radio">
+<h2>Digital Radio<a class="headerlink" href="#digital-radio" title="Link to this heading">#</a></h2>
+<p>When you were exploring the amateur and police radio bands, you undoubtedly encountered channels that made an oscillating beeping sound. Let take a look at how these channels are encoded, and why they sound this way.</p>
+<p>There are lots of channels to choose from. The one I picked is in the VHF amateur band at about 144.985 MHz. Many of the digital police and fire bands around 460 MHz are encoded in the same way, and would also work.</p>
+<p>The only trick is that there isn’t always a signal at 144.985. Use GQRX to monitor the frequency, and then when you have a strong signal, kill GQRX to free up the SDR, and then acquire 10 s of data using rtl_sdr as usual. Data I acquired at 145 MHz is available here:</p>
+<p><a class="reference internal" href="#vhf145.dat"><span class="xref myst">vhf145.dat</span></a></p>
+<p>This is the usual sampling rate of 2.048 MHz, centered at a frequency of 145 MHz.</p>
+<p>If we display the spectrogram with a block size of 512, and a dynamic range of 30 dB, we get this,</p>
+<p><img alt="" src="labs/graphics/vdr_spect.png" /></p>
+<p>Checking the frequencies with ffreq we find the signal we want at about -10 kHz. The other signal we see is N6FNI identifying itself with Morse code. We’ll ignore that.</p>
+<p>If we decimate the signal down by a factor of 256 (two decimations of 8 each), and compute the spectrogram with a smaller 200 sample window, we get this intriguing plot,</p>
+<p><img alt="" src="labs/graphics/vdr_spect_hr.png" /></p>
+<p>This shows a signal is being keyed on and off, but it has an odd structure. This is what you hear. To get a better idea of what going on, recall that most of the signals in this band are FM, so maybe we should FM decode first, and then see what we get. Using your narrowband FM receiver code, and a frequency shift by -10 kHz, we get this spectrogram, using a block size of 128,</p>
+<p><img alt="" src="labs/graphics/vdr_fmd.png" /></p>
+<p>We get a nice clean frequency shift digital waveform (at least unit the transmission ends). This is digital FM encoded in an analog FM signal! You can plot the waveform itself, and what you will see is a constant plus a cosine superimposed every once in a while.</p>
+<p>Determine the length of the bits, and decode the waveform that was being transmitted into a sequence of 1’s and 0’s.</p>
+</section>
+<section id="lab-report">
+<h2>Lab Report<a class="headerlink" href="#lab-report" title="Link to this heading">#</a></h2>
+<p>There are a couple of things to include in your lab report</p>
+<ul>
+<li><p>The bit pattern for two key presses.</p></li>
+<li><p>A spectrogram (or waveform plots) that show how another packet was encoded in the 915 MHz band.</p></li>
+<li><p>The decoded bit pattern for the FM digital radio signal.</p>
+<p>You can also look at another digital signal if you like from the 460 MHz band. There are many variations. This totally optional, though.</p>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./labs"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="Lab5.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lab 5: Commercial FM</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="Lab7.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lab 7: Automatic Dependent Surveillance-Broadcast (ADS-B)</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#your-car-s-remote">Your Car’s Remote</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digital-data-packets">Digital Data Packets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#digital-radio">Digital Radio</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By DFEC
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
