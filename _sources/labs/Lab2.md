@@ -23,7 +23,6 @@ They are stored in the directory that is the application. Open a terminal, and c
 
 ```
 /Applications/Gqrx_2.11.5.app/Contents/MacOS/.
-
 ```
 
 
@@ -67,7 +66,6 @@ Reading samples in async mode...
 ^CSignal caught, exiting!
 
 User cancel, exiting...
-
 ```
 
 
@@ -84,7 +82,6 @@ Usage:
 	[-p enable PPM error measurement]
 	[-b output_block_size (default: 16 * 16384)]
 	[-S force sync output (default: async)]
-
 ```
 
 
@@ -113,7 +110,6 @@ real sample rate: 2047993
 
 User cancel, exiting...
 Cumulative PPM error: -27
-
 ```
 
 
@@ -135,7 +131,6 @@ Usage:	 -f frequency_to_tune_to [Hz]
 	[-n number of samples to read (default: 0, infinite)]
 	[-S force sync output (default: async)]
 	filename (a '-' dumps samples to stdout)
-
 ```
 
 
@@ -153,7 +148,6 @@ Tuner gain set to 40.000000 dB.
 Reading samples in async mode...
 
 User cancel, exiting...
-
 ```
 
 
@@ -177,7 +171,6 @@ y = fread(fid,'uint8=>double');
 
 y = y-127;
 y = y(1:2:end) + i*y(2:2:end);
-
 ```
 
 
@@ -210,10 +203,7 @@ You see a couple of frequencies in use. The one that is on continuously is an AT
 Once you know there is a signal out there, capture 10 seconds of data, and save it to a file. Close gqrx or SDR# to free up the SDR, and then capture the data with
 
 ```
-
 > rtl_sdr -f 135000000 -n 20480000 ab.dat
-
-
 ```
 
 
@@ -229,7 +219,6 @@ Once you have the data, we will load it into MATLAB to look at it. Start up MATL
 
 ```
 >> d = loadFile('ab.dat')
-
 ```
 
 
@@ -240,7 +229,6 @@ The first thing to note is that just 10 seconds of RF is a lot of data! It is ha
 It is msg.m for “my spectrogram”. We will improve this as the course goes on. The help information is
 
 ```
-
 >> help msg
 
   msg(x,n0,nf,nt,dbf)
@@ -256,7 +244,6 @@ It is msg.m for “my spectrogram”. We will improve this as the course goes on
    This extracts a segment of x starting at n0, of length nf*nt
    The image plot is in dB, and autoscaled.  This can look very noisy
    if there aren't any interesting signals present.
-
 ```
 
 
@@ -265,7 +252,6 @@ This takes an input signal starting at sample n0, and computes the spectrum of n
 ```
 >> d = loadFile('ab1335_10s.dat');
 >> msg(d,1,1024,2000);
-
 ```
 
 
@@ -275,7 +261,6 @@ We see several signals. The msg.m file will return the data that is plotted if y
 
 ```
 >> ds = msg(d,1,1024,2000);
-
 ```
 
 
@@ -291,7 +276,6 @@ You can also use msg.m to decode the signals. Each column in the image is a samp
 
 ```
 >> dd = msg(d,1,256,80000);
-
 ```
 
 
@@ -301,7 +285,6 @@ Find the row in dd that corresponds to your signal, take the absolute value, sca
 >> dx = abs(dd(N,:))
 >> dx = dx/max(dx);
 >> sound(dx,8000);
-
 ```
 
 

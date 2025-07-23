@@ -421,7 +421,6 @@ document.write(`
 <p>Just make sure to give it a unique name so you don’t write over the latest version of gqrx.</p>
 <p>They are stored in the directory that is the application. Open a terminal, and cd to</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">/</span><span class="n">Applications</span><span class="o">/</span><span class="n">Gqrx_2</span><span class="mf">.11.5</span><span class="o">.</span><span class="n">app</span><span class="o">/</span><span class="n">Contents</span><span class="o">/</span><span class="n">MacOS</span><span class="o">/.</span>
-
 </pre></div>
 </div>
 <p>Here I assume you named the old version Gqrx_2.11.5. This has several programs, including three that you will be using in this lab. These are rtl_test, rtl_sdr, and rtl_tcp.</p>
@@ -453,7 +452,6 @@ Reading samples in async mode...
 ^CSignal caught, exiting!
 
 User cancel, exiting...
-
 </pre></div>
 </div>
 <p>This runs continuously to test the data rate, until you stop it with a ^C. There are a number of options, which you can see with the “-h” command line option (which isn’t actually an option).</p>
@@ -467,7 +465,6 @@ User cancel, exiting...
 	<span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">enable</span> <span class="n">PPM</span> <span class="n">error</span> <span class="n">measurement</span><span class="p">]</span>
 	<span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">output_block_size</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">16384</span><span class="p">)]</span>
 	<span class="p">[</span><span class="o">-</span><span class="n">S</span> <span class="n">force</span> <span class="n">sync</span> <span class="n">output</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="k">async</span><span class="p">)]</span>
-
 </pre></div>
 </div>
 <p>You can set the sampling rate with the “-s” option, which defaults to 2.048 MHz. One interesting option is “-p”, which tests what the actual sampling rate is. This will be slightly off of what you’ve asked for, and is the reason that the peaks in the spectra aren’t exactly where they should be when you use gqrx or SDR#. This changes as the device heats up. This is what I get after about a minute or so</p>
@@ -493,7 +490,6 @@ real sample rate: 2047993
 
 User cancel, exiting...
 Cumulative PPM error: -27
-
 </pre></div>
 </div>
 <p>This shows that my sampling rate is off by -27 parts per million, or ppm. You can set a correction for this in gqrx or SDR#.</p>
@@ -512,7 +508,6 @@ Cumulative PPM error: -27
 	<span class="p">[</span><span class="o">-</span><span class="n">n</span> <span class="n">number</span> <span class="n">of</span> <span class="n">samples</span> <span class="n">to</span> <span class="n">read</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="n">infinite</span><span class="p">)]</span>
 	<span class="p">[</span><span class="o">-</span><span class="n">S</span> <span class="n">force</span> <span class="n">sync</span> <span class="n">output</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="k">async</span><span class="p">)]</span>
 	<span class="n">filename</span> <span class="p">(</span><span class="n">a</span> <span class="s1">&#39;-&#39;</span> <span class="n">dumps</span> <span class="n">samples</span> <span class="n">to</span> <span class="n">stdout</span><span class="p">)</span>
-
 </pre></div>
 </div>
 <p>You set the center frequency with the “-f” switch, specified in Hz (you will get a lot of practice counting zeros!). The “-g” switch sets the gain in dB. You can set it to anything, but you’ll get the closest value from the list of supported gains that you saw with rtl_test. For example to collect 10 seconds of data centered at 120 MHz (the AM air band used for air traffic control), you would run</p>
@@ -527,7 +522,6 @@ Cumulative PPM error: -27
 <span class="n">Reading</span> <span class="n">samples</span> <span class="ow">in</span> <span class="k">async</span> <span class="n">mode</span><span class="o">...</span>
 
 <span class="n">User</span> <span class="n">cancel</span><span class="p">,</span> <span class="n">exiting</span><span class="o">...</span>
-
 </pre></div>
 </div>
 <p>The program terminates by itself when it has collected enough data.</p>
@@ -545,7 +539,6 @@ Cumulative PPM error: -27
 
 <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="o">-</span><span class="mi">127</span><span class="p">;</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">end</span><span class="p">)</span> <span class="o">+</span> <span class="n">i</span><span class="o">*</span><span class="n">y</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">end</span><span class="p">);</span>
-
 </pre></div>
 </div>
 <p>This loads the signed sequence of byte I and Q values, and stores them as complex MATLAB vector.</p>
@@ -565,10 +558,7 @@ Cumulative PPM error: -27
 <p>Use gqrx or SDR# to see if you can find any activity. Here is an example</p>
 <p>You see a couple of frequencies in use. The one that is on continuously is an ATIS signal. The others are planes and towers talking to each other. Note the gain you use here, so you can set it to be the same for your capture.</p>
 <p>Once you know there is a signal out there, capture 10 seconds of data, and save it to a file. Close gqrx or SDR# to free up the SDR, and then capture the data with</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-<span class="o">&gt;</span> <span class="n">rtl_sdr</span> <span class="o">-</span><span class="n">f</span> <span class="mi">135000000</span> <span class="o">-</span><span class="n">n</span> <span class="mi">20480000</span> <span class="n">ab</span><span class="o">.</span><span class="n">dat</span>
-
-
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">rtl_sdr</span> <span class="o">-</span><span class="n">f</span> <span class="mi">135000000</span> <span class="o">-</span><span class="n">n</span> <span class="mi">20480000</span> <span class="n">ab</span><span class="o">.</span><span class="n">dat</span>
 </pre></div>
 </div>
 <p>where I have chosen 135.0 MHz. You will probably want to set it to something else. Don’t set the frequency exactly to the frequency you want to acquire, because the receiver produces an artifact at DC. This is the spike you always see at the middle of the spectrum.</p>
@@ -577,14 +567,12 @@ Cumulative PPM error: -27
 <p>You can use this file if you are having trouble finding signals to capture. It is sampled at 2.048 MHz, and is centered at 135.5 MHz. The Palo Alto ATIS signal is there, as well as one of the NORCAL approach signals</p>
 <p>Once you have the data, we will load it into MATLAB to look at it. Start up MATLAB, and change to the directory where loadFile.m and the data file are. Load the data file with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">loadFile</span><span class="p">(</span><span class="s1">&#39;ab.dat&#39;</span><span class="p">)</span>
-
 </pre></div>
 </div>
 <p>The first thing to note is that just 10 seconds of RF is a lot of data! It is hard to tell if we have anything, or how to extract it. What we will do is make something like the waterfall plot that you see in gqrx or SDR#, called a spectrogram. What this does is compute the spectrum of blocks of the signal, and displays an image of how this changes over time. A basic spectrogram program is provided here</p>
 <p><a class="reference internal" href="#msg.m"><span class="xref myst">msg.m</span></a></p>
 <p>It is msg.m for “my spectrogram”. We will improve this as the course goes on. The help information is</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>
-<span class="o">&gt;&gt;</span> <span class="n">help</span> <span class="n">msg</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">help</span> <span class="n">msg</span>
 
   <span class="n">msg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n0</span><span class="p">,</span><span class="n">nf</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="n">dbf</span><span class="p">)</span>
 
@@ -599,19 +587,16 @@ Cumulative PPM error: -27
    <span class="n">This</span> <span class="n">extracts</span> <span class="n">a</span> <span class="n">segment</span> <span class="n">of</span> <span class="n">x</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">n0</span><span class="p">,</span> <span class="n">of</span> <span class="n">length</span> <span class="n">nf</span><span class="o">*</span><span class="n">nt</span>
    <span class="n">The</span> <span class="n">image</span> <span class="n">plot</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">dB</span><span class="p">,</span> <span class="ow">and</span> <span class="n">autoscaled</span><span class="o">.</span>  <span class="n">This</span> <span class="n">can</span> <span class="n">look</span> <span class="n">very</span> <span class="n">noisy</span>
    <span class="k">if</span> <span class="n">there</span> <span class="n">aren</span><span class="s1">&#39;t any interesting signals present.</span>
-
 </pre></div>
 </div>
 <p>This takes an input signal starting at sample n0, and computes the spectrum of nt segments of the signal, each of length nf. The result is displayed as an image, with time going horizontally, and frequency vertically. The center frequency is in the middle of the plot. For example, for the data provided above, we can look at the first second of data, by looking at 2000 blocks each of length 1024 samples (2048000 total samples, or one second at the 2.048 sampling rate). The results is</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">loadFile</span><span class="p">(</span><span class="s1">&#39;ab1335_10s.dat&#39;</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="n">msg</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">2000</span><span class="p">);</span>
-
 </pre></div>
 </div>
 <p>Unless you have a very big display, you’ll get an error message that the image doesn’t fit, and was scaled down. The result looks like this</p>
 <p>We see several signals. The msg.m file will return the data that is plotted if you assign the output to a variable</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">msg</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">2000</span><span class="p">);</span>
-
 </pre></div>
 </div>
 <p>We can plot the spectrum at at time of 0.5 seconds by plotting column 1000,</p>
@@ -620,14 +605,12 @@ Cumulative PPM error: -27
 <p>For your assignment, find an AM signal in the data you captured, and email me a screen shot of a plot of the signal. Or, if you are using the data set provided, find another signal, and send a plot of it (there are at least two more). You have ten seconds of data, so you can look later in the signal by increasing n0. For example, to start at 5 seconds, n0 should be 5*2048000.</p>
 <p>You can also use msg.m to decode the signals. Each column in the image is a sample of the spectrum in time. If we want to sample at 8kHz, we need blocks that are 2048000/8000 = 256 samples. In this case the entire data set is 80,000 samples. You may want to comment out the imshow line, and then do</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">dd</span> <span class="o">=</span> <span class="n">msg</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">80000</span><span class="p">);</span>
-
 </pre></div>
 </div>
 <p>Find the row in dd that corresponds to your signal, take the absolute value, scale it to a maximum amplitude of one, and then play it through your sound card. You should hear the audio.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">dx</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dd</span><span class="p">(</span><span class="n">N</span><span class="p">,:))</span>
 <span class="o">&gt;&gt;</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">dx</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">dx</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="n">sound</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="mi">8000</span><span class="p">);</span>
-
 </pre></div>
 </div>
 <p>Next time we’ll look at better ways to do this using modulation and decimation.</p>
