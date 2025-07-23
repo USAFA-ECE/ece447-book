@@ -201,7 +201,7 @@ The military side also has
 
 Choose a frequency where you might expect to get a signal. The ATIS frequencies are good initial candidates, because these continuously transmit information about the airport and how to contact them. The other frequencies, such at the air traffic control frequencies, are more interesting but are not always in use. Often a transmission lasts just a few seconds and can be hard to capture.
 
-One busy channel that has a strong signal around here is 310.8 MHz, SFO departures and arrivals from the south. This frequency also is a good match for your SDR antenna. At 310.8 MHz a quarter wave antenna is 24 cm, or about 9.5 inches. Stick your antenna to a metal surface to provide a ground plane, and extend the antenna to this length. Small adjustments to the frequency can help (+/- a few kHz).
+(Find busy channel in area) One busy channel that has a strong signal around here is 310.8 MHz, SFO departures and arrivals from the south. This frequency also is a good match for your SDR antenna. At 310.8 MHz a quarter wave antenna is 24 cm, or about 9.5 inches. Stick your antenna to a metal surface to provide a ground plane, and extend the antenna to this length. Small adjustments to the frequency can help (+/- a few kHz).
 
 Use gqrx or SDR# to see if you can find any activity. Here is an example
 
