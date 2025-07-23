@@ -15,3 +15,9 @@ parts:
     chapters:
       - file: labs/Lab1
       - file: labs/Lab2
+      - file: labs/Lab3
+      - file: labs/Lab4
+      - file: labs/Lab5
+      - file: labs/Lab6
+      - file: labs/Lab7
+      - file: labs/Lab8
