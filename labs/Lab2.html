@@ -442,7 +442,7 @@ document.write(`
 <section id="rtl-test">
 <h3><strong>rtl_test</strong><a class="headerlink" href="#rtl-test" title="Link to this heading">#</a></h3>
 <p>The first program we’ll look at is rtl_test. This looks for the SDR and reports what it finds. This is the first program to use when debugging your SDR.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; rtl_test
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>&gt; .\rtl_test
 Found 1 device(s):
   0:  ezcap USB 2.0 DVB-T/DAB/FM dongle
 
@@ -461,17 +461,13 @@ Reading samples in async mode...
 User cancel, exiting...
 </pre></div>
 </div>
-<p>This runs continuously to test the data rate, until you stop it with a ^C. There are a number of options, which you can see with the “-h” command line option (which isn’t actually an option).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">rtl_test</span><span class="p">:</span> <span class="n">illegal</span> <span class="n">option</span> <span class="o">--</span> <span class="n">h</span>
-<span class="n">rtl_test</span><span class="p">,</span> <span class="n">a</span> <span class="n">benchmark</span> <span class="n">tool</span> <span class="k">for</span> <span class="n">RTL2832</span> <span class="n">based</span> <span class="n">DVB</span><span class="o">-</span><span class="n">T</span> <span class="n">receivers</span>
-
-<span class="n">Usage</span><span class="p">:</span>
-	<span class="p">[</span><span class="o">-</span><span class="n">s</span> <span class="n">samplerate</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">2048000</span> <span class="n">Hz</span><span class="p">)]</span>
-	<span class="p">[</span><span class="o">-</span><span class="n">d</span> <span class="n">device_index</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">0</span><span class="p">)]</span>
-	<span class="p">[</span><span class="o">-</span><span class="n">t</span> <span class="n">enable</span> <span class="n">Elonics</span> <span class="n">E4000</span> <span class="n">tuner</span> <span class="n">benchmark</span><span class="p">]</span>
-	<span class="p">[</span><span class="o">-</span><span class="n">p</span> <span class="n">enable</span> <span class="n">PPM</span> <span class="n">error</span> <span class="n">measurement</span><span class="p">]</span>
-	<span class="p">[</span><span class="o">-</span><span class="n">b</span> <span class="n">output_block_size</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="mi">16</span> <span class="o">*</span> <span class="mi">16384</span><span class="p">)]</span>
-	<span class="p">[</span><span class="o">-</span><span class="n">S</span> <span class="n">force</span> <span class="n">sync</span> <span class="n">output</span> <span class="p">(</span><span class="n">default</span><span class="p">:</span> <span class="k">async</span><span class="p">)]</span>
+<p>This runs continuously to test the data rate, until you stop it with a ^C. There are a number of options, which are listed below.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[-s samplerate (default: 2048000 Hz)]
+[-d device_index (default: 0)]
+[-t enable Elonics E4000 tuner benchmark]
+[-p enable PPM error measurement]
+[-b output_block_size (default: 16 * 16384)]
+[-S force sync output (default: async)]
 </pre></div>
 </div>
 <p>You can set the sampling rate with the “-s” option, which defaults to 2.048 MHz. One interesting option is “-p”, which tests what the actual sampling rate is. This will be slightly off of what you’ve asked for, and is the reason that the peaks in the spectra aren’t exactly where they should be when you use gqrx or SDR#. This changes as the device heats up. This is what I get after about a minute or so</p>
@@ -533,7 +529,7 @@ Cumulative PPM error: -27
 </div>
 <p>The program terminates by itself when it has collected enough data.</p>
 <p>Once we’ve saved the data to a file, we can load it into MATLAB. The m-file</p>
-<p><a class="reference internal" href="#loadFile.m"><span class="xref myst">loadFile.m</span></a></p>
+<p><a class="reference download internal" download="" href="../_downloads/619e02bb36032f6e1aa142c28185a6ef/loadFile.m"><span class="xref download myst">loadFile.m</span></a></p>
 <p>will do this for you. It looks like this:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">y</span> <span class="o">=</span> <span class="n">loadFile</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
 <span class="o">%</span>  <span class="n">y</span> <span class="o">=</span> <span class="n">loadFile</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>

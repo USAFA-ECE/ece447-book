@@ -49,7 +49,7 @@ For Linux you can install gqrx using the apt manager, and this will automaticall
 The first program we'll look at is rtl\_test. This looks for the SDR and reports what it finds. This is the first program to use when debugging your SDR.
 
 ```
-> rtl_test
+> .\rtl_test
 Found 1 device(s):
   0:  ezcap USB 2.0 DVB-T/DAB/FM dongle
 
@@ -69,21 +69,14 @@ User cancel, exiting...
 ```
 
 
-This runs continuously to test the data rate, until you stop it with a ^C. There are a number of options, which you can see with the “-h” command line option (which isn't actually an option).
+This runs continuously to test the data rate, until you stop it with a ^C. There are a number of options, which are listed below.
 
-```
-> rtl_test: illegal option -- h
-rtl_test, a benchmark tool for RTL2832 based DVB-T receivers
-
-Usage:
 	[-s samplerate (default: 2048000 Hz)]
 	[-d device_index (default: 0)]
 	[-t enable Elonics E4000 tuner benchmark]
 	[-p enable PPM error measurement]
 	[-b output_block_size (default: 16 * 16384)]
 	[-S force sync output (default: async)]
-```
-
 
 You can set the sampling rate with the “-s” option, which defaults to 2.048 MHz. One interesting option is “-p”, which tests what the actual sampling rate is. This will be slightly off of what you've asked for, and is the reason that the peaks in the spectra aren't exactly where they should be when you use gqrx or SDR#. This changes as the device heats up. This is what I get after about a minute or so
 
