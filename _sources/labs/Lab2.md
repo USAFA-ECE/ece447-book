@@ -250,6 +250,8 @@ This takes an input signal starting at sample n0, and computes the spectrum of n
 
 Unless you have a very big display, you'll get an error message that the image doesn't fit, and was scaled down. The result looks like this
 
+![](graphics/COS_Peterson.png)
+
 We see several signals. The msg.m file will return the data that is plotted if you assign the output to a variable
 
 ```
