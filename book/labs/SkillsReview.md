@@ -2,6 +2,6 @@
 
 ## Download
 
-<embed src="_static/SkillsReview.pdf" width="100%" height="600px" type="application/pdf">
+<embed src="_static/Skills_Review.pdf" width="100%" height="600px" type="application/pdf">
 
 If you have trouble viewing, you can download the PDF [here](_static/Skills_Review.pdf).
