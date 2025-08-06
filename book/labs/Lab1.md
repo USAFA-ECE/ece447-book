@@ -9,89 +9,103 @@ In this lab we will install the SDR software for your computer and then use a re
 
 ## Aims of the Lab
 
-This lab is aimed getting your software working and starting to look around at all of the signals that you are constantly being bombarded with. The main requirement of the lab is to take a screen shot of your display at the end of the lab and submit it to Gradescope.
+This lab is aimed getting your software working and starting to look around at all of the signals that you are constantly being bombarded with. The main requirement of the lab is to take a screen shot of your spectrum visualization display showing some interesting narrowband FM signal, describe what you think you are seeing, save the screenshot and description as a PDF file, and submit it to Gradescope.
 
 This will show you have gotten everything going! Find an interesting frequency, and try to identify what is happening there. Next week there will be more to do.
 
 ## Software Installation
 
-There are two parts to the software you need. The first is the device driver to control the SDR. The second is the spectrum visualization software. For mac users, you can download all of this in one package. For windows users, you need to download the drivers and the visualization software as a package, and then install them separately
+There are two parts to the software you need. The first is the device driver to control the SDR. The second is the spectrum visualization software. 
 
-**MacOS**
+### Device Driver
 
-For MacOS, we will use the gqrx program. This is a graphical interface that is built on top of gnu radio, an open source software defined radio project. When you download gqrx, you will also get the gnu radio libraries, as well as the command line programs we will use in the next labs.
+Follow these steps to install the drivers necessary to run the dongle as an SDR (adapted from https://www.rtl-SDR.com/rtl-SDR-quick-start-guide/):
+- Download Zadig from Teams (General->Files). You can also find it at https://zadig.akeo.ie/downloads
+- Connect an antenna to your RTL-SDR dongle and plug it into a USB port. Wait a few seconds to make sure it doesn't try to automatically install any software (it shouldn't)
+- Go to the folder where you downloaded Zadig and double click to open (or right click and select "Run as administrator")
+- Go to "Help->Update Policy and Settings" then "Check Now" then "Close"
+- Go to "Options->List All Devices"
 
-The gqrx web page is
+<img src="graphics/zadig_options.png" width="350" height="150">
 
-[http://gqrx.dk](http://gqrx.dk/)
+- **WARNING: follow the next few instructions closely! Do NOT select anything besides what is instructed, or you will likely overwrite a driver for your mouse, keyboard, etc.** 
+    - Open the top drop-down menu. Select "Bulk-In, Interface (Interface 0)". Make sure it is Interface o (ZERO) and not "1". You may see "RTL2838UHIDIR" instead of the bulk in interface. This is also a valid selection. 
 
-The latest stable version is 2.6. It requires MacOS 10.11 or newer. Click the download tab at the top of the page, and scroll down to the the MacOS link. If you are ambitious you can use macports to get latest version, but this requires more work.
+    <img src="graphics/zadig_bulkinterface.png" width="350" height="150">
+    
+    - Verify the Driver shows WinUSB on the right of the green arrow. The right hand box shows the currently installed driver, and left hand box shows the driver that will be installed. It doesn't matter what the right hand box shows, but it will likely be (NONE) or (RTL...).
+    - Verify the USB ID is "0BDA 2838 00", which means the dongle is selected.
 
-Once the file has downloaded click on the .dmg file, and copy gqrx into your Applications folder.
+    <img src="graphics/zadig_install_none.png" width="350" height="150">
+    
+    - Click on Reinstall Driver. You may get a warning, but just accept it. Wait a few minutes for the installation. 
+- Check Device Manager for any caution triangles (Windows + X, M).
+- Delete the Zadig executable file when complete.
 
-**Windows**
+In case you were wondering, "Bulk-In, Interface 0" and "Bulk-In, Interface 1" refer to USB interfaces exposed by the SDR dongle, not the physical USB ports on your computer. "Bulk-In, Interface 0" is the primary data interface used by the SDR for streaming radio signals to your computer and is the one you want to isntall the WinUSB driver on when you were using Zadig. "Bulk-In, Interface 1" is typically a secondary interface used for other functions (remote control, audio), but it's not used for SDR signal processing. Installing the driver on this interface can cause issues like device connection errors.
 
-For Windows we will use SDR#. This is the same sort of program as gqrx, but written in C# for Windows. The web page is
+### Spectrum Visualization Software Installation
 
-[http://airspy.com/download](http://airspy.com/download/)
+Now we will download radioconda. Radioconda is a specialized software distribution built on the conda package manager, designed specifically for SDR applications. It includes GNU Radio, Digital RF, gqrx, and support for several types of SDRs, including the RTL-SDR you received.
 
-SDR# used to be an amateur project that was taken over by Airspy, which makes higher end SDR's. Download the first package, that includes SDR# along with a number of other interesting and useful components. You also need to install drivers for windows, which is described here:
+Follow these steps:
+- Go to https://github.com/ryanvolz/radioconda/releases and download the newest executable release for your operating system. I use Windows, so I downloaded "radioconda-2025.03.14-Windows-x86_64.exe".
+- Open the folder where you downloaded radioconda and run the executable file.
+- After radioconda is installed, open gqrx. (The easiest way for me to find gqrx is typing 'gqrx' into the WIndows search bar.)
 
-[rtl-sdr-quick-start-guide](http://www.rtl-sdr.com/rtl-sdr-quick-start-guide)
+We will use the gqrx program as our spectrum visualization tool. There are several other spectrum visualization tools available (e.g., SDR#, SDR++, HDSDR, SDR Angel for Android, and more), all with varying levels of functionality. gqrx is a graphical interface built on top of GNU radio, an open source software defined radio project. When you downloaded radioconda, you also downloaded GNU radio and several of its libraries, as well as the command line program we will use in the future labs.
 
-This worked for me pretty directly, so I wish you luck.
+The gqrx web page is [http://gqrx.dk](http://gqrx.dk/), if you want to learn more. Next, we'll use gqrx to pick up commercial FM radio.
 
 ## Commercial FM Radio
 
-First, plug the antenna into your sdr, and the sdr into a USB socket on your computer. Then, start your program. We'll look at gqrx here, but SDR# is very similar, and has the same settings to adjust.
+To receive signals with your RTL-SDR, you first need to make sure you connect the antenna. It is good to get in the habit of first connecting the antenna before powering on your SDR. While you likely won't hurt the SDR, it is possible to damage it through electrostatic discharge (ESD) - which is more likely at high altitudes or if you are wearing synthetic materials. If you don't have grounding mats or other procedures in place to mitigate ESD, just be careful. In your future military job if you are dealing with more sensitive electronics, you will have to be trained on proper ESD procedures. You don't want to be the person who bricks the flight controls of a satellite your team has been building...
 
-When you start gqrx, it will pop up a window for the device configuration
+If you haven't already done it, connect the antenna and plug the SDR into a USB socket on your computer. Then, start gqrx. When you start gqrx, it will pop up a window for the device configuration. In the Device drop down menu, select "Generic RTL..." 
+
+The RTL-SDR's max sample rate is technically 3.2MHz, but a more stable and reliable rate is 2.4MHz or less, especially with USB 2.0 ports. You just need to ensure the RTL-SDR sample rate is at least double (Nyquist!) the message bandwidth of the signal you want to receive. We'll set the sample rate to 1800000 (i.e., 1.8 MHz). Your computer and the SDR should keep up with this easily. 
 
 Configuration Window
 
 ![](graphics/gqrx_config.png)  
 
-Set the sample rate to 2400000 (i.e. 2.4 MHz). Your computer and the sdr should keep up with this easily. After clicking OK, gqrx will pop up:
+Click OK, and the gqrx window will pop up:
 
 Initial Display
 
 ![](graphics/gqrx_init.png)  
 
-This is a previous version of gqrx, but it should look similar. Set the frequency offset in the upper right to 0.000 kHz, and then set the receiver frequency in the upper left to 97.700 000 MHz. This is KAFA, which is a nice clean signal. Change the “Mode” pulldown on the right side of the screen to “Wide FM (Stereo)”. The display should look like this:
+Set the frequency offset in the upper right to 0.000 kHz, and then set the receiver frequency at the top of the plot to 99.900.000 Hz (or 99.9MHz) by:
+- Clicking the numbers at the top of the plot and typing in the frequency you want, or
+- Typing the frequency (in kHz) in the Frequency block in the right side menu.
 
-Tuned to KAFA
+The FM station at this frequency is KVUU, which is one of the strongest signals in the Colorado Springs area and will give you a nice clean signal. Change the “Mode” pulldown in the right side menu to “WFM (stereo)”. The display should look like this:
 
-![](graphics/gqrx_kqed_init.png)  
+Tuned to KVUU
 
-Now click the big button in the upper left corner. It looks like an on/off power button. With any luck, you should be listening to KAFA!
+![](graphics/gqrx_999_init.png)  
 
-Tuned to KAFA
+Now click the play button in the upper left corner. With any luck, you should be listening to KVUU! If you don't hear anything, check that your computer isn't muted and that you are in a location with reception.
 
-![](graphics/gqrx_885.png)  
+Tuned to KVUU
 
-The plot in the upper panel is the live spectrum that is being received, and has a range +/- 1.2 MHz, since you set the sampling rate to 2.4 MHz.
+![](graphics/gqrx_999.png)  
+
+The plot in the upper panel is the live spectrum being received and has a range +/- 0.9MHz, since you set the sampling rate to 1.8MHz.
 
 The lower panel is a waterfall plot. Each line in the image is the spectrum from the top panel, displayed with color encoding amplitude. It slowly scrolls down as you acquire longer. This plot is a great way to recognize different types of signals.
 
-One useful setting is the receiver gain. To change this click on “Input Controls”, which will bring up a panel for controlling the SDR. The slider at the top adjusts the gain. If it is too low (to the left), the signal will be all noise. If it is too high (to the right) the receiver saturates, and the signal is distorted. The “A” button sets the gain automatically, which you generally don't want to do when you are looking for signals, since it will constantly be changing.
+One useful setting is the receiver gain. To change this click on “Input Controls”, which will bring up a panel for controlling the SDR. There are several sliders available since different types of SDRs have multiple Intermediate Frequency (IF) stages. For the RTL-SDR the primary slider of interest is IF1. Try moving it up and down to see what level gives you the best definition between FM station signals and the noise floor. If it is too low (to the left), the signal will be all noise. If it is too high (to the right) the receiver saturates, and the signal is distorted. The “Hardware AGC” checkbox turns on the hardware automatic gain control. You generally don't want to use it when you are looking for signals, since it will constantly be changing.
 
-Go back to the “Receiver Options”. The top “Filter” pulldown sets how wide a bandwidth we are listening to. This is the shaded region on the live spectrum plot. On “Normal” it chooses something reasonable for whatever modulation we are receiving, so generally leave it there. The middle “Mode” pulldown selects how the receiver decodes the signal. Common choice are “AM”, used for aircraft and air traffic control, “Narrow FM” used for police and fire radio, and “Wide FM” used for commercial FM radio. We will talk about the other options later. The bottom “AGC” pulldown sets how rapidly the receiver adjusts for amplitude variations in the signal.
+Go back to the “Receiver Options”. The top “Filter” pulldown sets how wide a bandwidth we are listening to. This is the shaded region on the live spectrum plot. On “Normal” it chooses something reasonable for whatever modulation we are receiving, so generally leave it there. You can also change the bandwidth by dragging the edge of the shaded region on the spectrum plot. 
 
-Try setting the center frequency to other stations that you may know (such as 92.9 out of Pueblo or 98.1 classic rock). Often you will see several stations in the plot, as shown below:
+The middle “Mode” pulldown selects how the receiver decodes the signal. Common choices are “AM” used for aircraft and air traffic control, “Narrow FM” used for police and fire radio, and “Wide FM” used for commercial FM radio. We will talk about the other options later. The bottom “AGC” pulldown sets how rapidly the receiver adjusts for amplitude variations in the signal. Leave it at "Medium" for now.
 
-### Tuned to 99.7
+Try setting the center frequency to other stations that you may know (such as 92.9 out of Pueblo or 98.1 classic rock). Often you will see several stations in the plot, as shown below, where I increased the sample rate to 3.2MHz and adjusted the gain. At least eight stations are visible.
 
-![](graphics/gqrx_997.png)  
+![](graphics/gqrx_multiple.png)  
 
 Select any of them by clicking on them in the top panel. That will set the receiver offset.
-
-The SDR# version looks like this, when tuned to KAFA:
-
-### SDR# Tuned to KAFA
-
-![](graphics/sdrsharp_885.png)  
-
-Choose “RTLSDR/USB” as the input, next to the stop/play button in the upper left. Aside from the color scale, one difference from gqrx is that the SDR gain and sampling rate is set by the “configure” button. Otherwise the controls are pretty much the same.
 
 We will come back to commercial FM in a couple of labs.
 
