@@ -13,7 +13,7 @@ parts:
       - file: downloads
   - caption: Assignments and Labs
     chapters:
-      - file: labs/SkillsReview
+      - file: SkillsReview
       - file: labs/Lab1
       - file: labs/Lab2
       - file: labs/Lab3
