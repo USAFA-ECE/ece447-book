@@ -137,6 +137,6 @@ There are lots of other frequencies where you can find narrow band FM signals. O
 
 ## Assignment
 
-To show you have completed this lab, take a screen shot of some frequency band where you have found narrow band FM signals. Put the screen shot and a description of what it is in a PDF, and submit it to Gradescope. Use the Radio Reference (or Google or the GenAI platform of your choice) to figure out who is using that frequency.
+To show you have completed this lab, take a screen shot of some frequency band where you have found narrow band FM signals. Use the Radio Reference (or Google or the GenAI platform of your choice) to figure out who is using that frequency. Put the screen shot, a description of what it is, and *your documentation statement* in a PDF. Then submit the PDF to Gradescope.
 
 There are lots of other interesting frequency bands out there, that use other forms of modulation. Check out 463 MHz (lots of digital radio), 900-930 MHz (Paging, ISM), and Cell phones (700-800 MHz).
