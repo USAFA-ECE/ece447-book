@@ -111,7 +111,7 @@ We will come back to commercial FM in a couple of labs.
 
 ## Police, Fire, and Amateur Radio
 
-There are several frequency bands that are used for public services, such as local police and fire. You used to be able to easily listen in on the police, fire, and utilities frequencies. However, many of the emergency services use trunked systems, which are more bandwidth efficient but more complicated to decode. A great source of information on who is transmitting what from where is
+There are several frequency bands that are used for public services, such as local police and fire. You used to be able to easily listen in on the police, fire, and utilities frequencies. However, many of the emergency services now use digital trunked systems, which are more bandwidth efficient but more complicated to decode. A great source of information on who is transmitting what from where is
 
 [http://radioreference.com](http://radioreference.com/)
 
@@ -119,7 +119,7 @@ Searching the Radio Reference Databse (RRDB) for Colorado Springs brings up El P
 
 ![](graphics/El_Paso_freqs.png)  
 
-However these frequencies aren't consistently active. More active narrowband FM frequencies are found on amateur radio frequencies (depending on the time of day). You can find what frequencies are commonly used in the Colorado Springs area at https://repeaterbook.com/.
+However these frequencies aren't consistently active. Search other categories in El Paso County (e.g., schools, businesses). Specifically, look for frequencies using FM or FMN in the Mode column. Your gqrx software is able to easily decode these types of signals. Potentially more active narrowband FM frequencies are found on amateur radio frequencies (depending on the time of day). You can find what frequencies are commonly used in the Colorado Springs area at https://repeaterbook.com/.
 
 ![](graphics/AmateurRadio_Repeaters_COS.png)  
 
@@ -133,10 +133,10 @@ Here I set the receiver frequency is to 851.387MHz and the receiver offset to 55
 
 Another useful control is the Squelch box on the “Receiver Controls”. Tune to a frequency that is only noise and click the A box next to the squelch value. This will blank out the noise, and the speaker will go quiet. When you tune to an active frequency, the signal will come through, but will blank again when the signal stops. This will annoy the people around you less!
 
-There are lots of other frequencies where you can find narrow band FM signals. One is the police and fire band at about 154 MHz. Another are the amateur radio bands from 144-148 MHz, 220-225 MHz, and 420-450 MHz. There are many commercial users, like PG&E, right above 450 MHz. These fun to listen to after a power failure. Another is the weather radio around 162.500 MHz, where different weather stations are separated by 25 kHz spacings.
+There are lots of other frequencies where you can find narrow band FM signals. One is the amateur radio bands from 144-148MHz, 220-225MHz, and 420-450MHz. There are many commercial users, like Chapel Hills Mall, around 460MHz. Another is the weather radio around 162.500MHz.
 
 ## Assignment
 
-To show you have completed this lab, take a screen shot of some frequency band where you have found narrow band FM signals. Save it and a description of what it is as a PDF, and submit it to Gradescope. Use the radio reference (or google) to figure out who is using that frequency.
+To show you have completed this lab, take a screen shot of some frequency band where you have found narrow band FM signals. Put the screen shot and a description of what it is in a PDF, and submit it to Gradescope. Use the Radio Reference (or Google or the GenAI platform of your choice) to figure out who is using that frequency.
 
 There are lots of other interesting frequency bands out there, that use other forms of modulation. Check out 463 MHz (lots of digital radio), 900-930 MHz (Paging, ISM), and Cell phones (700-800 MHz).
