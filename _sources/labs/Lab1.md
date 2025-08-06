@@ -26,17 +26,17 @@ Follow these steps to install the drivers necessary to run the dongle as an SDR 
 - Go to "Help->Update Policy and Settings" then "Check Now" then "Close"
 - Go to "Options->List All Devices"
 
-<img src="graphics/zadig_options.png" width="350" height="150">
+![](graphics/zadig_options.png)  
 
 - **WARNING: follow the next few instructions closely! Do NOT select anything besides what is instructed, or you will likely overwrite a driver for your mouse, keyboard, etc.** 
     - Open the top drop-down menu. Select "Bulk-In, Interface (Interface 0)". Make sure it is Interface o (ZERO) and not "1". You may see "RTL2838UHIDIR" instead of the bulk in interface. This is also a valid selection. 
 
-    <img src="graphics/zadig_bulkinterface.png" width="350" height="150">
+![](graphics/zadig_bulkinterface.png)  
     
     - Verify the Driver shows WinUSB on the right of the green arrow. The right hand box shows the currently installed driver, and left hand box shows the driver that will be installed. It doesn't matter what the right hand box shows, but it will likely be (NONE) or (RTL...).
     - Verify the USB ID is "0BDA 2838 00", which means the dongle is selected.
 
-    <img src="graphics/zadig_install_none.png" width="350" height="150">
+![](graphics/zadig_install_none.png)
     
     - Click on Reinstall Driver. You may get a warning, but just accept it. Wait a few minutes for the installation. 
 - Check Device Manager for any caution triangles (Windows + X, M).
