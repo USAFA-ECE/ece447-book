@@ -2,6 +2,6 @@
 
 ## Download
 
-<embed src="book/_static/Skills_Review.pdf" width="100%" height="600px" type="application/pdf">
+<embed src="labs/Skills_Review.pdf" width="100%" height="600px" type="application/pdf">
 
-If you have trouble viewing, you can download the PDF [here](book\_static\Skills_Review.pdf).
+If you have trouble viewing, you can download the PDF [here](labs\Skills_Review.pdf).
