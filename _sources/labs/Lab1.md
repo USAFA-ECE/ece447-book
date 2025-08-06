@@ -111,27 +111,27 @@ We will come back to commercial FM in a couple of labs.
 
 ## Police, Fire, and Amateur Radio
 
-There are several frequency bands that are used for public services, such as local police and fire. For Palo Alto, the police, fire, and utilities frequencies are
-![](graphics/PA_Police.png)
-and for the Stanford Police are
-![](graphics/Stanford_Police.png)
-These are from
+There are several frequency bands that are used for public services, such as local police and fire. You used to be able to easily listen in on the police, fire, and utilities frequencies. However, many of the emergency services use trunked systems, which are more bandwidth efficient but more complicated to decode. A great source of information on who is transmitting what from where is
 
 [http://radioreference.com](http://radioreference.com/)
 
-which is a great source of information on who is transmitting what from where. Both the Palo Alto Police, and the Stanford Police are right around 483 MHz, so set your receiver frequency there. With your 2.4 MHz bandwidth you should see lots of activity, particularly later in the evening.
+Searching the Radio Reference Databse (RRDB) for Colorado Springs brings up El Paso County. In the screenshot below, you can see the El Paso County search and rescue  communications are narrowband FM (FMN) signals near 151MHz and 155MHz. 
 
-Note that you may need to find the right environment to be able to see lots of signals. Lots of devices spew RF. Campus buildings, like Packard, have a tremendous amount of interference. Also, buildings can screen signals. You may need to put your antenna in a window, or take your receiver outside, in order to improve your reception.
+![](graphics/El_Paso_freqs.png)  
 
-First, set your receive “Mode” pulldown to “Narrow FM”. This uses much less spectrum than commercial FM, and is commonly used for handheld communications such as police and fire. Click on any of the peaks in the upper plot. That will shift your receiver offset to that frequency. About half of the signals are digital, and will sound like dial-up modems. We'll talk about how these signals are encoded later in the class. The other half will be narrowband FM, and should be easy for you to decode. Your screen should look something like this
+However these frequencies aren't consistently active. More active narrowband FM frequencies are found on amateur radio frequencies (depending on the time of day). You can find what frequencies are commonly used in the Colorado Springs area at https://repeaterbook.com/.
 
-### Police and Fire Frequencies
+![](graphics/AmateurRadio_Repeaters_COS.png)  
 
-![](graphics/gqrx_PA.png)  
+Note that you may need to find the right environment to be able to see signals. USAFA's location puts you at a disadvantage, but you should still be able to pick up radio stations and amateur radio signals. Buildings can also screen signals, and Fairchild Hall is particularly adept at that. You may need to go to the Madera Center or outside somewhere in order to improve your reception.
 
-Here the receiver frequency is 483 MHz, and the receiver offset is -332.2 KHz, so that we are receiving the frequency 482.667 800 MHz. The frequencies won't be exactly those shown in the table, because the crystal in your SDR drifts with as it warms up. We'll look at calibrating this out later in the class.
+First, set your receive “Mode” pulldown to “Narrow FM”. This uses much less spectrum than commercial FM, and is commonly used for handheld communications such as police and fire. Click on any of the peaks in the upper plot. That will shift your receiver offset to that frequency. Many of the signals are digital and will sound like dial-up modems. We'll talk about how these signals are encoded later in the class. Other signals - especially if you can pick up some active amateur radio signals - will be narrowband FM. These should be easy for gqrx to decode, and you can listen in. Your screen may look something like this:
 
-Another useful control is the squelch slider, labeled “SQL” on the “Receiver Controls”. Tune to a frequency that is only noise, and adjust the slider so that it just blanks the noise, and the speaker goes quiet. Then when you tune to an active frequency the signal will come through, but will blank again when the signal stops. This will annoy your roommates less!
+![](graphics/COS_area_police.png)  
+
+Here I set the receiver frequency is to 851.387MHz and the receiver offset to 554.1kHz, so we are receiving the frequency 850.8329MHz. This region of the spectrum is part of the Digital Trunked Radio System (DTRS) used by law enforcement, fire departments, EMS and other emergency services. It uses a digital modulation scheme that encrypts transmissions for security. You won't hear anyone talking - just digital sounding signals. Also, the frequencies won't be exactly correct, because the crystal in your SDR drifts with as it warms up. We'll look at calibrating this out later in the course.
+
+Another useful control is the Squelch box on the “Receiver Controls”. Tune to a frequency that is only noise and click the A box next to the squelch value. This will blank out the noise, and the speaker will go quiet. When you tune to an active frequency, the signal will come through, but will blank again when the signal stops. This will annoy the people around you less!
 
 There are lots of other frequencies where you can find narrow band FM signals. One is the police and fire band at about 154 MHz. Another are the amateur radio bands from 144-148 MHz, 220-225 MHz, and 420-450 MHz. There are many commercial users, like PG&E, right above 450 MHz. These fun to listen to after a power failure. Another is the weather radio around 162.500 MHz, where different weather stations are separated by 25 kHz spacings.
 
