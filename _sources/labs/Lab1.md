@@ -3,9 +3,9 @@
 
 ## Overview
 
-The USB dongles we passed out in class can directly digitize a 3.2 MHz segment of the RF spectrum, from 27 MHz up to 1.7 GHz. This can capture a large part of the RF spectrum, which we can then process in MATLAB or Python and extract the signals we want.
+The USB dongles you will receive in class can directly digitize a 3.2 MHz segment of the RF spectrum, from 27 MHz up to 1.7 GHz. This can capture a large part of the RF spectrum, which we can then process in MATLAB or Python and extract the signals we want.
 
-In this lab we will install the USB software for your computer and then use a real time spectral display to look at some of the different signals that are all around you.
+In this lab we will install the SDR software for your computer and then use a real time spectral display to look at some of the different signals that are all around you.
 
 ## Aims of the Lab
 
