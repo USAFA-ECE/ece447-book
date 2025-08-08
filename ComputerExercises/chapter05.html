@@ -1,0 +1,1006 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>5.8.1 Sampling and Reconstruction of Lowpass Signals &#8212; ECE447 Course Webpage</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.8ecb98da25f57f5357bf6f572d296f466b2cfe2517ffebfabe82451661e28f02.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ComputerExercises/chapter05';</script>
+    <link rel="icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="ECE447 Course Webpage - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="ECE447 Course Webpage - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to ECE447, Communication Systems!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Course Schedule</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Downloads</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Slides and Downloads</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../SkillsReview.html">Skills Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab4.html">Lab 4: Narrowband FM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab5.html">Lab 5: Commercial FM</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab6.html">Lab 6: A Few Different Digital Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab7.html">Lab 7: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab8.html">Lab 8: Digital Packet Radio – APRS</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/usafa-ece/jupyterbook-template/blob/main/book/ComputerExercises/chapter05.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on Colab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="Colab logo" src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2FComputerExercises/chapter05.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ComputerExercises/chapter05.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>5.8.1 Sampling and Reconstruction of Lowpass Signals</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5.8.1 Sampling and Reconstruction of Lowpass Signals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pcm-illustration">5.8.2 PCM Illustration</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#delta-modulation">5.8.3 Delta Modulation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#video-residual-image-compression-and-coding">5.8.4 Video Residual Image Compression and Coding</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="sampling-and-reconstruction-of-lowpass-signals">
+<h1>5.8.1 Sampling and Reconstruction of Lowpass Signals<a class="headerlink" href="#sampling-and-reconstruction-of-lowpass-signals" title="Link to this heading">#</a></h1>
+<p><span style="color:red"> <b><em>Note: text on p.345-346 skipped</em></b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.fftpack</span><span class="w"> </span><span class="kn">import</span> <span class="n">dct</span><span class="p">,</span> <span class="n">idct</span>
+<span class="c1"># On kaggle, one can add new data folders by clicking the uploading sign next to the &quot;Add Data&quot; button on the right hand side panel.</span>
+<span class="c1"># We can upload a new dataset name such as &quot;chapter05images&quot;. The input path /kaggle/input/chapter05images</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">1</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">from</span><span class="w"> </span><span class="nn">scipy.fftpack</span><span class="w"> </span><span class="kn">import</span> <span class="n">dct</span><span class="p">,</span> <span class="n">idct</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;numpy&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">sampandquant</span><span class="p">(</span><span class="n">sig_in</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Usage:</span>
+<span class="sd">    s_out, sq_out, sqh_out, Delta, SQNR = sampandquant(sig_in, L, td, ts)</span>
+<span class="sd">    L - number of uniform quantization levels</span>
+<span class="sd">    sig_in - input signal vector</span>
+<span class="sd">    td - original signal sampling period of sig_in</span>
+<span class="sd">    ts - new sampling period</span>
+<span class="sd">    NOTE: td*fs must be a positive integer;</span>
+<span class="sd">    Function outputs:</span>
+<span class="sd">    s_out - sampled output</span>
+<span class="sd">    sq_out - sample-and-quantized output</span>
+<span class="sd">    sqh_out - sample,quantize, and hold output</span>
+<span class="sd">    Delta - quantization interval</span>
+<span class="sd">    SQNR - actual signal to quantization noise ratio</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">ts</span><span class="o">/</span><span class="n">td</span><span class="p">)</span><span class="o">.</span><span class="n">is_integer</span><span class="p">():</span>
+        <span class="n">nfac</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">ts</span><span class="o">/</span><span class="n">td</span><span class="p">))</span>
+        <span class="n">p_zoh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nfac</span><span class="p">)</span>
+        <span class="n">s_out</span> <span class="o">=</span> <span class="n">sig_in</span><span class="p">[::</span><span class="n">nfac</span><span class="p">]</span>
+        <span class="n">sq_out</span><span class="p">,</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">SQNR</span> <span class="o">=</span> <span class="n">uniquan</span><span class="p">(</span><span class="n">s_out</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+        <span class="n">s_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">s_out</span><span class="p">]</span> <span class="o">+</span><span class="p">[</span><span class="n">s_out</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="n">nfac</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">sqh_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">sq_out</span><span class="p">,</span> <span class="n">p_zoh</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Errors! ts/td is not an integer!&quot;</span><span class="p">)</span>
+        <span class="n">s_out</span> <span class="o">=</span> <span class="n">sq_out</span> <span class="o">=</span> <span class="n">sqh_out</span> <span class="o">=</span> <span class="n">Delta</span> <span class="o">=</span> <span class="n">SQNR</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">return</span> <span class="n">s_out</span><span class="p">,</span> <span class="n">sq_out</span><span class="p">,</span> <span class="n">sqh_out</span><span class="p">,</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">SQNR</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">uniquan</span><span class="p">(</span><span class="n">sig_in</span><span class="p">,</span> <span class="n">L</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Usage:</span>
+<span class="sd">    q_out, Delta, SQNR = uniquan(sig_in, L)</span>
+<span class="sd">    L - number of uniform quantization levels</span>
+<span class="sd">    sig_in - input signal vector</span>
+<span class="sd">    Function outputs:</span>
+<span class="sd">    q_out - quantized output</span>
+<span class="sd">    Delta - quantization interval</span>
+<span class="sd">    SQNR - actual signal to quantization noise ratio</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sig_pmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sig_in</span><span class="p">)</span>   <span class="c1"># finding the positive peak</span>
+    <span class="n">sig_nmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">sig_in</span><span class="p">)</span>   <span class="c1"># finding the negative peak</span>
+    <span class="n">Delta</span> <span class="o">=</span> <span class="p">(</span><span class="n">sig_pmax</span> <span class="o">-</span> <span class="n">sig_nmax</span><span class="p">)</span> <span class="o">/</span> <span class="n">L</span>    <span class="c1"># quantization interval</span>
+    <span class="n">q_level</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">sig_nmax</span> <span class="o">+</span> <span class="n">Delta</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">sig_pmax</span> <span class="o">-</span> <span class="n">Delta</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">Delta</span><span class="p">)</span>  <span class="c1"># define Q-levels</span>
+    <span class="n">L_sig</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sig_in</span><span class="p">)</span>   <span class="c1"># find signal length</span>
+    <span class="n">sigp</span> <span class="o">=</span> <span class="p">(</span><span class="n">sig_in</span> <span class="o">-</span> <span class="n">sig_nmax</span><span class="p">)</span> <span class="o">/</span> <span class="n">Delta</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span>   <span class="c1"># convert into 1/2 to L+1/2 range</span>
+    <span class="n">qindex</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">sigp</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>     <span class="c1"># round to 1,2, ... L levels</span>
+    <span class="n">qindex</span><span class="p">[</span><span class="n">qindex</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">qindex</span><span class="p">[</span><span class="n">qindex</span> <span class="o">&gt;</span> <span class="n">L</span><span class="p">]</span> <span class="o">=</span> <span class="n">L</span>   <span class="c1"># eliminate L+1 as a rare possibility</span>
+    <span class="n">q_out</span> <span class="o">=</span> <span class="n">q_level</span><span class="p">[</span><span class="n">qindex</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span>  <span class="c1"># use index vector to generate output</span>
+    <span class="n">SQNR</span> <span class="o">=</span> <span class="mi">20</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">sig_in</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">sig_in</span><span class="o">-</span><span class="n">q_out</span><span class="p">))</span>  <span class="c1"># actual SQNR value</span>
+    <span class="k">return</span> <span class="n">q_out</span><span class="p">,</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">SQNR</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save this codeblock as ExSample.py</span>
+<span class="n">td</span> <span class="o">=</span> <span class="mf">0.002</span>  <span class="c1">#original sampling rate 500 Hz</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">td</span><span class="p">,</span> <span class="n">td</span><span class="p">)</span>  <span class="c1"># Time interval of 1 second</span>
+<span class="n">xsig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1"># 1Hz+3Hz sinusoids</span>
+<span class="n">Lsig</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xsig</span><span class="p">)</span>
+
+<span class="n">ts</span> <span class="o">=</span> <span class="mf">0.02</span> <span class="c1">#new sampling rate = 50Hz.</span>
+<span class="n">Nfactor</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ts</span><span class="o">/</span><span class="n">td</span><span class="p">)</span>
+<span class="c1"># send the signal through a 16-level uniform quantizer</span>
+<span class="n">s_out</span><span class="p">,</span> <span class="n">sq_out</span><span class="p">,</span> <span class="n">sqh_out</span><span class="p">,</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">SQNR</span> <span class="o">=</span> <span class="n">sampandquant</span><span class="p">(</span><span class="n">xsig</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+
+<span class="c1"># receive 3 signals:</span>
+<span class="c1">#   1. sampled signal s_out</span>
+<span class="c1">#   2. sampled and quantized signal sq_out</span>
+<span class="c1">#   3. sampled, quantized, and zero-order hold signal sqh_out</span>
+<span class="c1"># calculate the Fourier transforms</span>
+<span class="n">Lfft</span> <span class="o">=</span> <span class="mi">2</span><span class="o">**</span><span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">Lsig</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">Fmax</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">td</span><span class="p">)</span>
+<span class="n">Faxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">Fmax</span><span class="p">,</span> <span class="n">Fmax</span><span class="p">,</span> <span class="n">Lfft</span><span class="p">)</span>
+<span class="n">Xsig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">xsig</span><span class="p">,</span> <span class="n">Lfft</span><span class="p">))</span>
+<span class="n">S_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">s_out</span><span class="p">,</span> <span class="n">Lfft</span><span class="p">))</span>
+
+<span class="c1"># Examples of sampling and reconstruction using</span>
+<span class="c1">#   a) ideal impulse train through LPF</span>
+<span class="c1">#   b) flat top pulse reconstruction through LPF</span>
+<span class="c1"># plot the original signal and the sample signals in time and frequency domain</span>
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span><span class="mi">6</span><span class="p">));</span> <span class="n">fig1</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">);</span> 
+<span class="n">sfig1a</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">sfig1b</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">s_out</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Signal ${\it g}({\it t})$ and its uniform samples&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">);</span> <span class="n">sfig1c</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Faxis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">Xsig</span><span class="p">),</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;frequency (Hz)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Spectrum of ${\it g}({\it t})$&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">);</span> <span class="n">sfig1d</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Faxis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S_out</span><span class="p">),</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$frequency (Hz)$&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="o">/</span><span class="n">Nfactor</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Spectrum of ${\it g}_T({\it t})$&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="c1"># Set the spacing between subfigures</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># calculate the reconstructed signal from ideal sampling and ideal LPF</span>
+<span class="c1"># Maximum LPF bandwidth equals to BW = floor((Lfft/Nfactor)/2);</span>
+<span class="n">BW</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># Bandwidth is no larger than 10Hz.</span>
+<span class="n">H_lpf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Lfft</span><span class="p">)</span>
+<span class="n">H_lpf</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">Lfft</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">BW</span><span class="p">:</span><span class="nb">int</span><span class="p">(</span><span class="n">Lfft</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">BW</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="c1"># ideal LPF</span>
+<span class="n">S_recv</span> <span class="o">=</span> <span class="n">Nfactor</span><span class="o">*</span><span class="n">S_out</span><span class="o">*</span><span class="n">H_lpf</span> <span class="c1"># ideal filtering</span>
+<span class="n">s_recv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">S_recv</span><span class="p">)))</span> <span class="c1"># reconstructed f-domain</span>
+<span class="n">s_recv</span> <span class="o">=</span> <span class="n">s_recv</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">]</span>
+
+<span class="c1"># non-ideal reconstruction</span>
+<span class="n">ZOH</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">Nfactor</span><span class="p">)</span>
+<span class="n">s_ni</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">s_out</span><span class="p">[::</span><span class="n">Nfactor</span><span class="p">],</span> <span class="n">ZOH</span><span class="p">)</span>
+<span class="n">S_ni</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">s_ni</span><span class="p">,</span> <span class="n">Lfft</span><span class="p">))</span>
+<span class="n">S_recv2</span> <span class="o">=</span> <span class="n">S_ni</span><span class="o">*</span><span class="n">H_lpf</span> <span class="c1"># ideal filtering</span>
+<span class="n">s_recv2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">S_recv2</span><span class="p">)))</span> <span class="c1"># reconstructed f-domain</span>
+<span class="n">s_recv2</span> <span class="o">=</span> <span class="n">s_recv2</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">]</span> <span class="c1"># reconstructed t-domain</span>
+
+<span class="c1"># plot the ideally reconstructed signal in time and frequency domain</span>
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span><span class="mi">6</span><span class="p">));</span> <span class="n">fig2</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">);</span>  <span class="n">sfig2a</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">Faxis</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">S_recv</span><span class="p">),</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;frequency (Hz)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Spectrum of ideal filtering (reconstruction)&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">);</span> <span class="n">sfig2b</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;m-.&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">s_recv</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Original signal&#39;</span><span class="p">,</span><span class="s1">&#39;Reconstructed signal&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original signal versus ideally reconstructed signal&#39;</span><span class="p">)</span>
+<span class="c1"># Set the spacing between subfigures</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># plot the ideally reconstructed signal in time and frequency domain</span>
+<span class="n">fig3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">fig3</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">);</span> <span class="n">sfig3a</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">s_ni</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original signal versus flat-top reconstruction&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">);</span> <span class="n">sfig3b</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">s_recv2</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b--&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;original signal&#39;</span><span class="p">,</span><span class="s1">&#39;LPF reconstruction&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original and flat-top reconstruction after LPF&#39;</span><span class="p">)</span>
+<span class="c1"># Set the spacing between subfigures</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/47cd1990aafeebb63f516a2692066effab83cf0f5acd43676fe284340ca35f37.png" src="../_images/47cd1990aafeebb63f516a2692066effab83cf0f5acd43676fe284340ca35f37.png" />
+<img alt="../_images/51abdb25c31ec4fbfcb0397e87374fb15a389556b0207089012536b5a697d8d9.png" src="../_images/51abdb25c31ec4fbfcb0397e87374fb15a389556b0207089012536b5a697d8d9.png" />
+<img alt="../_images/4f553aea723904a9e563fb0986ff46bd1bfe549d1a44e30477daa9899a6e8028.png" src="../_images/4f553aea723904a9e563fb0986ff46bd1bfe549d1a44e30477daa9899a6e8028.png" />
+</div>
+</div>
+<img src="images/Fig5_41.png" width="600" />
+<center><b>Figure 5.41</b> The relationship between the original signal and the ideal uniformly sampled signal in the time (a) and frequency (b, c) domains.</center>
+<img src="images/Fig5_42.png" width="600" />
+<center><b>Figure 5.42</b> Reconstructed signal spectrum and waveform from applying the ideal impulse sampling and ideal LPF reconstruction. </center>
+<img src="images/Fig5_43.png" width="600" />
+<center><b>Figure 5.43</b> Reconstructed signal spectrum and waveform from applying the simple rectangular reconstruction pulse (Fig. 5.6) followed by LPF without equalization.  </center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="pcm-illustration">
+<h1>5.8.2 PCM Illustration<a class="headerlink" href="#pcm-illustration" title="Link to this heading">#</a></h1>
+<p><span style="color:red"> <b><em>Note: text on pps.348-350 skipped</em></b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the following code block as ExPCM.py</span>
+<span class="n">td</span> <span class="o">=</span> <span class="mf">0.002</span>  <span class="c1"># original sampling rate 500 Hz</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">td</span><span class="p">,</span> <span class="n">td</span><span class="p">)</span>  <span class="c1"># time interval of 1 second</span>
+<span class="n">xsig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">6</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">t</span><span class="p">)</span>  <span class="c1"># 1Hz+3Hz sinusoids</span>
+<span class="n">Lsig</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xsig</span><span class="p">)</span>
+<span class="n">Lfft</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">Lsig</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Xsig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">xsig</span><span class="p">,</span> <span class="n">Lfft</span><span class="p">))</span>
+<span class="n">Fmax</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">td</span><span class="p">)</span>
+<span class="n">Faxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">Fmax</span><span class="p">,</span> <span class="n">Fmax</span><span class="p">,</span> <span class="n">Lfft</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="mf">0.02</span>  <span class="c1"># new sampling rate = 50Hz.</span>
+<span class="n">Nfact</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">ts</span> <span class="o">/</span> <span class="n">td</span><span class="p">)</span>
+<span class="c1"># send the signal through a 16-level uniform quantizer</span>
+<span class="p">(</span><span class="n">s_out</span><span class="p">,</span> <span class="n">sq_out</span><span class="p">,</span> <span class="n">sqh_out1</span><span class="p">,</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">SQNR</span><span class="p">)</span> <span class="o">=</span> <span class="n">sampandquant</span><span class="p">(</span><span class="n">xsig</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+<span class="c1"># obtained the PCM signal which is</span>
+<span class="c1"># - sampled, quantized, and zero-order hold signal sqh_out</span>
+
+<span class="c1"># plot the original signal and the PCM signal in time domain</span>
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">sfig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">sqh_out1</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Signal ${\it g}({\it t})$ and its 16 level PCM signal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec.)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># send the signal through a 4-level uniform quantizer</span>
+<span class="p">(</span><span class="n">s_out</span><span class="p">,</span> <span class="n">sq_out</span><span class="p">,</span> <span class="n">sqh_out2</span><span class="p">,</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">SQNR</span><span class="p">)</span> <span class="o">=</span> <span class="n">sampandquant</span><span class="p">(</span><span class="n">xsig</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+<span class="c1"># obtained the PCM signal which is</span>
+<span class="c1"># - sampled, quantized, and zero-order hold signal sqh_out</span>
+<span class="c1"># plot the original signal and the PCM signal in time domain </span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">sfig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">sqh_out2</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Signal ${\it g}({\it t})$ and its 4 level PCM signal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec.)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="c1"># Set the spacing between subfigures</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">Lfft</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">2</span> <span class="o">**</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="n">Lsig</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">Fmax</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">td</span><span class="p">)</span>
+<span class="n">Faxis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="n">Fmax</span><span class="p">,</span> <span class="n">Fmax</span><span class="p">,</span> <span class="n">Lfft</span><span class="p">)</span>
+<span class="n">SQH1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sqh_out1</span><span class="p">,</span> <span class="n">Lfft</span><span class="p">))</span>
+<span class="n">SQH2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">sqh_out2</span><span class="p">,</span> <span class="n">Lfft</span><span class="p">))</span>
+<span class="c1"># Now use LPF to filter the two PCM signals</span>
+<span class="n">BW</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="c1"># Bandwidth is no larger than 10Hz.</span>
+<span class="n">H_lpf</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Lfft</span><span class="p">)</span>
+<span class="n">H_lpf</span><span class="p">[</span><span class="n">Lfft</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">BW</span><span class="p">:</span><span class="n">Lfft</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">BW</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># ideal LPF</span>
+<span class="n">S1_recv</span> <span class="o">=</span> <span class="n">SQH1</span> <span class="o">*</span> <span class="n">H_lpf</span>  <span class="c1"># ideal filtering</span>
+<span class="n">s_recv1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">S1_recv</span><span class="p">)))</span>  <span class="c1"># reconstructed f-domain</span>
+<span class="n">s_recv1</span> <span class="o">=</span> <span class="n">s_recv1</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">]</span>  <span class="c1"># reconstructed t-domain</span>
+<span class="n">S2_recv</span> <span class="o">=</span> <span class="n">SQH2</span> <span class="o">*</span> <span class="n">H_lpf</span>  <span class="c1"># ideal filtering</span>
+<span class="n">s_recv2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">S2_recv</span><span class="p">)))</span>  <span class="c1"># reconstructed f-domain</span>
+<span class="n">s_recv2</span> <span class="o">=</span> <span class="n">s_recv2</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">]</span>  <span class="c1"># reconstructed t-domain</span>
+
+<span class="c1"># Plot the filtered signals against the original signal</span>
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig2</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">sfig3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">s_recv1</span><span class="p">,</span><span class="s1">&#39;b-.&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;original&#39;</span><span class="p">,</span><span class="s1">&#39;recovered&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Signal ${\it g}({\it t})$ and filtered 16-level PCM signal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec.)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">sfig4</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">s_recv2</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b-.&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;original&#39;</span><span class="p">,</span><span class="s1">&#39;recovered&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Signal ${\it g}({\it t})$ and filtered 4-level PCM signal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec.)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="c1"># Set the spacing between subfigures</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/dd9177d2605631d65463208954322eb59d4d91da80e1f98a76f2b7199198b870.png" src="../_images/dd9177d2605631d65463208954322eb59d4d91da80e1f98a76f2b7199198b870.png" />
+<img alt="../_images/356fb13890c6a6dd19cddac5130d926dbee063ada8751fe082c4277ae4ccf519.png" src="../_images/356fb13890c6a6dd19cddac5130d926dbee063ada8751fe082c4277ae4ccf519.png" />
+</div>
+</div>
+<img src="images/Fig5_44.png" width="600" />
+<center><b>Figure 5.44</b> Original signal and the PCM signals with different numbers of quantization levels.</center>
+<img src="images/Fig5_45.png" width="600" />
+<center><b>Figure 5.45</b> Comparison between the original signal and the PCM signals after LPF to recover the original message.</center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="delta-modulation">
+<h1>5.8.3 Delta Modulation<a class="headerlink" href="#delta-modulation" title="Link to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Example of sampling, quantization, and zero-order hold</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">deltamod</span><span class="p">(</span><span class="n">sig_in</span><span class="p">,</span> <span class="n">Delta</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ts</span><span class="p">):</span>
+    <span class="c1"># Delta - DM stepsize</span>
+    <span class="c1"># sig_in - input signal vector</span>
+    <span class="c1"># td - original signal sampling period of sig_in</span>
+    <span class="c1"># ts - new sampling period</span>
+    <span class="c1"># NOTE: td*fs must be a positive integer;</span>
+    <span class="c1"># Function outputs:</span>
+    <span class="c1"># s_DMout - DM sampled output</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">ts</span><span class="o">/</span><span class="n">td</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error! ts/td is not an integer!&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="n">nfac</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">ts</span><span class="o">/</span><span class="n">td</span><span class="p">)</span>
+    <span class="n">p_zoh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">nfac</span><span class="p">)</span>
+    <span class="n">s_down</span> <span class="o">=</span> <span class="n">sig_in</span><span class="p">[::</span><span class="n">nfac</span><span class="p">]</span>
+    <span class="n">Num_it</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">s_down</span><span class="p">)</span>
+    <span class="n">s_DMout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Num_it</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">s_DMout</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="n">Delta</span><span class="o">/</span><span class="mi">2</span>
+    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Num_it</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">xvar</span> <span class="o">=</span> <span class="n">s_DMout</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">s_DMout</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">xvar</span> <span class="o">+</span> <span class="n">Delta</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">s_down</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">xvar</span><span class="p">)</span>
+    <span class="n">s_DMout</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">s_DMout</span><span class="p">,</span> <span class="n">p_zoh</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">s_DMout</span>
+
+<span class="c1"># Save the block below as ExDM.py</span>
+<span class="n">td</span> <span class="o">=</span> <span class="mf">0.002</span> <span class="c1"># original sampling rate 500 Hz</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">+</span><span class="n">td</span><span class="p">,</span> <span class="n">td</span><span class="p">)</span> <span class="c1"># time interval of 1 second</span>
+<span class="n">xsig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">6</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">t</span><span class="p">)</span> <span class="c1"># 1Hz+3Hz sinusoids</span>
+<span class="n">Lsig</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xsig</span><span class="p">)</span>
+<span class="n">ts</span> <span class="o">=</span> <span class="mf">0.02</span> <span class="c1"># new sampling rate = 50Hz</span>
+<span class="n">Nfact</span> <span class="o">=</span> <span class="n">ts</span><span class="o">/</span><span class="n">td</span>
+<span class="c1"># send the signal through a 16-level uniform quantizer</span>
+<span class="n">Delta1</span> <span class="o">=</span> <span class="mf">0.2</span> <span class="c1"># First select a small Delta=0.2 in DM</span>
+<span class="n">s_DMout1</span> <span class="o">=</span> <span class="n">deltamod</span><span class="p">(</span><span class="n">xsig</span><span class="p">,</span> <span class="n">Delta1</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+<span class="c1"># obtained the DM signal </span>
+<span class="c1"># plot the original signal and the DM signal in time domain</span>
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
+<span class="n">sfig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">s_DMout1</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Signal ${\it g}({\it t})$ and DM signal&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec.)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="c1"># Apply DM again by doubling the Delta </span>
+<span class="n">Delta2</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">Delta1</span>
+<span class="n">s_DMout2</span> <span class="o">=</span> <span class="n">deltamod</span><span class="p">(</span><span class="n">xsig</span><span class="p">,</span> <span class="n">Delta2</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+<span class="c1"># obtained the DM signal</span>
+<span class="c1"># plot the original signal and the DM signal in time domain</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
+<span class="n">sfig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">s_DMout2</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Signal ${\it g}({\it t})$ and DM signal with doubled stepsize&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec.)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">Delta3</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">Delta2</span> <span class="c1"># Double the DM Delta again.</span>
+<span class="n">s_DMout3</span> <span class="o">=</span> <span class="n">deltamod</span><span class="p">(</span><span class="n">xsig</span><span class="p">,</span> <span class="n">Delta3</span><span class="p">,</span> <span class="n">td</span><span class="p">,</span> <span class="n">ts</span><span class="p">)</span>
+<span class="c1"># plot the original signal and the DM signal in time domain</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
+<span class="n">sfig3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsig</span><span class="p">,</span><span class="s1">&#39;k&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">,</span><span class="n">s_DMout3</span><span class="p">[:</span><span class="n">Lsig</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Signal ${\it g}({\it t})$ and DM signal with quadrupled stepsize&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;time (sec.)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">2.2</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="c1"># Set the spacing between subfigures</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/a8c347f205bf1b55ab7c0f0c27f957fb0fc35d712fa0aa11b535c7bdfa20a06d.png" src="../_images/a8c347f205bf1b55ab7c0f0c27f957fb0fc35d712fa0aa11b535c7bdfa20a06d.png" />
+</div>
+</div>
+<img src="images/Fig5_46.png" width="600" />
+<center><b>Figure 5.46</b> Examples of delta modulation output with three different step sizes: (a) small step size leads to overloading; (b) reasonable step size; (c) large step size causes large quantization errors.</center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="video-residual-image-compression-and-coding">
+<h1>5.8.4 Video Residual Image Compression and Coding<a class="headerlink" href="#video-residual-image-compression-and-coding" title="Link to this heading">#</a></h1>
+<img src="images/Fig5_47.png" width="600" />
+<center><b>Figure 5.47</b> Computer exercise example.</center><div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the following block as a block DCT function  block_dct8_normq.py</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bloc_dct8_normq</span><span class="p">(</span><span class="n">imgbloc</span><span class="p">,</span> <span class="n">Qpk</span><span class="p">):</span>
+    <span class="c1"># Input = imgbloc (8x8 original input image block for encoding)</span>
+    <span class="c1"># Output = qdimg (8x8 decoded image block)</span>
+    <span class="c1"># Typical 8x8 Q_matrix entered:</span>
+
+    <span class="n">Q_matrix</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">16</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">61</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">12</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mi">19</span><span class="p">,</span><span class="mi">26</span><span class="p">,</span><span class="mi">58</span><span class="p">,</span><span class="mi">60</span><span class="p">,</span><span class="mi">55</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="mi">24</span><span class="p">,</span><span class="mi">40</span><span class="p">,</span><span class="mi">57</span><span class="p">,</span><span class="mi">69</span><span class="p">,</span><span class="mi">56</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">14</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">29</span><span class="p">,</span><span class="mi">51</span><span class="p">,</span><span class="mi">87</span><span class="p">,</span><span class="mi">80</span><span class="p">,</span><span class="mi">62</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">18</span><span class="p">,</span><span class="mi">22</span><span class="p">,</span><span class="mi">37</span><span class="p">,</span><span class="mi">56</span><span class="p">,</span><span class="mi">68</span><span class="p">,</span><span class="mi">109</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">77</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">24</span><span class="p">,</span><span class="mi">35</span><span class="p">,</span><span class="mi">55</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">81</span><span class="p">,</span><span class="mi">104</span><span class="p">,</span><span class="mi">113</span><span class="p">,</span><span class="mi">92</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">49</span><span class="p">,</span><span class="mi">64</span><span class="p">,</span><span class="mi">78</span><span class="p">,</span><span class="mi">87</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">121</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">101</span><span class="p">],</span>
+                         <span class="p">[</span><span class="mi">72</span><span class="p">,</span><span class="mi">92</span><span class="p">,</span><span class="mi">95</span><span class="p">,</span><span class="mi">98</span><span class="p">,</span><span class="mi">112</span><span class="p">,</span><span class="mi">100</span><span class="p">,</span><span class="mi">103</span><span class="p">,</span><span class="mi">99</span><span class="p">]])</span>
+    <span class="n">dctbloc</span> <span class="o">=</span> <span class="n">dct</span><span class="p">(</span><span class="n">dct</span><span class="p">(</span><span class="n">imgbloc</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span> <span class="c1"># Take DCT2 of imageblock</span>
+    <span class="n">Dyn</span> <span class="o">=</span> <span class="n">Q_matrix</span> <span class="o">*</span> <span class="n">Qpk</span> <span class="c1"># Dynamic Q-matrix scaled by Qpk</span>
+    <span class="n">qdct</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">dctbloc</span> <span class="o">/</span> <span class="n">Dyn</span><span class="p">)</span> <span class="c1"># Element-wise quantization (index)</span>
+    <span class="n">iqdct</span> <span class="o">=</span> <span class="n">qdct</span> <span class="o">*</span> <span class="n">Dyn</span> <span class="c1"># denormalization</span>
+    <span class="n">qdimg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">idct</span><span class="p">(</span><span class="n">idct</span><span class="p">(</span><span class="n">iqdct</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">norm</span><span class="o">=</span><span class="s1">&#39;ortho&#39;</span><span class="p">))</span> <span class="c1"># inverse DCT</span>
+    <span class="k">return</span> <span class="n">qdimg</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>In the following example, we tested the famous “cameraman.tiff” image and selected three different values for the encoder
+parameter <em>Qpk</em>. Specifically, we tested <em>Qpk</em> =1, 4, and 8, respectively.  The three resulting images of descending
+qualities are shown in comparison with the original uncompressed image.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save the codeblock below as EXDCTencoding.py</span>
+<span class="c1"># This example performs 8x8 based DCT2 on an image file whose size is a multiple of 8x8 pixels. </span>
+<span class="c1"># By applying different Qpk values, the trade-off of rate and quality can be shown. Higher Qpk </span>
+<span class="c1"># leads to lower rate (i.e. higher compression rate) and lower quality</span>
+<span class="c1"># Load the cameraman image from Kaggle dataset</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="n">data_dirbook</span><span class="o">=</span><span class="s1">&#39;/kaggle/input/chapter05images&#39;</span> 
+<span class="n">G</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">imread</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">data_dirbook</span><span class="p">,</span><span class="s1">&#39;cameraman.tiff&#39;</span><span class="p">))</span>
+<span class="c1"># OR you can use G = plt.imread(&#39;/kaggle/input/chapter05images/cameraman.tiff&#39;)</span>
+<span class="n">img</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">G</span><span class="p">)</span>
+
+<span class="c1"># Display the original image</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Original image&#39;</span><span class="p">)</span>
+
+<span class="c1"># Perform 8x8 DCT compression with Qpk=1</span>
+<span class="n">Qpk</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">qimg1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">8</span><span class="p">):</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span>
+        <span class="n">qblock</span> <span class="o">=</span> <span class="n">bloc_dct8_normq</span><span class="p">(</span><span class="n">block</span><span class="p">,</span><span class="n">Qpk</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">qblock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">qblock</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">qimg1</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="n">qblock</span>
+<span class="c1"># Recover the compressed image to [0, 255]</span>
+<span class="n">qimg1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">qimg1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="c1"># Display the decoded image using Qpk=1</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">qimg1</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Decoded image using Qpk=1&#39;</span><span class="p">)</span>
+
+<span class="c1"># Perform 8x8 DCT compression with Qpk=4</span>
+<span class="n">Qpk</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">qimg2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">8</span><span class="p">):</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span>
+        <span class="n">qblock</span> <span class="o">=</span> <span class="n">bloc_dct8_normq</span><span class="p">(</span><span class="n">block</span><span class="p">,</span><span class="n">Qpk</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+        <span class="n">qblock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">qblock</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">qimg2</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="n">qblock</span>
+<span class="c1"># Recover the compressed image to [0, 255]</span>
+<span class="n">qimg2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">qimg2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+<span class="c1"># Display the decoded image using Qpk=4</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">qimg2</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Decoded image using Qpk=4&#39;</span><span class="p">)</span>
+
+<span class="c1"># Perform 8x8 DCT compression with Qpk=8</span>
+<span class="n">Qpk</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">qimg3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">img</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="mi">8</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">img</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="mi">8</span><span class="p">):</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="n">img</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span>
+        <span class="n">qblock</span> <span class="o">=</span> <span class="n">bloc_dct8_normq</span><span class="p">(</span><span class="n">block</span><span class="p">,</span><span class="n">Qpk</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">qblock</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">qblock</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+        <span class="n">qimg3</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span><span class="n">j</span><span class="o">+</span><span class="mi">8</span><span class="p">]</span> <span class="o">=</span> <span class="n">qblock</span>
+<span class="c1"># Recover the compressed image to [0, 255]</span>
+<span class="n">qimg3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">clip</span><span class="p">(</span><span class="n">qimg3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">)</span>
+
+<span class="c1"># Display the decoded image using Qpk=8</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">qimg3</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Decoded image using Qpk=8&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># Set the spacing between subfigures</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/7dd15830a9b343ecd2f05744053267d7ae271fe3c8a4deb2403cddf01be79023.png" src="../_images/7dd15830a9b343ecd2f05744053267d7ae271fe3c8a4deb2403cddf01be79023.png" />
+</div>
+</div>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ComputerExercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">5.8.1 Sampling and Reconstruction of Lowpass Signals</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#pcm-illustration">5.8.2 PCM Illustration</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#delta-modulation">5.8.3 Delta Modulation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#video-residual-image-compression-and-coding">5.8.4 Video Residual Image Compression and Coding</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By DFEC
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
