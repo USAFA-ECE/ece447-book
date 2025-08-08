@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>2.10.2 Signal Operations &#8212; ECE447 Course Webpage</title>
+    <title>Chapter 2 &#8212; ECE447 Course Webpage</title>
   
   
   
@@ -418,7 +418,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>2.10.2 Signal Operations</h1>
+    <h1>Chapter 2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -428,17 +428,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2.10.2 Signal Operations</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-signals-and-signal-graphing">2.10.1 Basic Signals and Signal Graphing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-signals-and-signal-power">2.10.3 Periodic Signals and Signal Power</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-correlation">2.10.4 Signal Correlation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><img src="images/Fig2_30.png" width="600"/></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-computation-of-coefficients-d-n">2.10.5 Numerical Computation of Coefficients <span class="math notranslate nohighlight">\(D_n\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-signals-and-signal-graphing">2.10.2 Basic Signals and Signal Graphing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-operations">2.10.3 Signal Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-signals-and-signal-power">2.10.4 Periodic Signals and Signal Power</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-correlation">2.10.5 Signal Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-computation-of-coefficients-d-n">2.10.6 Numerical Computation of Coefficients <span class="math notranslate nohighlight">\(D_n\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-example">COMPUTER EXAMPLE</a></li>
 </ul>
-</li>
-</ul>
-
             </nav>
         </div>
     </div>
@@ -449,7 +445,17 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <div class="cell docutils container">
+  <section class="tex2jax_ignore mathjax_ignore" id="chapter-2">
+<h1>Chapter 2<a class="headerlink" href="#chapter-2" title="Link to this heading">#</a></h1>
+<section id="basic-signals-and-signal-graphing">
+<h2>2.10.2 Basic Signals and Signal Graphing<a class="headerlink" href="#basic-signals-and-signal-graphing" title="Link to this heading">#</a></h2>
+<p>We first provide the implementation of three basic functions when a time vector <span class="math notranslate nohighlight">\(t\)</span> is defined:</p>
+<ul class="simple">
+<li><p>ustep: implements the unit step function <span class="math notranslate nohighlight">\(u(t)\)</span></p></li>
+<li><p>rect: implements the standard rectangular function <span class="math notranslate nohighlight">\(rect(t)\)</span></p></li>
+<li><p>triangl: implements standard triangle function <span class="math notranslate nohighlight">\(\Delta(t)\)</span></p></li>
+</ul>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Import Python packages</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
@@ -512,9 +518,10 @@ document.write(`
 </div>
 </div>
 </div>
-<p>We now show how to use Python to generate a simple signal plot through an example program. In this example, we construct and plot a signal</p>
-<p style="text-align: center;">$y(t) = exp(−t)sin(8\pi t)u(t+1)$</p>
-The result of this program is shown in Fig. 2.27.<div class="cell docutils container">
+<p>We now show how to use Python to generate a simple signal plot through an example program. In this example, we construct and plot a signal
+$<span class="math notranslate nohighlight">\(y(t) = e^{−t}sin(8\pi t)u(t+1)\)</span>$
+The result of this program is shown in Fig. 2.27.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save this file as CompEX02b.py</span>
 <span class="sd">&quot;&quot;&quot;To graph a signal, the first step is to determine x-axis and y-axis to plot</span>
@@ -540,25 +547,20 @@ The result of this program is shown in Fig. 2.27.<div class="cell docutils conta
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/eec1c511b54afff252d1a9bc30bf48fd7221b5e40566a48eccd5230846a58927.png" src="../_images/eec1c511b54afff252d1a9bc30bf48fd7221b5e40566a48eccd5230846a58927.png" />
+<img alt="../_images/82b61388ef8dff52ef5dbe8acb1a7679c38e093a5d92d778df247d198450ec29.png" src="../_images/82b61388ef8dff52ef5dbe8acb1a7679c38e093a5d92d778df247d198450ec29.png" />
 </div>
 </div>
-<p><em>italicized text</em><img src="images/Fig2_28.png" title="**Figure 2.28** Graphing a signal." width="600" /></p>
-<blockquote>
-<div><p>Indented block</p>
-</div></blockquote>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="c1"># This is formatted as code</span>
-</pre></div>
-</div>
-<center><b>Figure 2.28</b> Graphing a signal.</center><section class="tex2jax_ignore mathjax_ignore" id="signal-operations">
-<h1>2.10.2 Signal Operations<a class="headerlink" href="#signal-operations" title="Link to this heading">#</a></h1>
-<p>Some useful signal operations introduced in Sec. 2.3 can be implemented and illustrated by means of Python. We provide the example program to demonstrate the basic operations. First, we generate a segment of an exponentially decaying function</p>
-<center>$ y(t) = exp(-|t|/4)[ u(t)-u(t-4) ] $</center>
+<center><b>Figure 2.27</b> Graphing a signal.</center></section>
+<section id="signal-operations">
+<h2>2.10.3 Signal Operations<a class="headerlink" href="#signal-operations" title="Link to this heading">#</a></h2>
+<p>Some useful signal operations introduced in Sec. 2.3 can be implemented and illustrated by means of Python. We provide the example program to demonstrate the basic operations. First, we generate a segment of an exponentially decaying function
+$<span class="math notranslate nohighlight">\( y(t) = e^{-|t|/4}[ u(t)-u(t-4) ] \)</span><span class="math notranslate nohighlight">\(
 We then apply time scaling and time shifting to generate new signals
-<center>$ y_1(t) = y(2t)\qquad y_2(t) = y(t+2) $</center>
+\)</span><span class="math notranslate nohighlight">\( y_1(t) = y(2t)\qquad y_2(t) = y(t+2) \)</span><span class="math notranslate nohighlight">\(
 Finally, time scaling, time inversion, and time shifting are all utilized to generate a new signal
-<center>$ y_3(t) = y(2−2t) $</center>
-The original signal $ y(t) $ and its transformations are all given in Fig. 2.28.<div class="cell docutils container">
+\)</span><span class="math notranslate nohighlight">\( y_3(t) = y(2−2t) \)</span><span class="math notranslate nohighlight">\(
+The original signal \)</span> y(t) $ and its transformations are all given in Fig. 2.28.</p>
+<div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Save this file as CompEX02c.py</span>
 <span class="c1"># To apply a time domain transformation on a signal</span>
@@ -622,22 +624,12 @@ The original signal $ y(t) $ and its transformations are all given in Fig. 2.28.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/7a4fa158020694368202ea598113f9ea41a278efc2689b0c6811d664fd6a138b.png" src="../_images/7a4fa158020694368202ea598113f9ea41a278efc2689b0c6811d664fd6a138b.png" />
+<img alt="../_images/3fb8f0d5462a3eaca5765fb5b24922f6f78f24781b5455eb7b4b5647f259a3b1.png" src="../_images/3fb8f0d5462a3eaca5765fb5b24922f6f78f24781b5455eb7b4b5647f259a3b1.png" />
 </div>
 </div>
-<img src="images/Fig2_29.png" width="600" />
-<center><b>Figure 2.29</b> Examples of basic signal operations.</center></section>
-<section class="tex2jax_ignore mathjax_ignore" id="basic-signals-and-signal-graphing">
-<h1>2.10.1 Basic Signals and Signal Graphing<a class="headerlink" href="#basic-signals-and-signal-graphing" title="Link to this heading">#</a></h1>
-<p>We first provide the implementation of three basic functions when a time vector <span class="math notranslate nohighlight">\(t\)</span> is defined:</p>
-<ul class="simple">
-<li><p>ustep: implements the unit step function <span class="math notranslate nohighlight">\(u(t)\)</span></p></li>
-<li><p>rect: implements the standard rectangular function <span class="math notranslate nohighlight">\(rect(t)\)</span></p></li>
-<li><p>triangl: implements standard triangle function <span class="math notranslate nohighlight">\(\Delta(t)\)</span></p></li>
-</ul>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="periodic-signals-and-signal-power">
-<h1>2.10.3 Periodic Signals and Signal Power<a class="headerlink" href="#periodic-signals-and-signal-power" title="Link to this heading">#</a></h1>
+<center><b>Figure 2.28</b> Examples of basic signal operations.</center></section>
+<section id="periodic-signals-and-signal-power">
+<h2>2.10.4 Periodic Signals and Signal Power<a class="headerlink" href="#periodic-signals-and-signal-power" title="Link to this heading">#</a></h2>
 <p>Periodic signals can be generated by first determining the signal values in one period before repeating the same signal vector multiple times. In the next cell, we generate a periodic signal and observe
 its behavior over <span class="math notranslate nohighlight">\(2M\)</span> periods. The period of this example is <span class="math notranslate nohighlight">\(T = 6\)</span>. The program also evaluates the average signal power, which is stored as a variable <code class="docutils literal notranslate"><span class="pre">y_power</span></code>, and the signal energy in one period, which is stored in the variable <code class="docutils literal notranslate"><span class="pre">y_energyT</span></code>.</p>
 <div class="cell docutils container">
@@ -690,16 +682,9 @@ y_energy_in_T = 0.48775345
 </div>
 </div>
 </div>
-<img src="images/Fig2_29.png" width="600" />
-<center><b>Figure 2.29</b> Generating a periodic signal.</center>
-<p>The program generates a figure of periodic signal in Fig. 2.29 and numerical answers:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y_power</span> <span class="o">=</span> <span class="mf">0.0813</span>
-<span class="n">y_energyT</span> <span class="o">=</span> <span class="mf">0.4878</span>
-</pre></div>
-</div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="signal-correlation">
-<h1>2.10.4 Signal Correlation<a class="headerlink" href="#signal-correlation" title="Link to this heading">#</a></h1>
+<center><b>Figure 2.29</b> Generating a periodic signal.</center></section>
+<section id="signal-correlation">
+<h2>2.10.5 Signal Correlation<a class="headerlink" href="#signal-correlation" title="Link to this heading">#</a></h2>
 <p>The concept of signal correlation introduced in Sec. 2.6 can be implemented directly by using Python. In the next computer example, the program evaluates the signal correlation coefficients between <span class="math notranslate nohighlight">\(x(t)\)</span> and signals <span class="math notranslate nohighlight">\(g_1(t), g_2(t), \dots , g_5(t)\)</span>. The program first generates Fig. 2.30, which illustrates the six signals in the time domain.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -757,12 +742,9 @@ y_energy_in_T = 0.48775345
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/fa6d77c6f84c555c3957d986b624e742b4c5dc4759605713e7953a3fbafc4262.png" src="../_images/fa6d77c6f84c555c3957d986b624e742b4c5dc4759605713e7953a3fbafc4262.png" />
+<img alt="../_images/43e66a289cfab0cde2529462f4896983e6663ffc7176fecd95fdeaa584f6c21c.png" src="../_images/43e66a289cfab0cde2529462f4896983e6663ffc7176fecd95fdeaa584f6c21c.png" />
 </div>
 </div>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><img src="images/Fig2_30.png" width="600" /><a class="headerlink" href="#id1" title="Link to this heading">#</a></h1>
 <center><b>Figure 2.30</b> Signals from Example 2.6.</center><div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Computing signal energies</span>
@@ -809,8 +791,8 @@ c5 = 0.0000
 </pre></div>
 </div>
 </section>
-<section class="tex2jax_ignore mathjax_ignore" id="numerical-computation-of-coefficients-d-n">
-<h1>2.10.5 Numerical Computation of Coefficients <span class="math notranslate nohighlight">\(D_n\)</span><a class="headerlink" href="#numerical-computation-of-coefficients-d-n" title="Link to this heading">#</a></h1>
+<section id="numerical-computation-of-coefficients-d-n">
+<h2>2.10.6 Numerical Computation of Coefficients <span class="math notranslate nohighlight">\(D_n\)</span><a class="headerlink" href="#numerical-computation-of-coefficients-d-n" title="Link to this heading">#</a></h2>
 <p>There are several ways to numerically compute the Fourier series coefficients <span class="math notranslate nohighlight">\(D_n\)</span>. We will use Python to present two different methods. Specifically, we will show how to numerically evaluate the Fourier series by means of numerical integration and fast Fourier transform.</p>
 <p><strong>Direct Numerical Integration</strong>: The direct method is to carry out a direct numerical integration of Eq. (2.92) by defining the symbolic function <span class="math notranslate nohighlight">\(g(t)\)</span> along with its period. The first step is to define the symbolic expression of the signal <span class="math notranslate nohighlight">\(g(t)\)</span> under analysis. We use the triangle function <span class="math notranslate nohighlight">\(\Delta(t)\)</span> in the following example.</p>
 <div class="cell docutils container">
@@ -890,13 +872,12 @@ c5 = 0.0000
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/e31e414663882f5cc51aa30e7eb31a7b5391146bc14082815b2dbd148151624c.png" src="../_images/e31e414663882f5cc51aa30e7eb31a7b5391146bc14082815b2dbd148151624c.png" />
+<img alt="../_images/4e52b128771fef8ed3f6eae9f265eabf06041be50957bad9317fb52b9efa9633.png" src="../_images/4e52b128771fef8ed3f6eae9f265eabf06041be50957bad9317fb52b9efa9633.png" />
 </div>
 </div>
 <p><span style="color:red"> <b><em>Note: Python handles high precision numbers differently as MATLAB, but both versions shows aliasing error in angles</em></b></span></p>
-<img src="images/Fig2_31.bmp" width="600" />
-<center><b>Figure 2.31 (MATLAB version)</b> Exponential Fourier series coefficients of a repeated $(t/2)$ with period $T =4$ showing (a) amplitude and (b) angle of $D_n$.</center><img src="images/Fig2_31.png" width="600" />
 <center><b>Figure 2.31</b> Exponential Fourier series coefficients of a repeated $(t/2)$ with period $T =4$ showing (a) amplitude and (b) angle of $D_n$.</center><p><span style="color:red"> <b><em>Note: Introduction on pages 78-79 is not included here</em></b></span></p>
+</section>
 <section id="computer-example">
 <h2>COMPUTER EXAMPLE<a class="headerlink" href="#computer-example" title="Link to this heading">#</a></h2>
 <p>Compute and plot the trigonometric and exponential Fourier spectra for the periodic signal in Fig. 2.19b (Example 2.7).</p>
@@ -1035,17 +1016,13 @@ c5 = 0.0000
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">2.10.2 Signal Operations</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-signals-and-signal-graphing">2.10.1 Basic Signals and Signal Graphing</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-signals-and-signal-power">2.10.3 Periodic Signals and Signal Power</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-correlation">2.10.4 Signal Correlation</a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#id1"><img src="images/Fig2_30.png" width="600"/></a></li>
-<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-computation-of-coefficients-d-n">2.10.5 Numerical Computation of Coefficients <span class="math notranslate nohighlight">\(D_n\)</span></a><ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-signals-and-signal-graphing">2.10.2 Basic Signals and Signal Graphing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-operations">2.10.3 Signal Operations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#periodic-signals-and-signal-power">2.10.4 Periodic Signals and Signal Power</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#signal-correlation">2.10.5 Signal Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#numerical-computation-of-coefficients-d-n">2.10.6 Numerical Computation of Coefficients <span class="math notranslate nohighlight">\(D_n\)</span></a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-example">COMPUTER EXAMPLE</a></li>
 </ul>
-</li>
-</ul>
-
   </nav></div>
 
 </div></div>
