@@ -6,5 +6,5 @@ The slides on this page will be updated throughout the semester and posted as we
 
 | Lesson | Slides | 
 |:----------:|:----------:|
-| 1  | [Course Overview L1](_static\ECE447_Lesson1_Fa25_.pdf)  | 
-| 2  | [Communication Systems Overview L2](_static\ECE447_Lesson2_Fa25_.pdf)  | 
+| 1  | [Course Overview L1](_static/ECE447_Lesson1_Fa25_.pdf)  | 
+| 2  | [Communication Systems Overview L2](_static/ECE447_Lesson2_Fa25_.pdf)  | 
