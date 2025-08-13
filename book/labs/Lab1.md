@@ -42,7 +42,9 @@ Follow these steps to install the drivers necessary to run the dongle as an SDR 
 - Check Device Manager for any caution triangles (Windows + X, M).
 - Delete the Zadig executable file when complete.
 
-In case you were wondering, "Bulk-In, Interface 0" and "Bulk-In, Interface 1" refer to USB interfaces exposed by the SDR dongle, not the physical USB ports on your computer. "Bulk-In, Interface 0" is the primary data interface used by the SDR for streaming radio signals to your computer and is the one you want to isntall the WinUSB driver on when you were using Zadig. "Bulk-In, Interface 1" is typically a secondary interface used for other functions (remote control, audio), but it's not used for SDR signal processing. Installing the driver on this interface can cause issues like device connection errors.
+In case you were wondering, "Bulk-In, Interface 0" and "Bulk-In, Interface 1" refer to USB interfaces exposed by the SDR dongle, not the physical USB ports on your computer. "Bulk-In, Interface 0" is the primary data interface used by the SDR for streaming radio signals to your computer and is the one you want to install the WinUSB driver on when you were using Zadig. "Bulk-In, Interface 1" is typically a secondary interface used for other functions (remote control, audio), but it's not used for SDR signal processing. For some versions of the RTL-SDR firmware, installing the driver on Interface 1 can cause issues like device connection errors... but on other versions, installing the driver on both Interface 0 and Interface 1 will actually fix device connection errors! 
+
+Knowing which to do often can only be determined through trial and error, unfortunately. After you've installed the driver on Interface 0, if you get a device connection error you should then use Zadig to also install the drivers on Interface 1. That *should* correct any device connection issues. Ask for help if it doesn't!
 
 ### Spectrum Visualization Software Installation
 
