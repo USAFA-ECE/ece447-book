@@ -1,6 +1,6 @@
 # Course Schedule
 
-This is meant to serve an a _notional_ schedule for ECE447. We will keep this up to date throughout the semester, so come back to this page (not your syllabus) for the schedule closest to reality. If there is a discrepancy between this schedule and a due date on Gradescope, use the due date on Gradescope. Readings are primarily from the course textbook by Lathi and Ding (L&D). Each software-defined radio (SDR) lab has one or more deliverables due one week from the lab's assignment date.
+This is meant to serve an a _notional_ schedule for ECE447. We will keep this up to date throughout the semester, so come back to this page (not your syllabus) for the schedule closest to reality. If there is a discrepancy between this schedule and a due date on Gradescope, use the due date on Gradescope. Readings are primarily from the course textbook by Lathi and Ding (L&D). Each software-defined radio (SDR) lab has one or more deliverables due approximately one week from the lab's assignment date. 
 
  ### Introduction and Background  
 | Lesson | Topic | Reading | Assigned | Due |
