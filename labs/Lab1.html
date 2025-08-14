@@ -444,22 +444,17 @@ document.write(`
 </ul>
 <p><img alt="" src="../_images/zadig_options.png" /></p>
 <ul class="simple">
-<li><p><strong>WARNING: follow the next few instructions closely! Do NOT select anything besides what is instructed, or you will likely overwrite a driver for your mouse, keyboard, etc.</strong></p>
-<ul>
-<li><p>Open the top drop-down menu. Select “Bulk-In, Interface (Interface 0)”. Make sure it is Interface o (ZERO) and not “1”. You may see “RTL2838UHIDIR” instead of the bulk in interface. This is also a valid selection.</p></li>
-</ul>
-</li>
+<li><p><strong>WARNING: follow the next few instructions closely! Do NOT select anything besides what is instructed, or you will likely overwrite a driver for your mouse, keyboard, etc.</strong></p></li>
+<li><p>Open the top drop-down menu. Select “Bulk-In, Interface (Interface 0)”. Make sure it is Interface 0 (ZERO) and not “1”. You may see “RTL2838UHIDIR” instead of the bulk in interface. This is also a valid selection.</p></li>
 </ul>
 <p><img alt="" src="../_images/zadig_bulkinterface.png" /></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Verify the Driver shows WinUSB on the right of the green arrow. The right hand box shows the currently installed driver, and left hand box shows the driver that will be installed. It doesn&#39;t matter what the right hand box shows, but it will likely be (NONE) or (RTL...).
-- Verify the USB ID is &quot;0BDA 2838 00&quot;, which means the dongle is selected.
-</pre></div>
-</div>
-<p><img alt="" src="../_images/zadig_install_none.png" /></p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>- Click on Reinstall Driver. You may get a warning, but just accept it. Wait a few minutes for the installation. 
-</pre></div>
-</div>
 <ul class="simple">
+<li><p>Verify the Driver shows WinUSB on the right of the green arrow. The right hand box shows the currently installed driver, and left hand box shows the driver that will be installed. It doesn’t matter what the right hand box shows, but it will likely be (NONE) or (RTL…).</p></li>
+<li><p>Verify the USB ID is “0BDA 2838 00”, which means the dongle is selected.</p></li>
+</ul>
+<p><img alt="" src="../_images/zadig_install_none.png" /></p>
+<ul class="simple">
+<li><p>Click on Reinstall Driver. You may get a warning, but just accept it. Wait a few minutes for the installation.</p></li>
 <li><p>Check Device Manager for any caution triangles (Windows + X, M).</p></li>
 <li><p>Delete the Zadig executable file when complete.</p></li>
 </ul>
