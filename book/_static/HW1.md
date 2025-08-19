@@ -1,7 +1,7 @@
 # Homework 1
 Chapter 3
 
-## Due NLT 27 Aug (M8) by 1159 on Gradescope
+## Due NLT 27 Aug (M8) by 2359 on Gradescope
 
 ## Directions: 
 - Collaboration is authorized as noted in the syllabus Collaboration policy. 
