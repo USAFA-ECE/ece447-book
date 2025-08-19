@@ -1,4 +1,5 @@
 # Homework 1
+
 Chapter 3
 
 ## Due NLT 27 Aug (M8) by 2359 on Gradescope
