@@ -9,14 +9,14 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 2 | Modern communication systems | L&D 1 |  |  |
 | 3 | SDR Lab | [Lab 1 Description](labs/Lab1) |  Lab 1  | [Skills Review](_static/Skills_Review.pdf) |
 | 4 | Signals and signal space | L&D 2 |    |  |
-| 5 | Analysis and transmission of signals | L&D 3 |    |  |
+| 5 | Analysis and transmission of signals | L&D 3 |  [HW1](_static/HW1.md)  |  |
 | 6 | SDR Lab | [Lab 2 Description](labs/Lab2) |  Lab 2  | Lab 1 |
 | 7 | No Class | Down Day! |  |  |
 
 ### Analog Communications
 | Lesson | Topic | Reading | Assigned | Due |
 |----------|----------|----------|----------|----------|
-| 8 | Modulation methods, amplitude modulation, Part 1 | L&D 4-4.2 |  |  |
+| 8 | Modulation methods, amplitude modulation, Part 1 | L&D 4-4.2 |  | [HW1](_static/HW1.md) |
 | 9 | AM, Part 2 | L&D 4.3-4.4 |  |  |
 | 10 | SDR Lab | [Lab 3 Description](labs/Lab3) |  Lab 3  | Lab 2 |
 | 11 | Angle modulation, Part 1 | L&D 4.5 |  |  |
