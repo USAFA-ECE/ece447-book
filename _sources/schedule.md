@@ -9,7 +9,7 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 2 | Modern communication systems | L&D 1 |  |  |
 | 3 | SDR Lab | [Lab 1 Description](labs/Lab1) |  Lab 1  | [Skills Review](_static/Skills_Review.pdf) |
 | 4 | Signals and signal space | L&D 2 |    |  |
-| 5 | Analysis and transmission of signals | L&D 3 |  [HW1](_static/HW1.md)  |  |
+| 5 | Analysis and transmission of signals | L&D 3 |  [HW1](_static/HW1)  |  |
 | 6 | SDR Lab | [Lab 2 Description](labs/Lab2) |  Lab 2  | Lab 1 |
 | 7 | No Class | Down Day! |  |  |
 
