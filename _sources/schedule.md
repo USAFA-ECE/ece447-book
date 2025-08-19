@@ -16,7 +16,7 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 ### Analog Communications
 | Lesson | Topic | Reading | Assigned | Due |
 |----------|----------|----------|----------|----------|
-| 8 | Modulation methods, amplitude modulation, Part 1 | L&D 4-4.2 |  | [HW1](_static/HW1.md) |
+| 8 | Modulation methods, amplitude modulation, Part 1 | L&D 4-4.2 |  | [HW1](_static/HW1) |
 | 9 | AM, Part 2 | L&D 4.3-4.4 |  |  |
 | 10 | SDR Lab | [Lab 3 Description](labs/Lab3) |  Lab 3  | Lab 2 |
 | 11 | Angle modulation, Part 1 | L&D 4.5 |  |  |
