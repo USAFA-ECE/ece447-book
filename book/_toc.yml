@@ -15,6 +15,7 @@ parts:
     chapters:
       - file: SkillsReview
       - file: labs/Lab1
+      - file: _static/HW1
       - file: labs/Lab2
       - file: labs/Lab3
       - file: labs/Lab4
