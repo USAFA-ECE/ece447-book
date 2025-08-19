@@ -6,7 +6,8 @@ The slides on this page will be updated throughout the semester and posted as we
 
 | Lesson | Slides | 
 |:----------:|:----------:|
-| 1  | [Course Overview](_static/ECE447_Lesson1_Fa25_.pdf)  | 
-| 2  | [Communication Systems Overview](_static/ECE447_Lesson2_Fa25_.pdf)  | 
+| 1  | [Course Overview](_static/ECE447_Lesson1_Fa25.pdf)  | 
+| 2  | [Communication Systems Overview](_static/ECE447_Lesson2_Fa25.pdf)  | 
 | 3  | [SDR Lab 1](labs/Lab1)  | 
-| 4  | [Signals and Signal Space](_static/ECE447_Lesson4_Fa25_.pdf)  | 
+| 4  | [Signals and Signal Space](_static/ECE447_Lesson4_Fa25.pdf)  | 
+| 5  | [Analysis and Transmission of Signals](_static/ECE447_Lesson5_Fa25.pdf)  | 
