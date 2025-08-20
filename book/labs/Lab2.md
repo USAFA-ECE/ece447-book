@@ -195,18 +195,18 @@ Once you know there is a signal out there, capture 10 seconds of data, and save 
 ```
 
 
-where I have chosen 135.0 MHz. You will probably want to set it to something else. Don't set the frequency exactly to the frequency you want to acquire, because the receiver produces an artifact at DC. This is the spike you always see at the middle of the spectrum.
+where I have chosen 125.525 MHz. You may want to set it to something else. Don't set the frequency exactly to the frequency you want to acquire, because the receiver produces an artifact at DC. This is the spike you always see at the middle of the spectrum.
 
-<!-- A sample file is available at
+A sample file is available at
 
-[ab1355\_10s.dat](ab1355_10s.dat)
+[Lab2_128_10s.dat](Lab2_128_10s.dat)
 
-You can use this file if you are having trouble finding signals to capture. It is sampled at 2.048 MHz, and is centered at 135.5 MHz. The Palo Alto ATIS signal is there, as well as one of the NORCAL approach signals
+You can use this file if you are having trouble finding signals to capture. It is sampled at 2.048 MHz and is centered at 128.525 MHz. The USAFA ATIS signal is there.
 
 Once you have the data, we will load it into MATLAB to look at it. Start up MATLAB, and change to the directory where loadFile.m and the data file are. Load the data file with
 
 ```
->> d = loadFile('ab.dat')
+>> d = loadFile('Lab2_128_10s.dat')
 ```
 
 
@@ -245,23 +245,36 @@ This takes an input signal starting at sample n0, and computes the spectrum of n
 
 Unless you have a very big display, you'll get an error message that the image doesn't fit, and was scaled down. The result looks like this
 
-![](graphics/COS_Peterson.png)
+![](graphics/Lab2_128_1s.png)
 
-We see several signals. The msg.m file will return the data that is plotted if you assign the output to a variable
+We see one distinct signal across the middle. The msg.m file will return the data that is plotted if you assign the output to a variable
 
 ```
 >> ds = msg(d,1,1024,2000);
 ```
 
+We can plot the spectrum at a time of 0.5 seconds by plotting column 1000,
 
-We can plot the spectrum at at time of 0.5 seconds by plotting column 1000,
+```
+>> plot(abs(ds(:,1000)));
+```
+![](graphics/Lab2_128_spectrum.png)
 
-By zooming in, you can see that there is a strong signal at sample 313. You can plot that signal by plotting a row of the data
+You can see that there is a strong signal at sample 313 (mouse over the plot to find the sample number at the signal's peak). You can plot that signal by plotting a row of the data,
+```
+>> plot(abs(ds(313,:)));
+```
+![](graphics/Lab2_128_313_time.png)
 
 What you see is a conventional AM signal. The transmitted signal is a constant bias plus the voice signal being transmitted.
 
-For your assignment, find an AM signal in the data you captured, and email me a screen shot of a plot of the signal. Or, if you are using the data set provided, find another signal, and send a plot of it (there are at least two more). You have ten seconds of data, so you can look later in the signal by increasing n0. For example, to start at 5 seconds, n0 should be 5\*2048000.
+For your assignment, find an AM signal in the data you captured, and email me a screen shot of a plot of the signal. Or, if you have trouble capturing your own data, use this data set:
 
+[Lab2_ab_10s.dat](Lab2_ab_10s.dat)
+
+There are at least three signals at various times in this data set. Find one of the signals, and send a plot of it. You have ten seconds of data, so you can look later in the signal by increasing n0. For example, to start at 5 seconds, n0 should be 5\*2048000.
+
+## Extra Fun!
 You can also use msg.m to decode the signals. Each column in the image is a sample of the spectrum in time. If we want to sample at 8kHz, we need blocks that are 2048000/8000 = 256 samples. In this case the entire data set is 80,000 samples. You may want to comment out the imshow line, and then do
 
 ```
@@ -278,4 +291,4 @@ Find the row in dd that corresponds to your signal, take the absolute value, sca
 ```
 
 
-Next time we'll look at better ways to do this using modulation and decimation. -->
+Next time we'll look at better ways to do this using modulation and decimation.
