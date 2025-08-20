@@ -184,7 +184,7 @@ Choose a frequency where you might expect to get a signal. The ATIS frequencies 
 
 You also want to make sure the frequency you pick is a good match for your SDR antenna. If you are using the monopole antenna (silver telescoping), you want the antenna length to be close to a quarter wavelength and to stick your antenna to a metal surface to provide a ground plane. If you are using the dipole antenna (black telescoping), you want the antenna length to be close to half of a wavelength of your desired signal. Small adjustments to the frequency can help (+/- a few kHz).
 
-Use gqrx to see if you can find any activity. Here is an example
+Use gqrx to see if you can find any activity. 
 
 You see a couple of frequencies in use. The one that is on continuously is an ATIS signal. The others are planes and towers talking to each other. Note the gain you use here, so you can set it to be the same for your capture.
 
