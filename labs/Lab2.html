@@ -404,6 +404,7 @@ document.write(`
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#airband-am-signals">Airband AM Signals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-fun">Extra Fun!</a></li>
 </ul>
             </nav>
         </div>
@@ -576,89 +577,74 @@ Samples per million lost (minimum): 0
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">rtl_sdr</span> <span class="o">-</span><span class="n">f</span> <span class="mi">128525000</span> <span class="o">-</span><span class="n">n</span> <span class="mi">20480000</span> <span class="n">ab</span><span class="o">.</span><span class="n">dat</span>
 </pre></div>
 </div>
-<p>where I have chosen 135.0 MHz. You will probably want to set it to something else. Don’t set the frequency exactly to the frequency you want to acquire, because the receiver produces an artifact at DC. This is the spike you always see at the middle of the spectrum.</p>
-<!-- A sample file is available at
+<p>where I have chosen 125.525 MHz. You may want to set it to something else. Don’t set the frequency exactly to the frequency you want to acquire, because the receiver produces an artifact at DC. This is the spike you always see at the middle of the spectrum.</p>
+<p>A sample file is available at</p>
+<p><a class="reference download internal" download="" href="../_downloads/94a87e83c4404f217d65ca47f41154fb/Lab2_128_10s.dat"><span class="xref download myst">Lab2_128_10s.dat</span></a></p>
+<p>You can use this file if you are having trouble finding signals to capture. It is sampled at 2.048 MHz and is centered at 128.525 MHz. The USAFA ATIS signal is there.</p>
+<p>Once you have the data, we will load it into MATLAB to look at it. Start up MATLAB, and change to the directory where loadFile.m and the data file are. Load the data file with</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">loadFile</span><span class="p">(</span><span class="s1">&#39;Lab2_128_10s.dat&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The first thing to note is that just 10 seconds of RF is a lot of data! It is hard to tell if we have anything, or how to extract it. What we will do is make something like the waterfall plot that you see in gqrx, called a spectrogram. What this does is compute the spectrum of blocks of the signal, and displays an image of how this changes over time. A basic spectrogram program is provided here</p>
+<p><a class="reference download internal" download="" href="../_downloads/0fa805b1e95e0df303d3e9c612d06550/msg.m"><span class="xref download myst">msg.m</span></a></p>
+<p>It is msg.m for “my spectrogram”. The help information is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">help</span> <span class="n">msg</span>
 
-[ab1355\_10s.dat](ab1355_10s.dat)
+  <span class="n">msg</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">n0</span><span class="p">,</span><span class="n">nf</span><span class="p">,</span><span class="n">nt</span><span class="p">,</span><span class="n">dbf</span><span class="p">)</span>
 
-You can use this file if you are having trouble finding signals to capture. It is sampled at 2.048 MHz, and is centered at 135.5 MHz. The Palo Alto ATIS signal is there, as well as one of the NORCAL approach signals
+   <span class="n">Computes</span> <span class="ow">and</span> <span class="n">displays</span> <span class="n">a</span> <span class="n">spectrogram</span>
 
-Once you have the data, we will load it into MATLAB to look at it. Start up MATLAB, and change to the directory where loadFile.m and the data file are. Load the data file with
+       <span class="n">x</span>  <span class="o">--</span> <span class="nb">input</span> <span class="n">signal</span>
+       <span class="n">n0</span> <span class="o">--</span> <span class="n">first</span> <span class="n">sample</span>
+       <span class="n">nf</span> <span class="o">--</span> <span class="n">block</span> <span class="n">size</span> <span class="k">for</span> <span class="n">transform</span>
+       <span class="n">nt</span> <span class="o">--</span> <span class="n">number</span> <span class="n">of</span> <span class="n">time</span> <span class="n">steps</span> <span class="p">(</span><span class="n">blocks</span><span class="p">)</span>
+       <span class="n">dbf</span> <span class="o">--</span> <span class="n">dynamic</span> <span class="nb">range</span> <span class="ow">in</span> <span class="n">dB</span> <span class="p">(</span><span class="n">default</span> <span class="mi">40</span><span class="p">)</span>
 
-```
->> d = loadFile('ab.dat')
-```
-
-
-The first thing to note is that just 10 seconds of RF is a lot of data! It is hard to tell if we have anything, or how to extract it. What we will do is make something like the waterfall plot that you see in gqrx, called a spectrogram. What this does is compute the spectrum of blocks of the signal, and displays an image of how this changes over time. A basic spectrogram program is provided here
-
-[msg.m](msg.m)
-
-It is msg.m for “my spectrogram”. The help information is
-
-```
->> help msg
-
-  msg(x,n0,nf,nt,dbf)
-
-   Computes and displays a spectrogram
-
-       x  -- input signal
-       n0 -- first sample
-       nf -- block size for transform
-       nt -- number of time steps (blocks)
-       dbf -- dynamic range in dB (default 40)
-
-   This extracts a segment of x starting at n0, of length nf*nt
-   The image plot is in dB, and autoscaled.  This can look very noisy
-   if there aren't any interesting signals present.
-```
-
-
-This takes an input signal starting at sample n0, and computes the spectrum of nt segments of the signal, each of length nf. The result is displayed as an image, with time going horizontally, and frequency vertically. The center frequency is in the middle of the plot. For example, for the data provided above, we can look at the first second of data, by looking at 2000 blocks each of length 1024 samples (2048000 total samples, or one second at the 2.048 sampling rate). The results is
-
-```
->> d = loadFile('ab1335_10s.dat');
->> msg(d,1,1024,2000);
-```
-
-
-Unless you have a very big display, you'll get an error message that the image doesn't fit, and was scaled down. The result looks like this
-
-![](graphics/COS_Peterson.png)
-
-We see several signals. The msg.m file will return the data that is plotted if you assign the output to a variable
-
-```
->> ds = msg(d,1,1024,2000);
-```
-
-
-We can plot the spectrum at at time of 0.5 seconds by plotting column 1000,
-
-By zooming in, you can see that there is a strong signal at sample 313. You can plot that signal by plotting a row of the data
-
-What you see is a conventional AM signal. The transmitted signal is a constant bias plus the voice signal being transmitted.
-
-For your assignment, find an AM signal in the data you captured, and email me a screen shot of a plot of the signal. Or, if you are using the data set provided, find another signal, and send a plot of it (there are at least two more). You have ten seconds of data, so you can look later in the signal by increasing n0. For example, to start at 5 seconds, n0 should be 5\*2048000.
-
-You can also use msg.m to decode the signals. Each column in the image is a sample of the spectrum in time. If we want to sample at 8kHz, we need blocks that are 2048000/8000 = 256 samples. In this case the entire data set is 80,000 samples. You may want to comment out the imshow line, and then do
-
-```
->> dd = msg(d,1,256,80000);
-```
-
-
-Find the row in dd that corresponds to your signal, take the absolute value, scale it to a maximum amplitude of one, and then play it through your sound card. You should hear the audio.
-
-```
->> dx = abs(dd(N,:))
->> dx = dx/max(dx);
->> sound(dx,8000);
-```
-
-
-Next time we'll look at better ways to do this using modulation and decimation. --></section>
+   <span class="n">This</span> <span class="n">extracts</span> <span class="n">a</span> <span class="n">segment</span> <span class="n">of</span> <span class="n">x</span> <span class="n">starting</span> <span class="n">at</span> <span class="n">n0</span><span class="p">,</span> <span class="n">of</span> <span class="n">length</span> <span class="n">nf</span><span class="o">*</span><span class="n">nt</span>
+   <span class="n">The</span> <span class="n">image</span> <span class="n">plot</span> <span class="ow">is</span> <span class="ow">in</span> <span class="n">dB</span><span class="p">,</span> <span class="ow">and</span> <span class="n">autoscaled</span><span class="o">.</span>  <span class="n">This</span> <span class="n">can</span> <span class="n">look</span> <span class="n">very</span> <span class="n">noisy</span>
+   <span class="k">if</span> <span class="n">there</span> <span class="n">aren</span><span class="s1">&#39;t any interesting signals present.</span>
+</pre></div>
+</div>
+<p>This takes an input signal starting at sample n0, and computes the spectrum of nt segments of the signal, each of length nf. The result is displayed as an image, with time going horizontally, and frequency vertically. The center frequency is in the middle of the plot. For example, for the data provided above, we can look at the first second of data, by looking at 2000 blocks each of length 1024 samples (2048000 total samples, or one second at the 2.048 sampling rate). The results is</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">loadFile</span><span class="p">(</span><span class="s1">&#39;ab1335_10s.dat&#39;</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">msg</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">2000</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Unless you have a very big display, you’ll get an error message that the image doesn’t fit, and was scaled down. The result looks like this</p>
+<p><img alt="" src="../_images/Lab2_128_1s.png" /></p>
+<p>We see one distinct signal across the middle. The msg.m file will return the data that is plotted if you assign the output to a variable</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">ds</span> <span class="o">=</span> <span class="n">msg</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1024</span><span class="p">,</span><span class="mi">2000</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>We can plot the spectrum at a time of 0.5 seconds by plotting column 1000,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ds</span><span class="p">(:,</span><span class="mi">1000</span><span class="p">)));</span>
+</pre></div>
+</div>
+<p><img alt="" src="../_images/Lab2_128_spectrum.png" /></p>
+<p>You can see that there is a strong signal at sample 313 (mouse over the plot to find the sample number at the signal’s peak). You can plot that signal by plotting a row of the data,</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ds</span><span class="p">(</span><span class="mi">313</span><span class="p">,:)));</span>
+</pre></div>
+</div>
+<p><img alt="" src="../_images/Lab2_128_313_time.png" /></p>
+<p>What you see is a conventional AM signal. The transmitted signal is a constant bias plus the voice signal being transmitted.</p>
+<p>For your assignment, find an AM signal in the data you captured, and email me a screen shot of a plot of the signal. Or, if you have trouble capturing your own data, use this data set:</p>
+<p><a class="reference download internal" download="" href="../_downloads/49ac4e2fa3674d25d7ffe8febc1a7757/Lab2_ab_10s.dat"><span class="xref download myst">Lab2_ab_10s.dat</span></a></p>
+<p>There are at least three signals at various times in this data set. Find one of the signals, and send a plot of it. You have ten seconds of data, so you can look later in the signal by increasing n0. For example, to start at 5 seconds, n0 should be 5*2048000.</p>
+</section>
+<section id="extra-fun">
+<h2>Extra Fun!<a class="headerlink" href="#extra-fun" title="Link to this heading">#</a></h2>
+<p>You can also use msg.m to decode the signals. Each column in the image is a sample of the spectrum in time. If we want to sample at 8kHz, we need blocks that are 2048000/8000 = 256 samples. In this case the entire data set is 80,000 samples. You may want to comment out the imshow line, and then do</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">dd</span> <span class="o">=</span> <span class="n">msg</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">256</span><span class="p">,</span><span class="mi">80000</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Find the row in dd that corresponds to your signal, take the absolute value, scale it to a maximum amplitude of one, and then play it through your sound card. You should hear the audio.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">dx</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">dd</span><span class="p">(</span><span class="n">N</span><span class="p">,:))</span>
+<span class="o">&gt;&gt;</span> <span class="n">dx</span> <span class="o">=</span> <span class="n">dx</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="n">dx</span><span class="p">);</span>
+<span class="o">&gt;&gt;</span> <span class="n">sound</span><span class="p">(</span><span class="n">dx</span><span class="p">,</span><span class="mi">8000</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>Next time we’ll look at better ways to do this using modulation and decimation.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -733,6 +719,7 @@ Next time we'll look at better ways to do this using modulation and decimation. 
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#airband-am-signals">Airband AM Signals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#extra-fun">Extra Fun!</a></li>
 </ul>
   </nav></div>
 
