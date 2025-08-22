@@ -268,11 +268,14 @@ You can see that there is a strong signal at sample 313 (mouse over the plot to 
 
 What you see is a conventional AM signal. The transmitted signal is a constant bias plus the voice signal being transmitted.
 
-For your assignment, find an AM signal in the data you captured, and email me a screen shot of a plot of the signal. Or, if you have trouble capturing your own data, use this data set:
+## Assignment
+For your assignment, capture some AM data in the Airband, plot a segment of it in the time domain using MATLAB or Python (or GNU Radio Companion, if you figured that out!), save a screen shot of the signal plot to a PDF file, upload it to Gradescope, and answer the questions on Gradescope. 
+
+If you have trouble capturing your own data, you may use this data set:
 
 [Lab2_ab_10s.dat](Lab2_ab_10s.dat)
 
-There are at least three signals at various times in this data set. Find one of the signals, and send a plot of it. You have ten seconds of data, so you can look later in the signal by increasing n0. For example, to start at 5 seconds, n0 should be 5\*2048000.
+This is a capture of the Airband for 10 seconds at a 2.048M sampling rateThere are at least three signals at various times in this data set. You have ten seconds of data, so you can look later in the signal by increasing n0 in the `msg` function. For example, to start at 5 seconds, n0 should be 5\*2048000.
 
 ## Extra Fun!
 You can also use msg.m to decode the signals. Each column in the image is a sample of the spectrum in time. If we want to sample at 8kHz, we need blocks that are 2048000/8000 = 256 samples. In this case the entire data set is 80,000 samples. You may want to comment out the imshow line, and then do
