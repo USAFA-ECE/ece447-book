@@ -430,7 +430,7 @@ document.write(`
 <p><img alt="" src="../_images/WebSDR3.png" /></p>
 <p>You can zoom in and out using your trackpad or mouse wheel, and shift the spectrum left and right by dragging with your mouse. You can also type in a center frequency.</p>
 <p>In the example above you see a couple of different types of signals. There are a couple of AM shortwave signals, a digital shortwave signal, and several LSB SSB signals (it is 7 MHz, so it is lower sideband here). To listen to one of these you drag the filter icon under the waterfall plot to the signal you are interested in, and choose the right demodulator (in the box with the frequency and volume controls).</p>
-<p>For your lab report, find and example of these signals</p>
+<p>For your lab report, find an example of these signals</p>
 <ul class="simple">
 <li><p>AM</p></li>
 <li><p>SSB</p></li>
@@ -438,7 +438,7 @@ document.write(`
 <li><p>Morse Code (check right above 7 MHz for this)</p></li>
 <li><p>Something weird (radars, beacons, time, there is lots to find)</p></li>
 </ul>
-<p>For each, include a screen shot, say what kind of signal it is, what frequency it is at, where it is from (if you can tell), and what time you acquired it.</p>
+<p>For each, include a screen shot, say what kind of signal it is, what frequency it is at, where it is from (use internet searches and/or GenAI to learn more about it!), and what time you acquired it.</p>
 </section>
 <section id="broad-spectral-surveys-with-your-rtl-sdr">
 <h2>Broad Spectral Surveys with your RTL SDR<a class="headerlink" href="#broad-spectral-surveys-with-your-rtl-sdr" title="Link to this heading">#</a></h2>
@@ -485,11 +485,11 @@ document.write(`
 </pre></div>
 </div>
 <p>This will periodically measure the power from 85 MHz to 110 MHz in steps of 50 kHz. This requires scanning 25 MHz / 2 MHz = 13 spectral segments (rounding up). Each segment has 2MHz /50kHz = 40 spectral bins. The total number of bins is then 520.</p>
-<p>The -g switch sets the gain of the rtl_sdr. Use gqrx or sdrsharp to find a reasonable gain, and make note of it. Then, enter this number after the -g switch on the command line. This seems to fail sometimes under windows, in which case omit the -g switch completely, and let it autorange.</p>
+<p>The -g switch sets the gain of the rtl_sdr. Use gqrx to find a reasonable gain, and make note of it. Then, enter this number after the -g switch on the command line. This seems to fail sometimes in Windows, in which case omit the -g switch completely, and let it autorange.</p>
 <p>rtl_power tries to scan the entire band specified every ten seconds, so it can take a while to collect much data.</p>
-<p>The output is a .csv file that gives the signal level in dBm for each bin. This is a massive amount of data. To load this into matlab, download this m-file</p>
+<p>The output is a .csv file that gives the signal level in dBm for each bin. This is a massive amount of data. To load this into MATLAB, download this m-file</p>
 <p><a class="reference download internal" download="" href="../_downloads/361b95831cbe657db589c5b56bf06a3c/HM.m"><span class="xref download myst">HM.m</span></a></p>
-<p>If you have a rtl_power csv file named fm_band.csv, you would load it into matlab with</p>
+<p>If you have a rtl_power .csv file named fm_band.csv, you would load it into MATLAB with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">HM</span><span class="p">(</span><span class="s1">&#39;fm_band.csv&#39;</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="n">mv</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">d</span><span class="p">));</span>
 <span class="o">&gt;&gt;</span> <span class="n">imshow</span><span class="p">(</span><span class="n">d</span><span class="p">,[</span><span class="n">mv</span><span class="p">,</span><span class="mi">0</span><span class="p">]);</span>
@@ -605,13 +605,14 @@ document.write(`
 					<span class="o">%</span>   <span class="n">demodulated</span> <span class="n">data</span>
 </pre></div>
 </div>
-<p>If we compare the spectrogram of the first half second of signal before (left) and after (right)</p>
-<p float="left">
+<p>If we compare the spectrogram of the first half second of signal before (top or left) and after (bottom or right):</p>
+<p><img alt="" src="../_images/sgd.png" /> <img alt="" src="../_images/sgdm.png" /></p>
+<!-- <p float="left">
   <img src="graphics/sgd.png" width="350" />
   <img src="graphics/sgdm.png" width="350" /> 
-</p>
+</p> -->
 <p>We see that the strongest signal has been shifted to the middle of the spectrogram.</p>
-<p>The next step is to reduce the sampling rate from 2.048 MHz to something more reasonable for an audio signal we can play through your sound card. The matlab function for that is “decimate”. This does two things. It lowpass filters the signal, and it reduces the sampling rate by some specified ratio.</p>
+<p>The next step is to reduce the sampling rate from 2.048 MHz to something more reasonable for an audio signal we can play through your sound card. The MATLAB function for that is “decimate”. This does two things. It lowpass filters the signal, and it reduces the sampling rate by some specified ratio.</p>
 <p>We’ll start by reducing the rate from 2.048 MHz to 16 kHz, or a factor of 64. While decimate will do this in one step, it is much more efficient to do this in two stages, each decimating by a factor of 8. The decimate function is efficient because it uses that fact that when you decimate by a factor of 8, then 7/8ths of the samples are going to be thrown away, and don’t even need to be computed. We can decimate the demodulated dm signal with</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">dmd</span> <span class="o">=</span> <span class="n">decimate</span><span class="p">(</span><span class="n">dm</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;fir&#39;</span><span class="p">);</span>
 <span class="o">&gt;&gt;</span> <span class="n">dmdd</span> <span class="o">=</span> <span class="n">decimate</span><span class="p">(</span><span class="n">dmd</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;fir&#39;</span><span class="p">);</span>
