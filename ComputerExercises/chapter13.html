@@ -695,6 +695,29 @@ Corrected Codeword: [1 0 1 0 0 1 1]
 <span class="g g-Whitespace">    </span><span class="mi">684</span><span class="sd">     &quot;&quot;&quot;</span>
 <span class="ne">--&gt; </span><span class="mi">685</span>     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">a</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
 
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/numpy/_core/fromnumeric.py:2111,</span> in <span class="ni">nonzero</span><span class="nt">(a)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2018</span> <span class="nd">@array_function_dispatch</span><span class="p">(</span><span class="n">_nonzero_dispatcher</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2019</span> <span class="k">def</span><span class="w"> </span><span class="nf">nonzero</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">2020</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">2021</span><span class="sd">     Return the indices of the elements that are non-zero.</span>
+<span class="g g-Whitespace">   </span><span class="mi">2022</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2109</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">2110</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">2111</span>     <span class="k">return</span> <span class="n">_wrapfunc</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="s1">&#39;nonzero&#39;</span><span class="p">)</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/numpy/_core/fromnumeric.py:57,</span> in <span class="ni">_wrapfunc</span><span class="nt">(obj, method, *args, **kwds)</span>
+<span class="g g-Whitespace">     </span><span class="mi">54</span>     <span class="k">return</span> <span class="n">_wrapit</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">56</span> <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">57</span>     <span class="k">return</span> <span class="n">bound</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">58</span> <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">59</span>     <span class="c1"># A TypeError occurs if the object does have such a method in its</span>
+<span class="g g-Whitespace">     </span><span class="mi">60</span>     <span class="c1"># class, but its signature is not identical to that of NumPy&#39;s. This</span>
+   <span class="p">(</span><span class="o">...</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">64</span>     <span class="c1"># Call _wrapit from within the except clause to ensure a potential</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="c1"># exception has a traceback chain.</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span>     <span class="k">return</span> <span class="n">_wrapit</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">method</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
 </div>
