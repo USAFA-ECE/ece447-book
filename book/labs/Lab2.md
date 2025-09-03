@@ -275,7 +275,7 @@ If you have trouble capturing your own data, you may use this data set:
 
 [Lab2_ab_10s.dat](Lab2_ab_10s.dat)
 
-This is a capture of the Airband for 10 seconds at a 2.048M sampling rateThere are at least three signals at various times in this data set. You have ten seconds of data, so you can look later in the signal by increasing n0 in the `msg` function. For example, to start at 5 seconds, n0 should be 5\*2048000.
+This is a capture of the Airband for 10 seconds at a 2.048M sampling rate. There are at least three signals at various times in this data set. You have ten seconds of data, so you can look later in the signal by increasing n0 in the `msg` function. For example, to start at 5 seconds, n0 should be 5\*2048000.
 
 ## Extra Fun!
 You can also use msg.m to decode the signals. Each column in the image is a sample of the spectrum in time. If we want to sample at 8kHz, we need blocks that are 2048000/8000 = 256 samples. In this case the entire data set is 80,000 samples. You may want to comment out the imshow line, and then do

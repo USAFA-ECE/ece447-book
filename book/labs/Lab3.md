@@ -119,20 +119,19 @@ The values are in dBm, and are all negative. Typically they range from -40 to 0.
 
 ![](graphics/fm_band_50k.png)
 
-You can also use the heatmap.py routine available here:
+You can also use the heatmap.py routine available here (I didn't find it very helpful, but maybe you can figure out better Windows display options):
 
 [heatmap.py](https://raw.githubusercontent.com/keenerd/rtl-sdr-misc/master/heatmap/heatmap.py)
 
-On MacOS X, first make this executable, and then run heatmap.py,
+On Windows, download heatmap.py into the same folder as fm_band.csv. Then open the command prompt or some other terminal, and input:
 
 ```
-> chmod +x
-> ./heatmap.py fm_band.csv fm_band.jpg
-> open fm_band.jpg
+> cd C:\Users\YourName\Documents\FolderName
+> python heatmap.py fm_band.csv fm_band.jpg
+> start fm_band.jp
 ```
 
-
-This will pop up an image of fm\_band activity. There are many other display options available, especially for Windows.
+This will pop up an image of fm_band activity. There are many other display options available, especially for Windows.
 
 Find an interesting band, and do a spectral survey with rtl\_power. Below is an example that scans from 400 MHz to 600 MHz. This was done over an hour.
 
@@ -144,11 +143,11 @@ FM is a good place to start because the signals are large. However, nothing much
 
 Last week you found signals by looking at the spectrogram, which shows a time-frequency representation of the entire RF data you had captured. In the labs that are coming up, you will often need to be able to quickly and conveniently find where signals are in a large data set. One way to do this is a much more sparsely sampled version of the spectrogram.
 
-The following m-file does this. It basically computes the spectrogram as last week, but only for every 0.1s. It then finds which frequency channels have a signal over the “squelch” threshold, which defaults to 10% of the peak. It returns the frequency offsets of each signal it finds.
+The following m-file does this. It basically computes the same spectrogram as last week, but only for every 0.1s. It then finds which frequency channels have a signal over the “squelch” threshold, which defaults to 10% of the peak. It returns the frequency offsets of each signal it finds.
 
 [ffreq.m](ffreq.m)
 
-This is listed below
+The file is shown below:
 
 ```
 function [ f ] = ffreq( x, fs, fr, dt, sq )
@@ -215,14 +214,16 @@ end
 ```
 
 
-If we load the data set from last time, and then run ffreq.m with the default arguments (2048000 Hz sampling frequency, 1000 Hz frequency resolution, 0.1 s spacing between frames, and a 0.1 detection threshold), the result is
+If we load this data set (from Dr. Pauly)
+
+[ab1355_10s.dat](ab1355_10s.dat)
+
+ and then run ffreq.m with the default arguments (2048000 Hz sampling frequency, 1000 Hz frequency resolution, 0.1 s spacing between frames, and a 0.1 detection threshold), the result is
 
 ```
 >> d = loadFile('ab1335_10s.dat');
 >> f = ffreq(d)
 f =
-
-ans =
 
   Columns 1 through 8
 
@@ -236,7 +237,7 @@ ans =
 
 These are all frequencies in Hz, relative to the carrier frequency. There is a signal at -998 kHz, a band of frequencies centered at about -396 kHz, and another signal at -224 kHz.
 
-What we want to do do is tune to each of these bands, and listen to the signal. From class, we know that we need to demodulate first, and then lowpass filter. In addition, we should reduce the sampling rate. The original RF waveform was sampled at 2.048 MHz, and we only need a few kHz accurately represent each of the channels.
+What we want to do do is tune to each of these bands and listen to the signal. From class, we know that we need to demodulate first and then lowpass filter. In addition, we should reduce the sampling rate. The original RF waveform was sampled at 2.048 MHz, and we only need a few kHz accurately represent each of the channels.
 
 Demodulation corresponds to multiplying by a complex exponential. If we start with the signal centered at -396 kHz, we can demodulate this frequency by
 
@@ -244,20 +245,19 @@ Demodulation corresponds to multiplying by a complex exponential. If we start wi
 >> fs = 2048000 			% sampling frequency
 >> dt = 1/fs    			% sampling time
 >> t = [1:length(d)]*dt;  		% time of each of the samples of d
->> dm = d.*exp(-i*2*pi*(-396000)*t);	% d is the RF data loaded above, dm is is the
-					%   demodulated data
+>> dm = d.*exp(-i*2*pi*(-396000)*t);	% d is the RF data loaded above, dm is is the demodulated data
 ```
 
 
-If we compare the spectrogram of the first half second of signal before (top or left) and after (bottom or right):
+If we compare the spectrogram of the first half second of signal before (left) and after (right):
 
-![](graphics/sgd.png) ![](graphics/sgdm.png)
+![](graphics/Rx_vs_Demod_sig_centered.png)
 <!-- <p float="left">
   <img src="graphics/sgd.png" width="350" />
   <img src="graphics/sgdm.png" width="350" /> 
 </p> -->
 
-We see that the strongest signal has been shifted to the middle of the spectrogram.
+We see that the signal has been shifted to the middle of the spectrogram.
 
 The next step is to reduce the sampling rate from 2.048 MHz to something more reasonable for an audio signal we can play through your sound card. The MATLAB function for that is “decimate”. This does two things. It lowpass filters the signal, and it reduces the sampling rate by some specified ratio.
 
@@ -270,9 +270,7 @@ We'll start by reducing the rate from 2.048 MHz to 16 kHz, or a factor of 64. Wh
 
 The 'fir’ argument says to use a finite impulse response (FIR) filter for the lowpass filter prior to decimation. The default is to use a Chebychev infinite impulse response (IIR) filter, which is more efficient, but has non-linear phase. The FIR filter is a little slower to compute, but the linear phase response will be important when we are decoding digital signals later.
 
-If we look at the spectrogram of the signal at this point
-
-what we see is
+If we look at the spectrogram of the signal at this point what we see is
 
 ![](graphics/abdm.png)
 
@@ -306,11 +304,11 @@ This shows that the audio signal has been added to an AM carrier. While the ampl
 *   Something weird (radars, beacons, time, there is lots to find)
     
 
-For each, include a screen shot, say what kind of signal it is, what frequency it is at, where it is from (if you can tell), and what time you acquired it.
+For each, include a screen shot, say what kind of signal it is, what frequency it is at, where it is from (use internet searches and/or GenAI to learn more about it!), and what time you acquired it.
 
-2\. RTL\_Power: Run rtl\_power on a band of interest to you, and send the resulting spectral survey image. What is in this band?
+2\. RTL\_Power: Run rtl\_power on a band of interest to you, and include the resulting spectral survey image. What is in this band?
 
-3\. AM Demodulation: For your lab report, add an additional demodulation/decimate stage. First, demodulate the dmdd signal to center it exactly. Then, how much can you decimate the signal to optimize its sound quality? Send me a screen shot of the spectrogram of your result, along with your offset frequency, and decimation ratio of your final stage.
+3\. AM Demodulation: For your lab report, follow the steps from this lab to demodulate/decimate your Airband signal from Lab 2. First, demodulate the signal ``d`` to center it exactly and save it as ``dm``. Then, decimate ``dm`` as shown in the lab. How much should you decimate the signal to optimize its sound quality? Include in your lab report a screen shot of the spectrogram of your result, along with your offset frequency, and decimation ratio of your final stage.
 
 ## Next Week
 
