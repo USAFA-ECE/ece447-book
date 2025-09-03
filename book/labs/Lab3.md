@@ -312,4 +312,4 @@ For each, include a screen shot, say what kind of signal it is, what frequency i
 
 ## Next Week
 
-Next week we will look at narrow band FM modulation.
+Next time we will look at narrow band FM modulation.
