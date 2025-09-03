@@ -29,7 +29,7 @@ You can zoom in and out using your trackpad or mouse wheel, and shift the spectr
 
 In the example above you see a couple of different types of signals. There are a couple of AM shortwave signals, a digital shortwave signal, and several LSB SSB signals (it is 7 MHz, so it is lower sideband here). To listen to one of these you drag the filter icon under the waterfall plot to the signal you are interested in, and choose the right demodulator (in the box with the frequency and volume controls).
 
-For your lab report, find and example of these signals
+For your lab report, find an example of these signals
 
 *   AM
     
@@ -42,7 +42,7 @@ For your lab report, find and example of these signals
 *   Something weird (radars, beacons, time, there is lots to find)
     
 
-For each, include a screen shot, say what kind of signal it is, what frequency it is at, where it is from (if you can tell), and what time you acquired it.
+For each, include a screen shot, say what kind of signal it is, what frequency it is at, where it is from (use internet searches and/or GenAI to learn more about it!), and what time you acquired it.
 
 ## Broad Spectral Surveys with your RTL SDR
 
@@ -98,15 +98,15 @@ For example, to survey the entire FM band
 
 This will periodically measure the power from 85 MHz to 110 MHz in steps of 50 kHz. This requires scanning 25 MHz / 2 MHz = 13 spectral segments (rounding up). Each segment has 2MHz /50kHz = 40 spectral bins. The total number of bins is then 520.
 
-The -g switch sets the gain of the rtl\_sdr. Use gqrx or sdrsharp to find a reasonable gain, and make note of it. Then, enter this number after the -g switch on the command line. This seems to fail sometimes under windows, in which case omit the -g switch completely, and let it autorange.
+The -g switch sets the gain of the rtl_sdr. Use gqrx to find a reasonable gain, and make note of it. Then, enter this number after the -g switch on the command line. This seems to fail sometimes in Windows, in which case omit the -g switch completely, and let it autorange.
 
-rtl\_power tries to scan the entire band specified every ten seconds, so it can take a while to collect much data.
+rtl_power tries to scan the entire band specified every ten seconds, so it can take a while to collect much data.
 
-The output is a .csv file that gives the signal level in dBm for each bin. This is a massive amount of data. To load this into matlab, download this m-file
+The output is a .csv file that gives the signal level in dBm for each bin. This is a massive amount of data. To load this into MATLAB, download this m-file
 
 [HM.m](HM.m)
 
-If you have a rtl\_power csv file named fm\_band.csv, you would load it into matlab with
+If you have a rtl\_power .csv file named fm_band.csv, you would load it into MATLAB with
 
 ```
 >> d = HM('fm_band.csv');
@@ -249,16 +249,17 @@ Demodulation corresponds to multiplying by a complex exponential. If we start wi
 ```
 
 
-If we compare the spectrogram of the first half second of signal before (left) and after (right)
+If we compare the spectrogram of the first half second of signal before (top or left) and after (bottom or right):
 
-<p float="left">
+![](graphics/sgd.png) ![](graphics/sgdm.png)
+<!-- <p float="left">
   <img src="graphics/sgd.png" width="350" />
   <img src="graphics/sgdm.png" width="350" /> 
-</p>
+</p> -->
 
 We see that the strongest signal has been shifted to the middle of the spectrogram.
 
-The next step is to reduce the sampling rate from 2.048 MHz to something more reasonable for an audio signal we can play through your sound card. The matlab function for that is “decimate”. This does two things. It lowpass filters the signal, and it reduces the sampling rate by some specified ratio.
+The next step is to reduce the sampling rate from 2.048 MHz to something more reasonable for an audio signal we can play through your sound card. The MATLAB function for that is “decimate”. This does two things. It lowpass filters the signal, and it reduces the sampling rate by some specified ratio.
 
 We'll start by reducing the rate from 2.048 MHz to 16 kHz, or a factor of 64. While decimate will do this in one step, it is much more efficient to do this in two stages, each decimating by a factor of 8. The decimate function is efficient because it uses that fact that when you decimate by a factor of 8, then 7/8ths of the samples are going to be thrown away, and don't even need to be computed. We can decimate the demodulated dm signal with
 
