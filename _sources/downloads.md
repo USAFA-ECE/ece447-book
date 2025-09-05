@@ -15,3 +15,5 @@ The slides on this page will be updated throughout the semester and posted as we
 | 7  | No class  | 
 | 8  | [Amplitude Modulation, Part 1](_static/ECE447_Lesson8_Fa25.pdf)  | 
 | 9  | [Amplitude Modulation, Part 2](_static/ECE447_Lesson9_Fa25.pdf)  | 
+| 10  | [SDR Lab 3](labs/Lab3)  |
+| 11  | [Amplitude Modulation, Part 2](_static/ECE447_Lesson11_Fa25.pdf)  | 
