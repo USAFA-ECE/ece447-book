@@ -20,10 +20,10 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 9 | AM, Part 2 | L&D 4.3-4.4 |  |  |
 | 10 | SDR Lab | [Lab 3 Description](labs/Lab3) |  Lab 3  | Lab 2 |
 | 11 | Angle modulation, Part 1 | L&D 4.5 |  |  |
-| 12 | Angle modulation, Part 2 | L&D 4.6 |  |  |
+| 12 | Angle modulation, Part 2 | L&D 4.6 |  [HW2](HW/HW2)  |  |
 | 13 | Angle modulation, Part 3 | L&D 4.7-4.9 |  |  |
-| 14 | Flex day |  |  | Lab 3 |
-| 15 | Review day |  |  |  |
+| 14 | Flex day |  |  | Lab 3   |
+| 15 | Review day |  |  | [HW2](HW/HW2) |
 | 16 | GR 1 |  |  |  |
 | 17 | SDR Lab | [Lab 4 Description](labs/Lab4) |  Lab 4  |  |
 
