@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Skills Review &#8212; ECE447 Course Webpage</title>
+    <title>Homework 2 &#8212; ECE447 Course Webpage</title>
   
   
   
@@ -57,12 +57,14 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'HW/SkillsReview';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'HW/HW2';</script>
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Lab 1: Installing SDR Receivers" href="../labs/Lab1.html" />
-    <link rel="prev" title="Slides and Downloads" href="../downloads.html" />
+    <link rel="next" title="Lab 4: Narrowband FM" href="../labs/Lab4.html" />
+    <link rel="prev" title="Lab 3: Scanning for Signals, Modulation, and Decimation" href="../labs/Lab3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -191,12 +193,12 @@
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
 <ul class="current nav bd-sidenav">
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Skills Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="SkillsReview.html">Skills Review</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/Lab1.html">Lab 1: Installing SDR Receivers</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW1.html">Homework 1</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="HW2.html">Homework 2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Homework 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/Lab4.html">Lab 4: Narrowband FM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/Lab5.html">Lab 5: Commercial FM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/Lab6.html">Lab 6: A Few Different Digital Signals</a></li>
@@ -273,7 +275,7 @@
       
       
       
-      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2FHW/SkillsReview.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2FHW/HW2.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -303,7 +305,7 @@
       
       
       
-      <li><a href="../_sources/HW/SkillsReview.md" target="_blank"
+      <li><a href="../_sources/HW/HW2.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -387,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Skills Review</h1>
+    <h1>Homework 2</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -397,7 +399,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download">Download</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-15-sep-lesson-14-by-2359-on-gradescope">Due NLT 15 Sep (Lesson 14) by 2359 on Gradescope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directions">Directions:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems:</a></li>
 </ul>
             </nav>
         </div>
@@ -409,12 +413,33 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="skills-review">
-<h1>Skills Review<a class="headerlink" href="#skills-review" title="Link to this heading">#</a></h1>
-<section id="download">
-<h2>Download<a class="headerlink" href="#download" title="Link to this heading">#</a></h2>
-<embed src="Skills_Review.pdf" width="100%" height="600px" type="application/pdf">
-<p>If you have trouble viewing, you can download the PDF <a class="reference download internal" download="" href="../_downloads/c2d67ca886454b05559f287faa70197b/Skills_Review.pdf"><span class="xref download myst">here</span></a>.</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="homework-2">
+<h1>Homework 2<a class="headerlink" href="#homework-2" title="Link to this heading">#</a></h1>
+<p>Chapter 4</p>
+<section id="due-nlt-15-sep-lesson-14-by-2359-on-gradescope">
+<h2>Due NLT 15 Sep (Lesson 14) by 2359 on Gradescope<a class="headerlink" href="#due-nlt-15-sep-lesson-14-by-2359-on-gradescope" title="Link to this heading">#</a></h2>
+</section>
+<section id="directions">
+<h2>Directions:<a class="headerlink" href="#directions" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Collaboration is authorized as noted in the syllabus Collaboration policy.</p></li>
+<li><p>All homework must be complete, error-free, and <em>neatly organized</em>. <strong>Points may be deducted for sloppy and illegible work.</strong></p></li>
+<li><p>Answers should be clearly indicated by a box.</p></li>
+<li><p>Use engineering notation with proper units.</p></li>
+<li><p>Submit work to Gradescope with pages assigned to each problem. Scans/uploads must be legible and neat without excessive margins.</p></li>
+</ul>
+</section>
+<section id="problems">
+<h2>Problems:<a class="headerlink" href="#problems" title="Link to this heading">#</a></h2>
+<ul class="simple">
+<li><p>4.2-8 –&gt; Ignore the typo ‘]’ after <span class="math notranslate nohighlight">\(m_2(t)\)</span>. Just sketch the plot by hand, ensuring your plot is neat and legible. Remember what the Fourier transforms of sinc and sinc <span class="math notranslate nohighlight">\(^2\)</span> are.</p></li>
+<li><p>4.3-6 –&gt; Very similar to problem we went over in class!</p></li>
+<li><p>4.5-1 –&gt; FM: sketch by hand, but be sure to indicate what the minimum and maximum instantaneous frequencies are (<span class="math notranslate nohighlight">\((f_i)_{min}\)</span> and <span class="math notranslate nohighlight">\((f_i)_{max}\)</span>). PM: sketch by hand; HINT: write out the equation for <span class="math notranslate nohighlight">\(f_i\)</span> for PM with <span class="math notranslate nohighlight">\(\dot{m}(t)\)</span> determined from the plot; indicate the minimum and maximum instantaneous frequencies (<span class="math notranslate nohighlight">\((f_i)_{min}\)</span> and <span class="math notranslate nohighlight">\((f_i)_{max}\)</span>)</p></li>
+<li><p>4.5-4</p></li>
+<li><p>4.6-1</p></li>
+<li><p>4.6-4</p></li>
+<li><p>4.6-6 –&gt; For Part (b), <span class="math notranslate nohighlight">\(m(t)=2sin(2000\pi t)\)</span>. For Part (c), <span class="math notranslate nohighlight">\(m(t)=sin(4000\pi t)\)</span>.</p></li>
+</ul>
 </section>
 </section>
 
@@ -449,20 +474,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../downloads.html"
+       href="../labs/Lab3.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Slides and Downloads</p>
+        <p class="prev-next-title">Lab 3: Scanning for Signals, Modulation, and Decimation</p>
       </div>
     </a>
     <a class="right-next"
-       href="../labs/Lab1.html"
+       href="../labs/Lab4.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 1: Installing SDR Receivers</p>
+        <p class="prev-next-title">Lab 4: Narrowband FM</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -482,7 +507,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#download">Download</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-15-sep-lesson-14-by-2359-on-gradescope">Due NLT 15 Sep (Lesson 14) by 2359 on Gradescope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#directions">Directions:</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#problems">Problems:</a></li>
 </ul>
   </nav></div>
 
