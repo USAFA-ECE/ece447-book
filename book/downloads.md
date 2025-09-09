@@ -17,3 +17,4 @@ The slides on this page will be updated throughout the semester and posted as we
 | 9  | [Amplitude Modulation, Part 2](_static/ECE447_Lesson9_Fa25.pdf)  | 
 | 10  | [SDR Lab 3](labs/Lab3)  |
 | 11  | [Angle Modulation, Part 1](_static/ECE447_Lesson11_Fa25.pdf)  | 
+| 12  | [Angle Modulation, Part 2](_static/ECE447_Lesson12_Fa25.pdf)  | 
