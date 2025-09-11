@@ -245,7 +245,7 @@ Demodulation corresponds to multiplying by a complex exponential. If we start wi
 >> fs = 2048000 			% sampling frequency
 >> dt = 1/fs    			% sampling time
 >> t = [1:length(d)]*dt;  		% time of each of the samples of d
->> dm = d.*exp(-i*2*pi*(-396000)*t);	% d is the RF data loaded above, dm is is the demodulated data
+>> dm = d.*exp(-i*2*pi*(-396000)*t');	% d is the RF data loaded above, dm is is the demodulated data
 ```
 
 
