@@ -2,7 +2,7 @@
 
 Chapter 4
 
-## Due NLT 15 Sep (Lesson 14) by 2359 on Gradescope
+## Due NLT 17 Sep (Lesson 15) by 2359 on Gradescope
 
 ## Directions: 
 - Collaboration is authorized as noted in the syllabus Collaboration policy. 
