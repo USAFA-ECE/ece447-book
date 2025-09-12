@@ -308,8 +308,8 @@ For each, include a screen shot, say what kind of signal it is, what frequency i
 
 2\. RTL\_Power: Run rtl\_power on a band of interest to you, and include the resulting spectral survey image. What is in this band?
 
-3\. AM Demodulation: For your lab report, follow the steps from this lab to demodulate/decimate your Airband signal from Lab 2. First, demodulate the signal ``d`` to center it exactly and save it as ``dm``. Then, decimate ``dm`` as shown in the lab. How much should you decimate the signal to optimize its sound quality? Include in your lab report a screen shot of the spectrogram of your result, along with your offset frequency, and decimation ratio of your final stage.
+3\. AM Demodulation (**NOT REQUIRED TO DO OR TURN IN** - 9/12, mbb): For your lab report, follow the steps from this lab to demodulate/decimate your Airband signal from Lab 2. First, demodulate the signal ``d`` to center it exactly and save it as ``dm``. Then, decimate ``dm`` as shown in the lab. How much should you decimate the signal to optimize its sound quality? Include in your lab report a screen shot of the spectrogram of your result, along with your offset frequency, and decimation ratio of your final stage.
 
-## Next Week
+## Next Lab
 
 Next time we will look at narrow band FM modulation.
