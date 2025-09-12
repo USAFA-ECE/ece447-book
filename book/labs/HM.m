@@ -19,7 +19,7 @@ function [ hm ] = HM(fn)
 
 % skip the first two text columns that matlab can't deal with
 % read the rest into d
-d = csvread(fn,0,2);
+d = readmatrix(fn,'Range',[1,3]);
 
 % dimension of the csv array
 [nr nc] = size(d);
