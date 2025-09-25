@@ -30,7 +30,7 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 ### Digital Communications
 | Lesson | Topic | Reading | Assigned | Due |
 |----------|----------|----------|----------|----------|
-| 18 | Sampling, quantization, reconstruction | L&D 5.1 | [HW3](HW/HW3) |  |
+| 18 | Signal sampling and reconstruction | L&D 5.1 | [HW3](HW/HW3) |  |
 | 19 | Pulse code modulation | L&D 5.2 |  |  |
 | 20 | PCM (cont'd) & pulse modulations | L&D 5.7 |  | [HW3](HW/HW3) |
 | 21 | SDR Lab | [Lab 5 Description](labs/Lab5) |  Lab 5  |  |

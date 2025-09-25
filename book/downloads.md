@@ -23,4 +23,4 @@ The slides on this page will be updated throughout the semester and posted as we
 | 15  | Review day  | 
 | 16  | GR1  | 
 | 17  | GR review/feedback  | 
-| 18  |   | 
+| 18  | [Signal sampling and reconstruction](_static/ECE447_Lesson18_Fa25.pdf)  | 
