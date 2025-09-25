@@ -25,15 +25,15 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 14 | Flex day |  |  | Lab 3   |
 | 15 | Review day |  |  | [HW2](HW/HW2) |
 | 16 | GR 1 |  |  |  |
-| 17 | SDR Lab | [Lab 4 Description](labs/Lab4) |  Lab 4  |  |
+| 17 | GR Review/Feedback |  |    |  |
 
 ### Digital Communications
 | Lesson | Topic | Reading | Assigned | Due |
 |----------|----------|----------|----------|----------|
-| 18 | Sampling, quantization, reconstruction | L&D 5.1 |  |  |
+| 18 | Sampling, quantization, reconstruction | L&D 5.1 | [HW3](HW/HW3) |  |
 | 19 | Pulse code modulation | L&D 5.2 |  |  |
-| 20 | PCM (cont'd) & pulse modulations | L&D 5.7 |  |  |
-| 21 | SDR Lab | [Lab 5 Description](labs/Lab5) |  Lab 5  | Lab 4 |
+| 20 | PCM (cont'd) & pulse modulations | L&D 5.7 |  | [HW3](HW/HW3) |
+| 21 | SDR Lab | [Lab 5 Description](labs/Lab5) |  Lab 5  |  |
 | 22 | Digital comm & line coding | L&D 6.1-6.2 |  |  |
 | 23 | Pulse shaping & intersymbol interference (ISI) | L&D 6.3 |  |  |
 | 24 | Digital receivers: timing & detection, eye diagrams | L&D 6.5.2-6.5.3, 6.6 | | |
