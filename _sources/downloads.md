@@ -15,12 +15,13 @@ The slides on this page will be updated throughout the semester and posted as we
 | 7  | No class  | 
 | 8  | [Amplitude Modulation, Part 1](_static/ECE447_Lesson8_Fa25.pdf)  | 
 | 9  | [Amplitude Modulation, Part 2](_static/ECE447_Lesson9_Fa25.pdf)  | 
-| 10  | [SDR Lab 3](labs/Lab3)  |
-| 11  | [Angle Modulation, Part 1](_static/ECE447_Lesson11_Fa25.pdf)  | 
-| 12  | [Angle Modulation, Part 2](_static/ECE447_Lesson12_Fa25.pdf)  | 
-| 13  | [Angle Modulation, Part 3](_static/ECE447_Lesson13_Fa25.pdf)  | 
-| 14  | GNU Radio w/ Dr. Rogers  | 
-| 15  | Review day  | 
-| 16  | GR1  | 
-| 17  | GR review/feedback  | 
-| 18  | [Signal sampling and reconstruction](_static/ECE447_Lesson18_Fa25.pdf)  | 
+| 10 | [SDR Lab 3](labs/Lab3)  |
+| 11 | [Angle Modulation, Part 1](_static/ECE447_Lesson11_Fa25.pdf)  | 
+| 12 | [Angle Modulation, Part 2](_static/ECE447_Lesson12_Fa25.pdf)  | 
+| 13 | [Angle Modulation, Part 3](_static/ECE447_Lesson13_Fa25.pdf)  | 
+| 14 | GNU Radio w/ Dr. Rogers  | 
+| 15 | Review day  | 
+| 16 | GR1  | 
+| 17 | GR review/feedback  | 
+| 18 | [Signal sampling and reconstruction](_static/ECE447_Lesson18_Fa25.pdf)  | 
+| 19 | [Pulse Code Modulation (PCM)](_static/ECE447_Lesson19_Fa25.pdf)  | 
