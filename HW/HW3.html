@@ -432,11 +432,14 @@ document.write(`
 </section>
 <section id="problems">
 <h2>Problems:<a class="headerlink" href="#problems" title="Link to this heading">#</a></h2>
-<ul class="simple">
+<ul>
 <li><p>5.1-2 –&gt; Nyquist rate is <span class="math notranslate nohighlight">\(f_s\)</span>, and the Nyquist interval is <span class="math notranslate nohighlight">\(T_s=1/f_s\)</span>.</p></li>
 <li><p>5.1-5d –&gt; Only part d (unless you want more practice by working out the other parts!). Use the equation in the text between Equations 5.14 and 5.15a. Leave your answer in terms of <span class="math notranslate nohighlight">\(T_s\)</span> and <span class="math notranslate nohighlight">\(t_0\)</span> (no need to convert to anything else).</p></li>
-<li><p>5.1-8 –&gt; The point of this problem is to show mathematically how an anti-aliaising helps reduce the error in a reconstructed signal. In Part (b) you find the energy of the error signal. Use the provided hint to set up the equation below. Use your plot from Part (a) to determine the piecewise formula for <span class="math notranslate nohighlight">\(\tilde{G}(f)\)</span>. In Parts (c-d) you will first sketch the spectrum after including an ideal anti-aliaising filter, and then you will repeat Part (b) to show the reduction in the energy of the error signal.<br />
-<span class="math notranslate nohighlight">\(E = \int^{\infty}_{-\infty}||g(t)-\tilde{g}(t)||^2dt=\int^{\infty}_{-\infty}||G(f)-\tilde{G}(f)||^2df\)</span></p></li>
+<li><p>5.1-8 –&gt; The point of this problem is to show mathematically how an anti-aliaising helps reduce the error in a reconstructed signal. In Part (b) you find the energy of the error signal. Use the provided hint to set up the equation below. Use your plot from Part (a) to determine the piecewise formula for <span class="math notranslate nohighlight">\(\tilde{G}(f)\)</span>. In Parts (c-d) you will first sketch the spectrum after including an ideal anti-aliaising filter, and then you will repeat Part (b) to show the reduction in the energy of the error signal.</p>
+<p><span class="math notranslate nohighlight">\(E = \int^{\infty}_{-\infty}||g(t)-\tilde{g}(t)||^2dt=\int^{\infty}_{-\infty}||G(f)-\tilde{G}(f)||^2df\)</span></p>
+<p>Consider just a single copy of the signal/reconstructed signal. Since we are only dealing with real numbers, the <span class="math notranslate nohighlight">\(||\cdot||\)</span> norm operator simplifies to just an absolute value, which can also be removed. Further, we can take advantage of symmetry. So:</p>
+<p><span class="math notranslate nohighlight">\(E = 2\int^{400}_{0}\left[G(f)-\tilde{G}(f)\right]^2df\)</span></p>
+</li>
 </ul>
 </section>
 </section>
