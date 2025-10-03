@@ -26,3 +26,4 @@ The slides on this page will be updated throughout the semester and posted as we
 | 18 | [Signal sampling and reconstruction](_static/ECE447_Lesson18_Fa25.pdf)  | 
 | 19 | [Pulse Code Modulation (PCM)](_static/ECE447_Lesson19_Fa25.pdf)  | 
 | 20 | [PCM (cont'd) and Pulse Modulations](_static/ECE447_Lesson20_Fa25.pdf)  | 
+| 21 | [GNU Radio Lab](labs/Lab4)  | 

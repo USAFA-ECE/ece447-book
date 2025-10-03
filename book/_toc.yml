@@ -21,10 +21,11 @@ parts:
       - file: HW/HW2
       - file: HW/HW3
       - file: labs/Lab4
-      - file: labs/Lab5
-      - file: labs/Lab6
-      - file: labs/Lab7
-      - file: labs/Lab8
+      - file: HW/HW4
+  #    - file: labs/Lab5
+  #    - file: labs/Lab6
+  #    - file: labs/Lab7
+  #    - file: labs/Lab8
   # - caption: Textbook Computer Examples
   #   chapters:
   #    - file: ComputerExercises\chapter02
