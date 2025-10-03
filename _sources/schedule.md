@@ -33,9 +33,9 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 18 | Signal sampling and reconstruction | L&D 5.1 | [HW3](HW/HW3) |  |
 | 19 | Pulse code modulation | L&D 5.2 |  |  |
 | 20 | PCM (cont'd) & pulse modulations | L&D 5.7 |  | [HW3](HW/HW3) |
-| 21 | SDR Lab | [Lab 5 Description](labs/Lab5) |  Lab 5  |  |
+| 21 | GNU Radio Lab | [Lab 4 Description](labs/Lab4) |  Lab 4, [HW4](HW/HW4)  |  |
 | 22 | Digital comm & line coding | L&D 6.1-6.2 |  |  |
-| 23 | Pulse shaping & intersymbol interference (ISI) | L&D 6.3 |  |  |
+| 23 | Pulse shaping & intersymbol interference (ISI) | L&D 6.3 |  | [HW4](HW/HW4) |
 | 24 | Digital receivers: timing & detection, eye diagrams | L&D 6.5.2-6.5.3, 6.6 | | |
 | 25 | M-ary digital modulation | L&D 6.7 |  |  |
 | 26 | SDR Lab | [Lab 6 Description](labs/Lab6) |  Lab 6  | Lab 5 |

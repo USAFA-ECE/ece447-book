@@ -198,11 +198,8 @@
 <li class="toctree-l1"><a class="reference internal" href="../labs/Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW2.html">Homework 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/Lab4.html">Lab 4: Narrowband FM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/Lab5.html">Lab 5: Commercial FM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/Lab6.html">Lab 6: A Few Different Digital Signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/Lab7.html">Lab 7: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../labs/Lab8.html">Lab 8: Digital Packet Radio – APRS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab4.html">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
 </ul>
 
     </div>
@@ -604,8 +601,8 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/3f201c10c482c9dcf274d79e07bff0553f8c70f01d47f97101cd458f119c0c1f.png" src="../_images/3f201c10c482c9dcf274d79e07bff0553f8c70f01d47f97101cd458f119c0c1f.png" />
-<img alt="../_images/915696117049f28acfb64719e4d1a00c4ac008dc78f0923453fca4cab66236d9.png" src="../_images/915696117049f28acfb64719e4d1a00c4ac008dc78f0923453fca4cab66236d9.png" />
+<img alt="../_images/35f92527b99aef62a7c5c4e4fa8f5d4bd188d2ea81cc736acc8d87ce97aec444.png" src="../_images/35f92527b99aef62a7c5c4e4fa8f5d4bd188d2ea81cc736acc8d87ce97aec444.png" />
+<img alt="../_images/7241beeab0e2c3372df24db8d5e2149954248fcb15122bd578e6d5cd2c441441.png" src="../_images/7241beeab0e2c3372df24db8d5e2149954248fcb15122bd578e6d5cd2c441441.png" />
 </div>
 </div>
 </section>
@@ -691,7 +688,7 @@ document.write(`
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/00cc304e7839752777946e8c5350dbd8b5e7a1a3eee2e5960ecbd4b0cd2780a7.png" src="../_images/00cc304e7839752777946e8c5350dbd8b5e7a1a3eee2e5960ecbd4b0cd2780a7.png" />
-<img alt="../_images/128d953903436f00772cd91f9b053052f90d72f6d08334670d3d74cd95574515.png" src="../_images/128d953903436f00772cd91f9b053052f90d72f6d08334670d3d74cd95574515.png" />
+<img alt="../_images/fc6323a02fd7301b0fde86e480dcf3f098dc69f91a8d83c4c3697e00e82f0483.png" src="../_images/fc6323a02fd7301b0fde86e480dcf3f098dc69f91a8d83c4c3697e00e82f0483.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -726,8 +723,8 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Current Eb/No= 26
 </pre></div>
 </div>
-<img alt="../_images/70b2cdc2a10af2df65ec4be36de46e72a2a203eac9a8b055e0df74fa040bb0d4.png" src="../_images/70b2cdc2a10af2df65ec4be36de46e72a2a203eac9a8b055e0df74fa040bb0d4.png" />
-<img alt="../_images/ecdba4c51118d3f60c53c73ad9409690bf933c47d22988f65ea2fe96e5c8de46.png" src="../_images/ecdba4c51118d3f60c53c73ad9409690bf933c47d22988f65ea2fe96e5c8de46.png" />
+<img alt="../_images/d1789ec62b3bacf3b88e07f11c263ceb780ef343b188934d68b9247acd310d4d.png" src="../_images/d1789ec62b3bacf3b88e07f11c263ceb780ef343b188934d68b9247acd310d4d.png" />
+<img alt="../_images/2429e58f98fd67a48793d6b063cc88bab5c64054f2809b1c7bb22f3ef4365924.png" src="../_images/2429e58f98fd67a48793d6b063cc88bab5c64054f2809b1c7bb22f3ef4365924.png" />
 </div>
 </div>
 </section>
@@ -870,41 +867,20 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Be Patient: This code may take several minutes to complete...
 </pre></div>
 </div>
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2301/1985473488.py:36: FutureWarning: Beginning in SciPy 1.17, multidimensional input will be treated as a batch, not `ravel`ed. To preserve the existing behavior and silence this warning, `ravel` arguments before passing them to `toeplitz`.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_2298/1985473488.py:36: FutureWarning: Beginning in SciPy 1.17, multidimensional input will be treated as a batch, not `ravel`ed. To preserve the existing behavior and silence this warning, `ravel` arguments before passing them to `toeplitz`.
   Z = toeplitz(s_data[Nch:Ntrain], s_data[Nch::-1])
 </pre></div>
 </div>
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">71</span>
-<span class="g g-Whitespace">     </span><span class="mi">67</span>     <span class="n">d_temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">]))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">])</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> \
-<span class="g g-Whitespace">     </span><span class="mi">68</span>              <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">])</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">]))</span><span class="o">+</span>\
-<span class="g g-Whitespace">     </span><span class="mi">69</span>               <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">])</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">])</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span>     <span class="c1"># update the feedback data</span>
-<span class="ne">---&gt; </span><span class="mi">71</span>     <span class="n">feedbk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">d_temp</span><span class="p">],</span> <span class="n">feedbk</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
-<span class="g g-Whitespace">     </span><span class="mi">72</span> <span class="c1"># Now compute the entire DFE decision after decision feedback</span>
-<span class="g g-Whitespace">     </span><span class="mi">73</span> <span class="n">dfeq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dsig</span><span class="p">))</span><span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dsig</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> \
-<span class="g g-Whitespace">     </span><span class="mi">74</span>       <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dsig</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dsig</span><span class="p">))</span> <span class="o">+</span>\
-<span class="g g-Whitespace">     </span><span class="mi">75</span>         <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dsig</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dsig</span><span class="p">)</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span>
-
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/numpy/_core/multiarray.py:180,</span> in <span class="ni">concatenate</span><span class="nt">(arrays, axis, out, dtype, casting)</span>
-<span class="g g-Whitespace">    </span><span class="mi">111</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">112</span><span class="sd">     empty_like(prototype, dtype=None, order=&#39;K&#39;, subok=True, shape=None, *,</span>
-<span class="g g-Whitespace">    </span><span class="mi">113</span><span class="sd">                device=None)</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">175</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">176</span><span class="sd">     &quot;&quot;&quot;</span>   <span class="c1"># NOQA</span>
-<span class="g g-Whitespace">    </span><span class="mi">177</span>     <span class="k">return</span> <span class="p">(</span><span class="n">prototype</span><span class="p">,)</span>
-<span class="ne">--&gt; </span><span class="mi">180</span> <span class="nd">@array_function_from_c_func_and_dispatcher</span><span class="p">(</span><span class="n">_multiarray_umath</span><span class="o">.</span><span class="n">concatenate</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">181</span> <span class="k">def</span><span class="w"> </span><span class="nf">concatenate</span><span class="p">(</span><span class="n">arrays</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">casting</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">182</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">183</span><span class="sd">     concatenate(</span>
-<span class="g g-Whitespace">    </span><span class="mi">184</span><span class="sd">         (a1, a2, ...),</span>
-<span class="sd">   (...)</span>
-<span class="g g-Whitespace">    </span><span class="mi">280</span><span class="sd"> </span>
-<span class="g g-Whitespace">    </span><span class="mi">281</span><span class="sd">     &quot;&quot;&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">282</span>     <span class="k">if</span> <span class="n">out</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">283</span>         <span class="c1"># optimize for the typical case where only arrays is provided</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">8</span><span class="p">],</span> <span class="n">line</span> <span class="mi">69</span>
+<span class="g g-Whitespace">     </span><span class="mi">65</span> <span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">]</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">kj</span><span class="p">]</span> <span class="o">-</span> <span class="n">zfk</span>  <span class="c1"># subtract the feedback</span>
+<span class="g g-Whitespace">     </span><span class="mi">66</span> <span class="c1"># Now make decision after feedback</span>
+<span class="g g-Whitespace">     </span><span class="mi">67</span> <span class="n">d_temp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">]))</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">])</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> \
+<span class="g g-Whitespace">     </span><span class="mi">68</span>          <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">])</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">]))</span><span class="o">+</span>\
+<span class="ne">---&gt; </span><span class="mi">69</span>           <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">])</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dsig</span><span class="p">[</span><span class="n">kj</span><span class="p">])</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">70</span> <span class="c1"># update the feedback data</span>
+<span class="g g-Whitespace">     </span><span class="mi">71</span> <span class="n">feedbk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">(([</span><span class="n">d_temp</span><span class="p">],</span> <span class="n">feedbk</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>

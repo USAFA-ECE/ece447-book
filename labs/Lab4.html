@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Lab 4: Narrowband FM &#8212; ECE447 Course Webpage</title>
+    <title>Lab 4: GNU Radio &#8212; ECE447 Course Webpage</title>
   
   
   
@@ -61,7 +61,7 @@
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Lab 5: Commercial FM" href="Lab5.html" />
+    <link rel="next" title="Homework 4" href="../HW/HW4.html" />
     <link rel="prev" title="Homework 3" href="../HW/HW3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -198,11 +198,8 @@
 <li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW2.html">Homework 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 4: Narrowband FM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: Commercial FM</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: A Few Different Digital Signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab8.html">Lab 8: Digital Packet Radio – APRS</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
 </ul>
 
     </div>
@@ -388,7 +385,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 4: Narrowband FM</h1>
+    <h1>Lab 4: GNU Radio</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -398,15 +395,9 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#narrowband-fm-signals">Narrowband FM Signals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoding-narrowband-fm-signals">Decoding Narrowband FM Signals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packaging-up-your-fm-receiver">Packaging Up Your FM Receiver</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-some-fm-signals-and-decode-them">Capture Some FM Signals and Decode Them</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#odd-fact">Odd Fact</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gnu-radio-tutorials">GNU Radio Tutorials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-week">Next Week</a></li>
 </ul>
             </nav>
         </div>
@@ -418,83 +409,27 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-4-narrowband-fm">
-<h1>Lab 4: Narrowband FM<a class="headerlink" href="#lab-4-narrowband-fm" title="Link to this heading">#</a></h1>
-<p>(Adapted from Dr. John Pauly’s Stanford University EE179 course website: <a class="reference external" href="https://web.stanford.edu/class/ee179/Homework.html.">https://web.stanford.edu/class/ee179/Homework.html.</a>)</p>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>Last week you learned to find AM signals, and then demodulate and decimate them down to a baseband signal you could listen to. For AM, simply taking the absolute value of the complex signal detects the envelope, and gives you the audio waveform.</p>
-<p>This week we will look at narrowband FM. Finding the signals and the initial demodulation and decimation process are the same as for AM. The difference lies in how you detect the message in the FM signal. We will implement a simple method for this, and listen to two bands that have a lot of narrowband FM traffic, amateur radio, and police/fire/emergency radio.</p>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-4-gnu-radio">
+<h1>Lab 4: GNU Radio<a class="headerlink" href="#lab-4-gnu-radio" title="Link to this heading">#</a></h1>
 <section id="aims-of-the-lab">
 <h2>Aims of the Lab<a class="headerlink" href="#aims-of-the-lab" title="Link to this heading">#</a></h2>
-<p>The goal of this lab are to learn how to detect messages in narrowband FM signals.</p>
+<p>The goals of this lab are to learn GNU Radio better and apply it to changing the sample rate of a signal.</p>
 </section>
-<section id="narrowband-fm-signals">
-<h2>Narrowband FM Signals<a class="headerlink" href="#narrowband-fm-signals" title="Link to this heading">#</a></h2>
-<p>Narrowband FM is commonly used in Amateur Radio in the 144–148 MHz VHF band and the 420–450 MHz UHF band, where the bandwidth required for the FM signal is acceptable. It is also commonly used for Police, Fire, and Emergency Services, although it is increasingly being replaced by digital radio systems that are harder to decode.</p>
-<p>We’ll start with the VHF Amateur Radio band. The following file is a capture of 2.048 MHz of the RF spectrum centered at 145.5 MHz.</p>
-<p><a class="reference download internal" download="" href="../_downloads/070e53a455c99acabb6364df7aad996a/hb1455_10s.dat"><span class="xref download myst">hb1455_10s.dat</span></a></p>
-<p>The upper end (well actually, most) of the VHF amateur band is allocated to FM repeaters. These are moderately powerful radios (50-100W) located in high places that listen on one frequency and transmit on another. In the VHF band this offset is +/- 600 kHz, which is far enough apart to allow the repeater to listen and transmit at the same time. The offset is +/- 5 MHz in the UHF band, where more spectrum is available.</p>
-<p>Repeaters are important because radio communications in the VHF band (and above) are essentially limited to line of sight. This isn’t very far when hills and buildings are in the way. However, repeaters are located in high places like the tops of mountains. If you and the person you want to communicate with can see the same repeater/mountain, you can talk to each other. This allows people in large areas to communicate.</p>
-<p>One of the most active repeaters in the valley is N6NFI, operating at a transmit frequency of 145.230 MHz. This repeater is located right above Stanford on the south end of the hill with the Dish. If you walk the Dish path starting at Stanford Avenue, the N6NFI antenna is one of the antennas located on the left shortly after you reach the top of the hill. Someone is talking on this channel most of the day. The busiest time is from 9 AM to about 11 AM, when the “9 O’Clock Net” is happening. People call in to talk about all sorts of things, radio related and otherwise. If you want to get people going, call in and ask what “ground” really means!</p>
-<p>Load the data file, and see if you can find the frequency offset for the N6NFI repeater. It is the strongest signal in the data, so it should be pretty obvious. Demodulate the signal, and decimate it by a factor of 64 (in two stages of 8, as before). Report the offset frequency you found in your lab report.</p>
-<p>If you plot the spectrogram of the resulting demodulated and decimated signal dfm,</p>
-<p>you should see something like this</p>
-<p><img alt="" src="../_images/fmd.png" /></p>
-<p>If you plot the magnitude of the signal,</p>
-<p>it should be almost constant. This is because all of the information is in the phase. Include a screen shot of this plot in your report.</p>
-</section>
-<section id="decoding-narrowband-fm-signals">
-<h2>Decoding Narrowband FM Signals<a class="headerlink" href="#decoding-narrowband-fm-signals" title="Link to this heading">#</a></h2>
-<p>From class, the way you would expect to extract the audio waveform from the FM signal would be to differentiate the angle of the signal</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">ddfm</span> <span class="o">=</span> <span class="n">diff</span><span class="p">(</span><span class="n">angle</span><span class="p">(</span><span class="n">dfm</span><span class="p">));</span>
-</pre></div>
-</div>
-<p>This doesn’t work very well, although it can be fixed up.</p>
-<p>A better idea is to detect the message from the FM signal with this</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">ddfm</span> <span class="o">=</span> <span class="n">angle</span><span class="p">(</span><span class="n">conj</span><span class="p">(</span><span class="n">dfm</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">end</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span><span class="o">.*</span><span class="n">dfm</span><span class="p">(</span><span class="mi">2</span><span class="p">:</span><span class="n">end</span><span class="p">)));</span>
-</pre></div>
-</div>
-<p>Explain what this does and why it works in your lab report. An even simpler version replaces the angle() operation with taking the imaginary part with imag(). Try this. Why does this work?</p>
-<p>The spectrogram of the resulting signal now should look like this</p>
-<p><img alt="" src="../_images/fmdd.png" /></p>
-<p>This is a beautiful audio spectrum. Note the short segments of constant frequency at the beginning of the signal. You will hear when you play the signal back.</p>
-<p>Scale the signal to a maximum value of 1, and play it through your sound card</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">ddfm</span> <span class="o">=</span> <span class="n">ddfm</span><span class="o">/</span><span class="nb">max</span><span class="p">(</span><span class="nb">abs</span><span class="p">(</span><span class="n">ddfm</span><span class="p">));</span>
-<span class="o">&gt;&gt;</span> <span class="n">sound</span><span class="p">(</span><span class="n">dddm</span><span class="p">,</span> <span class="mi">32000</span><span class="p">)</span>
-</pre></div>
-</div>
-<p>You should hear very clear audio, much clearer than the AM signal from last week. This is the reason FM is so widely used. If the signal is above a threshold so that the phase can be accurately determined, the result is essentially perfect audio. The price for this is that the transmitter is putting out a full amplitude frequency modulated sinusoid continuously no matter what the input is. This requires even more power than AM. However, the amplifier doesn’t need to be linear if the harmonics are filtered out after the output stage. This allows FM amplifiers to be much less expensive than linear AM amplifiers, so the overall cost of an FM transmitter can be much less than for an AM transmitter of the same power and frequency.</p>
-<p>One of the things you hear in the audio is a background hum. You can also see it in the spectrogram as two continuous frequency lines on either side of DC. This sounds and looks like an artifact, but is actually put there on purpose. One of the problems with repeaters is that they retransmit everything they hear at their receive frequency. This could be noise or interference, or even another repeater. To solve this repeaters only retransmit signals if they contain a specific tone. This indicates that the signal was intended for them, and should be retransmitted. The tones are chosen to be “sub-audible” around 100 Hz, but clearly you can hear them. Some repeaters suppress the tone when they retransmit a signal. N6NFI does not, as you can hear.</p>
-<p>The tone is called a CTCSS code for “Continuous Tone Coded Squelch System”, or more commonly as a PL code for Motorola’s trademark name “Private Line”. There are also lots of other access methods that use digital codes, tone bursts, or tones at higher frequencies. These are less common.</p>
-<p>Use a segment from the data to determine what the CTCSS frequency is for N6NFI. Look it up on the web (google “N6NFI and CTCSS”) to see if you are right.</p>
-</section>
-<section id="packaging-up-your-fm-receiver">
-<h2>Packaging Up Your FM Receiver<a class="headerlink" href="#packaging-up-your-fm-receiver" title="Link to this heading">#</a></h2>
-<p>Make an m-file that packages up your FM receiver. Call it fm_dc.m for “FM Decoder”. Include another decimation stage AFTER the FM detection, since the audio bandwidth is only about +/- 2.5 kHz, which doesn’t require the 32 kHz sampling frequency that we have at this point. For lower SNR data this can greatly improve the quality of the signal. However, this data is clean enough it doesn’t make very much difference.</p>
-</section>
-<section id="capture-some-fm-signals-and-decode-them">
-<h2>Capture Some FM Signals and Decode Them<a class="headerlink" href="#capture-some-fm-signals-and-decode-them" title="Link to this heading">#</a></h2>
-<p>Capture a band where you expect to find narrowband FM signals (not the broadcast band, we’ll get to that next week). The bands you looked at in Lab 1 are a good place to start. Use the rtl_sdr command line routine to save data to a file, and then decode it with your fm_dc.m matlab routine. Submit a spectrogram of the signal, and a description of what you heard.</p>
-</section>
-<section id="odd-fact">
-<h2>Odd Fact<a class="headerlink" href="#odd-fact" title="Link to this heading">#</a></h2>
-<p>Try your AM receiver m-file on a narrowband FM signal. Why does this work at all? It works better as the AM receiver bandwidth is narrowed, and as you move slightly off the transmit frequency.</p>
+<section id="gnu-radio-tutorials">
+<h2>GNU Radio Tutorials<a class="headerlink" href="#gnu-radio-tutorials" title="Link to this heading">#</a></h2>
+<p>The GNU Radio wiki page contains several helpful tutorials for learning how to use GNU Radio. In this lab you will complete several of the foundational tutorials and then demonstrate what happens in the frequency domain when changing the sample rate of a signal.</p>
+<p>Go to <a class="reference external" href="https://wiki.gnuradio.org/index.php?title=Tutorials">https://wiki.gnuradio.org/index.php?title=Tutorials</a>. Complete the following tutorials:</p>
+<ul class="simple">
+<li><p>Introducing GNU Radio: Your First Flowgraph</p></li>
+<li><p>All tutorials under Flowgraph Fundamentals</p></li>
+<li><p>DSP Blocks: Low Pass Filter Example</p></li>
+<li><p>DSP Blocks: Sample Rate Change (skip the Decimation section)</p></li>
+</ul>
+<p>After completing the Sample Rate Change tutorial, create a figure similar to the figure immediately before the Decimation section but for a signal interpolated up to 512 kHz instead of 128 kHz.</p>
 </section>
 <section id="lab-report">
 <h2>Lab Report<a class="headerlink" href="#lab-report" title="Link to this heading">#</a></h2>
-<p>Include answers to these questions in your lab report.</p>
-<p>1. What was the offset frequency for N6NFI?</p>
-<p>2. Plot the magnitude of the demodulated and decimated FM signal to show that it is essentially constant. There will be some noise, but it turns out that noise in the magnitude has very little effect on the detected FM signal. Why is that?</p>
-<p>3. What is the problem with using diff(angle(RF_DATA))) to detect the FM signal? How does the approach proposed above work? And why can the angle operation be replaced with taking the imaginary component, and have it still work?</p>
-<p>4. What is the CTCSS frequency for N6NFI?</p>
-<p>5. Find a narrowband FM signal somewhere in the spectrum, capture it, and decode it. Include a spectrogram of the baseband (detected and decimated) signal, and a description of what you heard.</p>
-<p>6. Why does using your AM receiver on an FM signal work at all? This is a non-trivial question, so any reasonable answer will be accepted.</p>
-</section>
-<section id="next-week">
-<h2>Next Week<a class="headerlink" href="#next-week" title="Link to this heading">#</a></h2>
-<p>Next week we’ll start looking at commercial FM signals. These have lots of different components, including the stereo signal you usually think of, plus several digital radio streams, digital data for your car radio, and subcarriers for Muzak, and other targeted programming.</p>
+<p>Save your figure as a PDF, include a doc statement, and upload to Gradescope. Also, answer the questions in Gradescope.</p>
 </section>
 </section>
 
@@ -538,11 +473,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="Lab5.html"
+       href="../HW/HW4.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 5: Commercial FM</p>
+        <p class="prev-next-title">Homework 4</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -562,15 +497,9 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#narrowband-fm-signals">Narrowband FM Signals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decoding-narrowband-fm-signals">Decoding Narrowband FM Signals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#packaging-up-your-fm-receiver">Packaging Up Your FM Receiver</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#capture-some-fm-signals-and-decode-them">Capture Some FM Signals and Decode Them</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#odd-fact">Odd Fact</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gnu-radio-tutorials">GNU Radio Tutorials</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#next-week">Next Week</a></li>
 </ul>
   </nav></div>
 
