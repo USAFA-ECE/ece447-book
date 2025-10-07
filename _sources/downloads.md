@@ -27,3 +27,4 @@ The slides on this page will be updated throughout the semester and posted as we
 | 19 | [Pulse Code Modulation (PCM)](_static/ECE447_Lesson19_Fa25.pdf)  | 
 | 20 | [PCM (cont'd) and Pulse Modulations](_static/ECE447_Lesson20_Fa25.pdf)  | 
 | 21 | [GNU Radio Lab](labs/Lab4)  | 
+| 22 | [Digital Communication and Line Coding](_static/ECE447_Lesson22_Fa25.pdf)  | 
