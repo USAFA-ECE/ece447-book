@@ -1,5 +1,7 @@
 # Lab 4: GNU Radio
 
+## Due NLT 17 Oct (Lesson 25) by 2359 on Gradescope
+
 ## Aims of the Lab
 
 The goals of this lab are to learn GNU Radio better and apply it to changing the sample rate of a signal.
