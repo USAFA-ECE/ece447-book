@@ -200,6 +200,7 @@
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../labs/Lab4.html">Lab 4: GNU Radio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab5.html">Lab 5: QPSK Modulation and Demodulation</a></li>
 </ul>
 
     </div>
@@ -466,9 +467,7 @@ document.write(`
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25hCollecting numpy (from scikit-commpy)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+  Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting scipy (from scikit-commpy)
@@ -492,16 +491,14 @@ Collecting cycler&gt;=0.10 (from matplotlib-&gt;scikit-commpy)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting fonttools&gt;=4.22.0 (from matplotlib-&gt;scikit-commpy)
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading fonttools-4.60.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (112 kB)
+  Downloading fonttools-4.60.1-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (112 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting kiwisolver&gt;=1.3.1 (from matplotlib-&gt;scikit-commpy)
+  Downloading kiwisolver-1.4.9-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (6.3 kB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading kiwisolver-1.4.9-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl.metadata (6.3 kB)
-Requirement already satisfied: packaging&gt;=20.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib-&gt;scikit-commpy) (25.0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: packaging&gt;=20.0 in /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages (from matplotlib-&gt;scikit-commpy) (25.0)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pillow&gt;=8 (from matplotlib-&gt;scikit-commpy)
@@ -520,10 +517,7 @@ Downloading matplotlib-3.10.7-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x8
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/8.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━ <span class=" -Color -Color-Green">7.1/8.7 MB</span> <span class=" -Color -Color-Red">37.5 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">8.7/8.7 MB</span> <span class=" -Color -Color-Red">39.0 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">8.7/8.7 MB</span> <span class=" -Color -Color-Red">48.6 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
 ?25hDownloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (325 kB)
 Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
 </pre></div>
@@ -532,37 +526,34 @@ Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/4.8 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.8/4.8 MB</span> <span class=" -Color -Color-Red">89.0 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.8/4.8 MB</span> <span class=" -Color -Color-Red">98.6 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
 ?25hDownloading kiwisolver-1.4.9-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/1.6 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.6/1.6 MB</span> <span class=" -Color -Color-Red">89.7 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.6/1.6 MB</span> <span class=" -Color -Color-Red">102.5 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
 ?25hDownloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/16.8 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">16.8/16.8 MB</span> <span class=" -Color -Color-Red">164.6 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25h
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading pillow-11.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.6 MB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">16.8/16.8 MB</span> <span class=" -Color -Color-Red">169.4 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25hDownloading pillow-11.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.6 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/6.6 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.6/6.6 MB</span> <span class=" -Color -Color-Red">209.7 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading pyparsing-3.2.5-py3-none-any.whl (113 kB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.6/6.6 MB</span> <span class=" -Color -Color-Red">209.6 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25hDownloading pyparsing-3.2.5-py3-none-any.whl (113 kB)
+Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/37.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">37.7/37.7 MB</span> <span class=" -Color -Color-Red">259.9 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">37.7/37.7 MB</span> <span class=" -Color -Color-Red">263.0 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
 ?25hDownloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/6.3 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.3/6.3 MB</span> <span class=" -Color -Color-Red">249.1 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading mpmath-1.3.0-py3-none-any.whl (536 kB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/536.2 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">536.2/536.2 kB</span> <span class=" -Color -Color-Red">90.1 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.3/6.3 MB</span> <span class=" -Color -Color-Red">237.6 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25hDownloading mpmath-1.3.0-py3-none-any.whl (536 kB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/536.2 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">536.2/536.2 kB</span> <span class=" -Color -Color-Red">84.5 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -581,7 +572,7 @@ Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25h  Created wheel for scikit-commpy: filename=scikit_commpy-0.8.0-py3-none-any.whl size=115007 sha256=affbd071f09296e82ba6478460933ff54c32c532871babba6ad7be9d684dad0d
+?25h  Created wheel for scikit-commpy: filename=scikit_commpy-0.8.0-py3-none-any.whl size=115007 sha256=deea5e16b6a2273381db39f0e8bcb45bb2331cb2a004d25413fb146a85ad4475
   Stored in directory: /home/runner/.cache/pip/wheels/36/eb/56/f0bffa07ed968244dac624cfc6dee75474b7b451299bf54950
 Successfully built scikit-commpy
 </pre></div>
@@ -809,8 +800,7 @@ Successfully built scikit-commpy
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━ <span class=" -Color -Color-Green">10/12</span> [matplotlib]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ <span class=" -Color -Color-Green">11/12</span> [scikit-commpy]
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12/12</span> [scikit-commpy]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12/12</span> [scikit-commpy]
 ?25h
 Successfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.60.1 kiwisolver-1.4.9 matplotlib-3.10.7 mpmath-1.3.0 numpy-2.2.6 pillow-11.3.0 pyparsing-3.2.5 scikit-commpy-0.8.0 scipy-1.15.3 sympy-1.14.0
 </pre></div>
@@ -950,8 +940,8 @@ Successfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.60.1 kiwisolver
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/6f784a2bac7877751490e994dfbd49ee535007bee1609f0f28cc5c2d98b296bd.png" src="../_images/6f784a2bac7877751490e994dfbd49ee535007bee1609f0f28cc5c2d98b296bd.png" />
-<img alt="../_images/bf9c67dae8d6db84f0ee897bd2e7c6e97642f2111b7a21d8a5925af1caa05a10.png" src="../_images/bf9c67dae8d6db84f0ee897bd2e7c6e97642f2111b7a21d8a5925af1caa05a10.png" />
+<img alt="../_images/0a0472e98007c5244aa6c83c3a6f1a7b552aceb1ccf30439c2fd87893cc3fd51.png" src="../_images/0a0472e98007c5244aa6c83c3a6f1a7b552aceb1ccf30439c2fd87893cc3fd51.png" />
+<img alt="../_images/6b761a13ff3f547b04c09c9fda19595c1fe81908ae73146065cba91fbbfa8c6e.png" src="../_images/6b761a13ff3f547b04c09c9fda19595c1fe81908ae73146065cba91fbbfa8c6e.png" />
 </div>
 </div>
 <img src="images/Fig6_39.png" width="600" />
@@ -993,9 +983,9 @@ Successfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.60.1 kiwisolver
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Raised-cosine eye diagram&#39;)
 </pre></div>
 </div>
-<img alt="../_images/25c84bfc3a9f8a5ee55148c3c5daffccd42b3c619a83bbe8af8240dae8f2d5c3.png" src="../_images/25c84bfc3a9f8a5ee55148c3c5daffccd42b3c619a83bbe8af8240dae8f2d5c3.png" />
-<img alt="../_images/fefcf6f538460196af3fd9760a324adafc9535373bcb71fa2f09731a03d85a03.png" src="../_images/fefcf6f538460196af3fd9760a324adafc9535373bcb71fa2f09731a03d85a03.png" />
-<img alt="../_images/e6cee376443b6a2ae8b3418d2be9a5fbbd0e7264fa76d26ad497b4e4f415b6e7.png" src="../_images/e6cee376443b6a2ae8b3418d2be9a5fbbd0e7264fa76d26ad497b4e4f415b6e7.png" />
+<img alt="../_images/84edf4bc8832e32a3333a74a6098502756566e0bcce76256b039b9002c626024.png" src="../_images/84edf4bc8832e32a3333a74a6098502756566e0bcce76256b039b9002c626024.png" />
+<img alt="../_images/d9174a60f0fbaca68b7498a0c50e75da12459b052f3667da55b6a206a885cda7.png" src="../_images/d9174a60f0fbaca68b7498a0c50e75da12459b052f3667da55b6a206a885cda7.png" />
+<img alt="../_images/d761b89ac4b47cd636733b355626776a729c5b80e94769dc119da47a98e241b4.png" src="../_images/d761b89ac4b47cd636733b355626776a729c5b80e94769dc119da47a98e241b4.png" />
 </div>
 </div>
 </section>
@@ -1093,9 +1083,9 @@ Successfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.60.1 kiwisolver
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/2586b6e56d839524dc8bbd55d6253a092b3d2713c442288f6c187ee879645452.png" src="../_images/2586b6e56d839524dc8bbd55d6253a092b3d2713c442288f6c187ee879645452.png" />
-<img alt="../_images/abc512fb31b7b448a0863e2f3bc20149378c3c9ef4467f0c46ad9326e5052122.png" src="../_images/abc512fb31b7b448a0863e2f3bc20149378c3c9ef4467f0c46ad9326e5052122.png" />
-<img alt="../_images/e7c302dd081db1352c2151e8d86a61b592e21eba3eccaa40f931321af61e427f.png" src="../_images/e7c302dd081db1352c2151e8d86a61b592e21eba3eccaa40f931321af61e427f.png" />
+<img alt="../_images/5f72f30365e71aef42e90e95b6de4d30cea5c56040f99d189901dda2ec83184c.png" src="../_images/5f72f30365e71aef42e90e95b6de4d30cea5c56040f99d189901dda2ec83184c.png" />
+<img alt="../_images/448f30168d1c1c25c9b2e87d08b603142fa16373020e05d9af46750a33ec2f0f.png" src="../_images/448f30168d1c1c25c9b2e87d08b603142fa16373020e05d9af46750a33ec2f0f.png" />
+<img alt="../_images/e62dcfde4d8dc4de7c98ed6e7be375ddef12d7d74cf9c10e6fc30e4da20a9943.png" src="../_images/e62dcfde4d8dc4de7c98ed6e7be375ddef12d7d74cf9c10e6fc30e4da20a9943.png" />
 </div>
 </div>
 <img src="images/Fig6_41.png" width="600" />
