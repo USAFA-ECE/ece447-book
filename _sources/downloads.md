@@ -28,3 +28,6 @@ The slides on this page will be updated throughout the semester and posted as we
 | 20 | [PCM (cont'd) and Pulse Modulations](_static/ECE447_Lesson20_Fa25.pdf)  | 
 | 21 | [GNU Radio Lab](labs/Lab4)  | 
 | 22 | [Digital Communication and Line Coding](_static/ECE447_Lesson22_Fa25.pdf)  | 
+| 23 | [Digital Communication and Line Coding (cont'd)](_static/ECE447_Lesson22_Fa25.pdf)  | 
+| 24 | [Pulse Shaping & Intersymbol Interference (ISI)](_static/ECE447_Lesson24_Fa25.pdf)  | 
+| 25 | [Digital Receivers: Timing & Detection, Eye Diagrams](_static/ECE447_Lesson25_Fa25.pdf)  | 
