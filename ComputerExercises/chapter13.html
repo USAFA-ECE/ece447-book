@@ -683,13 +683,29 @@ Corrected Codeword: [1 0 1 0 0 1 1]
 <span class="g g-Whitespace">     </span><span class="mi">49</span>     <span class="n">error</span> <span class="o">=</span> <span class="n">E</span><span class="p">[</span><span class="n">idxe</span><span class="p">]</span>  <span class="c1"># look up the error pattern</span>
 <span class="g g-Whitespace">     </span><span class="mi">50</span>     <span class="n">cword</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">logical_xor</span><span class="p">(</span><span class="n">r</span><span class="p">[</span><span class="n">k1</span><span class="p">],</span> <span class="n">error</span><span class="p">)</span>  <span class="c1"># error correction</span>
 
-<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/numpy/_core/_methods.py:67,</span> in <span class="ni">_all</span><span class="nt">(a, axis, dtype, out, keepdims, where)</span>
-<span class="g g-Whitespace">     </span><span class="mi">64</span>         <span class="k">return</span> <span class="n">umr_any</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">keepdims</span><span class="p">)</span>
-<span class="g g-Whitespace">     </span><span class="mi">65</span>     <span class="k">return</span> <span class="n">umr_any</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="p">,</span> <span class="n">dtype</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">keepdims</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="n">where</span><span class="p">)</span>
-<span class="ne">---&gt; </span><span class="mi">67</span> <span class="k">def</span><span class="w"> </span><span class="nf">_all</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">out</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">keepdims</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">where</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="g g-Whitespace">     </span><span class="mi">68</span>     <span class="c1"># By default, return a boolean for any and all</span>
-<span class="g g-Whitespace">     </span><span class="mi">69</span>     <span class="k">if</span> <span class="n">dtype</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">     </span><span class="mi">70</span>         <span class="n">dtype</span> <span class="o">=</span> <span class="n">bool_dt</span>
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/numpy/_core/numeric.py:685,</span> in <span class="ni">flatnonzero</span><span class="nt">(a)</span>
+<span class="g g-Whitespace">    </span><span class="mi">646</span> <span class="nd">@array_function_dispatch</span><span class="p">(</span><span class="n">_flatnonzero_dispatcher</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">647</span> <span class="k">def</span><span class="w"> </span><span class="nf">flatnonzero</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<span class="g g-Whitespace">    </span><span class="mi">648</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="g g-Whitespace">    </span><span class="mi">649</span><span class="sd">     Return indices that are non-zero in the flattened version of a.</span>
+<span class="g g-Whitespace">    </span><span class="mi">650</span><span class="sd"> </span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">    </span><span class="mi">683</span><span class="sd"> </span>
+<span class="g g-Whitespace">    </span><span class="mi">684</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="ne">--&gt; </span><span class="mi">685</span>     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">nonzero</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ravel</span><span class="p">(</span><span class="n">a</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/numpy/_core/fromnumeric.py:1904,</span> in <span class="ni">ravel</span><span class="nt">(a, order)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1900</span> <span class="k">def</span><span class="w"> </span><span class="nf">_ravel_dispatcher</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1901</span>     <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="p">,)</span>
+<span class="ne">-&gt; </span><span class="mi">1904</span> <span class="nd">@array_function_dispatch</span><span class="p">(</span><span class="n">_ravel_dispatcher</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1905</span> <span class="k">def</span><span class="w"> </span><span class="nf">ravel</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">):</span>
+<span class="g g-Whitespace">   </span><span class="mi">1906</span><span class="w">     </span><span class="sd">&quot;&quot;&quot;Return a contiguous flattened array.</span>
+<span class="g g-Whitespace">   </span><span class="mi">1907</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">1908</span><span class="sd">     A 1-D array, containing the elements of the input, is returned.  A copy is</span>
+<span class="sd">   (...)</span>
+<span class="g g-Whitespace">   </span><span class="mi">2006</span><span class="sd"> </span>
+<span class="g g-Whitespace">   </span><span class="mi">2007</span><span class="sd">     &quot;&quot;&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">2008</span>     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">matrix</span><span class="p">):</span>
 
 <span class="ne">KeyboardInterrupt</span>: 
 </pre></div>
