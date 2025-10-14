@@ -100,16 +100,16 @@ Cell [0;32mIn[2], line 13[0m
 [1;32m     15[0m [38;5;66;03m# Generating random phases on the two frequencies[39;00m
 [1;32m     16[0m xbase1 [38;5;241m=[39m np[38;5;241m.[39mexp([38;5;241m1[39mj [38;5;241m*[39m [38;5;241m2[39m [38;5;241m*[39m np[38;5;241m.[39mpi [38;5;241m*[39m np[38;5;241m.[39mrandom[38;5;241m.[39mrand(Lh [38;5;241m*[39m n, [38;5;241m1[39m))
 
-File [0;32m/opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/ipykernel/kernelbase.py:1274[0m, in [0;36mKernel.raw_input[0;34m(self, prompt)[0m
-[1;32m   1272[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39m_allow_stdin:
-[1;32m   1273[0m     msg [38;5;241m=[39m [38;5;124m"[39m[38;5;124mraw_input was called, but this frontend does not support input requests.[39m[38;5;124m"[39m
-[0;32m-> 1274[0m     [38;5;28;01mraise[39;00m StdinNotImplementedError(msg)
-[1;32m   1275[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_input_request(
-[1;32m   1276[0m     [38;5;28mstr[39m(prompt),
-[1;32m   1277[0m     [38;5;28mself[39m[38;5;241m.[39m_parent_ident[[38;5;124m"[39m[38;5;124mshell[39m[38;5;124m"[39m],
-[1;32m   1278[0m     [38;5;28mself[39m[38;5;241m.[39mget_parent([38;5;124m"[39m[38;5;124mshell[39m[38;5;124m"[39m),
-[1;32m   1279[0m     password[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
-[1;32m   1280[0m )
+File [0;32m/opt/hostedtoolcache/Python/3.10.18/x64/lib/python3.10/site-packages/ipykernel/kernelbase.py:1472[0m, in [0;36mKernel.raw_input[0;34m(self, prompt)[0m
+[1;32m   1470[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39m_allow_stdin:
+[1;32m   1471[0m     msg [38;5;241m=[39m [38;5;124m"[39m[38;5;124mraw_input was called, but this frontend does not support input requests.[39m[38;5;124m"[39m
+[0;32m-> 1472[0m     [38;5;28;01mraise[39;00m StdinNotImplementedError(msg)
+[1;32m   1473[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_input_request(
+[1;32m   1474[0m     [38;5;28mstr[39m(prompt),
+[1;32m   1475[0m     [38;5;28mself[39m[38;5;241m.[39m_shell_parent_ident[38;5;241m.[39mget(),
+[1;32m   1476[0m     [38;5;28mself[39m[38;5;241m.[39mget_parent([38;5;124m"[39m[38;5;124mshell[39m[38;5;124m"[39m),
+[1;32m   1477[0m     password[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
+[1;32m   1478[0m )
 
 [0;31mStdinNotImplementedError[0m: raw_input was called, but this frontend does not support input requests.
 
