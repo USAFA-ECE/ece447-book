@@ -35,21 +35,21 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 20 | PCM (cont'd) & pulse modulations | L&D 5.7 |  | [HW3](HW/HW3) |
 | 21 | GNU Radio Lab | [Lab 4 Description](labs/Lab4) |  [Lab 4](labs/Lab4), [HW4](HW/HW4)  |  |
 | 22 | Digital comm & line coding | L&D 6.1-6.2 |  |  |
-| 23 | Pulse shaping & intersymbol interference (ISI) | L&D 6.3 |  | [HW4](HW/HW4) (2359 on T23) |
-| 24 | Digital receivers: timing & detection, eye diagrams | L&D 6.5.2-6.5.3, 6.6 | | |
-| 25 | M-ary digital modulation | L&D 6.7 |  | [Lab 4](labs/Lab4) |
-| 26 | SDR Lab | Lab 5 Description |  Lab 5  |  |
-| 27 | Digital carrier modulation | L&D 6.8-6.9 |  |  |
-| 28 | Probability, Part 1 | L&D 7.1-7.3 |  |  |
-| 29 | Probability, Part 2 | L&D 7.4-7.7 |  |  |
-| 30 | Random processes | L&D 8-8.4 (at least) |  |  |
-| 31 | SDR Lab | [Lab 7 Description](labs/Lab7) |  Lab 7  | Lab 6 |
-| 32 | Flex day |  |  |  |
+| 23 | Digital comm & line coding (cont'd) | L&D 6.1-6.2 |  | [HW4](HW/HW4) (2359 on T23) |
+| 24 | Pulse shaping & intersymbol interference (ISI) | L&D 6.3 |  | |
+| 25 | Digital receivers: timing & detection, eye diagrams | L&D 6.5.2-6.5.3, 6.6 | | [Lab 4](labs/Lab4) |
+| 26 | GNU Radio Lab | [Lab 5 Description](labs/Lab5.md) | [Lab 5](labs/Lab5.md) |  |
+| 27 | M-ary digital modulation | L&D 6.7 |  |  |
+| 28 | Digital carrier modulation | L&D 6.8-6.9 |  |  |
+| 29 | Probability, Part 1 | L&D 7.1-7.3 |  |  |
+| 30 | Probability, Part 2 | L&D 7.4-7.7 |  |  |
+| 31 | Random processes | L&D 8-8.4 (at least) |  |  |
+| 32 | SDR Lab | Lab 6 Description |  Lab 6  | [Lab 5](labs/Lab5.md) |
 | 33 | GR 2 |  |  |  |
 | 34 | Matched filter | L&D 9.1 |  |  |
 | 35 | Binary system performance, Part 1 | L&D 9.2 |  |  |
 | 36 | Binary system performance, Part 2 | L&D 9.2, 9.3.3 |  |  |  |
-| 37 | SDR Lab | [Lab 8 Description](labs/Lab8) |  Lab 8  | Lab 7 |
+| 37 | SDR Lab | Lab 7 Description |  Lab 7  | Lab 6 |
 | 38 | Error correction: parity, CRC, & Hamming codes | L&D 12.3.2, 13.1-13.3 |  |  |
 | 39 | OFDM, MIMO, CDMA | Supplemental (need to add) |  |  |
-| 40 | Course review |  |  | Lab 8 |
+| 40 | Course review |  |  | Lab 7 |
