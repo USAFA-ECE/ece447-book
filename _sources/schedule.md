@@ -36,10 +36,10 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 21 | GNU Radio Lab | [Lab 4 Description](labs/Lab4) |  [Lab 4](labs/Lab4), [HW4](HW/HW4)  |  |
 | 22 | Digital comm & line coding | L&D 6.1-6.2 |  |  |
 | 23 | Digital comm & line coding (cont'd) | L&D 6.1-6.2 |  | [HW4](HW/HW4) (2359 on T23) |
-| 24 | Pulse shaping & intersymbol interference (ISI) | L&D 6.3 |  | |
+| 24 | Pulse shaping & intersymbol interference (ISI) | L&D 6.3 | [HW5](HW/HW5) | |
 | 25 | Digital receivers: timing & detection, eye diagrams | L&D 6.5.2-6.5.3, 6.6 | | [Lab 4](labs/Lab4) |
 | 26 | GNU Radio Lab | [Lab 5 Description](labs/Lab5.md) | [Lab 5](labs/Lab5.md) |  |
-| 27 | M-ary digital modulation | L&D 6.7 |  |  |
+| 27 | M-ary digital modulation | L&D 6.7 |  | [HW5](HW/HW5) |
 | 28 | Digital carrier modulation | L&D 6.8-6.9 |  |  |
 | 29 | Probability, Part 1 | L&D 7.1-7.3 |  |  |
 | 30 | Probability, Part 2 | L&D 7.4-7.7 |  |  |
