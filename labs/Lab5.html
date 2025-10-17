@@ -57,6 +57,8 @@
     <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/Lab5';</script>
     <link rel="icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -399,7 +401,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-31-oct-lesson-30-by-2359-on-gradescope">Due NLT 31 Oct (Lesson 30) by 2359 on Gradescope</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qpsk-communication-system-still-completing-this-section-of-the-lab">QPSK Communication System (still completing this section of the lab)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dqpsk-communication-system">DQPSK Communication System</a></li>
 </ul>
             </nav>
         </div>
@@ -418,7 +420,7 @@ document.write(`
 </section>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
-<p>So far we’ve looked at AM and FM signals and completed some basic GNU Radio Companion tutorials to help us better understand filtering and sample rates. In this lab we will shift to a digital modulation technique called Quadrature Phase Shift Keying (QPSK). We will again use one of the tutorials from the GNU Radio Wiki page. This tutorial walks you through most of the communication chain from source to sink, with a special emphasis on signal distortion and channel impairments. You have been learning about ISI and timing errors in the past few lessons. In this lab you will implement a system that incorporates those errors <em>and</em> ways to address them. You will also use eye diagrams to subjectively evaluate the system’s effectiveness.</p>
+<p>So far we’ve looked at AM and FM signals and completed some basic GNU Radio Companion tutorials to help us better understand filtering and sample rates. In this lab we will shift to a digital modulation technique called Differential Quadrature Phase Shift Keying (DQPSK). We will again use one of the tutorials from the GNU Radio Wiki page. This tutorial walks you through most of the communication chain from source to sink, with a special emphasis on signal distortion and channel impairments. You have been learning about ISI and timing errors in the past few lessons. In this lab you will implement a system that incorporates those errors <em>and</em> ways to address them. You will also use eye diagrams to subjectively evaluate the system’s effectiveness.</p>
 </section>
 <section id="aims-of-the-lab">
 <h2>Aims of the Lab<a class="headerlink" href="#aims-of-the-lab" title="Link to this heading">#</a></h2>
@@ -429,9 +431,29 @@ document.write(`
 <li><p>Provide experience using eye diagrams.</p></li>
 </ul>
 </section>
-<section id="qpsk-communication-system-still-completing-this-section-of-the-lab">
-<h2>QPSK Communication System (still completing this section of the lab)<a class="headerlink" href="#qpsk-communication-system-still-completing-this-section-of-the-lab" title="Link to this heading">#</a></h2>
-<p>Complete the tutorial at this link: <a class="reference external" href="https://wiki.gnuradio.org/index.php?title=QPSK_Mod_and_Demod">https://wiki.gnuradio.org/index.php?title=QPSK_Mod_and_Demod</a></p>
+<section id="dqpsk-communication-system">
+<h2>DQPSK Communication System<a class="headerlink" href="#dqpsk-communication-system" title="Link to this heading">#</a></h2>
+<p>Navigate to the tutorial at this link: <a class="reference external" href="https://wiki.gnuradio.org/index.php?title=QPSK_Mod_and_Demod">https://wiki.gnuradio.org/index.php?title=QPSK_Mod_and_Demod</a>. You will work through thsi tutorial to build a “complete” system from bits, to transmitted waveform through a channel, to a receiver accomplishing time synchronization and equalization, to decoding, and back to bits again. As you work through the tutorial, make sure you read everything and build the flowgraph from scratch for practice (don’t just download the completed product!). Also, you must accomplish the following additional tasks and answer the following questions.</p>
+<ol class="arabic">
+<li><p>In the Constellation Modulator hierarchical block, there is a parameter called Excess Bandwidth. This is equivalent to the roll-off factor <span class="math notranslate nohighlight">\(r\)</span> we learned about in class. Because the block uses extra samples per symbol, you divide the sample rate <span class="math notranslate nohighlight">\(R_b\)</span> by the number of samples/symbol to get a symbol rate <span class="math notranslate nohighlight">\(R_s\)</span>. Then you can use <span class="math notranslate nohighlight">\(R_s\)</span> just like we would use <span class="math notranslate nohighlight">\(R_b\)</span> in the textbook to find total transmit bandwidth <span class="math notranslate nohighlight">\(B_T\)</span> (Eq. 6.33 in the textbook).</p>
+<p>Calculate <span class="math notranslate nohighlight">\(B_T\)</span> for each of the five excess bandwidth values used in the Excess Bandwidth section of the tutorial. Do your results match what is shown in the tutorial’s QT GUI Plot? Include the answers in your lab write up.</p>
+</li>
+<li><p>What is an RRC filter? Where do we use it in the communication system described in the tutorial? Why?</p></li>
+<li><p>List the three channel impairments added by the Channel Model block.</p></li>
+<li><p>When you get to the Polyphase Clock Sync block, jump down to the <strong>Using the Symbol Sync block</strong> section at the bottom of the tutorial. Click on the <a class="reference external" href="https://wiki.gnuradio.org/index.php?title=Symbol_Sync">Symbol_Sync</a> hyperlink to read through the 4 functions the block performs.</p></li>
+<li><p>Jump back to just after the Polyphase Clock Sync section, and pick up where you left off with the Multipath section.</p></li>
+<li><p>Note how the flowgraph uses Virtual Sink and Virtual Source to make the flowgraph cleaner and easy to follow.</p></li>
+<li><p>Why does the constellation diagram at the output of the equalizer look like a circle instead of the four, distinct symbols we started off with?</p></li>
+<li><p>The Costas Loop is a PLL (phase locked loop)-based circuit used for carrier frequency recovery and is especially useful for DSB-SC or phase modulated signals.</p></li>
+<li><p>After the Constellation Decoder, Differential Decoder, and Map, you are ready to unpack your received bits. The flowgraph provided in the tutorial graphically displays the received bits (Data 0) with the transmitted bits (Data 1). Do the two perfectly line up? Why not? What value of delay leads to perfect alignment? (Hint: it isn’t what the tutorial says it is!)</p></li>
+<li><p>Insert a QT GUI Eye Sink and connect it to the Costas Loop output. Set Samples per Symbol to 1 and turn on the Autoscale. Run your flowgraph and see how changing the Noise Voltage, Timing Offset, and Frequency Offset affects the eye in your diagram.</p>
+<ul class="simple">
+<li><p>Change the values for time_offset to start at 0.7 and stop at 1.1 in increments of 0.01. What do you notice about the system performance as you sweep through these time offset values?</p></li>
+<li><p>Return the noise and time offset values back to their original values. Now just change the frequency offset values. At what frequency offset value (plus or minus) does your eye completely close?</p></li>
+<li><p>Comment on the importance of time and frequency synchronization in a digital communication system.</p></li>
+</ul>
+</li>
+</ol>
 </section>
 </section>
 
@@ -493,7 +515,7 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-31-oct-lesson-30-by-2359-on-gradescope">Due NLT 31 Oct (Lesson 30) by 2359 on Gradescope</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#qpsk-communication-system-still-completing-this-section-of-the-lab">QPSK Communication System (still completing this section of the lab)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dqpsk-communication-system">DQPSK Communication System</a></li>
 </ul>
   </nav></div>
 
