@@ -44,4 +44,10 @@ Navigate to the tutorial at this link: https://wiki.gnuradio.org/index.php?title
     - Return the noise and time offset values back to their original values. Now just change the frequency offset values. At what frequency offset value (plus or minus) does your eye completely close?
     - Comment on the importance of time and frequency synchronization in a digital communication system.
 
+11. Include a screenshot of your final flowgraph in your writeup.
+
+## Lab Report
+
+Submit a neat, single PDF to Gradescope addressing all of the questions and directions listed above.
+
 
