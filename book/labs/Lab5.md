@@ -46,6 +46,8 @@ Navigate to the tutorial at this link: https://wiki.gnuradio.org/index.php?title
 
 11. Include a screenshot of your final flowgraph in your writeup.
 
+12. Summarize in a short paragraph what Dr. Rogers covered in class.
+
 ## Lab Report
 
 Submit a neat, single PDF to Gradescope addressing all of the questions and directions listed above.
