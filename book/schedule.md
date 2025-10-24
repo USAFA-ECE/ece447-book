@@ -40,10 +40,10 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 25 | Digital receivers: timing & detection, eye diagrams | L&D 6.5.2-6.5.3, 6.6 | | [Lab 4](labs/Lab4) |
 | 26 | GNU Radio Lab | [Lab 5 Description](labs/Lab5.md) | [Lab 5](labs/Lab5.md) |  |
 | 27 | M-ary digital modulation | L&D 6.7 |  | [HW5](HW/HW5) |
-| 28 | Digital carrier modulation | L&D 6.8-6.9 |  |  |
+| 28 | Digital carrier modulation | L&D 6.8-6.9 | [HW6](HW/HW6) |  |
 | 29 | Probability, Part 1 | L&D 7.1-7.3 |  |  |
 | 30 | Probability, Part 2 | L&D 7.4-7.7 |  |  |
-| 31 | Random processes | L&D 8-8.4 (at least) |  |  |
+| 31 | Random processes | L&D 8-8.4 (at least) |  | [HW6](HW/HW6) |
 | 32 | SDR Lab | Lab 6 Description |  Lab 6  | [Lab 5](labs/Lab5.md) |
 | 33 | GR 2 |  |  |  |
 | 34 | Matched filter | L&D 9.1 |  |  |
