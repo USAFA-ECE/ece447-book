@@ -34,3 +34,5 @@ The slides on this page will be updated throughout the semester and posted as we
 | 26 | [GNU Radio Lab 5](labs/Lab5)  | 
 | 27 | [M-ary Baseband Signaling](_static/ECE447_Lesson27_Fa25.pdf)  | 
 | 28 | [Digital Carrier Modulation](_static/ECE447_Lesson28_Fa25.pdf)  | 
+| 29 | [Probability](_static/ECE447_Lesson29_Fa25.pdf)  | 
+| 30 | [Probability](_static/ECE447_Lesson30_Fa25.pdf)  | 
