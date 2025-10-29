@@ -1,6 +1,6 @@
 # Lab 5: QPSK Modulation and Demodulation
 
-## Due NLT 31 Oct (Lesson 30) by 2359 on Gradescope
+## Due NLT 6 Nov (Lesson 32) by 2359 on Gradescope
 
 ## Overview
 
