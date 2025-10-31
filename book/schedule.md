@@ -43,9 +43,9 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 28 | Digital carrier modulation | L&D 6.8-6.9 | [HW6](HW/HW6) |  |
 | 29 | Probability, Part 1 | L&D 7.1-7.3 |  |  |
 | 30 | Probability, Part 2 | L&D 7.4-7.7 |  |  |
-| 31 | Random processes | L&D 8-8.4 (at least) |  | [HW6](HW/HW6) |
+| 31 | Random processes | L&D 8-8.4 (at least) | [HW7](HW/HW7) | [HW6](HW/HW6) |
 | 32 | SDR Lab | Lab 6 Description |  Lab 6  | [Lab 5](labs/Lab5.md) |
-| 33 | Matched filters | L&D 9.1 |  |  |
+| 33 | Matched filters | L&D 9.1 |  | [HW7](HW/HW7) |
 | 34 | GR 2 | Covering Lsns 18-30 (Chapters 5-7) |  |  |
 | 35 | Binary system performance, Part 1 | L&D 9.2 |  |  |
 | 36 | Binary system performance, Part 2 | L&D 9.2, 9.3.3 |  |  |  |
