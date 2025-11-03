@@ -24,15 +24,10 @@ jobs:
 
       - name: Install dependencies
         run: pip install -r requirements.txt
-#             pip install jupyter-book
 
       # Build the book - adding more verboe detail
       - name: Build the book
-        run: jupyter-book build -vvv book/
-#        continue-on-error: false
-
-#      - name: List build output
-#        run: ls -R book/_build/html
+        run: jupyter-book build book/
 
       - name: Upload book as artifact
         uses: actions/upload-artifact@v4
