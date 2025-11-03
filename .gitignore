@@ -6,7 +6,7 @@ venv/
 
 # HTML files created by jupyter-book build
 # These will be built automatically by github actions
-# **/_build/
+**/_build/
 
 # vscode
 .vscode/
