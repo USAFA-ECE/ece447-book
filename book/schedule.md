@@ -49,9 +49,7 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 34 | GR 2 | Covering Lsns 18-30 (Chapters 5-7) |  |  |
 | 35 | Matched filters & binary system performance, Part 1 | L&D 9.1-9.2 | HW8 |  |
 | 36 | Binary system performance, Part 2 | L&D 9.2, 9.3.3 |  | Lab 6 |
-<!-- | 37 | Error correction: parity, CRC, & Hamming codes | L&D 12.3.2, 13.1-13.3 |  |  |
-| 38 | MATLAB Lab | Lab 7 Description | Lab 7 |  | -->
-| 37 | SDR Lab | Lab 7 Description |  Lab 7  | Lab 6 |
-| 38 | Error correction: parity, CRC, & Hamming codes | L&D 12.3.2, 13.1-13.3 |  |  |
+| 37 | Error correction: parity, CRC, & Hamming codes | L&D 12.3.2, 13.1-13.3 |  |  |
+| 38 | MATLAB Lab | Lab 7 Description | Lab 7 |  |
 | 39 | OFDM, MIMO, CDMA | Supplemental (need to add) |  | HW8 |
 | 40 | Course review |  |  | Lab 7 |
