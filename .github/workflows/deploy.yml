@@ -26,9 +26,9 @@ jobs:
         run: pip install -r requirements.txt
 #             pip install jupyter-book
 
-      # Build the book
+      # Build the book - adding more verboe detail
       - name: Build the book
-        run: jupyter-book build book/
+        run: jupyter-book build -vvv book/
 #        continue-on-error: false
 
 #      - name: List build output
