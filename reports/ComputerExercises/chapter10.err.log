@@ -1,0 +1,108 @@
+Traceback (most recent call last):
+  File "/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/nbclient/client.py", line 1305, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/nbclient/client.py", line 705, in async_execute
+    await self.async_execute_cell(
+  File "/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/nbclient/client.py", line 1058, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/nbclient/client.py", line 914, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+''' Save the following as ExFHSS.py
+This program provides simulation for FHSS signaling using non-coherent detection
+of FSK. The jammer will jam 1 of the L frequency bands and can be turned on or
+off by inputting jamming=1 or 0 Non-coherent MFSK detection only needs to
+compare the magnitude of each frequency bin.'''
+n = 10000   # Number of data symbols in the simulation
+L = 8       # Number of frequency bands
+Lh = 1      # Number of hops per symbol (bit)
+m = 1       # Number of users
+s_data = np.round(np.random.rand(n, m))  # Generating information bits
+
+# Turn partial band jamming on or off to test BER via keyboard
+jamming = int(input('jamming=? (Enter 1 for Yes, 0 for No)'))
+
+# Generating random phases on the two frequencies
+xbase1 = np.exp(1j * 2 * np.pi * np.random.rand(Lh * n, 1))
+xbase0 = np.exp(1j * 2 * np.pi * np.random.rand(Lh * n, 1))
+# Modulating two orthogonal frequencies
+xmodsig = np.concatenate([np.kron(s_data, np.ones((Lh, 1))) * xbase1,
+                      np.kron(1 - s_data, np.ones((Lh, 1))) * xbase0], axis=1)
+del xbase0, xbase1
+# Generating a random hopping sequence n * Lh long
+Phop = np.random.randint(0, L, Lh * n)
+Xsiga =coo_matrix((xmodsig[:,0],(np.arange(Lh*n),Phop)),shape=(Lh*n,L)).toarray()
+Xsigb =coo_matrix((xmodsig[:,1],(np.arange(Lh*n),Phop)),shape=(Lh*n,L)).toarray()
+# Generating noise sequences for both frequency channels
+noise1 = np.random.randn(Lh * n) + 1j * np.random.randn(Lh * n)
+noise2 = np.random.randn(Lh * n) + 1j * np.random.randn(Lh * n)
+Nsiga = coo_matrix((noise1, (np.arange(Lh*n), Phop)), shape=(Lh*n, L)).toarray()
+Nsigb = coo_matrix((noise2, (np.arange(Lh*n), Phop)), shape=(Lh*n, L)).toarray()
+del noise1, noise2, xmodsig
+
+BER = []; BER_az = []; Eb2N = []   # building output arrays for plotting
+# Add a jammed channel (randomly picked)
+if jamming:
+    nch = np.random.randint(0, L)
+    Xsiga[:, nch] = 0;     Xsigb[:, nch] = 0
+    Nsiga[:, nch] = 0;     Nsigb[:, nch] = 0
+# Generating the channel noise (AWGN)
+for i in range(10):
+    Eb2N.append(i+1)  # (Eb/N in dB)
+    Eb2N_num = 10**(Eb2N[i]/10)  # Eb/N in numeral
+    Var_n = 1/(2*Eb2N_num)  # 1/SNR is the noise variance
+    signois = np.sqrt(Var_n)  # standard deviation
+    ych1 = Xsiga + signois * Nsiga  # AWGN complex channels
+    ych2 = Xsigb + signois * Nsigb  # AWGN channels
+# Non-coherent detection
+    dec = np.zeros(n)
+    for kk in range(n):
+        Yvec1 = np.zeros(Lh,dtype=complex); Yvec2 = np.zeros(Lh,dtype=complex)
+        for kk2 in range(Lh):
+            Yvec1[kk2] = ych1[kk*Lh+kk2, Phop[kk*Lh+kk2]]
+            Yvec2[kk2] = ych2[kk*Lh+kk2, Phop[kk*Lh+kk2]]
+        ydim1 = Yvec1.dot(np.conjugate(Yvec1))
+        ydim2 = Yvec2.dot(np.conjugate(Yvec2))
+        dec[kk] = (ydim1 > ydim2)
+
+    BER.append(np.sum(dec != s_data.flatten()) / n); #calculating BER
+    BER_az.append(0.5*np.exp(-Eb2N_num/2));   # Compare against analytical BER
+BER = np.array(BER)
+BER[BER==0] = np.nan # replace 0 with 'nan' to avoid 0 when plotting in logscale
+figber=plt.semilogy(Eb2N,BER_az,'b-',Eb2N,BER,'m-o',linewidth=2)
+plt.legend(['Analytical BER w/o jamming', 'FHSS simulation (L=8)'])
+fx=plt.xlabel(r'$E_b/N$ (dB)'); plt.grid()
+fy=plt.ylabel('Bit error rate',fontsize=11)
+plt.xlim(1,10);  plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mStdinNotImplementedError[0m                  Traceback (most recent call last)
+Cell [0;32mIn[2], line 13[0m
+[1;32m     10[0m s_data [38;5;241m=[39m np[38;5;241m.[39mround(np[38;5;241m.[39mrandom[38;5;241m.[39mrand(n, m))  [38;5;66;03m# Generating information bits[39;00m
+[1;32m     12[0m [38;5;66;03m# Turn partial band jamming on or off to test BER via keyboard[39;00m
+[0;32m---> 13[0m jamming [38;5;241m=[39m [38;5;28mint[39m([38;5;28;43minput[39;49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43mjamming=? (Enter 1 for Yes, 0 for No)[39;49m[38;5;124;43m'[39;49m[43m)[49m)
+[1;32m     15[0m [38;5;66;03m# Generating random phases on the two frequencies[39;00m
+[1;32m     16[0m xbase1 [38;5;241m=[39m np[38;5;241m.[39mexp([38;5;241m1[39mj [38;5;241m*[39m [38;5;241m2[39m [38;5;241m*[39m np[38;5;241m.[39mpi [38;5;241m*[39m np[38;5;241m.[39mrandom[38;5;241m.[39mrand(Lh [38;5;241m*[39m n, [38;5;241m1[39m))
+
+File [0;32m/opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/ipykernel/kernelbase.py:1395[0m, in [0;36mKernel.raw_input[0;34m(self, prompt)[0m
+[1;32m   1393[0m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m [38;5;28mself[39m[38;5;241m.[39m_allow_stdin:
+[1;32m   1394[0m     msg [38;5;241m=[39m [38;5;124m"[39m[38;5;124mraw_input was called, but this frontend does not support input requests.[39m[38;5;124m"[39m
+[0;32m-> 1395[0m     [38;5;28;01mraise[39;00m StdinNotImplementedError(msg)
+[1;32m   1396[0m [38;5;28;01mreturn[39;00m [38;5;28mself[39m[38;5;241m.[39m_input_request(
+[1;32m   1397[0m     [38;5;28mstr[39m(prompt),
+[1;32m   1398[0m     [38;5;28mself[39m[38;5;241m.[39m_get_shell_context_var([38;5;28mself[39m[38;5;241m.[39m_shell_parent_ident),
+[1;32m   1399[0m     [38;5;28mself[39m[38;5;241m.[39mget_parent([38;5;124m"[39m[38;5;124mshell[39m[38;5;124m"[39m),
+[1;32m   1400[0m     password[38;5;241m=[39m[38;5;28;01mFalse[39;00m,
+[1;32m   1401[0m )
+
+[0;31mStdinNotImplementedError[0m: raw_input was called, but this frontend does not support input requests.
+

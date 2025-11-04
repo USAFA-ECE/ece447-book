@@ -1,0 +1,1079 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>10.9.1 Computer Exercise 10.1: FHSS FSK under Partial Band Jamming &#8212; ECE447 Course Webpage</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ComputerExercises/chapter10';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="ECE447 Course Webpage - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="ECE447 Course Webpage - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to ECE447, Communication Systems!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Course Schedule</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Downloads</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Slides and Downloads</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW/SkillsReview.html">Skills Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW1.html">Homework 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW2.html">Homework 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab4.html">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW5.html">Homework 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab5.html">Lab 5: QPSK Modulation and Demodulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW6.html">Homework 6</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/usafa-ece/jupyterbook-template/blob/main/book/ComputerExercises/chapter10.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2FComputerExercises/chapter10.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ComputerExercises/chapter10.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>10.9.1 Computer Exercise 10.1: FHSS FSK under Partial Band Jamming</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">10.9.1 Computer Exercise 10.1: FHSS FSK under Partial Band Jamming</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-10-2-dsss-transmission-of-qpsk">10.9.2 Computer Exercise 10.2: DSSS Transmission of QPSK</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-10-3-multiuser-ds-cdma-system">10.9.3 Computer Exercise 10.3: Multiuser DS-CDMA System</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-10-4-multiuser-cdma-detection-in-near-far-environment">10.9.4 Computer Exercise 10.4: Multiuser CDMA Detection in Near-Far Environment</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="computer-exercise-10-1-fhss-fsk-under-partial-band-jamming">
+<h1>10.9.1 Computer Exercise 10.1: FHSS FSK under Partial Band Jamming<a class="headerlink" href="#computer-exercise-10-1-fhss-fsk-under-partial-band-jamming" title="Permalink to this heading">#</a></h1>
+<p><span style="color:red"> <b>* Note: Refer to the description from textbook Section 10.9 *</b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.sparse</span><span class="w"> </span><span class="kn">import</span> <span class="n">coo_matrix</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">welch</span><span class="p">,</span> <span class="n">get_window</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">erfc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39; Save the following as ExFHSS.py</span>
+<span class="sd">This program provides simulation for FHSS signaling using non-coherent detection</span>
+<span class="sd">of FSK. The jammer will jam 1 of the L frequency bands and can be turned on or</span>
+<span class="sd">off by inputting jamming=1 or 0 Non-coherent MFSK detection only needs to</span>
+<span class="sd">compare the magnitude of each frequency bin.&#39;&#39;&#39;</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">10000</span>   <span class="c1"># Number of data symbols in the simulation</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mi">8</span>       <span class="c1"># Number of frequency bands</span>
+<span class="n">Lh</span> <span class="o">=</span> <span class="mi">1</span>      <span class="c1"># Number of hops per symbol (bit)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="mi">1</span>       <span class="c1"># Number of users</span>
+<span class="n">s_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>  <span class="c1"># Generating information bits</span>
+
+<span class="c1"># Turn partial band jamming on or off to test BER via keyboard</span>
+<span class="n">jamming</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;jamming=? (Enter 1 for Yes, 0 for No)&#39;</span><span class="p">))</span>
+
+<span class="c1"># Generating random phases on the two frequencies</span>
+<span class="n">xbase1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Lh</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">xbase0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Lh</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># Modulating two orthogonal frequencies</span>
+<span class="n">xmodsig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">concatenate</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">s_data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">Lh</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">*</span> <span class="n">xbase1</span><span class="p">,</span>
+                      <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">s_data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">Lh</span><span class="p">,</span> <span class="mi">1</span><span class="p">)))</span> <span class="o">*</span> <span class="n">xbase0</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="k">del</span> <span class="n">xbase0</span><span class="p">,</span> <span class="n">xbase1</span>
+<span class="c1"># Generating a random hopping sequence n * Lh long</span>
+<span class="n">Phop</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">Lh</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">Xsiga</span> <span class="o">=</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">xmodsig</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Lh</span><span class="o">*</span><span class="n">n</span><span class="p">),</span><span class="n">Phop</span><span class="p">)),</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Lh</span><span class="o">*</span><span class="n">n</span><span class="p">,</span><span class="n">L</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">Xsigb</span> <span class="o">=</span><span class="n">coo_matrix</span><span class="p">((</span><span class="n">xmodsig</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Lh</span><span class="o">*</span><span class="n">n</span><span class="p">),</span><span class="n">Phop</span><span class="p">)),</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Lh</span><span class="o">*</span><span class="n">n</span><span class="p">,</span><span class="n">L</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="c1"># Generating noise sequences for both frequency channels</span>
+<span class="n">noise1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Lh</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Lh</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">noise2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Lh</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Lh</span> <span class="o">*</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">Nsiga</span> <span class="o">=</span> <span class="n">coo_matrix</span><span class="p">((</span><span class="n">noise1</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Lh</span><span class="o">*</span><span class="n">n</span><span class="p">),</span> <span class="n">Phop</span><span class="p">)),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Lh</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">L</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="n">Nsigb</span> <span class="o">=</span> <span class="n">coo_matrix</span><span class="p">((</span><span class="n">noise2</span><span class="p">,</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">Lh</span><span class="o">*</span><span class="n">n</span><span class="p">),</span> <span class="n">Phop</span><span class="p">)),</span> <span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="n">Lh</span><span class="o">*</span><span class="n">n</span><span class="p">,</span> <span class="n">L</span><span class="p">))</span><span class="o">.</span><span class="n">toarray</span><span class="p">()</span>
+<span class="k">del</span> <span class="n">noise1</span><span class="p">,</span> <span class="n">noise2</span><span class="p">,</span> <span class="n">xmodsig</span>
+
+<span class="n">BER</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">BER_az</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[]</span>   <span class="c1"># building output arrays for plotting</span>
+<span class="c1"># Add a jammed channel (randomly picked)</span>
+<span class="k">if</span> <span class="n">jamming</span><span class="p">:</span>
+    <span class="n">nch</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">L</span><span class="p">)</span>
+    <span class="n">Xsiga</span><span class="p">[:,</span> <span class="n">nch</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>     <span class="n">Xsigb</span><span class="p">[:,</span> <span class="n">nch</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">Nsiga</span><span class="p">[:,</span> <span class="n">nch</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>     <span class="n">Nsigb</span><span class="p">[:,</span> <span class="n">nch</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="c1"># Generating the channel noise (AWGN)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (Eb/N in dB)</span>
+    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Eb2N_num</span><span class="p">)</span>  <span class="c1"># 1/SNR is the noise variance</span>
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="p">)</span>  <span class="c1"># standard deviation</span>
+    <span class="n">ych1</span> <span class="o">=</span> <span class="n">Xsiga</span> <span class="o">+</span> <span class="n">signois</span> <span class="o">*</span> <span class="n">Nsiga</span>  <span class="c1"># AWGN complex channels</span>
+    <span class="n">ych2</span> <span class="o">=</span> <span class="n">Xsigb</span> <span class="o">+</span> <span class="n">signois</span> <span class="o">*</span> <span class="n">Nsigb</span>  <span class="c1"># AWGN channels</span>
+<span class="c1"># Non-coherent detection</span>
+    <span class="n">dec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">kk</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+        <span class="n">Yvec1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Lh</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">);</span> <span class="n">Yvec2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">Lh</span><span class="p">,</span><span class="n">dtype</span><span class="o">=</span><span class="nb">complex</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">kk2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Lh</span><span class="p">):</span>
+            <span class="n">Yvec1</span><span class="p">[</span><span class="n">kk2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ych1</span><span class="p">[</span><span class="n">kk</span><span class="o">*</span><span class="n">Lh</span><span class="o">+</span><span class="n">kk2</span><span class="p">,</span> <span class="n">Phop</span><span class="p">[</span><span class="n">kk</span><span class="o">*</span><span class="n">Lh</span><span class="o">+</span><span class="n">kk2</span><span class="p">]]</span>
+            <span class="n">Yvec2</span><span class="p">[</span><span class="n">kk2</span><span class="p">]</span> <span class="o">=</span> <span class="n">ych2</span><span class="p">[</span><span class="n">kk</span><span class="o">*</span><span class="n">Lh</span><span class="o">+</span><span class="n">kk2</span><span class="p">,</span> <span class="n">Phop</span><span class="p">[</span><span class="n">kk</span><span class="o">*</span><span class="n">Lh</span><span class="o">+</span><span class="n">kk2</span><span class="p">]]</span>
+        <span class="n">ydim1</span> <span class="o">=</span> <span class="n">Yvec1</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">Yvec1</span><span class="p">))</span>
+        <span class="n">ydim2</span> <span class="o">=</span> <span class="n">Yvec2</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">conjugate</span><span class="p">(</span><span class="n">Yvec2</span><span class="p">))</span>
+        <span class="n">dec</span><span class="p">[</span><span class="n">kk</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">ydim1</span> <span class="o">&gt;</span> <span class="n">ydim2</span><span class="p">)</span>
+
+    <span class="n">BER</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dec</span> <span class="o">!=</span> <span class="n">s_data</span><span class="o">.</span><span class="n">flatten</span><span class="p">())</span> <span class="o">/</span> <span class="n">n</span><span class="p">);</span> <span class="c1">#calculating BER</span>
+    <span class="n">BER_az</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Eb2N_num</span><span class="o">/</span><span class="mi">2</span><span class="p">));</span>   <span class="c1"># Compare against analytical BER</span>
+<span class="n">BER</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">BER</span><span class="p">)</span>
+<span class="n">BER</span><span class="p">[</span><span class="n">BER</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="c1"># replace 0 with &#39;nan&#39; to avoid 0 when plotting in logscale</span>
+<span class="n">figber</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER_az</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER</span><span class="p">,</span><span class="s1">&#39;m-o&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Analytical BER w/o jamming&#39;</span><span class="p">,</span> <span class="s1">&#39;FHSS simulation (L=8)&#39;</span><span class="p">])</span>
+<span class="n">fx</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">fy</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Bit error rate&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">StdinNotImplementedError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="n">line</span> <span class="mi">13</span>
+<span class="g g-Whitespace">     </span><span class="mi">10</span> <span class="n">s_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">m</span><span class="p">))</span>  <span class="c1"># Generating information bits</span>
+<span class="g g-Whitespace">     </span><span class="mi">12</span> <span class="c1"># Turn partial band jamming on or off to test BER via keyboard</span>
+<span class="ne">---&gt; </span><span class="mi">13</span> <span class="n">jamming</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s1">&#39;jamming=? (Enter 1 for Yes, 0 for No)&#39;</span><span class="p">))</span>
+<span class="g g-Whitespace">     </span><span class="mi">15</span> <span class="c1"># Generating random phases on the two frequencies</span>
+<span class="g g-Whitespace">     </span><span class="mi">16</span> <span class="n">xbase1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Lh</span> <span class="o">*</span> <span class="n">n</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+
+<span class="nn">File /opt/hostedtoolcache/Python/3.10.19/x64/lib/python3.10/site-packages/ipykernel/kernelbase.py:1395,</span> in <span class="ni">Kernel.raw_input</span><span class="nt">(self, prompt)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1393</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">_allow_stdin</span><span class="p">:</span>
+<span class="g g-Whitespace">   </span><span class="mi">1394</span>     <span class="n">msg</span> <span class="o">=</span> <span class="s2">&quot;raw_input was called, but this frontend does not support input requests.&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1395</span>     <span class="k">raise</span> <span class="n">StdinNotImplementedError</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1396</span> <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_input_request</span><span class="p">(</span>
+<span class="g g-Whitespace">   </span><span class="mi">1397</span>     <span class="nb">str</span><span class="p">(</span><span class="n">prompt</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1398</span>     <span class="bp">self</span><span class="o">.</span><span class="n">_get_shell_context_var</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_shell_parent_ident</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1399</span>     <span class="bp">self</span><span class="o">.</span><span class="n">get_parent</span><span class="p">(</span><span class="s2">&quot;shell&quot;</span><span class="p">),</span>
+<span class="g g-Whitespace">   </span><span class="mi">1400</span>     <span class="n">password</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1401</span> <span class="p">)</span>
+
+<span class="ne">StdinNotImplementedError</span>: raw_input was called, but this frontend does not support input requests.
+</pre></div>
+</div>
+</div>
+</div>
+<img src="images/Fig10_22.png" width="600" />
+<center><b>Figure 10.22</b> Performance of FHSS noncoherent detection under partial band jamming. </center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computer-exercise-10-2-dsss-transmission-of-qpsk">
+<h1>10.9.2 Computer Exercise 10.2: DSSS Transmission of QPSK<a class="headerlink" href="#computer-exercise-10-2-dsss-transmission-of-qpsk" title="Permalink to this heading">#</a></h1>
+<p><span style="color:red"> <b><em>Note: text from Section 10.9 skipped</em></b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;This ExDSSS.py provides simulation for DS-CDMA signaling using coherent QAM</span>
+<span class="sd">detection. To illustrate the CDMA spreading effect, a single user is spread by</span>
+<span class="sd">PN sequence of different lengths. Jamming is added as a narrowband;</span>
+<span class="sd">Changing spreading gain Lc &#39;&#39;&#39;</span>
+<span class="n">Ldata</span> <span class="o">=</span> <span class="mi">20000</span>  <span class="c1"># data length in simulation; Must be divisible by 8</span>
+<span class="n">Lc</span> <span class="o">=</span> <span class="mi">11</span>  <span class="c1"># spreading factor vs data rate, can also use the shorter Lc=7</span>
+
+<span class="c1"># Generate QPSK modulation symbols</span>
+<span class="n">data_sym</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> \
+            <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">jam_data</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">+</span> \
+            <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+<span class="c1"># Generating a spreading code</span>
+<span class="n">pcode</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="c1"># Now we spread signal</span>
+<span class="n">x_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">,</span> <span class="n">pcode</span><span class="p">)</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span>
+<span class="c1"># Signal power of the channel input is 2*Lc;</span>
+<span class="n">SIR</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># SIR in dB.  Change this value for different jamming strength</span>
+<span class="n">Pj</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Lc</span> <span class="o">/</span> <span class="p">(</span><span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">SIR</span> <span class="o">/</span> <span class="mi">10</span><span class="p">))</span>    <span class="c1"># Jamming power is relative</span>
+<span class="c1"># Generate noise (AWGN) with power = 2</span>
+<span class="n">noiseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Ldata</span> <span class="o">*</span> <span class="n">Lc</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Ldata</span> <span class="o">*</span> <span class="n">Lc</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Add jamming sinusoid sampling frequency is fc = Lc</span>
+<span class="n">jam_mod</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">jam_data</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">Lc</span><span class="p">,</span> <span class="mi">1</span><span class="p">)));</span> <span class="k">del</span> <span class="n">jam_data</span>
+<span class="n">jammer</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Pj</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">jam_mod</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> \
+                    <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="mf">0.12</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">Ldata</span> <span class="o">*</span> <span class="n">Lc</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">jammer</span> <span class="o">=</span> <span class="n">jammer</span><span class="o">.</span><span class="n">flatten</span><span class="p">();</span>   <span class="k">del</span> <span class="n">jam_mod</span>
+<span class="n">fs</span> <span class="o">=</span> <span class="mi">4096</span>
+<span class="n">the_hamming_window</span> <span class="o">=</span> <span class="n">get_window</span><span class="p">(</span><span class="s1">&#39;hamming&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x_in</span><span class="p">)</span><span class="o">/</span><span class="mf">4.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+<span class="c1"># Same as MATLAB, default Length of the FFT (nfft) is the greater of 256 or</span>
+<span class="c1"># the next power of 2 greater than the length of the segments.</span>
+<span class="n">nfft</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">the_hamming_window</span><span class="p">))))</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">welch</span><span class="p">(</span><span class="n">x_in</span><span class="p">,</span><span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="n">the_hamming_window</span><span class="p">,</span><span class="n">nfft</span> <span class="o">=</span> <span class="n">nfft</span><span class="p">,</span>
+             <span class="n">scaling</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span><span class="n">return_onesided</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">detrend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">Lc</span>
+
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">fig1</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">P</span><span class="p">)</span><span class="o">/</span><span class="n">Lc</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="n">Lc</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Lc</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.e-2</span><span class="p">,</span> <span class="mf">1.e2</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;frequency (in unit of $1/T_s$)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CDMA signal PSD&#39;</span><span class="p">)</span>
+<span class="n">x</span><span class="p">,</span> <span class="n">P</span> <span class="o">=</span> <span class="n">welch</span><span class="p">(</span><span class="n">jammer</span><span class="o">+</span><span class="n">x_in</span><span class="p">,</span><span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="n">the_hamming_window</span><span class="p">,</span>
+             <span class="n">nfft</span> <span class="o">=</span> <span class="n">nfft</span><span class="p">,</span><span class="n">scaling</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span><span class="n">return_onesided</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">detrend</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">*</span><span class="n">Lc</span>
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">fig2</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">P</span><span class="p">)</span><span class="o">/</span><span class="n">Lc</span><span class="p">,</span><span class="s1">&#39;b&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="n">Lc</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">Lc</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mf">1.e-2</span><span class="p">,</span> <span class="mf">1.e2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;frequency (in unit of $1/T_s$)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;CDMA signal + narrowband jammer PSD&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;CDMA signal + narrowband jammer PSD&#39;)
+</pre></div>
+</div>
+<img alt="../_images/b5dec90aafe9d8e17aa0d52d5c2848d1995f12ee02996a16a39e1163f6e58ca2.png" src="../_images/b5dec90aafe9d8e17aa0d52d5c2848d1995f12ee02996a16a39e1163f6e58ca2.png" />
+<img alt="../_images/52b9d9ca3923f7bdeaf1cf19496323b7f136aa6a755e08d3988b04dc28473a31.png" src="../_images/52b9d9ca3923f7bdeaf1cf19496323b7f136aa6a755e08d3988b04dc28473a31.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">BER</span> <span class="o">=</span> <span class="p">[];</span>  <span class="n">BER_az</span> <span class="o">=</span> <span class="p">[];</span>  <span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[]</span>   <span class="c1"># Computing BER for given SIR</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># (Eb/N in dB)</span>
+    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="n">Lc</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Eb2N_num</span><span class="p">)</span>  <span class="c1"># 1/SNR is the noise variance</span>
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="p">)</span>  <span class="c1"># standard deviation</span>
+    <span class="n">awgnois</span> <span class="o">=</span> <span class="n">signois</span> <span class="o">*</span> <span class="n">noiseq</span>  <span class="c1"># AWGN</span>
+    <span class="c1"># Add noise to signals at the channel output</span>
+    <span class="n">y_out</span> <span class="o">=</span> <span class="n">x_in</span> <span class="o">+</span> <span class="n">awgnois</span><span class="o">.</span><span class="n">flatten</span><span class="p">()</span> <span class="o">+</span> <span class="n">jammer</span>
+    <span class="n">Y_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y_out</span><span class="p">,</span> <span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="n">Lc</span><span class="p">),</span> <span class="n">order</span><span class="o">=</span><span class="s1">&#39;C&#39;</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">awgnois</span>
+    <span class="c1"># Despread first</span>
+    <span class="n">z_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Y_out</span><span class="p">,</span><span class="n">pcode</span><span class="p">)</span>
+    <span class="c1"># Decision based on the sign of the samples</span>
+    <span class="n">dec1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z_out</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z_out</span><span class="p">))</span>
+    <span class="c1"># Now compare against the original data to compute BER</span>
+    <span class="n">BER</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">)</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec1</span><span class="p">),</span> \
+                       <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">)</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec1</span><span class="p">)])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Ldata</span><span class="p">))</span>
+    <span class="n">BER_az</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">erfc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Eb2N_num</span><span class="p">)))</span>  <span class="c1"># analytical BER</span>
+<span class="n">BER</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">BER</span><span class="p">)</span>
+<span class="n">BER</span><span class="p">[</span><span class="n">BER</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span> <span class="c1"># replace 0 in BER with &#39;nan&#39; to mask 0 in logscale plot</span>
+<span class="n">fig3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">fig3</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">figber</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER_az</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER</span><span class="p">,</span><span class="s1">&#39;m-o&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mf">0.99e-5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;No jamming&#39;</span><span class="p">,</span><span class="s1">&#39;Narrowband jamming (-10 dB)&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Bit error rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;DSSS (CDMA) with spreading gain = 11&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/150be262b4f8e2d9f4d0e921673805f691ff635c32d69e79d7bede307dc7972d.png" src="../_images/150be262b4f8e2d9f4d0e921673805f691ff635c32d69e79d7bede307dc7972d.png" />
+</div>
+</div>
+<img src="images/Fig10_23.png" width="600" />
+<center><b>Figure 10.23</b> Power spectral densities of DSSS signal using Barker code of length 11 for spreading: (a) without narrowband jamming; (b) withnarrowband jamming at SIR=10 dB. </center>
+<img src="images/Fig10_24.png" width="600" />
+<center><b>Figure 10.24</b> Bit error probabilities of DSSS with QPSK modulation under narrowband jamming. </center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computer-exercise-10-3-multiuser-ds-cdma-system">
+<h1>10.9.3 Computer Exercise 10.3: Multiuser DS-CDMA System<a class="headerlink" href="#computer-exercise-10-3-multiuser-ds-cdma-system" title="Permalink to this heading">#</a></h1>
+<p><span style="color:red"> <b><em>Note: Note: Refer to description from textbook Section 10.9</em></b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell generates a table of 4 Gold sequence with length 31 each.</span>
+<span class="n">GPN</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span>
+              <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This cell tests multiuser DS-CDMA signaling using coherent QPSK for 4 users</span>
+<span class="n">Ldata</span> <span class="o">=</span> <span class="mi">200000</span>  <span class="c1"># data length in simulation; Must be divisible by 8</span>
+<span class="n">Lc</span> <span class="o">=</span> <span class="mi">31</span>  <span class="c1"># spreading factor vs data rate</span>
+<span class="c1"># User number = 4; Generate QPSK modulation symbols</span>
+<span class="n">data_sym</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> \
+            <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Select 4 spreading codes (Gold Codes of Length 11)</span>
+<span class="n">pcode</span> <span class="o">=</span> <span class="n">GPN</span>
+<span class="c1"># Spreading codes are now in matrix pcode of 31x4</span>
+<span class="n">PowerMat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="n">pcodew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pcode</span><span class="p">,</span> <span class="n">PowerMat</span><span class="p">)</span>
+<span class="c1"># Now spread</span>
+<span class="n">x_in</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">pcodew</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span> <span class="n">pcodew</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span>\
+      <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span> <span class="n">pcodew</span><span class="p">[:,</span><span class="mi">2</span><span class="p">])</span><span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span> <span class="n">pcodew</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1"># Signal power of the channel input is 2*Lc</span>
+<span class="c1"># Generate noise (AWGN)</span>
+<span class="n">noiseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Ldata</span> <span class="o">*</span> <span class="n">Lc</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Ldata</span> <span class="o">*</span> <span class="n">Lc</span><span class="p">)</span> <span class="c1"># Power=2</span>
+<span class="n">number_of_iterations</span> <span class="o">=</span> <span class="mi">12</span>
+
+<span class="n">BER1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BER2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BER3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BER4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BER_az</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># (Eb/N in dB)</span>
+    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="n">Lc</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Eb2N_num</span><span class="p">)</span>  <span class="c1"># 1/SNR is the noise variance</span>
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="p">)</span>  <span class="c1"># standard deviation</span>
+    <span class="n">awgnois</span> <span class="o">=</span> <span class="n">signois</span> <span class="o">*</span> <span class="n">noiseq</span>  <span class="c1"># AWGN</span>
+
+    <span class="c1"># Add noise to signals at the channel output</span>
+    <span class="n">y_out</span> <span class="o">=</span> <span class="n">x_in</span> <span class="o">+</span> <span class="n">awgnois</span>
+    <span class="n">Y_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y_out</span><span class="p">,</span> <span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="n">Lc</span><span class="p">))</span>
+    <span class="k">del</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">awgnois</span>
+    <span class="n">z_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y_out</span><span class="p">,</span> <span class="n">pcode</span><span class="p">)</span>    <span class="c1"># Despread first</span>
+    <span class="c1"># Decision based on the sign of the samples</span>
+    <span class="n">dec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z_out</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z_out</span><span class="p">))</span>
+    <span class="c1"># Now compare against the original data to compute BER</span>
+    <span class="n">BER1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BER2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BER3</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BER4</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]),</span>
+                    <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BER_az</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">erfc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Eb2N_num</span><span class="p">))</span> <span class="c1"># analytical</span>
+<span class="c1"># Replace 0 in BER with &#39;nan&#39;  when plotting in logscale</span>
+<span class="n">BER1</span><span class="p">[</span><span class="n">BER1</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">;</span> <span class="n">BER2</span><span class="p">[</span><span class="n">BER2</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">BER3</span><span class="p">[</span><span class="n">BER3</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">;</span> <span class="n">BER4</span><span class="p">[</span><span class="n">BER4</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">figber</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER_az</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">Eb2N</span><span class="p">,</span><span class="n">BER1</span><span class="p">,</span><span class="s1">&#39;m-o&#39;</span><span class="p">,</span> <span class="n">Eb2N</span><span class="p">,</span><span class="n">BER2</span><span class="p">,</span><span class="s1">&#39;m-s&#39;</span><span class="p">,</span>
+                    <span class="n">Eb2N</span><span class="p">,</span><span class="n">BER3</span><span class="p">,</span><span class="s1">&#39;m-v&#39;</span><span class="p">,</span> <span class="n">Eb2N</span><span class="p">,</span><span class="n">BER4</span><span class="p">,</span><span class="s1">&#39;m-*&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Single-user (analysis)&#39;</span><span class="p">,</span><span class="s1">&#39;User 1 BER&#39;</span><span class="p">,</span><span class="s1">&#39;User 2 BER&#39;</span><span class="p">,</span> <span class="s1">&#39;User 3 BER&#39;</span><span class="p">,</span><span class="s1">&#39;User 4 BER&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.99e-5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;QPSK bit error rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Four-user CDMA BER with Gold code of length 31&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/826fbb70a7f3a595cb925a5d33b7c486b76abbc6c089bdb86bfde9b3330967cc.png" src="../_images/826fbb70a7f3a595cb925a5d33b7c486b76abbc6c089bdb86bfde9b3330967cc.png" />
+</div>
+</div>
+<img src="images/Fig10_25.png" width="600" />
+<center><b>Figure 10.25</b> Performance of DS-CDMA conventional single-user detection without the near-far effect. </center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computer-exercise-10-4-multiuser-cdma-detection-in-near-far-environment">
+<h1>10.9.4 Computer Exercise 10.4: Multiuser CDMA Detection in Near-Far Environment<a class="headerlink" href="#computer-exercise-10-4-multiuser-cdma-detection-in-near-far-environment" title="Permalink to this heading">#</a></h1>
+<p><span style="color:red"> <b><em>Note: Refer to description from textbook Section 10.9</em></b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;This cell provides simulation for multiuser CDMA system with near-far effect</span>
+<span class="sd">due to user Tx power differences/variations.&#39;&#39;&#39;</span>
+<span class="c1"># Linear Decorrelator receivers are applied to mitigate the near-far effect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.linalg</span><span class="w"> </span><span class="kn">import</span> <span class="n">pinv</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">erfc</span>
+<span class="n">Ldata</span> <span class="o">=</span> <span class="mi">100000</span>  <span class="c1"># data length in simulation; Must be divisible by 8</span>
+<span class="n">Lc</span> <span class="o">=</span> <span class="mi">31</span>  <span class="c1"># spreading factor vs data rate</span>
+<span class="c1"># Generate QPSK modulation symbols</span>
+<span class="n">data_sym</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> \
+           <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">pcode</span> <span class="o">=</span> <span class="n">GPN</span>   <span class="c1"># Select 4 spreading codes (Gold Codes of Length 11)</span>
+<span class="c1"># Spreading codes are now in matrix pcode of 31x4</span>
+<span class="n">PowerMat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="n">pcodew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">pcode</span><span class="p">,</span> <span class="n">PowerMat</span><span class="p">);</span> <span class="n">Rcor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">pcodew</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">pcodew</span><span class="p">)</span>
+<span class="n">Rinv</span> <span class="o">=</span> <span class="n">pinv</span><span class="p">(</span><span class="n">Rcor</span><span class="p">)</span>
+<span class="c1"># Now spread the signals</span>
+<span class="n">x_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="n">pcodew</span><span class="p">[:,</span><span class="mi">0</span><span class="p">])</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="n">pcodew</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span><span class="o">+</span>\
+       <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">pcodew</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">3</span><span class="p">],</span><span class="n">pcodew</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span>
+<span class="c1"># Since signal power of the channel input is 2*Lc, generate noise (AWGN)</span>
+<span class="n">noiseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">Ldata</span> <span class="o">*</span> <span class="n">Lc</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> \
+         <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="p">(</span><span class="n">Ldata</span> <span class="o">*</span> <span class="n">Lc</span><span class="p">))</span>  <span class="c1"># Power is 2</span>
+<span class="n">number_of_iterations</span> <span class="o">=</span> <span class="mi">13</span>
+<span class="n">BERb2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BERa2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BERb4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BERa4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BER_az</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># (Eb/N in dB)</span>
+    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="n">Lc</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Eb2N_num</span><span class="p">)</span>  <span class="c1"># 1/SNR is the noise variance</span>
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="p">)</span>  <span class="c1"># standard deviation</span>
+    <span class="n">awgnois</span> <span class="o">=</span> <span class="n">signois</span> <span class="o">*</span> <span class="n">noiseq</span>  <span class="c1"># AWGN</span>
+    <span class="c1"># Add noise to signals at the channel output</span>
+    <span class="n">y_out</span> <span class="o">=</span> <span class="n">x_in</span> <span class="o">+</span> <span class="n">awgnois</span>
+    <span class="n">Y_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y_out</span><span class="p">,</span> <span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="n">Lc</span><span class="p">))</span>
+    <span class="k">del</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">awgnois</span>
+    <span class="c1"># Despread first and apply decorrelator Rinv</span>
+    <span class="n">z_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">Y_out</span><span class="p">,</span> <span class="n">pcode</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">Y_out</span>
+    <span class="n">z_dcr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">z_out</span><span class="p">,</span> <span class="n">Rinv</span><span class="p">)</span>  <span class="c1"># decorrelator output</span>
+    <span class="c1"># Decision based on the sign of the single receivers</span>
+    <span class="n">dec1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z_out</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z_out</span><span class="p">))</span>
+    <span class="n">dec2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z_dcr</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z_dcr</span><span class="p">))</span>
+    <span class="c1"># Now compare against the original data to compute BER of user 2</span>
+    <span class="c1"># and user 4 (weaker ones).</span>
+    <span class="n">BERa2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec1</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec1</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])])</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BERa4</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span> <span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec1</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]),</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span> <span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec1</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])])</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BERb2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])</span> <span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])])</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BERb4</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span> <span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec2</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]),</span>
+                       <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])</span> <span class="o">!=</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec2</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])])</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BER_az</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">=</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">erfc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Eb2N_num</span><span class="p">))</span> <span class="c1"># analytical</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig1</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">figber</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER_az</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">Eb2N</span><span class="p">,</span><span class="n">BERa2</span><span class="p">,</span><span class="s1">&#39;m-o&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BERa4</span><span class="p">,</span><span class="s1">&#39;m-s&#39;</span><span class="p">,</span>
+                    <span class="n">Eb2N</span><span class="p">,</span><span class="n">BERb2</span><span class="p">,</span><span class="s1">&#39;m--o&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BERb4</span><span class="p">,</span><span class="s1">&#39;m--s&#39;</span><span class="p">,</span><span class="n">mfc</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Single-user (analysis)&#39;</span><span class="p">,</span><span class="s1">&#39;User 2 (single user detector)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;User 4 (single user detector)&#39;</span><span class="p">,</span><span class="s1">&#39;User 2 (decorrelator)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;User 4 (decorrelator)&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.99e-5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;QPSK bit error rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Weak-user BER comparisons&#39;</span><span class="p">);</span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/eac19b76e0626e186945472ba007be0fcd3da55957cb57ecf604934db4a1d477.png" src="../_images/eac19b76e0626e186945472ba007be0fcd3da55957cb57ecf604934db4a1d477.png" />
+</div>
+</div>
+<img src="images/Fig10_26.png" width="600" />
+<center><b>Figure 10.26</b> Performance of decorrelator MUD in comparison with the conventional single-user receiver. </center>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;This cell provides simulation for multiuser CDMA system with near-far effect</span>
+<span class="sd">due to user Tx power differences/variations.&#39;&#39;&#39;</span>
+<span class="c1"># Decision feedback receivers are applied to mitigate the near-far effect</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">erfc</span>
+<span class="n">Ldata</span> <span class="o">=</span> <span class="mi">200000</span>  <span class="c1"># data length in simulation; Must be divisible by 8</span>
+<span class="n">Lc</span> <span class="o">=</span> <span class="mi">31</span>  <span class="c1"># spreading factor vs data rate</span>
+
+<span class="c1"># Generate QPSK modulation symbols</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">data_sym</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> \
+            <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Select 4 spreading codes (Gold Codes of Length 11)</span>
+<span class="n">pcode</span> <span class="o">=</span> <span class="n">GPN</span>  <span class="c1"># assuming GPN is defined elsewhere</span>
+<span class="c1"># Spreading codes are now in matrix pcode of 31x4</span>
+<span class="n">PowerMat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">([</span><span class="mi">10</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]))</span>
+<span class="n">pcodew</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pcode</span><span class="p">,</span> <span class="n">PowerMat</span><span class="p">)</span>
+<span class="n">Rcor</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">pcodew</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">pcodew</span><span class="p">)</span>
+<span class="c1"># Now spread</span>
+<span class="n">x_in</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">pcodew</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">pcodew</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">+</span> \
+       <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">],</span> <span class="n">pcodew</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">])</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">kron</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">],</span> <span class="n">pcodew</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span>
+
+<span class="c1"># Signal power of the channel input is 2*Lc</span>
+<span class="c1"># Generate noise (AWGN)</span>
+<span class="n">noiseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Ldata</span> <span class="o">*</span> <span class="n">Lc</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Ldata</span> <span class="o">*</span> <span class="n">Lc</span><span class="p">)</span>  <span class="c1"># Power is 2</span>
+<span class="n">number_of_iterations</span> <span class="o">=</span> <span class="mi">13</span>
+
+<span class="n">BER_c2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">));</span><span class="n">BER2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BER_c4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">));</span><span class="n">BER4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">))</span>
+<span class="n">BER_az</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">number_of_iterations</span><span class="p">));</span><span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">number_of_iterations</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>  <span class="c1"># (Eb/N in dB)</span>
+    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="n">Lc</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Eb2N_num</span><span class="p">)</span>  <span class="c1"># 1/SNR is the noise variance</span>
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="p">)</span>  <span class="c1"># standard deviation</span>
+    <span class="n">awgnois</span> <span class="o">=</span> <span class="n">signois</span> <span class="o">*</span> <span class="n">noiseq</span>  <span class="c1"># generate AWGN</span>
+    <span class="c1"># Add noise to signals at the channel output</span>
+    <span class="n">y_out</span> <span class="o">=</span> <span class="n">x_in</span> <span class="o">+</span> <span class="n">awgnois</span>
+    <span class="n">Y_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">y_out</span><span class="p">,</span> <span class="p">(</span><span class="n">Ldata</span><span class="p">,</span> <span class="n">Lc</span><span class="p">))</span>
+    <span class="k">del</span> <span class="n">y_out</span><span class="p">,</span> <span class="n">awgnois</span>
+    <span class="c1"># Despread first</span>
+    <span class="n">z_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">Y_out</span><span class="p">,</span> <span class="n">pcode</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">Y_out</span>
+    <span class="c1"># Decision based on the sign of the single receivers</span>
+    <span class="n">dec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z_out</span><span class="p">))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z_out</span><span class="p">))</span>
+    <span class="c1"># Decision based on the sign of the samples</span>
+    <span class="n">dec1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z_out</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z_out</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]))</span>
+    <span class="n">z_fk1</span> <span class="o">=</span> <span class="n">z_out</span> <span class="o">-</span> <span class="n">dec1</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">Rcor</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">dec3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z_fk1</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z_fk1</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]))</span>
+    <span class="n">z_fk2</span> <span class="o">=</span> <span class="n">z_fk1</span> <span class="o">-</span> <span class="n">dec3</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">Rcor</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">dec2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z_fk2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z_fk2</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span>
+    <span class="n">z_fk3</span> <span class="o">=</span> <span class="n">z_fk2</span> <span class="o">-</span> <span class="n">dec2</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">Rcor</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="p">:]</span>
+    <span class="n">dec4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z_fk3</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]))</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z_fk3</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]))</span>
+    <span class="c1"># Now compare against the original data to compute BER</span>
+    <span class="n">BER_c2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]),</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span><span class="mi">1</span><span class="p">])])</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BER2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec2</span><span class="p">),</span>
+                      <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec2</span><span class="p">)])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BER_c4</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]),</span>
+                        <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec</span><span class="p">[:,</span><span class="mi">3</span><span class="p">])])</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BER4</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">dec4</span><span class="p">),</span>
+                      <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">data_sym</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">])</span> <span class="o">!=</span> <span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">dec4</span><span class="p">)])</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Ldata</span><span class="p">)</span>
+    <span class="n">BER_az</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="o">*</span> <span class="n">erfc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Eb2N_num</span><span class="p">))</span> <span class="c1"># analytical</span>
+<span class="c1"># Replace 0 in BER with &#39;nan&#39; so that 0 values can be masked when plotting in logscale</span>
+<span class="n">BER_c2</span><span class="p">[</span><span class="n">BER_c2</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">BER2</span><span class="p">[</span><span class="n">BER2</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">BER_c4</span><span class="p">[</span><span class="n">BER_c4</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">BER4</span><span class="p">[</span><span class="n">BER4</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="k">del</span> <span class="n">z_fk1</span><span class="p">,</span> <span class="n">z_fk2</span><span class="p">,</span> <span class="n">z_fk3</span><span class="p">,</span> <span class="n">dec1</span><span class="p">,</span> <span class="n">dec3</span><span class="p">,</span> <span class="n">dec2</span><span class="p">,</span> <span class="n">dec4</span><span class="p">,</span> <span class="n">x_in</span><span class="p">,</span> <span class="n">noiseq</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">fig2</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">figber</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER_az</span><span class="p">,</span><span class="s1">&#39;b-&#39;</span><span class="p">,</span> <span class="n">Eb2N</span><span class="p">,</span><span class="n">BER_c2</span><span class="p">,</span><span class="s1">&#39;m-o&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER_c4</span><span class="p">,</span><span class="s1">&#39;m-s&#39;</span><span class="p">,</span>
+                    <span class="n">Eb2N</span><span class="p">,</span><span class="n">BER2</span><span class="p">,</span><span class="s1">&#39;m--o&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER4</span><span class="p">,</span><span class="s1">&#39;m--s&#39;</span><span class="p">,</span><span class="n">mfc</span><span class="o">=</span><span class="s1">&#39;none&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Single-user (analysis)&#39;</span><span class="p">,</span><span class="s1">&#39;User 2 (single user detector)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;User 4 (single user detector)&#39;</span><span class="p">,</span><span class="s1">&#39;User 2 (decorrelator)&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;User 4 (decorrelator)&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.99e-5</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;QPSK bit error rate&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Weak-user BER comparisons&#39;</span><span class="p">);</span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/531cd168eaf251c07a6e6e36e001e033e381270553e20ccf1285005042bdda0a.png" src="../_images/531cd168eaf251c07a6e6e36e001e033e381270553e20ccf1285005042bdda0a.png" />
+</div>
+</div>
+<p><span style="color:red"> <b><em>Note: text on p.739-740 skipped</em></b></span></p>
+<img src="images/Fig10_27.png" width="600" />
+<center><b>Figure 10.27</b> Performance of decision feedback MUD in comparison with the conventional single-user receiver. </center></section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ComputerExercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">10.9.1 Computer Exercise 10.1: FHSS FSK under Partial Band Jamming</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-10-2-dsss-transmission-of-qpsk">10.9.2 Computer Exercise 10.2: DSSS Transmission of QPSK</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-10-3-multiuser-ds-cdma-system">10.9.3 Computer Exercise 10.3: Multiuser DS-CDMA System</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-10-4-multiuser-cdma-detection-in-near-far-environment">10.9.4 Computer Exercise 10.4: Multiuser CDMA Detection in Near-Far Environment</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By DFEC
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>

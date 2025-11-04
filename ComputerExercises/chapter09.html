@@ -1,0 +1,1104 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>9.12.1 Computer Exercise 9.1: Binary Polar Signaling with Different Pulses &#8212; ECE447 Course Webpage</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=14f4ca6b54d191a8c7657f6c759bf11a5fb86285" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=5a5c038af52cf7bc1a1ec88eea08e6366ee68824"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'ComputerExercises/chapter09';</script>
+    <link rel="shortcut icon" href="../_static/favicon.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../intro.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/logo.png" class="logo__image only-light" alt="ECE447 Course Webpage - Home"/>
+    <script>document.write(`<img src="../_static/logo.png" class="logo__image only-dark" alt="ECE447 Course Webpage - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item"><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to ECE447, Communication Systems!
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Info</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../syllabus.html">Syllabus</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../schedule.html">Course Schedule</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Course Downloads</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../downloads.html">Slides and Downloads</a></li>
+</ul>
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="../HW/SkillsReview.html">Skills Review</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW1.html">Homework 1</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW2.html">Homework 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab4.html">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW5.html">Homework 5</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../labs/Lab5.html">Lab 5: QPSK Modulation and Demodulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../HW/HW6.html">Homework 6</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/usafa-ece/jupyterbook-template/blob/main/book/ComputerExercises/chapter09.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="../_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2FComputerExercises/chapter09.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/ComputerExercises/chapter09.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>9.12.1 Computer Exercise 9.1: Binary Polar Signaling with Different Pulses</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">9.12.1 Computer Exercise 9.1: Binary Polar Signaling with Different Pulses</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-9-2-on-off-binary-signaling">9.12.2 Computer Exercise 9.2: On-Off Binary Signaling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-9-3-16-qam-modulation">9.12.3 Computer Exercise 9.3: 16-QAM Modulation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-9-4-noncoherent-fsk-detection">9.12.4 Computer Exercise 9.4: Noncoherent FSK Detection</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-9-5-noncoherent-detection-of-binary-differential-psk">9.12.5 Computer Exercise 9.5: Noncoherent Detection of Binary Differential PSK</a></li>
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section class="tex2jax_ignore mathjax_ignore" id="computer-exercise-9-1-binary-polar-signaling-with-different-pulses">
+<h1>9.12.1 Computer Exercise 9.1: Binary Polar Signaling with Different Pulses<a class="headerlink" href="#computer-exercise-9-1-binary-polar-signaling-with-different-pulses" title="Permalink to this heading">#</a></h1>
+<p><span style="color:red"> <b><em>Note: Refer to the corresponding sections of textbook about the setup.</em></b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.signal</span><span class="w"> </span><span class="kn">import</span> <span class="n">welch</span><span class="p">,</span> <span class="n">get_window</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">scipy.special</span><span class="w"> </span><span class="kn">import</span> <span class="n">erfc</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">rcosdesign</span><span class="p">(</span><span class="n">beta</span><span class="p">,</span> <span class="n">span</span><span class="p">,</span> <span class="n">sps</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    This function returns the coefficients (weights) corresponding to a square-</span>
+<span class="sd">    root raised cosine FIR filter with rolloff factor &#39;beta&#39;. The /pulse is</span>
+<span class="sd">    truncated to &#39;span&#39; symbols, each symbol period contains &#39;sps&#39; samples. The</span>
+<span class="sd">    filter order, sps * span, must be even. The filter energy is 1.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        beta: the roll-off factor</span>
+<span class="sd">        span: number of symbols in the filter</span>
+<span class="sd">        sps:  samples per symbol.</span>
+<span class="sd">    Returns:</span>
+<span class="sd">        weights: filter coefficients, whose energy is 1.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="k">assert</span> <span class="n">sps</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;SPS must be &gt; 1, got </span><span class="si">%d</span><span class="s1"> instead&#39;</span> <span class="o">%</span> <span class="n">sps</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">sps</span><span class="p">)</span><span class="o">==</span><span class="nb">int</span><span class="p">,</span> <span class="p">(</span>
+        <span class="s1">&#39;SPS must be integer, got </span><span class="si">%s</span><span class="s1"> instead&#39;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">sps</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">span</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="ow">and</span> <span class="p">(</span><span class="n">span</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span>
+        <span class="s1">&#39;span must be an even number &gt;= 1, got </span><span class="si">%d</span><span class="s1"> instead&#39;</span> <span class="o">%</span> <span class="n">span</span><span class="p">)</span>
+    <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">span</span><span class="p">)</span><span class="o">==</span><span class="nb">int</span><span class="p">,</span> <span class="p">(</span>
+        <span class="s1">&#39;span must be integer, got </span><span class="si">%s</span><span class="s1"> instead&#39;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">span</span><span class="p">))</span>
+    <span class="k">assert</span> <span class="n">beta</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;beta must be &gt;= 0, got </span><span class="si">%f</span><span class="s1"> instead&#39;</span> <span class="o">%</span> <span class="n">beta</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">span</span> <span class="o">*</span> <span class="n">sps</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="c1"># compute filter coefficients</span>
+    <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">-</span><span class="n">span</span><span class="o">//</span><span class="mi">2</span><span class="o">*</span><span class="n">sps</span><span class="p">,(</span><span class="n">span</span><span class="o">//</span><span class="mi">2</span><span class="o">*</span><span class="n">sps</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span> <span class="c1"># filter center</span>
+            <span class="n">weights</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sps</span><span class="p">))</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">beta</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">n</span><span class="o">*</span><span class="mi">4</span><span class="o">*</span><span class="n">beta</span><span class="p">)</span> <span class="o">==</span> <span class="n">sps</span><span class="p">):</span>
+            <span class="n">weights</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">beta</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sps</span><span class="p">))</span><span class="o">*</span><span class="p">(</span>
+                <span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">beta</span><span class="p">))</span><span class="o">+</span>
+                 <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">2</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">))</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">beta</span><span class="p">)))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">weights</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sps</span><span class="p">))</span><span class="o">*</span><span class="p">(</span>
+                <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">beta</span><span class="p">)</span><span class="o">/</span><span class="n">sps</span><span class="p">))</span> <span class="o">+</span>
+                 <span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">beta</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">sps</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">beta</span><span class="p">)</span><span class="o">/</span><span class="n">sps</span><span class="p">))</span>
+                 <span class="p">)</span> <span class="o">/</span> <span class="p">(</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">sps</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">beta</span><span class="o">*</span><span class="n">n</span><span class="o">/</span><span class="n">sps</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+    <span class="c1"># scale the coefficients</span>
+    <span class="n">weights</span> <span class="o">=</span> <span class="n">weights</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">weights</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">weights</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This exercise performs simulation of binary baseband polar transmission in</span>
+<span class="c1"># AWGN channel. The program generates polar baseband signals using 3 different</span>
+<span class="c1"># pulse shapes (root-raised cosine (r=beta=0.5), rectangular, half-sine) and</span>
+<span class="c1"># estimate the bit error rate (BER) at different Eb/N for display</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="mi">1000000</span>  <span class="c1"># Total data symbols to find BER</span>
+<span class="c1"># To display the pulse shape, we oversample the signal by factor f_ovsamp=8</span>
+<span class="n">f_ovsamp</span> <span class="o">=</span> <span class="mi">8</span>      <span class="c1"># Oversampling factor vs data rate</span>
+<span class="n">delay_rc</span> <span class="o">=</span> <span class="mi">3</span>      <span class="c1"># Delay RRC pulse by 3 symbols</span>
+
+<span class="c1"># Generating root-raised cosine pulseshape (roll-off factor beta, e.g. 0.5)</span>
+<span class="n">prcos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">rcosdesign</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="n">delay_rc</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">sps</span><span class="o">=</span><span class="n">f_ovsamp</span><span class="p">))</span>
+<span class="n">prcos</span> <span class="o">=</span> <span class="n">prcos</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">prcos</span><span class="p">)</span>
+<span class="n">pcmatch</span> <span class="o">=</span> <span class="n">prcos</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># matched filter impulse response to RRC</span>
+
+<span class="c1"># Generating a rectangular pulse shape</span>
+<span class="n">prect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="p">);</span> <span class="n">prect</span> <span class="o">=</span> <span class="n">prect</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">prect</span><span class="p">)</span>
+<span class="n">prmatch</span> <span class="o">=</span> <span class="n">prect</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># matched filter impulse response to RECT pulse</span>
+
+<span class="c1"># Generating a half-sine pulse shape</span>
+<span class="n">psine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">f_ovsamp</span><span class="p">)</span>
+<span class="n">psine</span> <span class="o">=</span> <span class="n">psine</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">psine</span><span class="p">)</span>
+<span class="n">psmatch</span> <span class="o">=</span> <span class="n">psine</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   <span class="c1"># matched filter impulse response to half-sine</span>
+
+<span class="c1"># Generating random signal data of length L for polar signaling</span>
+<span class="n">s_data</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">L</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="c1"># upsample to match &#39;fictitious oversampling&#39;=f_ovsamp/T (T=1 symbol duration)</span>
+<span class="n">s_up</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">s_data</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">s_data</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Identify the decision delays due to pulse shaping and matched filters</span>
+<span class="n">delayrc</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">delay_rc</span> <span class="o">*</span> <span class="n">f_ovsamp</span>
+<span class="n">delayrt</span> <span class="o">=</span> <span class="n">f_ovsamp</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>  <span class="n">delaysn</span> <span class="o">=</span> <span class="n">f_ovsamp</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="c1"># Generate polar signaling of various different pulse-shapes</span>
+<span class="n">xrcos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">s_up</span><span class="p">,</span> <span class="n">prcos</span><span class="p">)</span>
+<span class="n">xrect</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">s_up</span><span class="p">,</span> <span class="n">prect</span><span class="p">)</span>
+<span class="n">xsine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">s_up</span><span class="p">,</span> <span class="n">psine</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">201</span><span class="p">)</span> <span class="o">/</span> <span class="n">f_ovsamp</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
+<span class="n">figwave1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xrcos</span><span class="p">[</span><span class="n">delayrc</span><span class="o">//</span><span class="mi">2</span><span class="p">:</span><span class="n">delayrc</span><span class="o">//</span><span class="mi">2</span><span class="o">+</span><span class="mi">200</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;(a) Polar signal with root-raised cosine pulse.&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
+<span class="n">figwave2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xrect</span><span class="p">[</span><span class="n">delayrt</span><span class="p">:</span><span class="n">delayrt</span><span class="o">+</span><span class="mi">200</span><span class="p">],</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;(b) Polar signal with rectangular pulse.&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
+<span class="n">figwave3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xsine</span><span class="p">[</span><span class="n">delaysn</span><span class="p">:</span><span class="n">delaysn</span><span class="o">+</span><span class="mi">200</span><span class="p">],</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;(c) Polar signal with half-sine pulse.&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Number of data symbol periods&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>  <span class="c1"># Set spacing between subfigures and plot</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/9d125b034427ab9f4267409dc1d75cebcbf8a2b818f5d53f4a2fc6ada7c5732e.png" src="../_images/9d125b034427ab9f4267409dc1d75cebcbf8a2b818f5d53f4a2fc6ada7c5732e.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Find the signal lengths</span>
+<span class="n">Lrcos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xrcos</span><span class="p">);</span>  <span class="n">Lrect</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xrect</span><span class="p">);</span>  <span class="n">Lsine</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xsine</span><span class="p">)</span>
+<span class="n">BER</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">Q</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Define arrays of BER and Q vs x-axis (Eb/N0)</span>
+<span class="n">noiseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Lrcos</span><span class="p">)</span>   <span class="c1"># generate baseline noise sequence</span>
+
+<span class="c1"># Generating the channel noise (AWGN)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># (Eb/N in dB)</span>
+    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Eb2N_num</span><span class="p">)</span> <span class="c1"># 1/SNR is the noise variance</span>
+
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="p">)</span>  <span class="c1"># standard deviation</span>
+    <span class="n">awgnois</span> <span class="o">=</span> <span class="n">signois</span> <span class="o">*</span> <span class="n">noiseq</span>  <span class="c1"># AWGN noise generation</span>
+    <span class="c1"># Add white Gaussian noise to signals at the channel output</span>
+    <span class="n">yrcos</span> <span class="o">=</span> <span class="n">xrcos</span> <span class="o">+</span> <span class="n">awgnois</span><span class="p">;</span>   <span class="n">yrect</span> <span class="o">=</span> <span class="n">xrect</span> <span class="o">+</span> <span class="n">awgnois</span><span class="p">[:</span><span class="n">Lrect</span><span class="p">]</span>
+    <span class="n">ysine</span> <span class="o">=</span> <span class="n">xsine</span> <span class="o">+</span> <span class="n">awgnois</span><span class="p">[:</span><span class="n">Lsine</span><span class="p">]</span>
+
+    <span class="c1"># Apply matched filters first</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">yrcos</span><span class="p">,</span> <span class="n">pcmatch</span><span class="p">);</span> <span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">yrect</span><span class="p">,</span> <span class="n">prmatch</span><span class="p">)</span>
+    <span class="n">z3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">ysine</span><span class="p">,</span> <span class="n">psmatch</span><span class="p">);</span> <span class="k">del</span> <span class="n">yrect</span><span class="p">;</span> <span class="k">del</span> <span class="n">yrcos</span><span class="p">;</span> <span class="k">del</span> <span class="n">ysine</span> <span class="c1"># clear memory</span>
+
+    <span class="c1"># Sampling received signals and acquire decision samples</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">delayrc</span><span class="p">::</span><span class="n">f_ovsamp</span><span class="p">][:</span><span class="n">L</span><span class="p">];</span>     <span class="n">z2</span> <span class="o">=</span> <span class="n">z2</span><span class="p">[</span><span class="n">delayrt</span><span class="p">::</span><span class="n">f_ovsamp</span><span class="p">][:</span><span class="n">L</span><span class="p">]</span>
+    <span class="n">z3</span> <span class="o">=</span> <span class="n">z3</span><span class="p">[</span><span class="n">delaysn</span><span class="p">::</span><span class="n">f_ovsamp</span><span class="p">][:</span><span class="n">L</span><span class="p">]</span>
+
+    <span class="c1"># Decision based on the sign of the samples for polar</span>
+    <span class="n">dec1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">z1</span><span class="p">);</span>  <span class="n">dec2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">z2</span><span class="p">);</span>  <span class="n">dec3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">z3</span><span class="p">)</span>
+    <span class="c1"># Now compare against the original data to compute BER for the 3 pulse types</span>
+    <span class="n">BER</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_data</span> <span class="o">-</span> <span class="n">dec1</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">L</span><span class="p">),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_data</span> <span class="o">-</span> <span class="n">dec2</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">L</span><span class="p">),</span>
+                <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_data</span> <span class="o">-</span> <span class="n">dec3</span><span class="p">))</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">L</span><span class="p">)])</span>
+    <span class="n">Q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">erfc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Eb2N_num</span><span class="p">)))</span> <span class="c1"># Compute the Analytical BER</span>
+<span class="n">BER</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">BER</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">figber</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="s1">&#39;k-&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;b-*&#39;</span><span class="p">,</span>
+                    <span class="n">Eb2N</span><span class="p">,</span><span class="n">BER</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;r-o&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER</span><span class="p">[:,</span><span class="mi">2</span><span class="p">],</span><span class="s1">&#39;m-v&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Analytical&#39;</span><span class="p">,</span><span class="s1">&#39;Root-raised cosine&#39;</span><span class="p">,</span><span class="s1">&#39;Rectangular&#39;</span><span class="p">,</span><span class="s1">&#39;Half-sine&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BER&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">.9e-5</span><span class="p">,</span> <span class="mf">1.01e-1</span><span class="p">]);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Set the spacing between subfigures</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4df573cfed4bfa63f9ca5698a8fa60721fe194c4a2e654f0d7f4f373c3d72c92.png" src="../_images/4df573cfed4bfa63f9ca5698a8fa60721fe194c4a2e654f0d7f4f373c3d72c92.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hamming_Wn</span> <span class="o">=</span> <span class="n">get_window</span><span class="p">(</span><span class="s1">&#39;hamming&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">xrcos</span><span class="p">)</span><span class="o">/</span><span class="mf">4.5</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">))</span>
+
+<span class="c1"># Default Length of FFT (nfft) is the greater of</span>
+<span class="c1"># 256 or the next power of 2 greater than the length of the segments.</span>
+<span class="n">Lfft</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">2</span><span class="o">**</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">log2</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">hamming_Wn</span><span class="p">))))</span>
+
+<span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">Psd1</span><span class="p">]</span><span class="o">=</span><span class="n">welch</span><span class="p">(</span><span class="n">xrcos</span><span class="p">,</span><span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="n">hamming_Wn</span><span class="p">,</span><span class="n">nfft</span><span class="o">=</span><span class="n">Lfft</span><span class="p">,</span><span class="n">scaling</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span>
+                <span class="n">return_onesided</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">detrend</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span> <span class="n">Psd1</span> <span class="o">/=</span> <span class="n">f_ovsamp</span>
+
+<span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">Psd2</span><span class="p">]</span><span class="o">=</span><span class="n">welch</span><span class="p">(</span><span class="n">xrect</span><span class="p">,</span><span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="n">hamming_Wn</span><span class="p">,</span><span class="n">nfft</span><span class="o">=</span><span class="n">Lfft</span><span class="p">,</span><span class="n">scaling</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span>
+                <span class="n">return_onesided</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">detrend</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span> <span class="n">Psd2</span> <span class="o">/=</span> <span class="n">f_ovsamp</span>
+<span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">Psd3</span><span class="p">]</span><span class="o">=</span><span class="n">welch</span><span class="p">(</span><span class="n">xsine</span><span class="p">,</span><span class="n">fs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">window</span><span class="o">=</span><span class="n">hamming_Wn</span><span class="p">,</span><span class="n">nfft</span><span class="o">=</span><span class="n">Lfft</span><span class="p">,</span><span class="n">scaling</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">,</span>
+                <span class="n">return_onesided</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">detrend</span><span class="o">=</span><span class="kc">False</span><span class="p">);</span> <span class="n">Psd3</span> <span class="o">/=</span> <span class="n">f_ovsamp</span>
+<span class="n">fig3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">));</span> <span class="c1"># Spectrum comparison</span>
+<span class="n">fig3</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">figpsd1</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">*</span><span class="n">f_ovsamp</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">Psd1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Power spectral density&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Frequency in unit of $1/T$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">4.5</span><span class="p">,</span> <span class="mf">4.1</span><span class="p">,</span> <span class="mf">0.99e-10</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">tt1</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;(a) PSD of root-raised cosine (roll-off $r=0.5$)&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">figpsd2</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">*</span><span class="n">f_ovsamp</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">Psd2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Frequency in unit of $1/T$&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">4.1</span><span class="p">,</span> <span class="mf">4.1</span><span class="p">,</span> <span class="mf">0.99e-10</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">])</span>
+<span class="n">tt2</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;(b) PSD of rectangular NRZ pulse&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+<span class="n">figpsd3</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">*</span><span class="n">f_ovsamp</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">Psd3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;Frequency in unit of $1/T$&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mf">4.1</span><span class="p">,</span> <span class="mf">4.1</span><span class="p">,</span> <span class="mf">0.99e-10</span><span class="p">,</span> <span class="mf">1.01</span><span class="p">])</span>
+<span class="n">tt3</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;(c) PSD of half-sine pulse&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> <span class="c1"># Set spacing of subfigures and show</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/de6c30b0b71dd2c4c9cc3a915c2a7475af8af7db0f27dee0c2838b0d57bda337.png" src="../_images/de6c30b0b71dd2c4c9cc3a915c2a7475af8af7db0f27dee0c2838b0d57bda337.png" />
+</div>
+</div>
+<img src="images/Fig9_42.png" width="600" />
+<center><b>Figure 9.42</b> Snapshot of the modulated signals from three different pulse shapes: (a) root-raised cosine pulses, of roll-off factor = 0.5; (b) rectangular pulse; (c) half-sine pulse.</center>
+<img src="images/Fig9_43.png" width="600" />
+<center><b>Figure 9.43</b> BER of optimum (matched filter) detection of polar signaling using three different pulse shapes: (a) root-raised cosine pulse of roll-off factor = 0.5; (b) rectangular pulse; (c) half-sine pulse.</center>
+<img src="images/Fig9_44.png" width="600" />
+<center><b>Figure 9.44</b> Power spectral density of the binary polar transmission using three different pulse shapes: (a) root-raised cosine pulse of roll-off factor 0.5; (b) rectangular NRZ pulse; (c) half-sine pulse.</center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computer-exercise-9-2-on-off-binary-signaling">
+<h1>9.12.2 Computer Exercise 9.2: On-Off Binary Signaling<a class="headerlink" href="#computer-exercise-9-2-on-off-binary-signaling" title="Permalink to this heading">#</a></h1>
+<p><span style="color:red"> <b><em>Note: Refer to the corresponding sections of textbook about the setup.</em></b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">This Python exercise generates on/off baseband signals using root-raised cosine</span>
+<span class="sd">pulse (roll-off factor = 0.5) and orthogonal baseband signal before estimating</span>
+<span class="sd">bit error rate (BER) at different Eb/N ratio for display and comparison</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="c1"># Generating root-raised cosine pulse shape (roll-off factor = 0.5)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mi">1000000</span>
+<span class="n">f_ovsamp</span> <span class="o">=</span> <span class="mi">16</span><span class="p">;</span> <span class="n">delay_rc</span> <span class="o">=</span> <span class="mi">3</span>
+
+<span class="n">prcos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">rcosdesign</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="n">delay_rc</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">sps</span><span class="o">=</span><span class="n">f_ovsamp</span><span class="p">))</span>
+<span class="n">prcos</span> <span class="o">=</span> <span class="n">prcos</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">prcos</span><span class="p">);</span> <span class="n">pcmatch</span> <span class="o">=</span> <span class="n">prcos</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Generating a sine pulse shape</span>
+<span class="n">psinh</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">f_ovsamp</span><span class="p">)</span>
+<span class="n">psinh</span> <span class="o">=</span> <span class="n">psinh</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">psinh</span><span class="p">);</span> <span class="n">phmatch</span> <span class="o">=</span> <span class="n">psinh</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Generating a half-sine pulse shape</span>
+<span class="n">psine</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">f_ovsamp</span><span class="p">)</span>
+<span class="n">psine</span> <span class="o">=</span> <span class="n">psine</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">psine</span><span class="p">);</span> <span class="n">psmatch</span> <span class="o">=</span> <span class="n">psine</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Generating random signal data for polar signaling</span>
+<span class="n">s_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">L</span><span class="p">))</span>
+
+<span class="c1"># upsample to match the &#39;fictitious oversampling rate&#39;</span>
+<span class="c1"># which is f_ovsamp/T (T=1 is the symbol duration)</span>
+<span class="n">s_up</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">s_data</span><span class="p">]</span> <span class="o">+</span><span class="p">[</span><span class="n">s_data</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">s_cp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="mi">1</span><span class="o">-</span><span class="n">s_data</span><span class="p">]</span> <span class="o">+</span><span class="p">[</span><span class="n">s_data</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Identify the decision delays due to pulse shaping and matched filters</span>
+<span class="n">delayrc</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">delay_rc</span> <span class="o">*</span> <span class="n">f_ovsamp</span><span class="p">;</span>  <span class="n">delayrt</span> <span class="o">=</span> <span class="n">f_ovsamp</span> <span class="o">-</span> <span class="mi">1</span>
+
+<span class="c1"># Generate on/off signaling of different pulse-shaping</span>
+<span class="n">xrcos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">s_up</span><span class="p">,</span> <span class="n">prcos</span><span class="p">)</span>
+<span class="n">xorth</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">s_up</span><span class="p">,</span> <span class="n">psinh</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">s_cp</span><span class="p">,</span> <span class="n">psine</span><span class="p">)</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">200</span><span class="p">)</span> <span class="o">/</span> <span class="n">f_ovsamp</span>
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">fig1</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">211</span><span class="p">)</span>
+<span class="n">figwave1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xrcos</span><span class="p">[</span><span class="n">delayrc</span><span class="o">//</span><span class="mi">2</span><span class="p">:</span><span class="n">delayrc</span><span class="o">//</span><span class="mi">2</span><span class="o">+</span><span class="mi">200</span><span class="p">],</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;(a) On/off root-raised cosine pulse.&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">212</span><span class="p">)</span>
+<span class="n">figwave2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">xorth</span><span class="p">[</span><span class="n">delayrt</span><span class="p">:</span><span class="n">delayrt</span><span class="o">+</span><span class="mi">200</span><span class="p">],</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">_</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;(b) Orthogonal modulation.&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/bf1c84bb979909f41b2e7ea2a2928e62fc0c7c38dee2d9d097406863dda54653.png" src="../_images/bf1c84bb979909f41b2e7ea2a2928e62fc0c7c38dee2d9d097406863dda54653.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Lrcos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xrcos</span><span class="p">);</span> <span class="n">Lorth</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xorth</span><span class="p">)</span>  <span class="c1"># Find the signal length</span>
+<span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">BER</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">Q</span> <span class="o">=</span> <span class="p">[]</span>             <span class="c1"># Preparing BER arrays and X-axis</span>
+<span class="n">noiseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Lrcos</span><span class="p">)</span>         <span class="c1"># Generating noise sequence</span>
+
+<span class="c1"># Generating the channel noise (AWGN)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># (Eb/N in dB)</span>
+    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Eb2N_num</span><span class="p">)</span> <span class="c1"># 1/SNR is the noise variance</span>
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="p">)</span> <span class="c1"># standard deviation</span>
+    <span class="n">awgnois</span> <span class="o">=</span> <span class="n">signois</span> <span class="o">*</span> <span class="n">noiseq</span> <span class="c1"># AWGN</span>
+
+    <span class="n">yrcos</span> <span class="o">=</span> <span class="n">xrcos</span> <span class="o">+</span> <span class="n">awgnois</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># Add noise to signals at channel output</span>
+    <span class="n">yorth</span> <span class="o">=</span> <span class="n">xorth</span> <span class="o">+</span> <span class="n">awgnois</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">Lorth</span><span class="p">]</span>   <span class="c1"># Add noise to signals at channel output</span>
+
+    <span class="c1"># Apply matched filters first</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">yrcos</span><span class="p">,</span> <span class="n">pcmatch</span><span class="p">)</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">yorth</span><span class="p">,</span> <span class="n">phmatch</span><span class="p">);</span>   <span class="n">z3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">yorth</span><span class="p">,</span> <span class="n">psmatch</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">awgnois</span><span class="p">,</span> <span class="n">yrcos</span><span class="p">,</span> <span class="n">yorth</span> <span class="c1"># Clear variables that are no longer used</span>
+
+    <span class="c1"># Sampling the received signal and acquire samples</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">delayrc</span><span class="p">:</span><span class="n">Lrcos</span><span class="p">:</span><span class="n">f_ovsamp</span><span class="p">]</span>
+    <span class="n">z2</span> <span class="o">=</span> <span class="n">z2</span><span class="p">[</span><span class="n">delayrt</span><span class="p">:</span><span class="n">Lorth</span><span class="o">-</span><span class="n">f_ovsamp</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">f_ovsamp</span><span class="p">]</span>
+    <span class="n">z3</span> <span class="o">=</span> <span class="n">z3</span><span class="p">[</span><span class="n">delayrt</span><span class="p">:</span><span class="n">Lorth</span><span class="o">-</span><span class="n">f_ovsamp</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">f_ovsamp</span><span class="p">]</span>
+
+    <span class="c1"># Decision based on the sign of the samples</span>
+    <span class="n">dec1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">z1</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">L</span><span class="p">]</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">.5</span><span class="p">)</span>
+    <span class="n">dec2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">z2</span><span class="o">-</span><span class="n">z3</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mf">.5</span><span class="p">)</span>
+
+    <span class="c1"># Now compare against the original data to compute BER of 2 on/off schemes</span>
+    <span class="n">BER</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_data</span><span class="o">-</span><span class="n">dec1</span><span class="p">))</span><span class="o">/</span><span class="n">L</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">s_data</span><span class="o">-</span><span class="n">dec2</span><span class="p">))</span><span class="o">/</span><span class="n">L</span><span class="p">])</span>
+    <span class="n">Q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">erfc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Eb2N_num</span><span class="o">/</span><span class="mi">2</span><span class="p">)))</span>     <span class="c1"># Compute the Analytical BER</span>
+<span class="n">BER</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">BER</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span>  <span class="n">fig2</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">figber</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="s1">&#39;k-&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span><span class="s1">&#39;b-*&#39;</span><span class="p">,</span>
+                      <span class="n">Eb2N</span><span class="p">,</span><span class="n">BER</span><span class="p">[:,</span><span class="mi">1</span><span class="p">],</span><span class="s1">&#39;m-o&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">fleg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span>
+    <span class="p">[</span><span class="s1">&#39;Analytical&#39;</span><span class="p">,</span><span class="s1">&#39;Root-raised cosine on/off&#39;</span><span class="p">,</span><span class="s1">&#39;Orthogonal signaling&#39;</span><span class="p">],</span>
+    <span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">fx</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span> <span class="n">fy</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;BER&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">();</span>  <span class="c1"># Set the spacing between subfigures</span>
+
+<span class="c1"># We can plot the individual pulses used for the binary orthogonal signaling</span>
+<span class="n">fig3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="n">fig3</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">wspace</span><span class="o">=</span><span class="mf">0.4</span><span class="p">)</span>
+<span class="n">pulse</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">f_ovsamp</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">psinh</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
+            <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">f_ovsamp</span><span class="p">,</span><span class="n">np</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">psine</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span><span class="s1">&#39;m&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pleg</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Half-sine pulse&#39;</span><span class="p">,</span> <span class="s1">&#39;Sine pulse&#39;</span><span class="p">],</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">pylab</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Binary orthogonal signals&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">);</span><span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/4c21647ccb3fbc9c590d4aa1be8d81de9cd6fe33d52e1889cf41a711d25d8a5f.png" src="../_images/4c21647ccb3fbc9c590d4aa1be8d81de9cd6fe33d52e1889cf41a711d25d8a5f.png" />
+<img alt="../_images/c0eb5138806d6d29e13d15e68cc3e36bc345fc5f72959515eb6ca4e85967a9ea.png" src="../_images/c0eb5138806d6d29e13d15e68cc3e36bc345fc5f72959515eb6ca4e85967a9ea.png" />
+</div>
+</div>
+<img src="images/Fig9_44.png" width="600" />
+<center><b>Figure 9.44</b> Waveforms of the two pulses used in orthogonal binary signaling: solid curve, half-sine pulse; curve with circles, sine pulse.</center>
+<img src="images/Fig9_45.png" width="600" />
+<center><b>Figure 9.45</b> Measured BER results in comparison with analytical BER.</center>
+<span style="color:red"> <b>*Note: Refer to the corresponding sections of textbook about the setup.*</b></span>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computer-exercise-9-3-16-qam-modulation">
+<h1>9.12.3 Computer Exercise 9.3: 16-QAM Modulation<a class="headerlink" href="#computer-exercise-9-3-16-qam-modulation" title="Permalink to this heading">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;This Python exercise performs simulation of QAM-16 baseband polar transmission</span>
+<span class="sd">in AWGN channel. Root-raised cosine pulse of roll-off = 0.5 is used. Matched</span>
+<span class="sd">filter receiver is used. The program estimates symbol error rate against Eb/N.&#39;&#39;&#39;</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mi">1000000</span>  <span class="c1"># Total data symbols in experiment is 1 million</span>
+
+<span class="c1"># To display the pulse shape, we oversample the signal by factor of f_ovsamp=8</span>
+<span class="n">f_ovsamp</span> <span class="o">=</span> <span class="mi">8</span>  <span class="c1"># Oversampling factor vs data rate</span>
+<span class="n">delay_rc</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># Identify decision delays due to pulse shaping and matched filter</span>
+<span class="n">delayrc</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">delay_rc</span><span class="o">*</span><span class="n">f_ovsamp</span>
+
+<span class="c1"># Generating root-raised cosine pulseshape (roll-off factor = 0.5)</span>
+<span class="n">prcos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span>
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">]),</span> <span class="n">rcosdesign</span><span class="p">(</span><span class="n">beta</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">span</span><span class="o">=</span><span class="n">delay_rc</span><span class="o">*</span><span class="mi">2</span><span class="p">,</span> <span class="n">sps</span><span class="o">=</span><span class="n">f_ovsamp</span><span class="p">))</span>
+<span class="n">prcos</span> <span class="o">=</span> <span class="n">prcos</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">prcos</span><span class="p">);</span> <span class="n">pcmatch</span> <span class="o">=</span> <span class="n">prcos</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Generating random signal data for polar signaling</span>
+<span class="n">s_data</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">-</span><span class="mi">3</span> <span class="o">+</span> \
+    <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">L</span><span class="p">))</span><span class="o">-</span><span class="mi">3</span><span class="p">)</span>
+<span class="c1"># upsample to match the &#39;oversampling rate&#39; f_ovsamp/T (T=1 symbol duration)</span>
+<span class="n">s_up</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">stack</span><span class="p">([</span><span class="n">s_data</span><span class="p">]</span> <span class="o">+</span><span class="p">[</span><span class="n">s_data</span><span class="o">*</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="p">(</span><span class="n">f_ovsamp</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">axis</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">xrcos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">s_up</span><span class="p">,</span> <span class="n">prcos</span><span class="p">)</span> <span class="c1"># Generate QAM-16 signaling with pulse-shaping</span>
+
+<span class="n">Lrcos</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xrcos</span><span class="p">)</span>    <span class="c1"># Find the signal length</span>
+<span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[];</span>   <span class="n">SER</span> <span class="o">=</span> <span class="p">[];</span>   <span class="n">Q</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">noiseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Lrcos</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Lrcos</span><span class="p">)</span> <span class="c1"># complex noise</span>
+<span class="n">Es</span> <span class="o">=</span> <span class="mi">10</span>           <span class="c1"># Average symbol energy of QAM-16</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">9</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span><span class="p">)</span>  <span class="c1"># (Eb/N in dB)</span>
+    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="n">Es</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Eb2N_num</span><span class="p">)</span>  <span class="c1"># 1/SNR is the noise variance</span>
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="o">/</span><span class="mi">2</span><span class="p">);</span>     <span class="n">awgnois</span> <span class="o">=</span> <span class="n">signois</span> <span class="o">*</span> <span class="n">noiseq</span>  <span class="c1"># AWGN</span>
+
+    <span class="n">yrcos</span> <span class="o">=</span> <span class="n">xrcos</span> <span class="o">+</span> <span class="n">awgnois</span>     <span class="c1"># Add noise to signals at the channel output</span>
+    <span class="c1"># Apply matched filters first</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">convolve</span><span class="p">(</span><span class="n">yrcos</span><span class="o">.</span><span class="n">ravel</span><span class="p">(),</span> <span class="n">pcmatch</span><span class="o">.</span><span class="n">ravel</span><span class="p">());</span> <span class="k">del</span> <span class="n">yrcos</span>
+    <span class="c1"># Sampling the received signal and acquire samples</span>
+    <span class="n">z1</span> <span class="o">=</span> <span class="n">z1</span><span class="p">[</span><span class="n">delayrc</span><span class="p">::</span><span class="n">f_ovsamp</span><span class="p">]</span>
+
+    <span class="c1"># Decision based on the sign of the samples</span>
+    <span class="n">dec1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z1</span><span class="p">[:</span><span class="n">L</span><span class="p">]))</span> <span class="o">+</span>  <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z1</span><span class="p">[:</span><span class="n">L</span><span class="p">])</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z1</span><span class="p">[:</span><span class="n">L</span><span class="p">])</span><span class="o">+</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z1</span><span class="p">[:</span><span class="n">L</span><span class="p">]))</span> <span class="o">+</span> \
+        <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z1</span><span class="p">[:</span><span class="n">L</span><span class="p">])</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">sign</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z1</span><span class="p">[:</span><span class="n">L</span><span class="p">])</span><span class="o">+</span><span class="mi">2</span><span class="p">))</span>
+    <span class="c1"># Now compare against the original data to compute SER</span>
+    <span class="n">SER</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">s_data</span><span class="o">.</span><span class="n">ravel</span><span class="p">()</span> <span class="o">!=</span> <span class="n">dec1</span><span class="p">)</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>
+
+    <span class="n">p1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">erfc</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">Eb2N_num</span><span class="o">/</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># Compute Analytical BER</span>
+    <span class="n">Q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">9</span><span class="o">/</span><span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">p1</span> <span class="o">+</span> <span class="mi">1</span><span class="o">/</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">p1</span><span class="p">))</span>
+    <span class="c1"># Q.append(3*0.5*erfc(np.sqrt((2*Eb2N_num/5)/2)))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SER</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">SER</span><span class="p">)</span>
+<span class="c1"># replace 0 in SER with &#39;nan&#39; to omit 0 values when plotting in logscale</span>
+<span class="n">SER</span><span class="p">[</span><span class="n">SER</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">fig1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">);</span> <span class="n">figber</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">Q</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">SER</span><span class="p">,</span><span class="s1">&#39;b-v&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">18</span><span class="p">,</span> <span class="mf">.99e-5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span>  <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Analytical SER&#39;</span><span class="p">,</span> <span class="s1">&#39;Root-raised cosine&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Symbol error probability&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">();</span> <span class="c1"># Constellation plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">z1</span><span class="p">[:</span><span class="nb">min</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">4000</span><span class="p">)]),</span><span class="n">np</span><span class="o">.</span><span class="n">imag</span><span class="p">(</span><span class="n">z1</span><span class="p">[:</span><span class="nb">min</span><span class="p">(</span><span class="n">L</span><span class="p">,</span><span class="mi">4000</span><span class="p">)]),</span><span class="s1">&#39;b.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;square&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;Real part of matched filter output samples&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Imaginary part of matched filter output samples&#39;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">(</span><span class="n">pad</span><span class="o">=</span><span class="mf">1.0</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/ba7bc8cb0c0779bfe6543f4a23f90438e5b742f8d0af238b93560955e6d6cdf0.png" src="../_images/ba7bc8cb0c0779bfe6543f4a23f90438e5b742f8d0af238b93560955e6d6cdf0.png" />
+<img alt="../_images/0b7a701a84040e757a32f4c732fc3de893d9fabfd1096b847b0e6a44a6dd281b.png" src="../_images/0b7a701a84040e757a32f4c732fc3de893d9fabfd1096b847b0e6a44a6dd281b.png" />
+</div>
+</div>
+<!-- <img src="images/Fig9_46.png" width="600" />
+
+<center><b>Figure 9.46</b> Eye diagram of the real (in-phase) component of the 16-QAM transmission at the receiver matched filter output.</center>
+
+<img src="images/Fig9_47.png" width="600" />
+
+<center><b>Figure 9.47</b> Eye diagram of the real (in-phase) component of the 16-QAM transmission at the receiver matched filter output.</center> -->
+<img src="images/Fig9_48.png" width="600" />
+<center><b>Figure 9.48</b> Symbol error probability of 16-QAM using root-raised cosine pulse in comparison with the analytical result.</center>
+<img src="images/Fig9_49.png" width="600" />
+<center><b>Figure 9.49</b> Scatter plot of the matched filter output for the 16-QAM signaling with root-raised cosine pulse when $Eb/N=18$ dB</center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computer-exercise-9-4-noncoherent-fsk-detection">
+<h1>9.12.4 Computer Exercise 9.4: Noncoherent FSK Detection<a class="headerlink" href="#computer-exercise-9-4-noncoherent-fsk-detection" title="Permalink to this heading">#</a></h1>
+<p><span style="color:red"> <b><em>Note: Refer to the corresponding sections of textbook about the setup.</em></b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># This program provides simulation for noncoherent detection of</span>
+<span class="c1"># orthogonal signaling including BFSK. Noncoherent MFSK detection only</span>
+<span class="c1"># needs to compare the magnitude of each frequency bin.</span>
+
+<span class="n">L</span> <span class="o">=</span> <span class="mi">100000</span> <span class="c1"># Number of data symbols in the simulation</span>
+<span class="n">s_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">L</span><span class="p">))</span>
+
+<span class="c1"># Generating random phases on the two frequencies</span>
+<span class="n">xbase1</span> <span class="o">=</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()),</span> <span class="mi">0</span><span class="p">]</span>
+<span class="n">xbase0</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">())]</span>
+<span class="c1"># Modulating two orthogonal frequencies</span>
+<span class="n">xmodsig</span> <span class="o">=</span> <span class="n">s_data</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span><span class="o">*</span><span class="n">xbase1</span> <span class="o">+</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="n">s_data</span><span class="p">[:,</span> <span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">])</span><span class="o">*</span><span class="n">xbase0</span>
+
+<span class="c1"># Generating noise sequences for both frequency channels</span>
+<span class="n">noisei</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span> <span class="n">noiseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">L</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="n">BER</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">BER_az</span> <span class="o">=</span> <span class="p">[];</span> <span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[]</span>   <span class="c1"># BER, Analytical BER, and Eb/N</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">12</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="mi">10</span><span class="p">)</span> <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">Eb2N_num</span><span class="p">)</span>      <span class="c1"># using 1/SNR as the noise variance</span>
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="p">)</span> <span class="c1"># standard deviation</span>
+    <span class="n">awgnois</span> <span class="o">=</span> <span class="n">signois</span><span class="o">*</span><span class="p">(</span><span class="n">noisei</span> <span class="o">+</span> <span class="mi">1</span><span class="n">j</span><span class="o">*</span><span class="n">noiseq</span><span class="p">)</span> <span class="c1"># AWGN added in complex channels</span>
+    <span class="n">ychout</span> <span class="o">=</span> <span class="n">xmodsig</span> <span class="o">+</span> <span class="n">awgnois</span>  <span class="c1"># Add noise to signals at the channel output</span>
+    <span class="c1"># Non-coherent detection</span>
+    <span class="n">ydim1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ychout</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">]);</span>   <span class="n">ydim2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">ychout</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span>
+    <span class="n">dec</span> <span class="o">=</span> <span class="n">ydim1</span> <span class="o">&gt;</span> <span class="n">ydim2</span>
+
+    <span class="n">BER</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dec</span> <span class="o">!=</span> <span class="n">s_data</span><span class="p">)</span><span class="o">/</span><span class="n">L</span><span class="p">)</span>     <span class="c1"># Compute BER from simulation</span>
+    <span class="n">BER_az</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Eb2N_num</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>  <span class="c1"># Compare against analytical BER.</span>
+    <span class="n">figber</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER_az</span><span class="p">,</span><span class="s1">&#39;m-&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER</span><span class="p">,</span><span class="s1">&#39;b-o&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Analytical BER&#39;</span><span class="p">,</span> <span class="s1">&#39;Noncoherent FSK simulation&#39;</span><span class="p">])</span>
+<span class="n">fx</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">fy</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Bit error rate&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/0ffe67a927c6e854bb29a512310453cbe90bcf97c895648a9502198e0898a216.png" src="../_images/0ffe67a927c6e854bb29a512310453cbe90bcf97c895648a9502198e0898a216.png" />
+</div>
+</div>
+<img src="images/Fig9_50.png" width="600" />
+<center><b>Figure 9.50</b> BER from noncoherent detection of binary FSK.</center>
+</section>
+<section class="tex2jax_ignore mathjax_ignore" id="computer-exercise-9-5-noncoherent-detection-of-binary-differential-psk">
+<h1>9.12.5 Computer Exercise 9.5: Noncoherent Detection of Binary Differential PSK<a class="headerlink" href="#computer-exercise-9-5-noncoherent-detection-of-binary-differential-psk" title="Permalink to this heading">#</a></h1>
+<p><span style="color:red"> <b><em>Note: Refer to the corresponding sections of textbook about the setup.</em></b></span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">This exercise tests differential detection of binary DPSK. Differential</span>
+<span class="sd">detection only needs to compare successive phases of signal samples at receiver.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="mi">1000000</span> <span class="c1"># Number of data symbols in the simulation</span>
+<span class="n">s_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="n">L</span><span class="p">))</span>
+<span class="n">initphase</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">()</span>     <span class="c1"># Generating initial random phase</span>
+<span class="n">s_denc</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mod</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cumsum</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">s_data</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">)),</span> <span class="mi">2</span><span class="p">)</span>   <span class="c1"># differential modulation</span>
+<span class="n">xphase</span> <span class="o">=</span> <span class="n">initphase</span> <span class="o">+</span> <span class="n">s_denc</span><span class="p">;</span> <span class="k">del</span> <span class="n">s_denc</span>  <span class="c1"># define the phase divisible by pi</span>
+<span class="c1"># modulate the phase of the signal</span>
+<span class="n">xmodsig</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="n">j</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">xphase</span><span class="p">);</span> <span class="k">del</span> <span class="n">xphase</span>
+<span class="n">Lx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">xmodsig</span><span class="p">)</span>                   <span class="c1">#Determine the length of modulated signal</span>
+<span class="n">noiseq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">Lx</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>     <span class="c1"># Generating noise sequence</span>
+
+<span class="n">BER</span> <span class="o">=</span> <span class="p">[];</span>   <span class="n">BER_az</span> <span class="o">=</span> <span class="p">[];</span>   <span class="n">Eb2N</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">):</span>
+    <span class="n">Eb2N</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>                <span class="c1"># (Eb/N in dB)</span>
+    <span class="n">Eb2N_num</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="n">Eb2N</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span> <span class="c1"># Eb/N in numeral</span>
+    <span class="n">Var_n</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">Eb2N_num</span><span class="p">)</span>      <span class="c1"># 1/SNR is the noise variance</span>
+    <span class="n">signois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">Var_n</span><span class="p">)</span>        <span class="c1"># standard deviation</span>
+    <span class="c1"># AWGN complex channels</span>
+    <span class="n">awgnois</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">signois</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">(([</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="n">j</span><span class="p">]))</span><span class="o">*</span><span class="n">noiseq</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">ychout</span> <span class="o">=</span> <span class="n">xmodsig</span> <span class="o">+</span> <span class="n">awgnois</span>      <span class="c1"># Add noise to signals at channel outpu</span>
+    <span class="c1"># Non-coherent detection</span>
+    <span class="n">yphase</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">angle</span><span class="p">(</span><span class="n">ychout</span><span class="p">)</span>         <span class="c1"># find the channel output phase</span>
+    <span class="n">ydfdec</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">yphase</span><span class="p">)</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span>  <span class="c1"># calculate phase difference</span>
+    <span class="n">dec</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">ydfdec</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.5</span>           <span class="c1"># make hard decisions</span>
+    <span class="n">BER</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">dec</span> <span class="o">!=</span> <span class="n">s_data</span><span class="p">)</span> <span class="o">/</span> <span class="n">L</span><span class="p">)</span>     <span class="c1"># Compute BER from simulation</span>
+    <span class="n">BER_az</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mf">0.5</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">Eb2N_num</span><span class="p">))</span>    <span class="c1"># Compare against analytical BER.</span>
+<span class="c1"># Plot BER results</span>
+<span class="n">BER</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">BER</span><span class="p">)</span>
+<span class="c1"># replace 0 in BER with &#39;nan&#39; to omit 0 values when plotting in logscale</span>
+<span class="n">BER</span><span class="p">[</span><span class="n">BER</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span>
+<span class="n">figber</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">semilogy</span><span class="p">(</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER_az</span><span class="p">,</span><span class="s1">&#39;k-&#39;</span><span class="p">,</span><span class="n">Eb2N</span><span class="p">,</span><span class="n">BER</span><span class="p">,</span><span class="s1">&#39;b-o&#39;</span><span class="p">,</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">.99e-5</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span> <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">();</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Analytical BER&#39;</span><span class="p">,</span> <span class="s1">&#39;Binary DPSK simulation&#39;</span><span class="p">])</span>
+<span class="n">fx</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;$E_b/N$ (dB)&#39;</span><span class="p">);</span> <span class="n">fy</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Bit error rate&#39;</span><span class="p">,</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/019a29295cdf3189788e09b6a1704a9eaa4f65b26c37aa8cc9af952a3279a0a7.png" src="../_images/019a29295cdf3189788e09b6a1704a9eaa4f65b26c37aa8cc9af952a3279a0a7.png" />
+</div>
+</div>
+<img src="images/Fig9_51.png" width="600" />
+<center><b>Figure 9.51</b> Analytical BER results from noncoherent detection of binary DPSK simulation (round points).
+</center>
+<p><span style="color:red"> <b>*Note: simulation results do not always match analytical results when insufficient bits are tested. *</b></span></p>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./ComputerExercises"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">9.12.1 Computer Exercise 9.1: Binary Polar Signaling with Different Pulses</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-9-2-on-off-binary-signaling">9.12.2 Computer Exercise 9.2: On-Off Binary Signaling</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-9-3-16-qam-modulation">9.12.3 Computer Exercise 9.3: 16-QAM Modulation</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-9-4-noncoherent-fsk-detection">9.12.4 Computer Exercise 9.4: Noncoherent FSK Detection</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#computer-exercise-9-5-noncoherent-detection-of-binary-differential-psk">9.12.5 Computer Exercise 9.5: Noncoherent Detection of Binary Differential PSK</a></li>
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By DFEC
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2025.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
