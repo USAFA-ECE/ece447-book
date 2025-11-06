@@ -25,35 +25,6 @@ parts:
       - file: HW/HW5
       - file: labs/Lab5
       - file: HW/HW6
-  #    - file: labs/Lab5
-  #    - file: labs/Lab6
+      - file: HW/HW7
+      - file: labs/Lab6
   #    - file: labs/Lab7
-  #    - file: labs/Lab8
-  # - caption: Textbook Computer Examples
-  #   chapters:
-  #    - file: ComputerExercises\chapter02
-  #      title: Chapter 2
-  #    - file: ComputerExercises\chapter03
-  #      title: Chapter 3
-  #    - file: ComputerExercises\chapter04
-  #      title: Chapter 4
-  #    - file: ComputerExercises\chapter04
-  #      title: Chapter 4
-  #    - file: ComputerExercises\chapter05
-  #      title: Chapter 5
-      # - file: ComputerExercises\chapter06
-      #   title: Chapter 6
-      # - file: ComputerExercises\chapter07
-      #   title: Chapter 7
-      # - file: ComputerExercises\chapter08
-      #   title: Chapter 8
-      # - file: ComputerExercises\chapter09
-      #   title: Chapter 9
-      # - file: ComputerExercises\chapter10
-      #   title: Chapter 10
-      # - file: ComputerExercises\chapter11
-      #   title: Chapter 11
-      # - file: ComputerExercises\chapter12
-      #   title: Chapter 12
-      # - file: ComputerExercises\chapter13
-      #   title: Chapter 13
