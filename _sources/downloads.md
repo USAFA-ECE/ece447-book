@@ -36,3 +36,5 @@ The slides on this page will be updated throughout the semester and posted as we
 | 28 | [Digital Carrier Modulation](_static/ECE447_Lesson28_Fa25.pdf)  | 
 | 29 | [Probability](_static/ECE447_Lesson29_Fa25.pdf)  | 
 | 30 | [Probability](_static/ECE447_Lesson30_Fa25.pdf)  | 
+| 31 | [Random Processes](_static/ECE447_Lesson31_Fa25.pdf)  | 
+| 32 | [SDR/MATLAB Lab 6](labs/Lab6)  | 
