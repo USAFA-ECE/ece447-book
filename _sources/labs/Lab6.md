@@ -3,12 +3,11 @@
 
 ## Overview
 
-For the this lab we'll look at decoding packets from Automatic Dependent Surveillance-Broadcast (ADS-B). This is the system used to track aircraft in real time. Each plane constantly sends out a stream of digital packets. These are on-off keying, and are a great first project for decoding packet radio. There are many interesting aspects of how this system works.
+For the this lab we'll look at decoding packets from Automatic Dependent Surveillance-Broadcast (ADS-B). This is the system used to track aircraft in real time. Each plane constantly sends out a stream of digital packets. These are digital signals and a great first project for decoding packet radio. There are many interesting aspects of how this system works.
 
 If you want to get right to the lab, and your part, you can skip down to the “Decoding ADSB Packets” section below.
 
-Introduction
-------------
+## Introduction
 
 ADS-B transmitters are currently carried by all planes in the US. Commercial aircraft use these packets to periodically broadcast their tail number, flight, altitude, direction, and speed. Light planes can transmit shorter packets that simply identify them. By 2020 all planes in US airspace were to have to their full information and status, but that is still continuing now. Other countries have sightly later schedules.
 
@@ -22,11 +21,11 @@ The planes listen to the GPS system to figure out where they are, and then trans
 
 The packets that are sent are called “squitters”, a term which originated in the military with Identification Friend or Foe (IFF) systems. The goal of this lab is to acquire and decode these packets.
 
-Programs like dump1090 on macos and linux (and many more on Windows) use your RTL-SDR to acquire and track the ADSB packets. An example from the COS area is shown below,
+Programs like dump1090 on macos and linux (and many more on Windows) use your RTL-SDR to acquire and track the ADSB packets. An example from the COS area using the website [adsbexchange.com](adsbexchange.com) is shown below,
 
 ![](graphics/ADSBExchangeSS.png)
 
-This is in the afternoon about 3:30. You can clearly see how the planes are lining up for SFO, and lots of small plane traffic around San Carlos. The small planes have only recently started appearing in large numbers. If you click on a plane, it gives you its flight information including it current flight track.
+This is at about 10:30pm, so there isn't too much activity. You can see a couple larger passenger aircraft on the edges, a couple of aircraft already on the ground at COS airport, a helicopter returning from Pueblo, and the pink aircraft that is limiting how much data is displayed to the public through ADSB. If you click on a plane, it gives you its flight information including it current flight track.
 
 Since ADSB is public, many web sites aggregate the ADSB data from a wide range of sites to provide real time information about where flights are, and the flight paths they have taken. Two are Flightaware.com and Flightradar24.com. This is very useful.
 
@@ -34,11 +33,11 @@ An example from Flightaware for a flight a few summers ago is
 
 ![](graphics/Flight_Aware.png)
 
-These sites actively recruit people with rtl-sdr's to participate in their network, and even sell branded rtl-sdr's explicitly for this purpose:
+These sites actively recruit people with RTL-SDR's to participate in their network, and even sell branded RTL-SDR's explicitly for this purpose:
 
 ![](graphics/Flight_Aware_Dongle.png)
 
-The hardware is free if you are in an area that needs coverage (sorry, the Bay Area is already pretty well saturated!).
+The hardware is free if you are in an area that needs coverage.
 
 The most important fact about ADSB is that it is not encrypted. This makes the location and identity of every plane public information. This is significant. Numerous law enforcement agencies use surveilience planes or helicopters, and these all have tail numbers, and transmit on ADSB. All of these activities are now publicly available. Google FBI and ADSB, or CIA and ADSB for example. You will find lots of interesting things.
 
@@ -50,22 +49,21 @@ Another interesting example is Putin's doomsday aircraft. This is a telecommunic
 
 For the U.S., Air Force 1 generally turns off its ADSB transponder, but occasionally does turn it on.
 
-Decoding ADSB Packets
----------------------
+## Decoding ADSB Packets
 
 Before starting to acquire signals, it is useful to check to make sure there is something out there! If we run gqrx and look for packets at 1090 MHz, we see something like this:
 
 ![](graphics/ADSB_gqrx.png)
 
-This should a little like the packets you captured for this week. Packets are very short, so they spread across the spectrum. Each time a packet comes in, the spectrum jumps. There is a lot of traffic! We are going to collect some of this, and decode it.
+The packets are very short, so they spread across the spectrum. Each time a packet comes in, the spectrum jumps. There is a lot of traffic in this figure! You are going to collect some of this and decode it.
 
 The ADSB packets are short sequences of pulses, that look like this:
 
 ![](graphics/ADSB_Packet_Waveform.png)
 
-Each pulse is 1 us long, and consists of two 0.5 us pulses. There is an 8 us preamble that allows you to find the start of the packet. It's spacing is unique, and can't turn up in a packet. The packet itself follows, and is either 56 or 112 us long, which decodes to 56 or 112 bits. Bit are encoded as a split phase pulses, where a falling transition is a 1, and a rising transition is a 0.
+Each pulse is 1 us long, and consists of two 0.5 us pulses. There is an 8 us preamble that allows you to find the start of the packet. It's spacing is unique and can't turn up in a packet. The packet itself follows and is either 56 or 112 us long, which decodes to 56 or 112 bits. Bits are encoded as split phase pulses, where a falling transition is a 1 and a rising transition is a 0.
 
-The split phase pulses are exactly at the Nyquist limit if we sample at 2 MHz, as we have been doing in the previous labs, and that will make resolving the pulses difficult (although that is what is commonly done!). Fortunately the rtl-sdr's that you are using will sample up to 3.2 MHz, which is fast enough that we can see the pulses clearly.
+The split phase pulses are exactly at the Nyquist limit if we sample at 2 MHz. Sampling at 2 MHz will make resolving the pulses difficult (although this is what is commonly done!). Fortunately, the RTL-SDR's you have will sample up to 3.2 MHz, which is fast enough for us to see the pulses clearly.
 
 Capture some data with
 
@@ -75,11 +73,11 @@ Capture some data with
 ```
 
 
-This will give you 5 seconds of data. Here is a capture I did
+This will give you 5 seconds of data. Here is a capture Dr. Pauly did:
 
 [adsb\_3.2M.dat](adsb_3.2M.dat)
 
-Load them into matlab
+Load the data into MATLAB:
 
 ```
 >> da = abs(loadFile('adsb_3.2M.dat'));
@@ -87,17 +85,19 @@ Load them into matlab
 ```
 
 
-There was an earlier file [adsb\_32.dat](adsb_32.dat) which is not quite as active. We'll give you an even better file below, with lots of activity.
+(There is an even better file below with lots of activity.)
 
-We are only concerned with the envelope, so we use the absolute value. The bit boundaries are on 1 us increments, which doesn't match our 3.2 MHz sampling rate. We'll upsample to 4 MHz to make make the bit boundaries line up with the samples
-
+We are only concerned with the envelope, so we use the absolute value. The bit boundaries are at 1 us increments, which doesn't match our 3.2 MHz sampling rate. We'll upsample to 4 MHz to make make the bit boundaries line up with the samples.
+```
+>> d = resample(da,5,4);
+```
 This upsamples by a factor of 5, then downsamples by a factor of 4 to leave us at (3.2 MHz) \* 5 / 4 = 4 MHz.
 
 If we plot the first 1e6 samples, we see something like this
 
 ![](graphics/ADSB_1e6.png)
 
-Each of the spikes is a packet. Use your matlab zoom to visualize one of them. One packet is shown here
+Each of the spikes is a packet. Use your MATLAB zoom to visualize one of them. One packet is shown here
 
 ![](graphics/ADSB_Raw_Waveform.png)
 
@@ -111,7 +111,15 @@ If we take the 4 MHz sampled data and threshold it we get the ADSB waveform
 
 ![](graphics/ADSB_Detected_Waveform.png)
 
-Then subsampling by a factor of 2 and shifting to the first non-zero bit, we get the ADSB bit stream for the packet.
+We do the thresholding using code similar to this:
+```
+x = (your signal);
+T = (some value, likely 5, 10, or 20);
+
+x_threshold = double(x>T); % the double command converts the logical type to back to double
+``` 
+
+Next we subsample by a factor of 2 and shift so the plot starts at the first non-zero bit. This is the ADSB bit stream for the packet.
 
 ![](graphics/ADSB_Bits.png)
 
@@ -119,15 +127,24 @@ We decode this as
 
 ![](graphics/ADSB_Decode.png)
 
+You must collect one or more ADSB signals and use MATLAB (or Python) to produce a figure clearly showing an ADSB bit stream, as in the preceding two figures. You must identify the packet preamble and where the packet data begins. Additionally, you must answer all questions given in the Lab Report section below. 
+
+If you are enjoying the decoding process and wish to earn some bonus points, proceed with the next section!
+
+## BONUS: Further Decoding of the ADSB Packets
+
+This next part is _optional_, but you will receive a 5 point bonus (on a 50 pt assignment) for identifying a flight number from your decoded data following the steps provided in this section. **You are allowed to use GenAI Level 5 for this part of the lab to help you write MATLAB or Python code.**
+
+---------
 Since the packets are only 56 or 112 bits, a lot of effort has been devoted to compressing as much information into the packets as possible. This is fairly intricate. We'll restrict our attention to finding packets with the fight numbers of the planes. Each plane sends these out every 2 s.
 
-The bits in the 112 us ADSB packet are allocated as follows,
+The bits in the 112 us ADSB packet (which is the length of packet we will be interested in) are allocated as follows,
 
 ![](graphics/ADSB_Bit_Allocation.png)
 
-The first 5 bits after the preamble identify the type of packet. This will be 17 or 18 for planes communicating to the ground. We are only interested in the DF 17 packets. The next three bits tell something about where the plane is, we'll skip these.
+The first 5 bits after the preamble identify the type of packet. This will be 17 or 18 for planes communicating to the ground. We are only interested in the DF 17 packets, meaning the first five bits after the preamble are 17 in binary. The next three bits after that tell something about where the plane is, we'll skip these.
 
-The unique identifier for the plane is the next 24 bits. If you format these bits as a hexidecimal string, and type that into google, you will find out which specific airframe this is, who owns it, and what they do with it.
+The unique identifier for the plane is the next 24 bits. If you format these bits as a hexidecimal string, and type that into Google, you can find out which specific airframe this is, who owns it, and what they do with it.
 
 After that is the data bits, that we will decode. This looks like
 
@@ -147,7 +164,7 @@ After the initial 8 bits of the data packet, the characters for the flight numbe
 ```
 
 
-The # entries are not used. This can be summarized as 1-26 => A-Z, 48-57=> 0-9, and 32 => space. In matlab, you can implement the decoder as
+The decimal value of each 6-bit binary number indicates the location of the character in the string above. The # entries are not used. This can be summarized as 1-26 => A-Z, 48-57=> 0-9, and 32 => space. In MATLAB, you can implement the decoder as
 
 ```
 function decode_id(pd)
@@ -175,8 +192,7 @@ end
 
 ```
 
-
-where pd is a matlab array of row vectors of 1's and 0's for each packet.
+where `pd` is a MATLAB array of row vectors of 1's and 0's for each packet.
 
 There is only one identify packet in the capture given above. To test your decoder, here are a couple of other identify packets to work with
 
@@ -190,7 +206,6 @@ pd = ['8da6e45a213b5d3340482042cea1'
 '8da0a457234cb5f5d39e2071ffa5']
 
 ```
-
 
 These are in hexidecimal. To convert them into an array of bits for the decoder above, use this
 
@@ -211,30 +226,34 @@ end
 
 ```
 
-
 A couple of flight numbers you should find are N543PD , FDX3153,and SKW5498.
 
-Lab Report
-----------
-
-For your lab report, try your processing code on this data set
+Here is another data set that was acquired during a much busier time of day in the Bay Area. 
 
 [adsb\_3.2M\_3.dat](adsb_3.2M_3.dat)
 
-This was acquired during a much busier time of the day. There are about 400 packets of various types, with at least 7 identify packets (not bad for 2 s of data!). The optimum threshold varies by packet, so you will get different planes with different thresholds. Try threshold levels of 20, 10 and 5. A better approach would be a packet level specific threshold, but that is beyond this lab.
+There are about 400 packets of various types, with at least 7 identify packets (not bad for 2 s of data!). The optimum threshold varies by packet, so you will get different numbers of planes with different thresholds. Try threshold levels of 20, 10 and 5. A better approach would be a packet level specific threshold, but that is beyond this lab.
 
-Decode the 24 bit ICAO identifiers as hex integers. Report how many unique planes to you hear. There will be lots of these packets because it includes all of the commercial planes, as well as light aircraft that don't have full adsb transmitters. I get 11 unique ICAO numbers with a threshold of 20.
+You can decode the 24 bit ICAO identifiers as hex integers. There will be lots of these packets because it includes all of the commercial planes, as well as light aircraft that don't have full adsb transmitters. Dr. Pauly got 11 unique ICAO numbers with a threshold of 20.
 
-Only some of the packets are the identify packets we are looking for. These have the first five bits after the preamble (bits 1-5) of 17, and a TC field (bits 33-37) of \[0 0 1 0 0\]. The data packet then encodes the flight number. Decode these using the mapping given above. You can type them into google, and you can see where they are coming from and going to, but that is not required for this lab.
+Only some of the packets are the identify packets. Again, these have the first five bits after the preamble (bits 1-5) of 17, and a TC field (bits 33-37) of \[0 0 1 0 0\]. The data packet then encodes the flight number. You can decode these using the mapping given above. You can then type them into Google and see where they are coming from and going to.
 
-Include your m-files for each of these functions in your report.
+## Lab Report
 
-Just for Fun
-------------
+For your lab report, you must: 
+- Collect one or more ADSB signals.
+- Use MATLAB (or Python) to produce a figure from your collected signals clearly showing an ADSB bit stream. This figure must be a stem plot similar to the last two plots in the Decoding ADSB Packets section, with a stem representing each 0.5 us (or two stems per 1 us pulse). 
+    - In the figure you must identify the packet preamble and where the packet data begins. 
+- Answer the two questions below:
+    - Using what you have learned about _baseband_ signaling in ECE 447, describe the type of signal coming from ADSB transmitters (e.g., line code, bandwidth, pulse width, bit rate, etc.).
+    - In this lab you manually adjusted timing and threshold values to get your received signal and decode it. ADSB receivers do all this in real time. Discuss how ADSB receivers know where the bits are.
+
+
+## Just for Fun (No Bonus)
 
 ### Real Time ADSB Plane PLotting
 
-Use your rtl-sdr to acquire ADSB data, decode it, and map it in real time. Thats where the plots above came from. Set your antenna up with an appropriate length, and vertical polarization. For Windows users the most popular program seems to be [Plane Plotter](https://www.coaa.co.uk/planeplotter.htm). This comes as a self extracting .exe file. It has a free 21 day trial period, after which it costs 25 Euros. For the Mac and Linux, the key piece of software is Dump1090. This captures and decodes the data. The actual display is usually handled by other programs (typically a web server and a browser). Some basic installation guidelines for the mac are [here](http://ee26n.stanford.edu/Assignments/Dump1090.html). Raspbian even has dump1090 in its package manager. 1090 MHz doesn't go through buildings too well, so put your antenna in a window, or go outside. If you can see the planes, you can pick up their signal.
+Use your RTL-SDR to acquire ADSB data, decode it, and map it in real time. Thats where the plots above came from. Set your antenna up with an appropriate length, and vertical polarization. For Windows users the most popular program seems to be [Plane Plotter](https://www.coaa.co.uk/planeplotter.htm). This comes as a self extracting .exe file. It has a free 21 day trial period, after which it costs 25 Euros. For the Mac and Linux, the key piece of software is Dump1090. This captures and decodes the data. The actual display is usually handled by other programs (typically a web server and a browser). Some basic installation guidelines for the mac are [here](http://ee26n.stanford.edu/Assignments/Dump1090.html). Raspbian even has dump1090 in its package manager. 1090 MHz doesn't go through buildings too well, so put your antenna in a window, or go outside. If you can see the planes, you can pick up their signal.
 
 ### Dictator Alert
 
