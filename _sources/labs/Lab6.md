@@ -239,14 +239,16 @@ You can decode the 24 bit ICAO identifiers as hex integers. There will be lots o
 Only some of the packets are the identify packets. Again, these have the first five bits after the preamble (bits 1-5) of 17, and a TC field (bits 33-37) of \[0 0 1 0 0\]. The data packet then encodes the flight number. You can decode these using the mapping given above. You can then type them into Google and see where they are coming from and going to.
 
 ## Lab Report
+ 
+- Collect one or more ADSB signals. Upload your best collect file to Gradescope.
 
-For your lab report, you must: 
-- Collect one or more ADSB signals.
+For your PDF lab report, you must:
 - Use MATLAB (or Python) to produce a figure from your collected signals clearly showing an ADSB bit stream. This figure must be a stem plot similar to the last two plots in the Decoding ADSB Packets section, with a stem representing each 0.5 us (or two stems per 1 us pulse). 
     - In the figure you must identify the packet preamble and where the packet data begins. 
 - Answer the two questions below:
     - Using what you have learned about _baseband_ signaling in ECE 447, describe the type of signal coming from ADSB transmitters (e.g., line code, bandwidth, pulse width, bit rate, etc.).
     - In this lab you manually adjusted timing and threshold values to get your received signal and decode it. ADSB receivers do all this in real time. Discuss how ADSB receivers know where the bits are.
+- Upload the PDF lab report to Gradescope.
 
 
 ## Just for Fun (No Bonus)
