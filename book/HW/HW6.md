@@ -26,5 +26,5 @@ Chapter 6 (6.7-6.9)
     2. Use the available bandwidth and roll-off factor to find the pulse rate (pulses/sec), $R_s$. This can also be called the symbol rate - hence the subscript $s$.
     3. Calculate the number of bits per pulse.
 
-- **6.8-1** --> Part (a): remember binary PSK is equivalent to polar signaling. Part (b): use Carson's Rule, where $\Delta f$ is the peak frequency deviation (i.e., difference between the frequencies) and $B$ is the bandwidth of the baseband signal.
+- **6.8-1** --> Part (a): remember binary PSK is equivalent to polar signaling. Part (b): use Carson's Rule, where $\Delta f$ is the peak frequency deviation from the center point between the two frequencies and $B$ is the bandwidth of the baseband signal.
 - **6.8-1 Add-on Part (c)** --> If the modulator generates a 16-PSK signal, what is the bandwidth of the modulated output? What about for a 16-QAM signal? 
