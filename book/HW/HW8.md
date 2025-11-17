@@ -12,8 +12,8 @@ Chapter 9
 - Submit work to Gradescope with pages assigned to each problem. Scans/uploads must be legible and neat without excessive margins.
 
 ## Problems:
-- ****
-- **** 
-- ****  
-- ****  
-- ****  
+- **TBD**
+- **TBD** 
+- **TBD**  
+- **TBD**  
+- **TBD**  
