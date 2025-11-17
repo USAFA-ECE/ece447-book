@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Lab 4: GNU Radio &#8212; ECE447 Course Webpage</title>
+    <title>Lab 7: Digital Wireless System using MATLAB &#8212; ECE447 Course Webpage</title>
   
   
   
@@ -62,12 +62,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/Lab4';</script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'labs/Lab7';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Homework 4" href="../HW/HW4.html" />
-    <link rel="prev" title="Homework 3" href="../HW/HW3.html" />
+    <link rel="prev" title="Homework 8" href="../HW/HW8.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -192,7 +193,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW2.html">Homework 2</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab4.html">Lab 4: GNU Radio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW5.html">Homework 5</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: QPSK Modulation and Demodulation</a></li>
@@ -200,7 +201,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW7.html">Homework 7</a></li>
 <li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW8.html">Homework 8</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: Digital Wireless System using MATLAB</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 7: Digital Wireless System using MATLAB</a></li>
 </ul>
 
     </div>
@@ -272,7 +273,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2Flabs/Lab4.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2Flabs/Lab7.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -302,7 +303,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="../_sources/labs/Lab4.md" target="_blank"
+      <li><a href="../_sources/labs/Lab7.md" target="_blank"
    class="btn btn-sm btn-download-source-button dropdown-item"
    title="Download source file"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -386,7 +387,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 4: GNU Radio</h1>
+    <h1>Lab 7: Digital Wireless System using MATLAB</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -396,9 +397,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-17-oct-lesson-25-by-2359-on-gradescope">Due NLT 17 Oct (Lesson 25) by 2359 on Gradescope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-to-gradescope-nlt-2359-on-thursday-4-dec-l40">Due to Gradescope NLT 2359 on Thursday, 4 Dec (L40)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gnu-radio-tutorials">GNU Radio Tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-matlab-wireless-communications-onramp-tutorial">Part 1: MATLAB Wireless Communications Onramp Tutorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-bit-error-rate-ber-vs-signal-to-noise-ratio-snr-for-qam-signals">Part 2: Bit Error Rate (BER) vs. Signal-to-Noise Ratio (SNR) for QAM Signals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-ber-vs-snr-for-qam-symbols-using-ofdm-in-a-multipath-environment">Part 3: BER vs. SNR for QAM Symbols using OFDM in a Multipath Environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
 </ul>
             </nav>
@@ -411,30 +416,84 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-4-gnu-radio">
-<h1>Lab 4: GNU Radio<a class="headerlink" href="#lab-4-gnu-radio" title="Permalink to this heading">#</a></h1>
-<section id="due-nlt-17-oct-lesson-25-by-2359-on-gradescope">
-<h2>Due NLT 17 Oct (Lesson 25) by 2359 on Gradescope<a class="headerlink" href="#due-nlt-17-oct-lesson-25-by-2359-on-gradescope" title="Permalink to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-7-digital-wireless-system-using-matlab">
+<h1>Lab 7: Digital Wireless System using MATLAB<a class="headerlink" href="#lab-7-digital-wireless-system-using-matlab" title="Permalink to this heading">#</a></h1>
+<section id="due-to-gradescope-nlt-2359-on-thursday-4-dec-l40">
+<h2>Due to Gradescope NLT 2359 on Thursday, 4 Dec (L40)<a class="headerlink" href="#due-to-gradescope-nlt-2359-on-thursday-4-dec-l40" title="Permalink to this heading">#</a></h2>
+</section>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>We have be covering binary digital communication systems in class. We have also discussed QAM, frequency division multiplexing, channel noise, and random signals. This lab is a conglomeration of all of these topics and shows how modern wireless telecommunication systems achieve high performance in challenging environments.</p>
+<p>You will first complete an online MATLAB tutorial for wireless communications. This tutorial will explain concepts and walk you through the necessary code. You will need your Mathworks login info to complete the tutorial. After that, you will use a provided MATLAB script to plot the BER vs. SNR for varying levels of QAM signals, both with and without multipath in the channel. Next, you will use a different MATLAB script to plot the BER vs. SNR for QAM signals using Orthogonal Frequency Division Multiplexing (OFDM). You will see how knowledge of the channel, or the CSI, can drastically improve digital system performance.</p>
 </section>
 <section id="aims-of-the-lab">
 <h2>Aims of the Lab<a class="headerlink" href="#aims-of-the-lab" title="Permalink to this heading">#</a></h2>
-<p>The goals of this lab are to learn GNU Radio better and apply it to changing the sample rate of a signal.</p>
-</section>
-<section id="gnu-radio-tutorials">
-<h2>GNU Radio Tutorials<a class="headerlink" href="#gnu-radio-tutorials" title="Permalink to this heading">#</a></h2>
-<p>The GNU Radio wiki page contains several helpful tutorials for learning how to use GNU Radio. In this lab you will complete several of the foundational tutorials and then demonstrate what happens in the frequency domain when changing the sample rate of a signal.</p>
-<p>Go to <a class="reference external" href="https://wiki.gnuradio.org/index.php?title=Tutorials">https://wiki.gnuradio.org/index.php?title=Tutorials</a>. Complete the following tutorials:</p>
+<p>The purposes of this lab are:</p>
 <ul class="simple">
-<li><p>Introducing GNU Radio: Your First Flowgraph</p></li>
-<li><p>All tutorials under Flowgraph Fundamentals</p></li>
-<li><p>DSP Blocks: Low Pass Filter Example</p></li>
-<li><p>DSP Blocks: Sample Rate Change (skip the Decimation section)</p></li>
+<li><p>Explore the impact of noise and multipath on QAM signals.</p></li>
+<li><p>Understand how OFDM and Channel State Information (CSI) affect system performance.</p></li>
 </ul>
-<p>After completing the Sample Rate Change tutorial, create a figure similar to the figure immediately before the Decimation section but for a signal interpolated up to 512 kHz instead of 128 kHz.</p>
+</section>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
+<p>Wireless communication systems face significant challenges due to the nature of the radio channel. One of the most critical impairments is multipath propagation, which occurs when transmitted signals reflect off buildings, terrain, and other objects, arriving at the receiver via multiple paths. These delayed copies of the signal interfere with each other, causing fading and distortion that degrade system performance. Multipath effects become more pronounced in high-data-rate systems, where symbol durations are short and inter-symbol interference (ISI) can severely impact reliability.</p>
+<p>To combat multipath, modern systems employ Orthogonal Frequency Division Multiplexing (OFDM). OFDM divides the available bandwidth into many narrow subcarriers, each carrying a portion of the data. By transmitting symbols in parallel across these subcarriers, OFDM converts a frequency-selective channel into multiple flat-fading channels, greatly reducing ISI. This technique is widely used in standards such as LTE, Wi-Fi, and 5G because it improves robustness in multipath environments.</p>
+<p>Historically, OFDM emerged in the late 1960s as a theoretical concept for mitigating multipath in high-speed data transmission. It gained practical relevance in the 1980s with digital broadcasting and DSL technologies, where its ability to handle severe channel impairments proved invaluable. The breakthrough came in the 1990s when OFDM was adopted for wireless LANs (IEEE 802.11a) and later became the foundation for 4G LTE and 5G NR. Its efficiency in spectrum usage and resilience to multipath made it the dominant modulation technique for modern broadband wireless systems.</p>
+<p>Another key concept in wireless systems is Channel State Information (CSI). CSI represents the transmitter’s and receiver’s knowledge of the channel characteristics. Accurate CSI enables techniques like adaptive modulation, coding, and equalization, which optimize performance under varying conditions. When CSI is imperfect—due to measurement errors or outdated estimates—system performance degrades, especially in multipath channels. Understanding the impact of CSI quality is essential for designing resilient communication systems.</p>
+<p>In this lab, you will explore these concepts by simulating QAM signals under different conditions, comparing performance with and without OFDM, and analyzing the role of CSI. Through MATLAB-based experiments, you will gain insight into how modern wireless systems mitigate multipath and why accurate channel knowledge is critical for reliable communication.</p>
+</section>
+<section id="part-1-matlab-wireless-communications-onramp-tutorial">
+<h2>Part 1: MATLAB Wireless Communications Onramp Tutorial<a class="headerlink" href="#part-1-matlab-wireless-communications-onramp-tutorial" title="Permalink to this heading">#</a></h2>
+<p>Complete the tutorial located at this link:</p>
+<p><a class="reference external" href="https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless">https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless</a></p>
+<p>The time required to complete the tutorial is estimated to be one hour, so plan accordingly.</p>
+</section>
+<section id="part-2-bit-error-rate-ber-vs-signal-to-noise-ratio-snr-for-qam-signals">
+<h2>Part 2: Bit Error Rate (BER) vs. Signal-to-Noise Ratio (SNR) for QAM Signals<a class="headerlink" href="#part-2-bit-error-rate-ber-vs-signal-to-noise-ratio-snr-for-qam-signals" title="Permalink to this heading">#</a></h2>
+<p>In the next part of this lab, you will use what you learned in the tutorial to investigate the effect of noise and multipath on QAM signals. Use this MATLAB code: <span class="xref myst">WCO_Lab_QAM.m</span> (generated from the tutorial online). Complete the following steps and answer the questions for your lab report:</p>
+<ol class="arabic">
+<li><p>Plot the BER versus the SNR for 4-, 16-, 64-, and 256-QAM over SNRs ranging from -20 dB to 40 dB in increments of at most 2 dB for a regular AWGN channel without multipath.</p>
+<p>a. Copy and paste the plot into your lab report.</p>
+<p>b. This plot is known as a <em>waterfall plot</em> due to its shape. A system can be designed to dynamically change the modulation format after measuring the SNR of the channel to maintain a specific BER. Using your plot, estimate how many extra decibels in SNR each additional bit in the QAM symbol achieves to maintain a BER of <span class="math notranslate nohighlight">\(10^{-3}\)</span>. For example, 4-QAM uses 2 bits and 16-QAM uses 4 bits. At BER = <span class="math notranslate nohighlight">\(10^{-3}\)</span>, estimate the difference between the SNRs of the two QAM formats. (Note: smaller SNR increments make this easier.)</p>
+</li>
+<li><p>Modify the code to include multipath in the channel and generate a plot with the same QAM modulation orders and SNRs as before.</p>
+<p>a. Copy and paste the plot into your document.</p>
+<p>b. How is this plot different than the first one? Why?</p>
+</li>
+<li><p>With the multipath option enabled, MATLAB should generate a spectrum analyzer plot showing the transmitted signal in yellow and the channel in blue in the frequency domain. How does what you see in the plot explain the differences between your first two plots? (Hint: Part 4 of the online tutorial – Multipath Channels - discusses this in the Further Practice section.)</p></li>
+</ol>
+</section>
+<section id="part-3-ber-vs-snr-for-qam-symbols-using-ofdm-in-a-multipath-environment">
+<h2>Part 3: BER vs. SNR for QAM Symbols using OFDM in a Multipath Environment<a class="headerlink" href="#part-3-ber-vs-snr-for-qam-symbols-using-ofdm-in-a-multipath-environment" title="Permalink to this heading">#</a></h2>
+<p>In this part of the lab, you will investigate the effect of noise and multipath on QAM signals <em>using OFDM</em>. You will also look at how having less than perfect Channel State Information (CSI) at the transmitter affects the system’s performance. Use this MATLAB code: <span class="xref myst">WCO_Lab_OFDM.m</span>. Complete the following steps and add your plots and answers to your lab report:</p>
+<ol class="arabic">
+<li><p>Plot the BER versus the SNR for 4-, 16-, 64-, and 256-QAM over SNRs ranging from -20 dB to 40 dB in increments of at most 2 dB for a regular AWGN channel with multipath using OFDM and with perfect CSI knowledge at the transmitter (Option 1 selected).</p>
+<p>a. Copy and paste the plot into your lab report.</p>
+<p>b. How does this plot compare to the multipath plot in Part 2 that did not use OFDM? Why does OFDM improve the communication system’s performance when multipath is present?</p>
+</li>
+<li><p>Perfect CSI enables perfect equalization at the receiver. If the CSI is corrupted, whether through incorrect channel sounding or other means, the system performance degrades.</p>
+<ul class="simple">
+<li><p>In Option 2, only a single path of the multipath CSI is corrupted.</p></li>
+<li><p>In Option 3, each path of the multipath vector has a small amount of noise added to it.</p></li>
+<li><p>In Option 4, the receiver does not have any CSI.</p></li>
+</ul>
+<p>Re-run the code for each option and save the plots.</p>
+<p>a. Copy and paste the plots into your document.</p>
+<p>b. Compare and contrast the three plots with imperfect CSI (Options 2–4) to the plot with perfect CSI (Option 1) at the receiver. Discuss the impact of having good CSI at the receiver to system performance. How does the performance compare between Options 2 and 3 (one corrupt path vs. all paths slightly corrupted)? What happens if you increase the amplitude of the noise corrupting the CSI (currently set to 0.05)?</p>
+</li>
+</ol>
 </section>
 <section id="lab-report">
 <h2>Lab Report<a class="headerlink" href="#lab-report" title="Permalink to this heading">#</a></h2>
-<p>Save your figure as a PDF, include a doc statement, and upload to Gradescope. Also, answer the questions in Gradescope.</p>
+<ul class="simple">
+<li><p>Complete the Mathworks Wireless Communications On-ramp tutorial at:
+<a class="reference external" href="https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless">https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless</a></p></li>
+</ul>
+<p>For your PDF lab report, you must:</p>
+<ul class="simple">
+<li><p>Include all plots and answer all questions as directed in Parts 2 and 3 of the lab guidance.</p></li>
+<li><p>Upload the PDF to Gradescope.</p></li>
+</ul>
 </section>
 </section>
 
@@ -469,22 +528,13 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../HW/HW3.html"
+       href="../HW/HW8.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Homework 3</p>
+        <p class="prev-next-title">Homework 8</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="../HW/HW4.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Homework 4</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -502,9 +552,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-17-oct-lesson-25-by-2359-on-gradescope">Due NLT 17 Oct (Lesson 25) by 2359 on Gradescope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-to-gradescope-nlt-2359-on-thursday-4-dec-l40">Due to Gradescope NLT 2359 on Thursday, 4 Dec (L40)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gnu-radio-tutorials">GNU Radio Tutorials</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-matlab-wireless-communications-onramp-tutorial">Part 1: MATLAB Wireless Communications Onramp Tutorial</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-bit-error-rate-ber-vs-signal-to-noise-ratio-snr-for-qam-signals">Part 2: Bit Error Rate (BER) vs. Signal-to-Noise Ratio (SNR) for QAM Signals</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-ber-vs-snr-for-qam-symbols-using-ofdm-in-a-multipath-environment">Part 3: BER vs. SNR for QAM Symbols using OFDM in a Multipath Environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
 </ul>
   </nav></div>
