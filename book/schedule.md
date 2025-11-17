@@ -44,12 +44,12 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 29 | Probability, Part 1 | L&D 7.1-7.3 |  |  |
 | 30 | Probability, Part 2 | L&D 7.4-7.7 |  |  |
 | 31 | Random processes | L&D 8-8.4 (at least) | [HW7](HW/HW7) | [HW6](HW/HW6) |
-| 32 | SDR Lab | Lab 6 Description |  Lab 6  | [Lab 5](labs/Lab5.md) |
+| 32 | SDR Lab | Lab 6 Description | [Lab 6](labs/Lab6.md) | [Lab 5](labs/Lab5.md) |
 | 33 | GR2 Review Day |  |  | [HW7](HW/HW7) |
 | 34 | GR 2 | Covering Lsns 18-30 (Chapters 5-7) |  |  |
-| 35 | Matched filters & binary system performance, Part 1 | L&D 9.1-9.2 | HW8 |  |
-| 36 | Binary system performance, Part 2 | L&D 9.2, 9.3.3 |  | Lab 6 |
+| 35 | Matched filters & binary system performance, Part 1 | L&D 9.1-9.2 | [HW8](HW/HW8) |  |
+| 36 | Binary system performance, Part 2 | L&D 9.2, 9.3.3 |  | [Lab 6](labs/Lab6.md) |
 | 37 | Error correction: parity, CRC, & Hamming codes | L&D 12.3.2, 13.1-13.3 |  |  |
-| 38 | MATLAB Lab | Lab 7 Description | Lab 7 |  |
-| 39 | OFDM, MIMO, CDMA | Supplemental (need to add) |  | HW8 |
-| 40 | Course review |  |  | Lab 7 |
+| 38 | MATLAB Lab | Lab 7 Description | [Lab 7](labs/Lab7.md) |  |
+| 39 | OFDM, MIMO, CDMA | Supplemental (need to add) |  | [HW8](HW/HW8) |
+| 40 | Course review |  |  | [Lab 7](labs/Lab7.md) |

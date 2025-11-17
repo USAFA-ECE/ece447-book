@@ -27,4 +27,5 @@ parts:
       - file: HW/HW6
       - file: HW/HW7
       - file: labs/Lab6
-  #    - file: labs/Lab7
+      - file: HW/HW8
+      - file: labs/Lab7
