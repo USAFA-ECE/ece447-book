@@ -36,7 +36,7 @@ The time required to complete the tutorial is estimated to be one hour, so plan 
 
 ## Part 2: Bit Error Rate (BER) vs. Signal-to-Noise Ratio (SNR) for QAM Signals
 
-In the next part of this lab, you will use what you learned in the tutorial to investigate the effect of noise and multipath on QAM signals. Use this MATLAB code: [WCO_Lab_QAM.m](labs/WCO_Lab_QAM.m) (generated from the tutorial online). Complete the following steps and answer the questions for your lab report:
+In the next part of this lab, you will use what you learned in the tutorial to investigate the effect of noise and multipath on QAM signals. Use this MATLAB code: [WCO_Lab_QAM.m](WCO_Lab_QAM.m) (generated from the tutorial online). Complete the following steps and answer the questions for your lab report:
 
 1. Plot the BER versus the SNR for 4-, 16-, 64-, and 256-QAM over SNRs ranging from -20 dB to 40 dB in increments of at most 2 dB for a regular AWGN channel without multipath.
     
@@ -55,7 +55,7 @@ In the next part of this lab, you will use what you learned in the tutorial to i
 
 ## Part 3: BER vs. SNR for QAM Symbols using OFDM in a Multipath Environment
 
-In this part of the lab, you will investigate the effect of noise and multipath on QAM signals *using OFDM*. You will also look at how having less than perfect Channel State Information (CSI) at the transmitter affects the system’s performance. Use this MATLAB code: [WCO_Lab_OFDM.m](labs/WCO_Lab_OFDM.m). Complete the following steps and add your plots and answers to your lab report:
+In this part of the lab, you will investigate the effect of noise and multipath on QAM signals *using OFDM*. You will also look at how having less than perfect Channel State Information (CSI) at the transmitter affects the system’s performance. Use this MATLAB code: [WCO_Lab_OFDM.m](WCO_Lab_OFDM.m). Complete the following steps and add your plots and answers to your lab report:
 
 1. Plot the BER versus the SNR for 4-, 16-, 64-, and 256-QAM over SNRs ranging from -20 dB to 40 dB in increments of at most 2 dB for a regular AWGN channel with multipath using OFDM and with perfect CSI knowledge at the transmitter (Option 1 selected).
 
