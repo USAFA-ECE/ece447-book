@@ -1,6 +1,6 @@
 # Lab 7: Digital Wireless System using MATLAB
 
-### Due to Gradescope NLT 2359 on Thursday, 4 Dec (L40)
+**Due to Gradescope NLT 2359 on Thursday, 4 Dec (L40)**
 
 ## Overview
 
