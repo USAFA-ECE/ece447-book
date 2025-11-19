@@ -12,8 +12,13 @@ Chapter 9
 - Submit work to Gradescope with pages assigned to each problem. Scans/uploads must be legible and neat without excessive margins.
 
 ## Problems:
-- **TBD**
-- **TBD** 
-- **TBD**  
+- **Chapter 8**: Define each of the following terms and give an example of a random process that meets the definition of each one.
+
+    - Stationary
+    - Nonstationary
+    - Wide-sense stationary
+    - Ergodic wide-sense stationary
+
+- **9.2-1a and modified b**: For Part(b) assume equiprobable transmission of 0 or 1 (NOT what the problem states!). Find the BER as a function of $T_b$ and $\mathcal{N}$ (aka $N_0$).
 - **TBD**  
 - **TBD**  

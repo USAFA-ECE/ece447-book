@@ -39,4 +39,5 @@ The slides on this page will be updated throughout the semester and posted as we
 | 31 | [Random Processes](_static/ECE447_Lesson31_Fa25.pdf)  | 
 | 32 | [SDR/MATLAB Lab 6](labs/Lab6)  | 
 | 33 | [GR 2 Review](_static/ECE447_Lesson33_Fa25.pdf)  | 
-| 35 | [Matched Filters, Binary System Performance](_static/ECE447_Lesson35_Fa25.pdf)  | 
+| 35 | [Matched Filters, Binary System Performance (Part1)](_static/ECE447_Lesson35_Fa25.pdf)  | 
+| 36 | [Binary System Performance (Part 2)](_static/ECE447_Lesson36_Fa25.pdf)  | 
