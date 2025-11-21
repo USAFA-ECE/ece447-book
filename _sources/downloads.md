@@ -41,3 +41,7 @@ The slides on this page will be updated throughout the semester and posted as we
 | 33 | [GR 2 Review](_static/ECE447_Lesson33_Fa25.pdf)  | 
 | 35 | [Matched Filters, Binary System Performance (Part1)](_static/ECE447_Lesson35_Fa25.pdf)  | 
 | 36 | [Binary System Performance (Part 2)](_static/ECE447_Lesson36_Fa25.pdf)  | 
+| 37 | [Error Correction](_static/ECE447_Lesson37_Fa25.pdf)  | 
+| 38 | [MATLAB Lab 7](labs/Lab7.md)  | 
+| 39 | [Advanced Topics](_static/ECE447_Lesson39_Fa25.pdf)  | 
+| 40 | [Course Review](_static/ECE447_Lesson40_Fa25.pdf)  | 
