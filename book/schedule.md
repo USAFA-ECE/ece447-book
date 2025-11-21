@@ -51,5 +51,5 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 36 | Binary system performance, Part 2 | L&D 9.2, 9.3.3 |  | [Lab 6](labs/Lab6.md) |
 | 37 | Error correction: parity, CRC, & Hamming codes | L&D 12.3.2, 13.1-13.3 |  |  |
 | 38 | MATLAB Lab | Lab 7 Description | [Lab 7](labs/Lab7.md) |  |
-| 39 | OFDM, MIMO, CDMA | Supplemental (need to add) |  | [HW8](HW/HW8) |
+| 39 | OFDM, MIMO, CDMA | None |  | [HW8](HW/HW8) |
 | 40 | Course review |  |  | [Lab 7](labs/Lab7.md) |
