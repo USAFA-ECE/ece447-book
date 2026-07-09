@@ -2,7 +2,7 @@
 
 Chapter 7
 
-## Due NLT 10 Nov (Lesson 33) by 2359 on Gradescope
+## Due NLT Lesson 34, 2359 on Gradescope
 
 ## Directions: 
 - Collaboration is authorized as noted in the syllabus Collaboration policy. 

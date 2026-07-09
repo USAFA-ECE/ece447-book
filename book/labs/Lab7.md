@@ -1,84 +1,64 @@
-# Lab 7: Digital Wireless System using MATLAB
+# Lab 7: A Digital Communications Protocol — ASCII Messaging
 
-**Due to Gradescope NLT 2359 on Thursday, 4 Dec (L40)**
+(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, Ch. 12.4-12.7.)
 
 ## Overview
 
-We have be covering binary digital communication systems in class. We have also discussed QAM, frequency division multiplexing, channel noise, and random signals. This lab is a conglomeration of all of these topics and shows how modern wireless telecommunication systems achieve high performance in challenging environments.
-
-You will first complete an online MATLAB tutorial for wireless communications. This tutorial will explain concepts and walk you through the necessary code. You will need your Mathworks login info to complete the tutorial. After that, you will use a provided MATLAB script to plot the BER vs. SNR for varying levels of QAM signals, both with and without multipath in the channel. Next, you will use a different MATLAB script to plot the BER vs. SNR for QAM signals using Orthogonal Frequency Division Multiplexing (OFDM). You will see how knowledge of the channel, or the CSI, can drastically improve digital system performance.
+A synchronized QPSK link (Lab 6) only gets you a clean stream of symbols — it doesn't tell you where a message starts. Today you'll receive a live, framed, ASCII-encoded message from the instructor's PLUTO and decode actual text out of the air. As in Lab 6, only the instructor transmits; the whole class receives simultaneously on individual RTL-SDRs.
 
 ## Aims of the Lab
 
-The purposes of this lab are: 
-- Explore the impact of noise and multipath on QAM signals.
-- Understand how OFDM and Channel State Information (CSI) affect system performance.
+- Write down the cross-correlation frame-detection metric and use it to explain how the receiver locates a known sync word inside a continuous symbol stream.
+- Decode a real over-the-air ASCII message end-to-end.
 
-## Introduction
+## Some Math: Finding the Frame with Cross-Correlation
 
-Wireless communication systems face significant challenges due to the nature of the radio channel. One of the most critical impairments is multipath propagation, which occurs when transmitted signals reflect off buildings, terrain, and other objects, arriving at the receiver via multiple paths. These delayed copies of the signal interfere with each other, causing fading and distortion that degrade system performance. Multipath effects become more pronounced in high-data-rate systems, where symbol durations are short and inter-symbol interference (ISI) can severely impact reliability.
+The transmitter prepends every message with a known sequence of symbols, $c[0], c[1], \dots, c[L-1]$ (the sync word), that both transmitter and receiver agree on ahead of time. The receiver slides a window of length $L$ across its incoming symbol stream $r[n]$ and computes the cross-correlation at every position:
 
-To combat multipath, modern systems employ Orthogonal Frequency Division Multiplexing (OFDM). OFDM divides the available bandwidth into many narrow subcarriers, each carrying a portion of the data. By transmitting symbols in parallel across these subcarriers, OFDM converts a frequency-selective channel into multiple flat-fading channels, greatly reducing ISI. This technique is widely used in standards such as LTE, Wi-Fi, and 5G because it improves robustness in multipath environments.
+$$R[n] = \sum_{k=0}^{L-1} r[n+k]\, c^*[k]$$
 
-Historically, OFDM emerged in the late 1960s as a theoretical concept for mitigating multipath in high-speed data transmission. It gained practical relevance in the 1980s with digital broadcasting and DSL technologies, where its ability to handle severe channel impairments proved invaluable. The breakthrough came in the 1990s when OFDM was adopted for wireless LANs (IEEE 802.11a) and later became the foundation for 4G LTE and 5G NR. Its efficiency in spectrum usage and resilience to multipath made it the dominant modulation technique for modern broadband wireless systems.
+When the window is aligned exactly with the transmitted sync word, every term in the sum adds constructively (since $r[n+k] \approx c[k]$ there), producing a sharp peak in $|R[n]|$. Anywhere else, the received symbols are essentially uncorrelated with $c[k]$, so the terms partially cancel and $|R[n]|$ stays small. Detecting that peak (usually by comparing it against a threshold) tells the receiver exactly which sample index the message frame starts at — this correlation is precisely the matched filter operation, so named because $c^*[k]$ is matched to the exact known waveform you're searching for.
 
-Another key concept in wireless systems is Channel State Information (CSI). CSI represents the transmitter’s and receiver’s knowledge of the channel characteristics. Accurate CSI enables techniques like adaptive modulation, coding, and equalization, which optimize performance under varying conditions. When CSI is imperfect—due to measurement errors or outdated estimates—system performance degrades, especially in multipath channels. Understanding the impact of CSI quality is essential for designing resilient communication systems.
+## Setup
 
-In this lab, you will explore these concepts by simulating QAM signals under different conditions, comparing performance with and without OFDM, and analyzing the role of CSI. Through MATLAB-based experiments, you will gain insight into how modern wireless systems mitigate multipath and why accurate channel knowledge is critical for reliable communication.
+The instructor will announce a transmit frequency and run `digital/pluto_tx/pluto_QPSK_ascii_message.slx`, which repeatedly transmits a short text message framed with a known sync word.
 
-## Part 1: MATLAB Wireless Communications Onramp Tutorial
+## Activity 1: Frame Synchronization
 
-Complete the tutorial located at this link:
+1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_ascii_message.slx`. Internally, this receiver computes exactly the $R[n]$ correlation above against the known sync word.
+2. Locate the correlation peak / frame detection indicator in the model.
+3. Confirm it's triggering — once it finds a strong correlation peak, the receiver knows exactly where the message frame begins and can start decoding from that point.
 
-https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless
+*For more detail on data and frame synchronization, see Sec. 12.6 in SDR textbook.*
 
-The time required to complete the tutorial is estimated to be one hour, so plan accordingly.
+## Activity 2: Decode the Message
 
-## Part 2: Bit Error Rate (BER) vs. Signal-to-Noise Ratio (SNR) for QAM Signals
+1. With frame sync locked, let the receiver decode the received symbols into ASCII characters.
+2. Confirm you can read the transmitted text.
+3. If the instructor changes the message partway through class, confirm your receiver picks up the new text too.
+4. **If you're not receiving a clean decode**, fall back to `digital/rtlsdr_rx/rec_data/qpsk_ascii_msg.mat` (or `digital/rtlsdr_rx/rec_data/dqpsk_ascii_msg.mat` for the differentially-encoded version) to complete the assignment.
 
-In the next part of this lab, you will use what you learned in the tutorial to investigate the effect of noise and multipath on QAM signals. Use this MATLAB code: [WCO_Lab_QAM.m](WCO_Lab_QAM.m) (generated from the tutorial online). Complete the following steps and answer the questions for your lab report:
+*For more detail on ASCII encoding and message transmission, see Sec. 12.5 and 12.7 in SDR textbook.*
 
-1. Plot the BER versus the SNR for 4-, 16-, 64-, and 256-QAM over SNRs ranging from -20 dB to 40 dB in increments of at most 2 dB for a regular AWGN channel without multipath.
-    
-    a. Copy and paste the plot into your lab report. 
-    
-    b. This plot is known as a _waterfall plot_ due to its shape. A system can be designed to dynamically change the modulation format after measuring the SNR of the channel to maintain a specific BER. Using your plot, estimate how many extra decibels in SNR each additional bit in the QAM symbol achieves to maintain a BER of $10^{-3}$. For example, 4-QAM uses 2 bits and 16-QAM uses 4 bits. At BER = $10^{-3}$, estimate the difference between the SNRs of the two QAM formats. (Note: smaller SNR increments make this easier.)
+## Optional Extension
 
-2. Modify the code to include multipath in the channel and generate a plot with the same QAM modulation orders and SNRs as before.
+QPSK has a subtle problem: the 4th-power frequency estimation trick from Lab 6 can't tell the difference between the true carrier phase and the true phase plus any multiple of 90 degrees — so a receiver can lock on 90, 180, or 270 degrees rotated from the truth and have no way to know it (this is called phase ambiguity).
 
-    a. Copy and paste the plot into your document.
+Differential encoding sidesteps the problem entirely by transmitting information in the change between consecutive symbols rather than their absolute value: $b[n] = a[n]\, b[n-1]$, where $a[n]$ is the data-bearing unit-magnitude symbol and $b[n-1]$ is the previously transmitted symbol. The receiver recovers $a[n]$ by multiplying by the conjugate of the previous received symbol:
 
-    b. How is this plot different than the first one? Why?
+$$\hat{a}[n] = r[n]\, r^*[n-1]$$
 
-3. With the multipath option enabled, MATLAB should generate a spectrum analyzer plot showing the transmitted signal in yellow and the channel in blue in the frequency domain. How does what you see in the plot explain the differences between your first two plots? (Hint: Part 4 of the online tutorial – Multipath Channels - discusses this in the Further Practice section.)
+If the whole received constellation is rotated by some unknown ambiguity $\theta_0$ — i.e. $r[n] = b[n]e^{j\theta_0}$ for every $n$ — then $\hat{a}[n] = b[n]e^{j\theta_0}\, \big(b[n-1]e^{j\theta_0}\big)^* = b[n]b^*[n-1] = a[n]$: the $e^{j\theta_0}$ terms cancel exactly, regardless of what $\theta_0$ is. That's why differential encoding is immune to phase ambiguity.
 
+If you finish early, try `digital/simulation/differential_coding/QPSK_diff_encode_decode.slx` and confirm this cancellation for yourself by introducing a constellation rotation and checking that the decoded bits are unaffected.
 
-## Part 3: BER vs. SNR for QAM Symbols using OFDM in a Multipath Environment
+*For more detail on phase ambiguity and differential encoding, see Sec. 11.9-11.10 in SDR textbook.*
 
-In this part of the lab, you will investigate the effect of noise and multipath on QAM signals *using OFDM*. You will also look at how having less than perfect Channel State Information (CSI) at the transmitter affects the system’s performance. Use this MATLAB code: [WCO_Lab_OFDM.m](WCO_Lab_OFDM.m). Complete the following steps and add your plots and answers to your lab report:
+## Assignment
 
-1. Plot the BER versus the SNR for 4-, 16-, 64-, and 256-QAM over SNRs ranging from -20 dB to 40 dB in increments of at most 2 dB for a regular AWGN channel with multipath using OFDM and with perfect CSI knowledge at the transmitter (Option 1 selected).
+Submit a single PDF to Gradescope containing:
 
-    a. Copy and paste the plot into your lab report.
-
-    b. How does this plot compare to the multipath plot in Part 2 that did not use OFDM? Why does OFDM improve the communication system’s performance when multipath is present?
-
-2. Perfect CSI enables perfect equalization at the receiver. If the CSI is corrupted, whether through incorrect channel sounding or other means, the system performance degrades.
-    - In Option 2, only a single path of the multipath CSI is corrupted.
-    - In Option 3, each path of the multipath vector has a small amount of noise added to it.
-    - In Option 4, the receiver does not have any CSI.
-
-    Re-run the code for each option and save the plots.
-
-    a. Copy and paste the plots into your document.
-
-    b. Compare and contrast the three plots with imperfect CSI (Options 2–4) to the plot with perfect CSI (Option 1) at the receiver. Discuss the impact of having good CSI at the receiver to system performance. How does the performance compare between Options 2 and 3 (one corrupt path vs. all paths slightly corrupted)? What happens if you increase the amplitude of the noise corrupting the CSI (currently set to 0.05)?
-
-## Lab Report
-
-- Complete the Mathworks Wireless Communications On-ramp tutorial at:
-https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless 
-
-For your PDF lab report, you must:
-- Include all plots and answer all questions as directed in Parts 2 and 3 of the lab guidance.
-- Upload the PDF to Gradescope.
+1. A screenshot showing your frame synchronization indicator locking on (e.g., the correlation peak or sync flag).
+2. The decoded ASCII message text you received.
+3. 2-3 sentences: what would your receiver see if the frame sync word were never found (e.g., due to a very weak signal)? Would it decode garbage, nothing at all, or something else?
+4. Your documentation statement.

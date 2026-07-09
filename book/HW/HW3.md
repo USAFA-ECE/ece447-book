@@ -2,7 +2,7 @@
 
 Chapter 5
 
-## Due NLT 1 Oct (Lesson 20) by 2359 on Gradescope
+## Due NLT Lesson 20, 2359 on Gradescope
 
 ## Directions: 
 - Collaboration is authorized as noted in the syllabus Collaboration policy. 

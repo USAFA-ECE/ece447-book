@@ -1,297 +1,59 @@
-# Lab 2: Capturing Signals and Displaying Signals 
-(Adapted from Dr. John Pauly's Stanford University EE179 course website: https://web.stanford.edu/class/ee179/Homework.html.)
+# Lab 2: Complex Signals and Spectra
+
+(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, Ch. 5.1-5.2.)
 
 ## Overview
 
-Last time you used an integrated program, gqrx, to control your SDR and listen to wideband commercial FM and narrowband FM used in police and fire radio. This week we'll get a little closer to the hardware and learn how to control the SDRs more directly. We'll use this to save data to a file, or stream it over a socket, so we can get signals into MATLAB or Python where we can get a better look at them. 
-
-(Remember - you can choose whether to use MATLAB or Python. The example code provided in this lab will be for MATLAB. If you are more comfortable with Python, the code is easily converted from MATLAB using GenAI, and whenever I reference MATLAB just think Python.)
+Every receiver you built in Lab 1 was secretly working with **complex (I/Q) samples**, even though the spectrum display looked like an ordinary real-valued plot. This lab makes that explicit: you'll see why real signals produce mirror-image (symmetric) spectra, why complex signals don't, and why that distinction matters once your RTL-SDR hands you IQ data instead of a single real-valued stream.
 
 ## Aims of the Lab
 
-This week we'll look at other ways to control your SDR, how to get the data into MATLAB, and then display the spectrum. In the end you will be able to capture a signal, and display it's spectrum as a plot, and a spectrogram which displays how the spectrum changes with time.
+- Derive, from Euler's formula, why a real cosine has a two-sided (mirrored) spectrum while a complex exponential has a one-sided spectrum.
+- Compare the spectrum of a real-valued signal to the spectrum of a complex-valued signal built from the same information.
+- Observe frequency offset in a live RTL-SDR capture (caused by your dongle's crystal drift) and correct it using a complex exponential, and understand the multiplication that performs the correction.
 
-## Command Line SDR Control
+## Some Math: From Euler's Formula to Complex Baseband
 
-You can control your SDR more directly with programs you run from the command line. This will allow you to see details about the SDR, capture data to a file, or stream it over the network via a socket. You can also do this using GNU Radio or GNU Radio Companion, the GUI version of GNU Radio (sort of like what Simulink is to MATLAB).
+Start with Euler's formula, $e^{j\theta} = \cos\theta + j\sin\theta$. Solving for cosine by combining $e^{j\theta}$ and $e^{-j\theta}$ gives:
 
-<!-- If you have a mac, the programs used to be installed when you installed gqrx. However the latest version doesn't. The easiest thing to do is install an older version that includes these. This is at
+$$\cos(2\pi f t) = \frac{1}{2}e^{j2\pi f t} + \frac{1}{2}e^{-j2\pi f t}$$
 
-[gqrx with rtl utilities](https://github.com/gqrx-sdr/gqrx/releases/tag/v2.11.5)
+Read the right-hand side as two counter-rotating phasors, one spinning at $+f$ and one at $-f$, each with half the amplitude. That's exactly why a real-valued tone at frequency $f$ shows up as *two* impulses in its spectrum, at $+f$ and $-f$ — the "mirroring" you'll see in Activity 1 isn't a plotting artifact, it's a direct consequence of the fact that a real signal can only be built from *both* phasors together (cosines and sines are their own complex conjugate pair).
 
-Just make sure to give it a unique name so you don't write over the latest version of gqrx.
+Now build a complex baseband signal directly from an in-phase and quadrature component, $I(t) = A\cos(2\pi f t)$ and $Q(t) = A\sin(2\pi f t)$:
 
-They are stored in the directory that is the application. Open a terminal, and cd to
+$$s(t) = I(t) + jQ(t) = A\cos(2\pi f t) + jA\sin(2\pi f t) = Ae^{j2\pi f t}$$
 
-```
-/Applications/Gqrx_2.11.5.app/Contents/MacOS/.
-``` -->
+by Euler's formula again — but this time there's only *one* phasor, spinning at $+f$. No $-f$ term exists to cancel or reinforce it. This is the one-sided spectrum you'll see in Activity 1's third exercise, and it's exactly how your RTL-SDR's quadrature downconverter produces a complex baseband signal from real RF.
 
+Finally, frequency correction (Activity 2) is just multiplying by another phasor:
 
-<!-- Here I assume you named the old version Gqrx\_2.11.5. This has several programs, including three that you will be using in this lab. These are rtl\_test, rtl\_sdr, and rtl\_tcp.
+$$s(t)\cdot e^{-j2\pi \Delta f t} = Ae^{j2\pi f t}e^{-j2\pi \Delta f t} = Ae^{j2\pi (f-\Delta f)t}$$
 
-Either add the directory where these programs reside to your path, or make symbolic links to them, so that you can run them conveniently.
+which shifts your tone from $f$ down to $f - \Delta f$. If $\Delta f$ matches your RTL-SDR's crystal offset exactly, the signal lands back where it should be.
 
-You can also build these using Homebrew or Macports.
- -->
+## Activity 1: Real vs. Complex Spectra
 
-You should have everything you need since you downloaded radioconda for Lab 1. If not and you are using Windows, you can download and install the executables directly from Osmocom, the company that supports all of these projects. Here is the link to the [Osmocom rtlsdr wiki page](https://osmocom.org/projects/rtl-sdr/wiki/Rtl-sdr), and a link to the compiled binaries is:
+1. Run `complex/three_cosines_complex_spectra_plot.m`. This builds a signal from three real cosine tones and plots its spectrum two ways: once as you'd expect from a real signal (mirrored around 0 Hz — each tone appears twice, once positive and once negative frequency), and once treating it as a complex signal. Compare the two plots.
+2. Step through `complex/time_to_frequency_domain_cosines1.m` and open `complex/time_to_frequency_domain_cosines2.slx` in Simulink to see the same relationship built up two ways, block by block, rather than in one script.
+3. Run `complex/time_to_complex_frequency_domain.m`, which shows how combining two real signals with a 90-degree phase shift (I and Q) produces a spectrum that is *not* mirrored — energy appears only where the real signal actually was, not on both sides. This is exactly the trick your RTL-SDR uses to hand you a usable baseband signal.
+4. Connect what you saw back to the math above: identify, in the mirrored plot, the two counter-rotating phasor terms from the cosine identity, and in the non-mirrored plot, explain why only one of them survives.
 
-[Executables for the rtlsdr utilities](https://ftp.osmocom.org/binaries/windows/rtl-sdr/)
+*For more detail on real vs. complex spectra, see Sec. 5.1-5.2 in SDR textbook.*
 
-Choose the latest version compatible with your system. If you want to learn more, read through the [Osmocom rtlsdr wiki page](https://osmocom.org/projects/rtl-sdr/wiki/Rtl-sdr). 
+## Activity 2: Frequency Offset on a Real Capture
 
-For Linux you can install gqrx using the apt manager, and this will automatically install all of gnuradio and the rtl utilities.
+1. Tune your RTL-SDR to the FM station you found in Lab 1.
+2. Open `complex/complex_demodulation.slx` and feed it live RTL-SDR data. You may notice the signal isn't perfectly centered where you expect — every RTL-SDR's internal crystal has some small frequency error (typically a few kHz), so your "0 Hz" isn't quite the station's actual center frequency.
+3. Open `complex/complex_frequency_correction.slx`. This multiplies your baseband signal by a complex exponential tuned to your dongle's estimated offset, shifting the spectrum back into place.
+4. Adjust the correction frequency slider until the signal is centered, and note the offset value you converged on — you'll report this for the assignment.
 
-### **rtl\_test**
-
-The first program we'll look at is rtl\_test. This looks for the SDR and reports what it finds. This is the first program to use when debugging your SDR. To begin, open Windows Powershell or the command prompt and navigate to the folder where the tools are located in the radioconda library. For me the folder path was `C:\Users\[username]\radioconda\Library\bin`, but if that doesn't get you to the correct folder then just search for rtl_test.exe. 
-```
-> cd C:\Users\[username]\radioconda\Library\bin
-```
-After you have used the command prompt to navigate to the correct folder, run rtl_test.
-```
-> rtl_test
-Found 1 device(s):
-  0:  Realtek, RTL2838UHIDIR, SN: 00000001
-
-Using device 0: Generic RTL2832U OEM
-Found Elonics E4000 tuner
-Supported gain values (14): -1.0 1.5 4.0 6.5 9.0 11.5 14.0 16.5 19.0 21.5 24.0 29.0 34.0 42.0 
-
-Info: This tool will continuously read from the device, and report if
-samples get lost. If you observe no further output, everything is fine.
-
-Reading samples in async mode...
-^CSignal caught, exiting!
-
-User cancel, exiting...
-```
-
-
-This runs continuously to test the data rate, until you stop it with a ^C (Control+C). There are a number of options, which you can find by typing in `rtl_test -h` and are listed below.
-
-	[-s samplerate (default: 2048000 Hz)]
-	[-d device_index (default: 0)]
-	[-t enable Elonics E4000 tuner benchmark]
-	[-p enable PPM error measurement]
-	[-b output_block_size (default: 16 * 16384)]
-	[-S force sync output (default: async)]
-
-You can set the sampling rate with the “-s” option, which defaults to 2.048 MHz. One interesting option is “-p”, which tests what the actual sampling rate is. This will be slightly off of what you've asked for, and is the reason that the peaks in the spectra aren't exactly where they should be when you use gqrx. This changes as the device heats up. This is what I get after about a minute or so
-
-```
-> rtl_test -p
-Found 1 device(s):
-  0:  Realtek, RTL2838UHIDIR, SN: 00000001
-
-Using device 0: Generic RTL2832U OEM
-Found Elonics E4000 tuner
-Supported gain values (14): -1.0 1.5 4.0 6.5 9.0 11.5 14.0 16.5 19.0 21.5 24.0 29.0 34.0 42.0 
-Reporting PPM error measurement every 10 seconds...
-Press ^C after a few minutes.
-Reading samples in async mode...
-real sample rate: 2048045 current PPM: 22 cumulative PPM: 22
-real sample rate: 2047989 current PPM: -5 cumulative PPM: 8
-real sample rate: 2048003 current PPM: 2 cumulative PPM: 6
-real sample rate: 2047992 current PPM: -4 cumulative PPM: 4
-real sample rate: 2048018 current PPM: 9 cumulative PPM: 5
-real sample rate: 2048002 current PPM: 1 cumulative PPM: 4
-^CSignal caught, exiting!
-
-User cancel, exiting...
-Samples per million lost (minimum): 0
-```
-
-This shows that my sampling rate is off by only 4 parts per million, or ppm. If it is significantly off, you can set a correction for this in gqrx.
-
-### **rtl\_sdr**
-
-The next program is rtl\_sdr. This starts the SDR up, then collects data, and writes it to a file. This also has a number of options:
-
-```
-> rtl_sdr
-rtl_sdr, an I/Q recorder for RTL2832 based DVB-T receivers
-
-Usage:	 -f frequency_to_tune_to [Hz]
-	[-s samplerate (default: 2048000 Hz)]
-	[-d device_index (default: 0)]
-	[-g gain (default: 0 for auto)]
-	[-b output_block_size (default: 16 * 16384)]
-	[-n number of samples to read (default: 0, infinite)]
-	[-S force sync output (default: async)]
-	filename (a '-' dumps samples to stdout)
-```
-
-
-You set the center frequency with the “-f” switch, specified in Hz (you will get a lot of practice counting zeros!). The “-g” switch sets the gain in dB. You can set it to anything, but you'll get the closest value from the list of supported gains that you saw with rtl\_test. For example to collect 10 seconds of data centered at 120 MHz (an AM air band used for air traffic control), you would run:
-
-```
-> rtl_sdr -f 120000000 -g 40 -n 20480000 ab120_10s.dat
-Found 1 device(s):
-  0:  Realtek, RTL2838UHIDIR, SN: 00000001
-
-Using device 0: Generic RTL2832U OEM
-Found Elonics E4000 tuner
-Sampling at 2048000 S/s.
-Tuned to 120000000 Hz.
-Tuner gain set to 42.00 dB.
-Reading samples in async mode...
-
-User cancel, exiting...
-```
-
-
-The program terminates by itself when it has collected enough data.
-
-Once we've saved the data to a file, we can load it into MATLAB. The SDR saves the data as interleaved 8-bit unsigned IQ samples (I, Q, I, Q,...). The following m-file
-
-[loadFile.m](loadFile.m)
-
-will create a signed sequence of de-interleaved IQ values and save it as a complex-valued vector in MATLAB. It looks like this:
-
-```
-function y = loadFile(filename)
-%  y = loadFile(filename)
-%
-% reads  complex samples from the rtlsdr file
-%
-
-fid = fopen(filename,'rb');
-y = fread(fid,'uint8=>double');
-
-y = y-127;
-y = y(1:2:end) + i*y(2:2:end);
-```
-
-## Airband AM Signals
-
-The main part of the lab is to capture and decode AM signals in the air band, with is right above the commercial FM band we were decoding last week. There is a band from 108-118 MHz that mostly has navigation beacons that identify themselves by Morse code. Then from 118-137 MHz there are several bands used for communication between aircraft and the ground. Communications in these bands uses AM modulation. This is because when two users try to talk on the same channel, you hear both of them with AM. With FM, you hear only the stronger of the two, or something completely intelligible if both are the same strength. With air traffic control, it is important to hear everyone that is out there!
-
-The USAFA Airfield transmits on these frequencies:
-
-![](graphics/USAFA_Airfield.png)
-
-If you leave USAFA, you can also hear traffic from the Colorado Springs Airport and Peterson SFB. Since both use the same runways, they both use the same International Air Transport Association (IATA) code of COS. However, they do not use all of the same radio frequencies. For the main civilian airport, the frequencies are:
-
-![](graphics/COS.png)
-
-The military side has some additional frequencies:
-
-![](graphics/COS_Peterson.png)
-
-Choose a frequency where you might expect to get a signal. The ATIS frequencies are good initial candidates, because these continuously transmit information about the airport and how to contact them. The other frequencies, such as the air traffic control frequencies, are more interesting but are not always in use. Often a transmission lasts just a few seconds and can be hard to capture.
-
-You also want to make sure the frequency you pick is a good match for your SDR antenna. If you are using the monopole antenna (silver telescoping), you want the antenna length to be close to a quarter wavelength and to stick your antenna to a metal surface to provide a ground plane. If you are using the dipole antenna (black telescoping), you want the antenna length to be close to half of a wavelength of your desired signal. Small adjustments to the frequency can help (+/- a few kHz).
-
-Use gqrx to see if you can find any activity. 
-
-You see a couple of frequencies in use. The one that is on continuously is an ATIS signal. The others are planes and towers talking to each other. Note the gain you use here, so you can set it to be the same for your capture.
-
-Once you know there is a signal out there, capture 10 seconds of data, and save it to a file. Close gqrx to free up the SDR, and then capture the data with
-
-```
-> rtl_sdr -f 128525000 -n 20480000 ab.dat
-```
-
-
-where I have chosen 125.525 MHz. You may want to set it to something else. Don't set the frequency exactly to the frequency you want to acquire, because the receiver produces an artifact at DC. This is the spike you always see at the middle of the spectrum.
-
-A sample file is available at
-
-[Lab2_128_10s.dat](Lab2_128_10s.dat)
-
-You can use this file if you are having trouble finding signals to capture. It is sampled at 2.048 MHz and is centered at 128.525 MHz. The USAFA ATIS signal is there.
-
-Once you have the data, we will load it into MATLAB to look at it. Start up MATLAB, and change to the directory where loadFile.m and the data file are. Load the data file with
-
-```
->> d = loadFile('Lab2_128_10s.dat')
-```
-
-
-The first thing to note is that just 10 seconds of RF is a lot of data! It is hard to tell if we have anything, or how to extract it. What we will do is make something like the waterfall plot that you see in gqrx, called a spectrogram. What this does is compute the spectrum of blocks of the signal, and displays an image of how this changes over time. A basic spectrogram program is provided here
-
-[msg.m](msg.m)
-
-It is msg.m for “my spectrogram”. The help information is
-
-```
->> help msg
-
-  msg(x,n0,nf,nt,dbf)
-
-   Computes and displays a spectrogram
-
-       x  -- input signal
-       n0 -- first sample
-       nf -- block size for transform
-       nt -- number of time steps (blocks)
-       dbf -- dynamic range in dB (default 40)
-
-   This extracts a segment of x starting at n0, of length nf*nt
-   The image plot is in dB, and autoscaled.  This can look very noisy
-   if there aren't any interesting signals present.
-```
-
-
-This takes an input signal starting at sample n0, and computes the spectrum of nt segments of the signal, each of length nf. The result is displayed as an image, with time going horizontally, and frequency vertically. The center frequency is in the middle of the plot. For example, for the data provided above, we can look at the first second of data, by looking at 2000 blocks each of length 1024 samples (2048000 total samples, or one second at the 2.048 sampling rate). The results is
-
-```
->> d = loadFile('ab1335_10s.dat');
->> msg(d,1,1024,2000);
-```
-
-
-Unless you have a very big display, you'll get an error message that the image doesn't fit, and was scaled down. The result looks like this
-
-![](graphics/Lab2_128_1s.png)
-
-We see one distinct signal across the middle. The msg.m file will return the data that is plotted if you assign the output to a variable
-
-```
->> ds = msg(d,1,1024,2000);
-```
-
-We can plot the spectrum at a time of 0.5 seconds by plotting column 1000,
-
-```
->> plot(abs(ds(:,1000)));
-```
-![](graphics/Lab2_128_spectrum.png)
-
-You can see that there is a strong signal at sample 313 (mouse over the plot to find the sample number at the signal's peak). You can plot that signal by plotting a row of the data,
-```
->> plot(abs(ds(313,:)));
-```
-![](graphics/Lab2_128_313_time.png)
-
-What you see is a conventional AM signal. The transmitted signal is a constant bias plus the voice signal being transmitted.
+*For more detail on frequency offset and correction, see Sec. 5.8-5.9 in SDR textbook.*
 
 ## Assignment
-For your assignment, capture some AM data in the Airband, plot a segment of it in the time domain using MATLAB or Python (or GNU Radio Companion, if you figured that out!), save a screen shot of the signal plot to a PDF file, upload it to Gradescope, and answer the questions on Gradescope. 
 
-If you have trouble capturing your own data, you may use this data set:
+Submit a single PDF to Gradescope containing:
 
-[Lab2_ab_10s.dat](Lab2_ab_10s.dat)
-
-This is a capture of the Airband for 10 seconds at a 2.048M sampling rate. There are at least three signals at various times in this data set. You have ten seconds of data, so you can look later in the signal by increasing n0 in the `msg` function. For example, to start at 5 seconds, n0 should be 5\*2048000.
-
-## Extra Fun!
-You can also use msg.m to decode the signals. Each column in the image is a sample of the spectrum in time. If we want to sample at 8kHz, we need blocks that are 2048000/8000 = 256 samples. In this case the entire data set is 80,000 samples. You may want to comment out the imshow line, and then do
-
-```
->> dd = msg(d,1,256,80000);
-```
-
-
-Find the row in dd that corresponds to your signal, take the absolute value, scale it to a maximum amplitude of one, and then play it through your sound card. You should hear the audio.
-
-```
->> dx = abs(dd(N,:))
->> dx = dx/max(dx);
->> sound(dx,8000);
-```
-
-
-Next time we'll look at better ways to do this using modulation and decimation.
+1. Screenshots of the real-valued (mirrored) and complex-valued (non-mirrored) spectra from Activity 1, with 2-3 sentences explaining in your own words why the complex version isn't symmetric.
+2. A before/after screenshot pair from Activity 2 showing your captured signal off-center, then corrected, along with the correction frequency you used.
+3. Your documentation statement.

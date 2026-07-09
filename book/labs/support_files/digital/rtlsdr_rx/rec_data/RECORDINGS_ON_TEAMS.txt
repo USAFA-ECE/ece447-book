@@ -1,0 +1,17 @@
+The large recorded-signal .mat files for Labs 5-8 are NOT in the course repo
+(each is 100-240 MB). Download the ones you need from the course Teams folder
+and place them in THIS folder:
+
+  Teams > ECE447-Fall2026 > Class Materials > desktopSDR_supportFiles_v2_0__2021a
+        > digital/rtlsdr_rx/rec_data/
+  https://usafa0.sharepoint.com/:f:/r/teams/ECE447-Fall2026/Class%20Materials/desktopSDR_supportFiles_v2_0__2021a
+
+Files used by the labs:
+  qpsk_raised_cosine.mat    Lab 5, Activity 4  (required)
+  qpsk_coarse_synch.mat     Lab 6  (live-reception fallback)
+  qpsk_carrier_timing.mat   Lab 6  (live-reception fallback)
+  qpsk_ascii_msg.mat        Lab 7  (live-reception fallback)
+  dqpsk_ascii_msg.mat       Lab 7  (live-reception fallback)
+  dqpsk_image1.mat          Lab 8  (live-reception fallback)
+  dqpsk_image2.mat          Lab 8  (live-reception fallback)
+  dqpsk_image7.mat          Lab 8  (live-reception fallback)

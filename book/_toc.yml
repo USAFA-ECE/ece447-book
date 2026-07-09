@@ -19,13 +19,14 @@ parts:
       - file: labs/Lab2
       - file: labs/Lab3
       - file: HW/HW2
-      - file: HW/HW3
       - file: labs/Lab4
+      - file: HW/HW3
+      - file: labs/Lab5
       - file: HW/HW4
       - file: HW/HW5
-      - file: labs/Lab5
+      - file: labs/Lab6
       - file: HW/HW6
       - file: HW/HW7
-      - file: labs/Lab6
-      - file: HW/HW8
       - file: labs/Lab7
+      - file: HW/HW8
+      - file: labs/Lab8
