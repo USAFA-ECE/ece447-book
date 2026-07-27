@@ -2,7 +2,7 @@
 
 Chapter 9
 
-## Due NLT 2 Dec (Lesson 39) by 2359 to Gradescope
+## Due NLT Lesson 40, 2359 to Gradescope
 
 ## Directions: 
 - Collaboration is authorized as noted in the syllabus Collaboration policy. 

@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Lab 4: GNU Radio &#8212; ECE447 Course Webpage</title>
+    <title>Lab 4: Frequency Modulation — Receiving Commercial FM Radio &#8212; ECE447 Course Webpage</title>
   
   
   
@@ -62,12 +62,14 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/Lab4';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Homework 4" href="../HW/HW4.html" />
-    <link rel="prev" title="Homework 3" href="../HW/HW3.html" />
+    <link rel="next" title="Homework 3" href="../HW/HW3.html" />
+    <link rel="prev" title="Homework 2" href="../HW/HW2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -186,21 +188,22 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../HW/SkillsReview.html">Skills Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: SDR Setup and Spectrum Exploration with MATLAB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW1.html">Homework 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Complex Signals and Spectra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Amplitude Modulation — Receiving Real Air Band Traffic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW2.html">Homework 2</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 4: Frequency Modulation — Receiving Commercial FM Radio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: Digital Modulation Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW5.html">Homework 5</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: QPSK Modulation and Demodulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: QPSK Transmission and Reception over Real Hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW6.html">Homework 6</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW7.html">Homework 7</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: A Digital Communications Protocol — ASCII Messaging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW8.html">Homework 8</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: Digital Wireless System using MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab8.html">Lab 8: Capstone — Image Transmission with an Integrity Check</a></li>
 </ul>
 
     </div>
@@ -386,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 4: GNU Radio</h1>
+    <h1>Lab 4: Frequency Modulation — Receiving Commercial FM Radio</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -396,10 +399,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-17-oct-lesson-25-by-2359-on-gradescope">Due NLT 17 Oct (Lesson 25) by 2359 on Gradescope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gnu-radio-tutorials">GNU Radio Tutorials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-math-fm-carson-s-rule-and-the-discriminator">Some Math: FM, Carson’s Rule, and the Discriminator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-1-fm-basics-on-the-spectrum-analyzer">Activity 1: FM Basics on the Spectrum Analyzer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-2-mono-fm-reception">Activity 2: Mono FM Reception</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-3-stereo-decoding">Activity 3: Stereo Decoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
             </nav>
         </div>
@@ -411,30 +417,80 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-4-gnu-radio">
-<h1>Lab 4: GNU Radio<a class="headerlink" href="#lab-4-gnu-radio" title="Permalink to this heading">#</a></h1>
-<section id="due-nlt-17-oct-lesson-25-by-2359-on-gradescope">
-<h2>Due NLT 17 Oct (Lesson 25) by 2359 on Gradescope<a class="headerlink" href="#due-nlt-17-oct-lesson-25-by-2359-on-gradescope" title="Permalink to this heading">#</a></h2>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-4-frequency-modulation-receiving-commercial-fm-radio">
+<h1>Lab 4: Frequency Modulation — Receiving Commercial FM Radio<a class="headerlink" href="#lab-4-frequency-modulation-receiving-commercial-fm-radio" title="Permalink to this heading">#</a></h1>
+<p>(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, &amp; A. G. Broadhurst, <a class="reference external" href="https://www.desktopsdr.com/download-files"><em>Software Defined Radio using MATLAB &amp; Simulink and the RTL-SDR</em></a>, 2nd Ed., Strathclyde Academic Media, 2022, Ch. 9-10.)</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p>Commercial FM broadcast is one of the strongest, easiest signals your RTL-SDR can receive, which makes it a great real-world testbed for FM demodulation. Today you’ll build an FM receiver, get working mono audio out of a real local station, and then push into stereo decoding. As with Lab 3, we’re keeping this receive-only — no PLUTO transmission needed, since there’s already a strong, legal, real-world FM signal on the air for you to use.</p>
 </section>
 <section id="aims-of-the-lab">
 <h2>Aims of the Lab<a class="headerlink" href="#aims-of-the-lab" title="Permalink to this heading">#</a></h2>
-<p>The goals of this lab are to learn GNU Radio better and apply it to changing the sample rate of a signal.</p>
-</section>
-<section id="gnu-radio-tutorials">
-<h2>GNU Radio Tutorials<a class="headerlink" href="#gnu-radio-tutorials" title="Permalink to this heading">#</a></h2>
-<p>The GNU Radio wiki page contains several helpful tutorials for learning how to use GNU Radio. In this lab you will complete several of the foundational tutorials and then demonstrate what happens in the frequency domain when changing the sample rate of a signal.</p>
-<p>Go to <a class="reference external" href="https://wiki.gnuradio.org/index.php?title=Tutorials">https://wiki.gnuradio.org/index.php?title=Tutorials</a>. Complete the following tutorials:</p>
 <ul class="simple">
-<li><p>Introducing GNU Radio: Your First Flowgraph</p></li>
-<li><p>All tutorials under Flowgraph Fundamentals</p></li>
-<li><p>DSP Blocks: Low Pass Filter Example</p></li>
-<li><p>DSP Blocks: Sample Rate Change (skip the Decimation section)</p></li>
+<li><p>Write down the FM signal equation, its instantaneous frequency, and Carson’s Rule for bandwidth — and connect each to something you can see on the spectrum analyzer.</p></li>
+<li><p>Understand how a discriminator recovers the message from instantaneous frequency, using the same phase/frequency relationship from Lab 2.</p></li>
+<li><p>Build a non-coherent FM discriminator receiver and get real audio out of it.</p></li>
+<li><p>Attempt stereo (MPX) decoding on a real broadcast signal, and see DSB-SC coherent detection (Lab 3) reappear inside it.</p></li>
 </ul>
-<p>After completing the Sample Rate Change tutorial, create a figure similar to the figure immediately before the Decimation section but for a signal interpolated up to 512 kHz instead of 128 kHz.</p>
 </section>
-<section id="lab-report">
-<h2>Lab Report<a class="headerlink" href="#lab-report" title="Permalink to this heading">#</a></h2>
-<p>Save your figure as a PDF, include a doc statement, and upload to Gradescope. Also, answer the questions in Gradescope.</p>
+<section id="some-math-fm-carson-s-rule-and-the-discriminator">
+<h2>Some Math: FM, Carson’s Rule, and the Discriminator<a class="headerlink" href="#some-math-fm-carson-s-rule-and-the-discriminator" title="Permalink to this heading">#</a></h2>
+<p>An FM signal encodes the message <span class="math notranslate nohighlight">\(m(t)\)</span> in the carrier’s instantaneous frequency rather than its amplitude:</p>
+<div class="math notranslate nohighlight">
+\[s(t) = A_c \cos\!\left(2\pi f_c t + 2\pi k_f\int_0^t m(\tau)\,d\tau\right), \qquad f_i(t) = f_c + k_f\, m(t)\]</div>
+<p>where <span class="math notranslate nohighlight">\(f_i(t)\)</span> is the instantaneous frequency and <span class="math notranslate nohighlight">\(k_f\)</span> is the frequency sensitivity (Hz per unit of <span class="math notranslate nohighlight">\(m(t)\)</span>). Because the <em>amplitude</em> <span class="math notranslate nohighlight">\(A_c\)</span> never changes, amplitude noise and fading — which directly corrupt AM — mostly don’t touch the information here, which is the whole reason FM sounds cleaner than AM in the presence of noise.</p>
+<p>Peak frequency deviation is <span class="math notranslate nohighlight">\(\Delta f = k_f \max|m(t)|\)</span>. <strong>Carson’s Rule</strong> estimates the transmission bandwidth from that deviation and the highest message frequency <span class="math notranslate nohighlight">\(f_m\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[B_T \approx 2(\Delta f + f_m)\]</div>
+<p>For commercial WFM, <span class="math notranslate nohighlight">\(\Delta f \approx 75\text{ kHz}\)</span> and <span class="math notranslate nohighlight">\(f_m \approx 15\text{ kHz}\)</span> (plus multiplex content, in practice), giving the roughly 200 kHz channel width you’ll measure on the spectrum analyzer in Activity 2 — go ahead and check your measured bandwidth against this estimate.</p>
+<p>The <strong>discriminator</strong> recovers <span class="math notranslate nohighlight">\(m(t)\)</span> by exploiting the same phase/frequency relationship you used for frequency correction in Lab 2: instantaneous frequency is the derivative of instantaneous phase, <span class="math notranslate nohighlight">\(f_i(t) = \frac{1}{2\pi}\frac{d\theta(t)}{dt}\)</span>, so differentiating the received phase and subtracting <span class="math notranslate nohighlight">\(f_c\)</span> recovers <span class="math notranslate nohighlight">\(k_f m(t)\)</span> directly. In discrete time, this derivative is approximated by comparing each complex baseband sample to the previous one:</p>
+<div class="math notranslate nohighlight">
+\[\hat{m}[n] \propto \angle\big(x[n]\,x^*[n-1]\big)\]</div>
+<p>(the angle of one sample times the conjugate of the last one) — this is literally the block computation your discriminator model performs, sample by sample, with no local oscillator or carrier recovery required.</p>
+</section>
+<section id="activity-1-fm-basics-on-the-spectrum-analyzer">
+<h2>Activity 1: FM Basics on the Spectrum Analyzer<a class="headerlink" href="#activity-1-fm-basics-on-the-spectrum-analyzer" title="Permalink to this heading">#</a></h2>
+<blockquote>
+<div><p><strong>Set up your antenna and your location first.</strong> This whole lab runs on real off-air FM, and Fairchild’s interior blocks it — head for a window or the southeast corner of the building, as in <a class="reference internal" href="Lab1.html"><span class="doc std std-doc">Lab 1</span></a>. Set your whip to a quarter wavelength for the FM band — about <strong>77 cm</strong> at 98 MHz — and give it a ground plane, either a magnetic base on a large metal surface or three or four radials cut to that same length. See Lab 1, Activity 2, step 1 if you need the details again.</p>
+</div></blockquote>
+<ol class="arabic simple">
+<li><p>Tune to a strong local FM station using the spectrum tools from Lab 1.</p></li>
+<li><p>Measure its occupied bandwidth directly off the spectrum display.</p></li>
+<li><p>Compare your measurement against the Carson’s Rule estimate above (<span class="math notranslate nohighlight">\(\Delta f \approx 75\)</span> kHz, <span class="math notranslate nohighlight">\(f_m \approx 15\)</span> kHz).</p></li>
+<li><p>Note how much wider the FM signal is than the DSB-LC Air Band signal from Lab 3 — this is why your RTL-SDR’s ~1.8-2.4 MHz sample rate only fits a handful of FM stations at once.</p></li>
+</ol>
+<p><em>For more detail on FM bandwidth, see Sec. 9.3 in SDR textbook.</em></p>
+</section>
+<section id="activity-2-mono-fm-reception">
+<h2>Activity 2: Mono FM Reception<a class="headerlink" href="#activity-2-mono-fm-reception" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">fm/rtlsdr_rx/rtlsdr_fm_discrim_demod.slx</span></code>. This implements the discriminator equation above.</p></li>
+<li><p>Tune to a strong local FM station and confirm you get clean mono audio out of your computer’s speakers.</p></li>
+<li><p>If you’d rather work from a MATLAB script, step through <code class="docutils literal notranslate"><span class="pre">fm/rtlsdr_rx/rtlsdr_fm_discrim_demod_matlab.m</span></code>, which implements the same receiver without Simulink.</p></li>
+</ol>
+<p><em>For more detail on the discriminator and mono FM reception, see Sec. 9.6-9.7 and 10.2 in SDR textbook.</em></p>
+</section>
+<section id="activity-3-stereo-decoding">
+<h2>Activity 3: Stereo Decoding<a class="headerlink" href="#activity-3-stereo-decoding" title="Permalink to this heading">#</a></h2>
+<p>Most FM stations broadcast in stereo using a multiplexed (MPX) baseband:</p>
+<div class="math notranslate nohighlight">
+\[m_{MPX}(t) = (L+R)(t) \;+\; \underbrace{A_p\cos(2\pi \cdot 19\text{kHz}\cdot t)}_{\text{pilot}} \;+\; (L-R)(t)\cos(2\pi \cdot 38\text{kHz}\cdot t)\]</div>
+<p>That last term should look familiar: <span class="math notranslate nohighlight">\((L-R)(t)\)</span> riding on a 38 kHz subcarrier is exactly a <strong>DSB-SC</strong> signal, the same as in Lab 3. The 19 kHz pilot tone exists purely so the receiver can double it to regenerate a phase-locked 38 kHz reference for coherent detection — solving the exact “you need the transmitter’s carrier phase” problem from Lab 3’s DSB-SC math, without needing to send the full-power 38 kHz carrier itself.</p>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">fm/rtlsdr_rx/rtlsdr_fm_discrim_stereo_demod.slx</span></code> and see if you can separate left and right channels on your station.</p></li>
+<li><p>Stereo separation is more sensitive to signal strength than mono — if you’re not getting clean separation, try <code class="docutils literal notranslate"><span class="pre">fm/rtlsdr_rx/rtlsdr_fm_pll_stereo_demod.slx</span></code> or <code class="docutils literal notranslate"><span class="pre">fm/rtlsdr_rx/rtlsdr_fm_slope_stereo_demod.slx</span></code>, which use different techniques to lock onto the pilot tone.</p></li>
+<li><p>You don’t need to understand the internals of all three — just compare which one works best on your captured signal.</p></li>
+</ol>
+<p><em>For more detail on stereo MPX transmission and reception, see Sec. 10.3-10.4 in SDR textbook.</em></p>
+</section>
+<section id="assignment">
+<h2>Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h2>
+<p>Submit a single PDF to Gradescope containing:</p>
+<ol class="arabic simple">
+<li><p>A screenshot of your mono FM receiver’s spectrum and a short note confirming you heard clean audio, with the station frequency.</p></li>
+<li><p>A screenshot of your stereo decoding attempt, and 2-3 sentences on whether you achieved clean L/R separation and, if not, what you think limited it (signal strength, multipath, etc.).</p></li>
+<li><p>Your documentation statement.</p></li>
+</ol>
 </section>
 </section>
 
@@ -469,20 +525,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../HW/HW3.html"
+       href="../HW/HW2.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Homework 3</p>
+        <p class="prev-next-title">Homework 2</p>
       </div>
     </a>
     <a class="right-next"
-       href="../HW/HW4.html"
+       href="../HW/HW3.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Homework 4</p>
+        <p class="prev-next-title">Homework 3</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -502,10 +558,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-17-oct-lesson-25-by-2359-on-gradescope">Due NLT 17 Oct (Lesson 25) by 2359 on Gradescope</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#gnu-radio-tutorials">GNU Radio Tutorials</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-math-fm-carson-s-rule-and-the-discriminator">Some Math: FM, Carson’s Rule, and the Discriminator</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-1-fm-basics-on-the-spectrum-analyzer">Activity 1: FM Basics on the Spectrum Analyzer</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-2-mono-fm-reception">Activity 2: Mono FM Reception</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-3-stereo-decoding">Activity 3: Stereo Decoding</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
   </nav></div>
 

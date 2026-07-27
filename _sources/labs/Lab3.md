@@ -1,315 +1,80 @@
-# Lab 3: Scanning for Signals, Modulation, and Decimation 
-(Adapted from Dr. John Pauly's Stanford University EE179 course website: https://web.stanford.edu/class/ee179/Homework.html.)
+# Lab 3: Amplitude Modulation — Receiving Real Air Band Traffic
 
-## WebSDR Demo
+(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, highlights of Ch. 5.3-8.3.)
 
-We'll start with a demo of WebSDR's. These are SDR's, some just like yours, that are attached to the web. You can connect to them with a web browser, and control the frequency and demodulations just like it was attached to your own computer. This is nice in that you can listen to radio signals from all over the world, and many of the SDR's are attached to nice antennas in a wide range of frequency bands.
+## Overview
 
-A web site that provides a list of WebSDRs is here
+Aircraft communications still use plain old amplitude modulation (DSB-LC, the same scheme as commercial AM broadcast) on the Air Band, 108-137 MHz — conveniently right in your RTL-SDR's tuning range, unlike commercial mediumwave AM. That makes today's lab genuinely off-the-air: you'll receive and demodulate real USAFA airfield traffic, not a simulated or instructor-transmitted signal.
 
-[WebSDR](http://www.websdr.org/)
+This lab skips transmitting AM yourself with a PLUTO radio — since the goal is to hear a real signal, not one we generated in the room. We'll also take a first look at QAM in simulation, since you'll need it again soon in the digital communications unit.
 
-The web page has a list of WebSDR's and which bands they can tune to
+## Aims of the Lab
 
-![](graphics/WebSDR1.png)
+- Derive the DSB-LC and DSB-SC equations and understand exactly why one demodulates with a simple envelope detector while the other needs a coherent (synchronous) receiver.
+- Build and use a non-coherent (envelope) AM demodulator — the same basic technique used in real aviation radios.
+- Receive and demodulate live Air Band traffic from the USAFA airfield.
+- Get a first, low-stakes look at QAM constellations in simulation.
 
-The second one is in Brasil, and covers most of the HF amateur bands, the VHF band, and more. The third one is in Utah, and covers the lower part of the HF band. If you scroll to the very bottom of the page you see a map where they are all located. You can click on any of them to listen to what they are receiving.
+## Some Math: DSB-LC vs. DSB-SC
 
-![](graphics/WebSDR2.png)
+**DSB-LC** ("large carrier" — what Air Band radios and commercial AM broadcast use) transmits the message riding on top of a carrier:
 
-The first WebSDR in the lists is a very nice one from University of Twente in the Netherlands. This is a system that captures the entire spectrum from 0-30 MHz, and lets you tune in to any part of it. It picks up most of Europe. It is available here
+$$s(t) = \big[A_c + m(t)\big]\cos(2\pi f_c t)$$
 
-[Twente WebSDR](http://websdr.ewi.utwente.nl:8901/)
+Because $A_c$ is a large constant added to $m(t)$, as long as $A_c + m(t) \ge 0$ for all $t$, the envelope of $s(t)$ — its amplitude, ignoring the carrier phase entirely — traces out $A_c + m(t)$ directly. That's the entire trick behind envelope detection: no local oscillator, no phase tracking, just rectify and low-pass filter, and $m(t)$ falls out (after removing the DC offset $A_c$). The positivity requirement defines the **modulation index**:
 
-The interface for the Websdr looks like this:
+$$\mu = \frac{\max|m(t)|}{A_c} \le 1$$
 
-![](graphics/WebSDR3.png)
+If $\mu > 1$ ("over-modulation"), $A_c + m(t)$ goes negative somewhere, the envelope detector can't track it faithfully, and you get audible distortion. This simplicity is exactly why DSB-LC is still standard for aviation voice: it works with dead-simple, rugged receivers, at the cost of wasting transmit power on the carrier itself.
 
-You can zoom in and out using your trackpad or mouse wheel, and shift the spectrum left and right by dragging with your mouse. You can also type in a center frequency.
+**DSB-SC** ("suppressed carrier") drops the carrier term entirely:
 
-In the example above you see a couple of different types of signals. There are a couple of AM shortwave signals, a digital shortwave signal, and several LSB SSB signals (it is 7 MHz, so it is lower sideband here). To listen to one of these you drag the filter icon under the waterfall plot to the signal you are interested in, and choose the right demodulator (in the box with the frequency and volume controls).
+$$s(t) = m(t)\cos(2\pi f_c t)$$
 
-For your lab report, find an example of these signals
+More power-efficient, but now the envelope of $s(t)$ is just $|m(t)|$ — not $m(t)$ — so an envelope detector can't recover the message (it can't tell a positive swing from a negative one). Instead you need **coherent detection**: multiply by a locally generated copy of the carrier and low-pass filter:
 
-*   AM
-    
-*   SSB
-    
-*   Digital
-    
-*   Morse Code (check right above 7 MHz for this)
-    
-*   Something weird (radars, beacons, time, there is lots to find)
-    
+$$s(t)\cos(2\pi f_c t) = m(t)\cos^2(2\pi f_c t) = \frac{m(t)}{2}\big[1 + \cos(4\pi f_c t)\big] \xrightarrow{\text{LPF}} \frac{m(t)}{2}$$
 
-For each, include a screen shot, say what kind of signal it is, what frequency it is at, where it is from (use internet searches and/or GenAI to learn more about it!), and what time you acquired it.
+The catch: this only works if your local oscillator's phase matches the transmitter's carrier phase. A phase error $\phi$ scales the recovered signal by $\cos\phi$ — at $\phi=90°$ you get nothing at all. That phase-matching requirement is exactly what makes coherent receivers harder to build than envelope detectors, and why we're sticking with DSB-LC for today's real-world reception.
 
-## Broad Spectral Surveys with your RTL SDR
+## Activity 1: DSB-LC in Simulation
 
-For the next part of the lab, we'll look at finding signals with your RTL SDR's. One of the issues with the RTL SDR's is that they only see 2 MHz of spectrum at a time. Some of the bands, like the TV and cell phone bands, are much broader than this, making it hard to appreciate what is going on. It is like trying to identify a picture while looking through a straw.
+1. Open `am/simulation/am_dsb_tc.slx` and run it at the default modulation index to see a DSB-LC signal generated and demodulated entirely in simulation, so you know what a clean result should look like before you fight real noise and fading.
+2. Identify the envelope detector stage in the model and confirm the recovered message matches the original, minus the $A_c$ DC offset.
+3. Push the modulation index above $\mu=1$ (increase $m(t)$'s amplitude relative to $A_c$) and re-run. Confirm you see the distortion the math above predicts, and explain in your own words why it happens.
 
-Fortunately, there is a command line utility for this, rtl\_power. What this does a explore an entire band of frequencies 2 MHz at a time. Then, you can splice them all together to get a more complete picture.
+*For more detail on DSB-LC and envelope detection, see Sec. 6.3 and 6.8 in SDR textbook.*
 
-The help file for rtl\_power is (without the experimental options)
+## Activity 2: Envelope Detection on Real Air Band Traffic
 
-```
-> rtl_power -h
-rtl_power, a simple FFT logger for RTL2832 based DVB-T receivers
+> **Set up your antenna and your location first.** Airfield transmissions are far weaker than commercial FM, so the antenna work from [Lab 1](Lab1) (Activity 2, step 1) matters *more* here, not less. Set your whip to a quarter wavelength for this band — about **62 cm** at 120 MHz — and give it a ground plane, either a magnetic base on a large metal surface or three or four radials cut to that same length. You'll also need to get out of the interior of Fairchild: a window, or better, the southeast corner.
 
-Use:	rtl_power -f freq_range [-options] [filename]
-	-f lower:upper:bin_size [Hz]
-	 (bin size is a maximum, smaller more convenient bins
-	  will be used.  valid range 1Hz - 2.8MHz)
-	[-i integration_interval (default: 10 seconds)]
-	 (buggy if a full sweep takes longer than the interval)
-	[-1 enables single-shot mode (default: off)]
-	[-e exit_timer (default: off/0)]
-	[-d device_index (default: 0)]
-	[-g tuner_gain (default: automatic)]
-	[-p ppm_error (default: 0)]
-	filename (a '-' dumps samples to stdout)
-	 (omitting the filename also uses stdout)
+1. Open `am/rtlsdr_rx/rtlsdr_am_envelope_demod.slx`.
+2. Tune to the Air Band frequency you identified in Lab 1 for USAFA airfield traffic (tower, ground, or approach).
+3. Listen for aircraft or controller transmissions — Air Band traffic is intermittent (push-to-talk), so you may need to wait, or try a couple of different frequencies in the 118-137 MHz range.
+4. If you have trouble finding active traffic, switch to `am/rtlsdr_rx/rtlsdr_am_envelope_demod_matlab.m`, the same receiver as a MATLAB script, which is easier to leave running in the background while you work on something else and listen for activity.
 
-CSV FFT output columns:
-	date, time, Hz low, Hz high, Hz step, samples, dbm, dbm, ...
+*For more detail on downconverting and envelope-detecting real AM signals, see Sec. 6.7-6.8 and 8.2 in SDR textbook.*
 
-Examples:
-	rtl_power -f 88M:108M:125k fm_stations.csv
-	 (creates 160 bins across the FM band,
-	  individual stations should be visible)
-	rtl_power -f 100M:1G:1M -i 5m -1 survey.csv
-	 (a five minute low res scan of nearly everything)
-	rtl_power -f ... -i 15m -1 log.csv
-	 (integrate for 15 minutes and exit afterwards)
-	rtl_power -f ... -e 1h | gzip > log.csv.gz
-	 (collect data for one hour and compress it on the fly)
+## Activity 3: A First Look at QAM (Simulation)
 
-Convert CSV to a waterfall graphic with:
-	 http://kmkeen.com/tmp/heatmap.py.txt
-```
+QAM is what you get from packing *two* DSB-SC signals into the same bandwidth, 90 degrees out of phase with each other:
 
+$$s(t) = I(t)\cos(2\pi f_c t) - Q(t)\sin(2\pi f_c t)$$
 
-For example, to survey the entire FM band
+where $I(t)$ and $Q(t)$ each carry their own independent stream of bits. A coherent receiver separates them by multiplying by $\cos(2\pi f_c t)$ and $\sin(2\pi f_c t)$ respectively (each recovers one component, by the same coherent-detection math as DSB-SC above — try writing out $s(t)\cos(2\pi f_c t)$ and $s(t)\sin(2\pi f_c t)$ and low-pass filtering each). Notice that an envelope detector can't do any of this: it only reports $\sqrt{I(t)^2+Q(t)^2}$, throwing away exactly the phase information that tells $I$ and $Q$ apart.
 
-```
-> rtl_power -f 85M:110M:50k -g 20  fm_band.csv
-```
+1. Open `complex/qam_mod_demod.slx`. This maps bits onto a QAM constellation, modulates, adds a bit of noise, and demodulates.
+2. Change the constellation order (e.g., 4-QAM vs 16-QAM) and observe how the points get packed closer together.
+3. Sweep the noise level and observe how a denser constellation gets noticeably more fragile as noise increases — with more points packed into the same I/Q plane, a smaller noise nudge is enough to cross a decision boundary into the wrong symbol.
+4. You'll come back to this exact tradeoff — and to QPSK specifically — in the digital communications unit.
 
+*For more detail on QAM, see Sec. 5.4 in SDR textbook.*
 
-This will periodically measure the power from 85 MHz to 110 MHz in steps of 50 kHz. This requires scanning 25 MHz / 2 MHz = 13 spectral segments (rounding up). Each segment has 2MHz /50kHz = 40 spectral bins. The total number of bins is then 520.
+## Assignment
 
-The -g switch sets the gain of the rtl_sdr. Use gqrx to find a reasonable gain, and make note of it. Then, enter this number after the -g switch on the command line. This seems to fail sometimes in Windows, in which case omit the -g switch completely, and let it autorange.
+Submit a single PDF to Gradescope containing:
 
-rtl_power tries to scan the entire band specified every ten seconds, so it can take a while to collect much data.
-
-The output is a .csv file that gives the signal level in dBm for each bin. This is a massive amount of data. To load this into MATLAB, download this m-file
-
-[HM.m](HM.m)
-
-If you have a rtl\_power .csv file named fm_band.csv, you would load it into MATLAB with
-
-```
->> d = HM('fm_band.csv');
->> mv = min(min(d));
->> imshow(d,[mv,0]);
-```
-
-
-The values are in dBm, and are all negative. Typically they range from -40 to 0. The function imshow() is in the image processing toolbox.
-
-![](graphics/fm_band_50k.png)
-
-You can also use the heatmap.py routine available here (I didn't find it very helpful, but maybe you can figure out better Windows display options):
-
-[heatmap.py](https://raw.githubusercontent.com/keenerd/rtl-sdr-misc/master/heatmap/heatmap.py)
-
-On Windows, download heatmap.py into the same folder as fm_band.csv. Then open the command prompt or some other terminal, and input:
-
-```
-> cd C:\Users\YourName\Documents\FolderName
-> python heatmap.py fm_band.csv fm_band.jpg
-> start fm_band.jp
-```
-
-This will pop up an image of fm_band activity. There are many other display options available, especially for Windows.
-
-Find an interesting band, and do a spectral survey with rtl\_power. Below is an example that scans from 400 MHz to 600 MHz. This was done over an hour.
-
-![](graphics/b_400-600.png)
-
-FM is a good place to start because the signals are large. However, nothing much changes, the signals are always there. Some interesting options are the cell phone bands from 700 MHz to 900 MHz, the 902-928 MHz ISM band, or everything the rtl\_sdr can see from 50 MHz to 1700 MHz.
-
-## Automatically finding signals in your captured data
-
-Last week you found signals by looking at the spectrogram, which shows a time-frequency representation of the entire RF data you had captured. In the labs that are coming up, you will often need to be able to quickly and conveniently find where signals are in a large data set. One way to do this is a much more sparsely sampled version of the spectrogram.
-
-The following m-file does this. It basically computes the same spectrogram as last week, but only for every 0.1s. It then finds which frequency channels have a signal over the “squelch” threshold, which defaults to 10% of the peak. It returns the frequency offsets of each signal it finds.
-
-[ffreq.m](ffreq.m)
-
-The file is shown below:
-
-```
-function [ f ] = ffreq( x, fs, fr, dt, sq )
-%
-%  f = ffreq(x, fs, fr, dt)
-%
-%   Find frequencies in an RF waveform x
-%
-%   Input:
-%       x -- input RF waveform
-%       fs -- sampling frequency
-%       fr -- frequency resolution
-%       dt -- time sampling period
-%       sq -- threshold value
-%
-%   Output:
-%       f -- frequencies found in signal
-%
-
-% assume reasonable defaults
-if nargin < 5,
-   sq = 0.1;
-end
-if nargin < 4,
-   dt = 0.1;
-end
-if nargin < 3,
-    fr = 1000;
-end
-if nargin < 2,
-    fs = 2048000;
-end
-
-% find the frame size
-nf = fs/fr;
-
-% find the number of frames to skip
-nt = fs*dt;
-
-% compute the spectrum of the first block
-xf = fftshift(fft(x(1:nf))).';
-
-% compute the next blocks, spaced by dt seconds
-jj = 1;
-while jj< length(x)-nf,
-    xf = [xf; fftshift(fft(x(jj+(0:nf-1)))).'];
-    jj = jj+nt;
-end
-
-% find the maximum signals in each frequency bin
-xfm = max(abs(xf));
-
-% find the maximimum overall, for normalization
-mx = max(xfm);
-
-% find the indexes of the frequency channels that are abouve the
-% squelch threshold.  Indexes are relative to the carrier
-f = find(abs(xfm)>sq*mx) - nf/2;
-
-% convert the indexes to absolute frequencies
-f = f*fr;
-
-end
-```
-
-
-If we load this data set (from Dr. Pauly)
-
-[ab1355_10s.dat](ab1355_10s.dat)
-
- and then run ffreq.m with the default arguments (2048000 Hz sampling frequency, 1000 Hz frequency resolution, 0.1 s spacing between frames, and a 0.1 detection threshold), the result is
-
-```
->> d = loadFile('ab1335_10s.dat');
->> f = ffreq(d)
-f =
-
-  Columns 1 through 8
-
-     -998000     -402000     -401000     -400000     -399000     -398000     -397000     -396000
-
-  Columns 9 through 11
-
-     -395000     -394000     -224000
-```
-
-
-These are all frequencies in Hz, relative to the carrier frequency. There is a signal at -998 kHz, a band of frequencies centered at about -396 kHz, and another signal at -224 kHz.
-
-What we want to do do is tune to each of these bands and listen to the signal. From class, we know that we need to demodulate first and then lowpass filter. In addition, we should reduce the sampling rate. The original RF waveform was sampled at 2.048 MHz, and we only need a few kHz accurately represent each of the channels.
-
-Demodulation corresponds to multiplying by a complex exponential. If we start with the signal centered at -396 kHz, we can demodulate this frequency by
-
-```
->> fs = 2048000 			% sampling frequency
->> dt = 1/fs    			% sampling time
->> t = [1:length(d)]*dt;  		% time of each of the samples of d
->> dm = d.*exp(-i*2*pi*(-396000)*t');	% d is the RF data loaded above, dm is is the demodulated data
-```
-
-
-If we compare the spectrogram of the first half second of signal before (left) and after (right):
-
-![](graphics/Rx_vs_Demod_sig_centered.png)
-<!-- <p float="left">
-  <img src="graphics/sgd.png" width="350" />
-  <img src="graphics/sgdm.png" width="350" /> 
-</p> -->
-
-We see that the signal has been shifted to the middle of the spectrogram.
-
-The next step is to reduce the sampling rate from 2.048 MHz to something more reasonable for an audio signal we can play through your sound card. The MATLAB function for that is “decimate”. This does two things. It lowpass filters the signal, and it reduces the sampling rate by some specified ratio.
-
-We'll start by reducing the rate from 2.048 MHz to 16 kHz, or a factor of 64. While decimate will do this in one step, it is much more efficient to do this in two stages, each decimating by a factor of 8. The decimate function is efficient because it uses that fact that when you decimate by a factor of 8, then 7/8ths of the samples are going to be thrown away, and don't even need to be computed. We can decimate the demodulated dm signal with
-
-```
->> dmd = decimate(dm,8,'fir');
->> dmdd = decimate(dmd, 8, 'fir');
-```
-
-The 'fir’ argument says to use a finite impulse response (FIR) filter for the lowpass filter prior to decimation. The default is to use a Chebychev infinite impulse response (IIR) filter, which is more efficient, but has non-linear phase. The FIR filter is a little slower to compute, but the linear phase response will be important when we are decoding digital signals later.
-
-If we look at the spectrogram of the signal at this point what we see is
-
-![](graphics/abdm.png)
-
-There are a couple of things to note. First, it is clear that the center frequency isn't exactly right. We can fix this with another complex demodulation. Second, we get a sense of the frequency content of the signal. It is contained in a much smaller bandwidth than our current sampling rate.
-
-Because of the way the AM signal is constructed, we can detect the AM signal by taking the absolute value. Play back the signal with
-
-```
->> sound(abs(dmdd), 32000);
-```
-
-
-If we plot the signal, we get
-
-![](graphics/abplot.png)
-
-This shows that the audio signal has been added to an AM carrier. While the amplitude of the carrier changes with time, it doesn't affect your ability to decode the signal.
-
-## Lab Report
-
-1\. WebSDR: For your lab report, find and example of these signals
-
-*   AM
-    
-*   SSB
-    
-*   Digital
-    
-*   Morse Code (check right above 7 MHz or 14 MHz for this)
-    
-*   Something weird (radars, beacons, time, there is lots to find)
-    
-
-For each, include a screen shot, say what kind of signal it is, what frequency it is at, where it is from (use internet searches and/or GenAI to learn more about it!), and what time you acquired it.
-
-2\. RTL\_Power: Run rtl\_power on a band of interest to you, and include the resulting spectral survey image. What is in this band?
-
-3\. AM Demodulation (**NOT REQUIRED TO DO OR TURN IN** - 9/12, mbb): For your lab report, follow the steps from this lab to demodulate/decimate your Airband signal from Lab 2. First, demodulate the signal ``d`` to center it exactly and save it as ``dm``. Then, decimate ``dm`` as shown in the lab. How much should you decimate the signal to optimize its sound quality? Include in your lab report a screen shot of the spectrogram of your result, along with your offset frequency, and decimation ratio of your final stage.
-
-## Next Lab
-
-Next time we will look at narrow band FM modulation.
+1. A screenshot of your envelope detector output (spectrum and, if you can capture it, a note on what you heard) while receiving live Air Band traffic, with the frequency you tuned to and a description of the traffic (tower/ground/approach, if you could tell).
+2. A screenshot of a QAM constellation at two different noise levels, with 2-3 sentences comparing them and explaining, in terms of $I(t)$ and $Q(t)$, why a DSB-LC envelope detector wouldn't work for demodulating a QAM signal.
+3. Your documentation statement.

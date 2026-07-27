@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Lab 7: Digital Wireless System using MATLAB &#8212; ECE447 Course Webpage</title>
+    <title>Lab 7: A Digital Communications Protocol — ASCII Messaging &#8212; ECE447 Course Webpage</title>
   
   
   
@@ -68,7 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="Homework 8" href="../HW/HW8.html" />
+    <link rel="next" title="Homework 8" href="../HW/HW8.html" />
+    <link rel="prev" title="Homework 7" href="../HW/HW7.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -187,21 +188,22 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../HW/SkillsReview.html">Skills Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: SDR Setup and Spectrum Exploration with MATLAB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW1.html">Homework 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Complex Signals and Spectra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Amplitude Modulation — Receiving Real Air Band Traffic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW2.html">Homework 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab4.html">Lab 4: Frequency Modulation — Receiving Commercial FM Radio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab4.html">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: Digital Modulation Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW5.html">Homework 5</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: QPSK Modulation and Demodulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: QPSK Transmission and Reception over Real Hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW6.html">Homework 6</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW7.html">Homework 7</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 7: A Digital Communications Protocol — ASCII Messaging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW8.html">Homework 8</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 7: Digital Wireless System using MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab8.html">Lab 8: Capstone — Image Transmission with an Integrity Check</a></li>
 </ul>
 
     </div>
@@ -387,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 7: Digital Wireless System using MATLAB</h1>
+    <h1>Lab 7: A Digital Communications Protocol — ASCII Messaging</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -399,11 +401,12 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-matlab-wireless-communications-onramp-tutorial">Part 1: MATLAB Wireless Communications Onramp Tutorial</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-bit-error-rate-ber-vs-signal-to-noise-ratio-snr-for-qam-signals">Part 2: Bit Error Rate (BER) vs. Signal-to-Noise Ratio (SNR) for QAM Signals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-ber-vs-snr-for-qam-symbols-using-ofdm-in-a-multipath-environment">Part 3: BER vs. SNR for QAM Symbols using OFDM in a Multipath Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-math-finding-the-frame-with-cross-correlation">Some Math: Finding the Frame with Cross-Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-1-frame-synchronization">Activity 1: Frame Synchronization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-2-decode-the-message">Activity 2: Decode the Message</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-extension">Optional Extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
             </nav>
         </div>
@@ -415,82 +418,69 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-7-digital-wireless-system-using-matlab">
-<h1>Lab 7: Digital Wireless System using MATLAB<a class="headerlink" href="#lab-7-digital-wireless-system-using-matlab" title="Permalink to this heading">#</a></h1>
-<p><strong>Due to Gradescope NLT 2359 on Thursday, 4 Dec (L40)</strong></p>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-7-a-digital-communications-protocol-ascii-messaging">
+<h1>Lab 7: A Digital Communications Protocol — ASCII Messaging<a class="headerlink" href="#lab-7-a-digital-communications-protocol-ascii-messaging" title="Permalink to this heading">#</a></h1>
+<p>(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, &amp; A. G. Broadhurst, <a class="reference external" href="https://www.desktopsdr.com/download-files"><em>Software Defined Radio using MATLAB &amp; Simulink and the RTL-SDR</em></a>, 2nd Ed., Strathclyde Academic Media, 2022, Ch. 12.4-12.7.)</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>We have be covering binary digital communication systems in class. We have also discussed QAM, frequency division multiplexing, channel noise, and random signals. This lab is a conglomeration of all of these topics and shows how modern wireless telecommunication systems achieve high performance in challenging environments.</p>
-<p>You will first complete an online MATLAB tutorial for wireless communications. This tutorial will explain concepts and walk you through the necessary code. You will need your Mathworks login info to complete the tutorial. After that, you will use a provided MATLAB script to plot the BER vs. SNR for varying levels of QAM signals, both with and without multipath in the channel. Next, you will use a different MATLAB script to plot the BER vs. SNR for QAM signals using Orthogonal Frequency Division Multiplexing (OFDM). You will see how knowledge of the channel, or the CSI, can drastically improve digital system performance.</p>
+<p>A synchronized QPSK link (Lab 6) only gets you a clean stream of symbols — it doesn’t tell you where a message starts. Today you’ll receive a live, framed, ASCII-encoded message from the instructor’s PLUTO and decode actual text out of the air. As in Lab 6, only the instructor transmits; the whole class receives simultaneously on individual RTL-SDRs.</p>
 </section>
 <section id="aims-of-the-lab">
 <h2>Aims of the Lab<a class="headerlink" href="#aims-of-the-lab" title="Permalink to this heading">#</a></h2>
-<p>The purposes of this lab are:</p>
 <ul class="simple">
-<li><p>Explore the impact of noise and multipath on QAM signals.</p></li>
-<li><p>Understand how OFDM and Channel State Information (CSI) affect system performance.</p></li>
+<li><p>Write down the cross-correlation frame-detection metric and use it to explain how the receiver locates a known sync word inside a continuous symbol stream.</p></li>
+<li><p>Decode a real over-the-air ASCII message end-to-end.</p></li>
 </ul>
 </section>
-<section id="introduction">
-<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading">#</a></h2>
-<p>Wireless communication systems face significant challenges due to the nature of the radio channel. One of the most critical impairments is multipath propagation, which occurs when transmitted signals reflect off buildings, terrain, and other objects, arriving at the receiver via multiple paths. These delayed copies of the signal interfere with each other, causing fading and distortion that degrade system performance. Multipath effects become more pronounced in high-data-rate systems, where symbol durations are short and inter-symbol interference (ISI) can severely impact reliability.</p>
-<p>To combat multipath, modern systems employ Orthogonal Frequency Division Multiplexing (OFDM). OFDM divides the available bandwidth into many narrow subcarriers, each carrying a portion of the data. By transmitting symbols in parallel across these subcarriers, OFDM converts a frequency-selective channel into multiple flat-fading channels, greatly reducing ISI. This technique is widely used in standards such as LTE, Wi-Fi, and 5G because it improves robustness in multipath environments.</p>
-<p>Historically, OFDM emerged in the late 1960s as a theoretical concept for mitigating multipath in high-speed data transmission. It gained practical relevance in the 1980s with digital broadcasting and DSL technologies, where its ability to handle severe channel impairments proved invaluable. The breakthrough came in the 1990s when OFDM was adopted for wireless LANs (IEEE 802.11a) and later became the foundation for 4G LTE and 5G NR. Its efficiency in spectrum usage and resilience to multipath made it the dominant modulation technique for modern broadband wireless systems.</p>
-<p>Another key concept in wireless systems is Channel State Information (CSI). CSI represents the transmitter’s and receiver’s knowledge of the channel characteristics. Accurate CSI enables techniques like adaptive modulation, coding, and equalization, which optimize performance under varying conditions. When CSI is imperfect—due to measurement errors or outdated estimates—system performance degrades, especially in multipath channels. Understanding the impact of CSI quality is essential for designing resilient communication systems.</p>
-<p>In this lab, you will explore these concepts by simulating QAM signals under different conditions, comparing performance with and without OFDM, and analyzing the role of CSI. Through MATLAB-based experiments, you will gain insight into how modern wireless systems mitigate multipath and why accurate channel knowledge is critical for reliable communication.</p>
+<section id="some-math-finding-the-frame-with-cross-correlation">
+<h2>Some Math: Finding the Frame with Cross-Correlation<a class="headerlink" href="#some-math-finding-the-frame-with-cross-correlation" title="Permalink to this heading">#</a></h2>
+<p>The transmitter prepends every message with a known sequence of symbols, <span class="math notranslate nohighlight">\(c[0], c[1], \dots, c[L-1]\)</span> (the sync word), that both transmitter and receiver agree on ahead of time. The receiver slides a window of length <span class="math notranslate nohighlight">\(L\)</span> across its incoming symbol stream <span class="math notranslate nohighlight">\(r[n]\)</span> and computes the cross-correlation at every position:</p>
+<div class="math notranslate nohighlight">
+\[R[n] = \sum_{k=0}^{L-1} r[n+k]\, c^*[k]\]</div>
+<p>When the window is aligned exactly with the transmitted sync word, every term in the sum adds constructively (since <span class="math notranslate nohighlight">\(r[n+k] \approx c[k]\)</span> there), producing a sharp peak in <span class="math notranslate nohighlight">\(|R[n]|\)</span>. Anywhere else, the received symbols are essentially uncorrelated with <span class="math notranslate nohighlight">\(c[k]\)</span>, so the terms partially cancel and <span class="math notranslate nohighlight">\(|R[n]|\)</span> stays small. Detecting that peak (usually by comparing it against a threshold) tells the receiver exactly which sample index the message frame starts at — this correlation is precisely the matched filter operation, so named because <span class="math notranslate nohighlight">\(c^*[k]\)</span> is matched to the exact known waveform you’re searching for.</p>
 </section>
-<section id="part-1-matlab-wireless-communications-onramp-tutorial">
-<h2>Part 1: MATLAB Wireless Communications Onramp Tutorial<a class="headerlink" href="#part-1-matlab-wireless-communications-onramp-tutorial" title="Permalink to this heading">#</a></h2>
-<p>Complete the tutorial located at this link:</p>
-<p><a class="reference external" href="https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless">https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless</a></p>
-<p>The time required to complete the tutorial is estimated to be one hour, so plan accordingly.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
+<p>The instructor will announce a transmit frequency and run <code class="docutils literal notranslate"><span class="pre">digital/pluto_tx/pluto_QPSK_ascii_message.slx</span></code>, which repeatedly transmits a short text message framed with a known sync word.</p>
 </section>
-<section id="part-2-bit-error-rate-ber-vs-signal-to-noise-ratio-snr-for-qam-signals">
-<h2>Part 2: Bit Error Rate (BER) vs. Signal-to-Noise Ratio (SNR) for QAM Signals<a class="headerlink" href="#part-2-bit-error-rate-ber-vs-signal-to-noise-ratio-snr-for-qam-signals" title="Permalink to this heading">#</a></h2>
-<p>In the next part of this lab, you will use what you learned in the tutorial to investigate the effect of noise and multipath on QAM signals. Use this MATLAB code: <a class="reference download internal" download="" href="../_downloads/c4289542ada445b2bb2b25a630ba0e47/WCO_Lab_QAM.m"><span class="xref download myst">WCO_Lab_QAM.m</span></a> (generated from the tutorial online). Complete the following steps and answer the questions for your lab report:</p>
-<ol class="arabic">
-<li><p>Plot the BER versus the SNR for 4-, 16-, 64-, and 256-QAM over SNRs ranging from -20 dB to 40 dB in increments of at most 2 dB for a regular AWGN channel without multipath.</p>
-<p>a. Copy and paste the plot into your lab report.</p>
-<p>b. This plot is known as a <em>waterfall plot</em> due to its shape. A system can be designed to dynamically change the modulation format after measuring the SNR of the channel to maintain a specific BER. Using your plot, estimate how many extra decibels in SNR each additional bit in the QAM symbol achieves to maintain a BER of <span class="math notranslate nohighlight">\(10^{-3}\)</span>. For example, 4-QAM uses 2 bits and 16-QAM uses 4 bits. At BER = <span class="math notranslate nohighlight">\(10^{-3}\)</span>, estimate the difference between the SNRs of the two QAM formats. (Note: smaller SNR increments make this easier.)</p>
-</li>
-<li><p>Modify the code to include multipath in the channel and generate a plot with the same QAM modulation orders and SNRs as before.</p>
-<p>a. Copy and paste the plot into your document.</p>
-<p>b. How is this plot different than the first one? Why?</p>
-</li>
-<li><p>With the multipath option enabled, MATLAB should generate a spectrum analyzer plot showing the transmitted signal in yellow and the channel in blue in the frequency domain. How does what you see in the plot explain the differences between your first two plots? (Hint: Part 4 of the online tutorial – Multipath Channels - discusses this in the Further Practice section.)</p></li>
+<section id="activity-1-frame-synchronization">
+<h2>Activity 1: Frame Synchronization<a class="headerlink" href="#activity-1-frame-synchronization" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">digital/rtlsdr_rx/rtlsdr_QPSK_ascii_message.slx</span></code>. Internally, this receiver computes exactly the <span class="math notranslate nohighlight">\(R[n]\)</span> correlation above against the known sync word.</p></li>
+<li><p>Locate the correlation peak / frame detection indicator in the model.</p></li>
+<li><p>Confirm it’s triggering — once it finds a strong correlation peak, the receiver knows exactly where the message frame begins and can start decoding from that point.</p></li>
 </ol>
+<p><em>For more detail on data and frame synchronization, see Sec. 12.6 in SDR textbook.</em></p>
 </section>
-<section id="part-3-ber-vs-snr-for-qam-symbols-using-ofdm-in-a-multipath-environment">
-<h2>Part 3: BER vs. SNR for QAM Symbols using OFDM in a Multipath Environment<a class="headerlink" href="#part-3-ber-vs-snr-for-qam-symbols-using-ofdm-in-a-multipath-environment" title="Permalink to this heading">#</a></h2>
-<p>In this part of the lab, you will investigate the effect of noise and multipath on QAM signals <em>using OFDM</em>. You will also look at how having less than perfect Channel State Information (CSI) at the transmitter affects the system’s performance. Use this MATLAB code: <a class="reference download internal" download="" href="../_downloads/de79ebcd594dd23e7df226a0b095bed3/WCO_Lab_OFDM.m"><span class="xref download myst">WCO_Lab_OFDM.m</span></a>. Complete the following steps and add your plots and answers to your lab report:</p>
-<ol class="arabic">
-<li><p>Plot the BER versus the SNR for 4-, 16-, 64-, and 256-QAM over SNRs ranging from -20 dB to 40 dB in increments of at most 2 dB for a regular AWGN channel with multipath using OFDM and with perfect CSI knowledge at the transmitter (Option 1 selected).</p>
-<p>a. Copy and paste the plot into your lab report.</p>
-<p>b. How does this plot compare to the multipath plot in Part 2 that did not use OFDM? Why does OFDM improve the communication system’s performance when multipath is present?</p>
-</li>
-<li><p>Perfect CSI enables perfect equalization at the receiver. If the CSI is corrupted, whether through incorrect channel sounding or other means, the system performance degrades.</p>
-<ul class="simple">
-<li><p>In Option 2, only a single path of the multipath CSI is corrupted.</p></li>
-<li><p>In Option 3, each path of the multipath vector has a small amount of noise added to it.</p></li>
-<li><p>In Option 4, the receiver does not have any CSI.</p></li>
-</ul>
-<p>Re-run the code for each option and save the plots.</p>
-<p>a. Copy and paste the plots into your document.</p>
-<p>b. Compare and contrast the three plots with imperfect CSI (Options 2–4) to the plot with perfect CSI (Option 1) at the receiver. Discuss the impact of having good CSI at the receiver to system performance. How does the performance compare between Options 2 and 3 (one corrupt path vs. all paths slightly corrupted)? What happens if you increase the amplitude of the noise corrupting the CSI (currently set to 0.05)?</p>
-</li>
+<section id="activity-2-decode-the-message">
+<h2>Activity 2: Decode the Message<a class="headerlink" href="#activity-2-decode-the-message" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>With frame sync locked, let the receiver decode the received symbols into ASCII characters.</p></li>
+<li><p>Confirm you can read the transmitted text.</p></li>
+<li><p>If the instructor changes the message partway through class, confirm your receiver picks up the new text too.</p></li>
+<li><p><strong>If you’re not receiving a clean decode</strong>, fall back to <code class="docutils literal notranslate"><span class="pre">digital/rtlsdr_rx/rec_data/qpsk_ascii_msg.mat</span></code> (or <code class="docutils literal notranslate"><span class="pre">digital/rtlsdr_rx/rec_data/dqpsk_ascii_msg.mat</span></code> for the differentially-encoded version) to complete the assignment.</p></li>
 </ol>
+<p><em>For more detail on ASCII encoding and message transmission, see Sec. 12.5 and 12.7 in SDR textbook.</em></p>
 </section>
-<section id="lab-report">
-<h2>Lab Report<a class="headerlink" href="#lab-report" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Complete the Mathworks Wireless Communications On-ramp tutorial at:
-<a class="reference external" href="https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless">https://matlabacademy.mathworks.com/details/wireless-communications-onramp/wireless</a></p></li>
-</ul>
-<p>For your PDF lab report, you must:</p>
-<ul class="simple">
-<li><p>Include all plots and answer all questions as directed in Parts 2 and 3 of the lab guidance.</p></li>
-<li><p>Upload the PDF to Gradescope.</p></li>
-</ul>
+<section id="optional-extension">
+<h2>Optional Extension<a class="headerlink" href="#optional-extension" title="Permalink to this heading">#</a></h2>
+<p>QPSK has a subtle problem: the 4th-power frequency estimation trick from Lab 6 can’t tell the difference between the true carrier phase and the true phase plus any multiple of 90 degrees — so a receiver can lock on 90, 180, or 270 degrees rotated from the truth and have no way to know it (this is called phase ambiguity).</p>
+<p>Differential encoding sidesteps the problem entirely by transmitting information in the change between consecutive symbols rather than their absolute value: <span class="math notranslate nohighlight">\(b[n] = a[n]\, b[n-1]\)</span>, where <span class="math notranslate nohighlight">\(a[n]\)</span> is the data-bearing unit-magnitude symbol and <span class="math notranslate nohighlight">\(b[n-1]\)</span> is the previously transmitted symbol. The receiver recovers <span class="math notranslate nohighlight">\(a[n]\)</span> by multiplying by the conjugate of the previous received symbol:</p>
+<div class="math notranslate nohighlight">
+\[\hat{a}[n] = r[n]\, r^*[n-1]\]</div>
+<p>If the whole received constellation is rotated by some unknown ambiguity <span class="math notranslate nohighlight">\(\theta_0\)</span> — i.e. <span class="math notranslate nohighlight">\(r[n] = b[n]e^{j\theta_0}\)</span> for every <span class="math notranslate nohighlight">\(n\)</span> — then <span class="math notranslate nohighlight">\(\hat{a}[n] = b[n]e^{j\theta_0}\, \big(b[n-1]e^{j\theta_0}\big)^* = b[n]b^*[n-1] = a[n]\)</span>: the <span class="math notranslate nohighlight">\(e^{j\theta_0}\)</span> terms cancel exactly, regardless of what <span class="math notranslate nohighlight">\(\theta_0\)</span> is. That’s why differential encoding is immune to phase ambiguity.</p>
+<p>If you finish early, try <code class="docutils literal notranslate"><span class="pre">digital/simulation/differential_coding/QPSK_diff_encode_decode.slx</span></code> and confirm this cancellation for yourself by introducing a constellation rotation and checking that the decoded bits are unaffected.</p>
+<p><em>For more detail on phase ambiguity and differential encoding, see Sec. 11.9-11.10 in SDR textbook.</em></p>
+</section>
+<section id="assignment">
+<h2>Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h2>
+<p>Submit a single PDF to Gradescope containing:</p>
+<ol class="arabic simple">
+<li><p>A screenshot showing your frame synchronization indicator locking on (e.g., the correlation peak or sync flag).</p></li>
+<li><p>The decoded ASCII message text you received.</p></li>
+<li><p>2-3 sentences: what would your receiver see if the frame sync word were never found (e.g., due to a very weak signal)? Would it decode garbage, nothing at all, or something else?</p></li>
+<li><p>Your documentation statement.</p></li>
+</ol>
 </section>
 </section>
 
@@ -525,13 +515,22 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../HW/HW8.html"
+       href="../HW/HW7.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Homework 7</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../HW/HW8.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
         <p class="prev-next-title">Homework 8</p>
       </div>
+      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div>
                 </footer>
@@ -551,11 +550,12 @@ document.write(`
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#introduction">Introduction</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-matlab-wireless-communications-onramp-tutorial">Part 1: MATLAB Wireless Communications Onramp Tutorial</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-bit-error-rate-ber-vs-signal-to-noise-ratio-snr-for-qam-signals">Part 2: Bit Error Rate (BER) vs. Signal-to-Noise Ratio (SNR) for QAM Signals</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-3-ber-vs-snr-for-qam-symbols-using-ofdm-in-a-multipath-environment">Part 3: BER vs. SNR for QAM Symbols using OFDM in a Multipath Environment</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-math-finding-the-frame-with-cross-correlation">Some Math: Finding the Frame with Cross-Correlation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-1-frame-synchronization">Activity 1: Frame Synchronization</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-2-decode-the-message">Activity 2: Decode the Message</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#optional-extension">Optional Extension</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
   </nav></div>
 

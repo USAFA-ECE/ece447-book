@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Lab 5: QPSK Modulation and Demodulation &#8212; ECE447 Course Webpage</title>
+    <title>Lab 5: Digital Modulation Fundamentals &#8212; ECE447 Course Webpage</title>
   
   
   
@@ -68,8 +68,8 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Homework 6" href="../HW/HW6.html" />
-    <link rel="prev" title="Homework 5" href="../HW/HW5.html" />
+    <link rel="next" title="Homework 4" href="../HW/HW4.html" />
+    <link rel="prev" title="Homework 3" href="../HW/HW3.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -188,21 +188,22 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../HW/SkillsReview.html">Skills Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: SDR Setup and Spectrum Exploration with MATLAB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW1.html">Homework 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Complex Signals and Spectra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Amplitude Modulation — Receiving Real Air Band Traffic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW2.html">Homework 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab4.html">Lab 4: Frequency Modulation — Receiving Commercial FM Radio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab4.html">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 5: Digital Modulation Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW5.html">Homework 5</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 5: QPSK Modulation and Demodulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: QPSK Transmission and Reception over Real Hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW6.html">Homework 6</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW7.html">Homework 7</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: A Digital Communications Protocol — ASCII Messaging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW8.html">Homework 8</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: Digital Wireless System using MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab8.html">Lab 8: Capstone — Image Transmission with an Integrity Check</a></li>
 </ul>
 
     </div>
@@ -388,7 +389,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 5: QPSK Modulation and Demodulation</h1>
+    <h1>Lab 5: Digital Modulation Fundamentals</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -398,11 +399,14 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-6-nov-lesson-32-by-2359-on-gradescope">Due NLT 6 Nov (Lesson 32) by 2359 on Gradescope</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dqpsk-communication-system">DQPSK Communication System</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-math-symbol-mapping-and-minimum-distance">Some Math: Symbol Mapping and Minimum Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-1-bits-to-symbols">Activity 1: Bits to Symbols</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-2-constellations-under-noise">Activity 2: Constellations Under Noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-3-pulse-shaping-the-nyquist-isi-criterion">Activity 3: Pulse Shaping — the Nyquist ISI Criterion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-4-a-real-captured-signal">Activity 4: A Real Captured Signal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
             </nav>
         </div>
@@ -414,53 +418,83 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-5-qpsk-modulation-and-demodulation">
-<h1>Lab 5: QPSK Modulation and Demodulation<a class="headerlink" href="#lab-5-qpsk-modulation-and-demodulation" title="Permalink to this heading">#</a></h1>
-<section id="due-nlt-6-nov-lesson-32-by-2359-on-gradescope">
-<h2>Due NLT 6 Nov (Lesson 32) by 2359 on Gradescope<a class="headerlink" href="#due-nlt-6-nov-lesson-32-by-2359-on-gradescope" title="Permalink to this heading">#</a></h2>
-</section>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-5-digital-modulation-fundamentals">
+<h1>Lab 5: Digital Modulation Fundamentals<a class="headerlink" href="#lab-5-digital-modulation-fundamentals" title="Permalink to this heading">#</a></h1>
+<p>(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, &amp; A. G. Broadhurst, <a class="reference external" href="https://www.desktopsdr.com/download-files"><em>Software Defined Radio using MATLAB &amp; Simulink and the RTL-SDR</em></a>, 2nd Ed., Strathclyde Academic Media, 2022, Ch. 11.1-11.2.)</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>So far we’ve looked at AM and FM signals and completed some basic GNU Radio Companion tutorials to help us better understand filtering and sample rates. In this lab we will shift to a digital modulation technique called Differential Quadrature Phase Shift Keying (DQPSK). We will again use one of the tutorials from the GNU Radio Wiki page. This tutorial walks you through most of the communication chain from source to sink, with a special emphasis on signal distortion and channel impairments. You have been learning about ISI and timing errors in the past few lessons. In this lab you will implement a system that incorporates those errors <em>and</em> ways to address them. You will also use eye diagrams to subjectively evaluate the system’s effectiveness.</p>
+<p>This lab is entirely simulation-based — no live transmission needed — and sets up everything you’ll need for the hands-on hardware labs that follow. You’ll map bits to symbols, look at constellations under noise, and see why we shape pulses instead of just switching amplitudes on and off. To ground it in something real, you’ll finish by loading an actual RTL-SDR capture of a QPSK signal recorded for the SDR textbook, straight from your course files.</p>
 </section>
 <section id="aims-of-the-lab">
 <h2>Aims of the Lab<a class="headerlink" href="#aims-of-the-lab" title="Permalink to this heading">#</a></h2>
-<p>The goals of this lab are to:</p>
 <ul class="simple">
-<li><p>Understand why signal distortion (e.g., inter-symbol interference, or ISI) occurs and how to counter it.</p></li>
-<li><p>Understand channel effects on a signal and how to accurately recover the signal at the receiver.</p></li>
-<li><p>Provide experience using eye diagrams.</p></li>
+<li><p>Write down the QPSK and 16-QAM symbol-mapping equations and use them to explain, quantitatively, why higher-order constellations are more fragile to noise.</p></li>
+<li><p>See how noise degrades a constellation, and connect what you see to minimum distance between constellation points.</p></li>
+<li><p>Derive the Nyquist ISI criterion and the bandwidth-vs-rolloff tradeoff for pulse shaping.</p></li>
+<li><p>View a real captured QPSK signal for the first time.</p></li>
 </ul>
 </section>
-<section id="dqpsk-communication-system">
-<h2>DQPSK Communication System<a class="headerlink" href="#dqpsk-communication-system" title="Permalink to this heading">#</a></h2>
-<p>Navigate to the tutorial at this link: <a class="reference external" href="https://wiki.gnuradio.org/index.php?title=QPSK_Mod_and_Demod">https://wiki.gnuradio.org/index.php?title=QPSK_Mod_and_Demod</a>. You will work through thsi tutorial to build a “complete” system from bits, to transmitted waveform through a channel, to a receiver accomplishing time synchronization and equalization, to decoding, and back to bits again. As you work through the tutorial, make sure you read everything and build the flowgraph from scratch for practice (don’t just download the completed product!). Also, you must accomplish the following additional tasks and answer the following questions.</p>
-<ol class="arabic">
-<li><p>In the Constellation Modulator hierarchical block, there is a parameter called Excess Bandwidth. This is equivalent to the roll-off factor <span class="math notranslate nohighlight">\(r\)</span> we learned about in class. Because the block uses extra samples per symbol, you divide the sample rate <span class="math notranslate nohighlight">\(R_b\)</span> by the number of samples/symbol to get a symbol rate <span class="math notranslate nohighlight">\(R_s\)</span>. Then you can use <span class="math notranslate nohighlight">\(R_s\)</span> just like we would use <span class="math notranslate nohighlight">\(R_b\)</span> in the textbook to find total transmit bandwidth <span class="math notranslate nohighlight">\(B_T\)</span> (Eq. 6.33 in the textbook).</p>
-<p>Calculate <span class="math notranslate nohighlight">\(B_T\)</span> for each of the five excess bandwidth values used in the Excess Bandwidth section of the tutorial. Do your results match what is shown in the tutorial’s QT GUI Plot? Include the answers in your lab write up.</p>
-</li>
-<li><p>What is an RRC filter? Where do we use it in the communication system described in the tutorial? Why?</p></li>
-<li><p>List the three channel impairments added by the Channel Model block.</p></li>
-<li><p>When you get to the Polyphase Clock Sync block, jump down to the <strong>Using the Symbol Sync block</strong> section at the bottom of the tutorial. Click on the <a class="reference external" href="https://wiki.gnuradio.org/index.php?title=Symbol_Sync">Symbol_Sync</a> hyperlink to read through the 4 functions the block performs.</p></li>
-<li><p>Jump back to just after the Polyphase Clock Sync section, and pick up where you left off with the Multipath section.</p></li>
-<li><p>Note how the flowgraph uses Virtual Sink and Virtual Source to make the flowgraph cleaner and easy to follow.</p></li>
-<li><p>Why does the constellation diagram at the output of the equalizer look like a circle instead of the four, distinct symbols we started off with?</p></li>
-<li><p>The Costas Loop is a PLL (phase locked loop)-based circuit used for carrier frequency recovery and is especially useful for DSB-SC or phase modulated signals.</p></li>
-<li><p>After the Constellation Decoder, Differential Decoder, and Map, you are ready to unpack your received bits. The flowgraph provided in the tutorial graphically displays the received bits (Data 0) with the transmitted bits (Data 1). Do the two perfectly line up? Why not? What value of delay leads to perfect alignment? (Hint: it isn’t what the tutorial says it is!)</p></li>
-<li><p>Insert a QT GUI Eye Sink and connect it to the Costas Loop output. Set Samples per Symbol to 1 and turn on the Autoscale. Run your flowgraph and see how changing the Noise Voltage, Timing Offset, and Frequency Offset affects the eye in your diagram.</p>
-<ul class="simple">
-<li><p>Change the values for time_offset to start at 0.7 and stop at 1.1 in increments of 0.01. What do you notice about the system performance as you sweep through these time offset values?</p></li>
-<li><p>Return the noise and time offset values back to their original values. Now just change the frequency offset values. At what frequency offset value (plus or minus) does your eye completely close?</p></li>
-<li><p>Comment on the importance of time and frequency synchronization in a digital communication system.</p></li>
-</ul>
-</li>
-<li><p>Include a screenshot of your final flowgraph in your writeup.</p></li>
-<li><p>Summarize in a short paragraph what Dr. Rogers covered in class.</p></li>
+<section id="some-math-symbol-mapping-and-minimum-distance">
+<h2>Some Math: Symbol Mapping and Minimum Distance<a class="headerlink" href="#some-math-symbol-mapping-and-minimum-distance" title="Permalink to this heading">#</a></h2>
+<p>QPSK maps every 2 bits onto one of 4 symbols, each a point on the unit circle at one of four phases:</p>
+<div class="math notranslate nohighlight">
+\[s_k = \sqrt{E_s}\, e^{j(\pi/4 + k\pi/2)}, \qquad k = 0,1,2,3\]</div>
+<p>or equivalently in I/Q form, <span class="math notranslate nohighlight">\(s_k \in \{\pm 1 \pm j\}\sqrt{E_s/2}\)</span>. In general, an <span class="math notranslate nohighlight">\(M\)</span>-ary constellation carries <span class="math notranslate nohighlight">\(k=\log_2 M\)</span> bits per symbol, so for a fixed bit rate <span class="math notranslate nohighlight">\(R_b\)</span>, the symbol rate is <span class="math notranslate nohighlight">\(R_s = R_b/k\)</span> — this is exactly why higher-order modulation (more bits/symbol) lets you fit more data into the same symbol rate (and therefore the same bandwidth).</p>
+<p>That efficiency has a cost, though. For a fixed <em>average symbol energy</em> <span class="math notranslate nohighlight">\(E_s\)</span> (roughly, fixed transmit power), packing more points into the same I/Q area means each pair of adjacent points is closer together — their <strong>minimum distance</strong> <span class="math notranslate nohighlight">\(d_{min}\)</span> shrinks as <span class="math notranslate nohighlight">\(M\)</span> grows. Since additive noise pushes a received point around by some random amount, a smaller <span class="math notranslate nohighlight">\(d_{min}\)</span> means a much higher chance that a noise-corrupted point crosses into a neighboring symbol’s decision region and gets decoded wrong. That’s the precise, quantitative version of “16-QAM is more fragile than QPSK” you’ll observe in Activity 2.</p>
+</section>
+<section id="activity-1-bits-to-symbols">
+<h2>Activity 1: Bits to Symbols<a class="headerlink" href="#activity-1-bits-to-symbols" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">digital/simulation/modulation/QPSK_map_demap.slx</span></code> and <code class="docutils literal notranslate"><span class="pre">digital/simulation/modulation/QPSK_map_demap_IQ.slx</span></code>. These implement the QPSK mapping equation above.</p></li>
+<li><p>Confirm that mapping then demapping recovers your original bits with no noise present.</p></li>
+<li><p>Identify which of the four constellation points corresponds to which 2-bit pair, and check it against the <span class="math notranslate nohighlight">\(s_k\)</span> equation above (which phase does <span class="math notranslate nohighlight">\(k=0\)</span> land at?).</p></li>
 </ol>
+<p><em>For more detail on symbol mapping, see Sec. 11.1 in SDR textbook.</em></p>
 </section>
-<section id="lab-report">
-<h2>Lab Report<a class="headerlink" href="#lab-report" title="Permalink to this heading">#</a></h2>
-<p>Submit a neat, single PDF to Gradescope addressing all of the questions and directions listed above.</p>
+<section id="activity-2-constellations-under-noise">
+<h2>Activity 2: Constellations Under Noise<a class="headerlink" href="#activity-2-constellations-under-noise" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">digital/simulation/modulation/QPSK_constellation_noise.slx</span></code> and <code class="docutils literal notranslate"><span class="pre">digital/simulation/modulation/QAM16_constellation_noise.slx</span></code>.</p></li>
+<li><p>Sweep the noise level up on both and compare: at what noise level does QPSK’s constellation start to look “fuzzy,” versus 16-QAM’s? You should see 16-QAM degrade first — its <span class="math notranslate nohighlight">\(d_{min}\)</span> is smaller for the same average energy, exactly as the math above predicts.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">digital/simulation/modulation/QAM16_constellation_IQ.slx</span></code>, which breaks the same 16-QAM signal into separate I and Q views, if you want to see the components individually.</p></li>
+</ol>
+<p><em>For more detail on constellation noise sensitivity, see Sec. 11.1 in SDR textbook.</em></p>
+</section>
+<section id="activity-3-pulse-shaping-the-nyquist-isi-criterion">
+<h2>Activity 3: Pulse Shaping — the Nyquist ISI Criterion<a class="headerlink" href="#activity-3-pulse-shaping-the-nyquist-isi-criterion" title="Permalink to this heading">#</a></h2>
+<p>A pulse shape <span class="math notranslate nohighlight">\(p(t)\)</span> avoids inter-symbol interference (ISI) if it satisfies the <strong>Nyquist ISI criterion</strong>: sampled at the symbol rate, it must be zero at every neighboring symbol instant and 1 at its own center,</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}p(nT_s) = \begin{cases}1 &amp; n=0 \\ 0 &amp; n \ne 0\end{cases}\end{split}\]</div>
+<p>so that when pulses from neighboring symbols overlap in time (which shaped pulses do), they contribute exactly zero at the instant you sample the symbol you care about. The raised-cosine family of pulses is built specifically to satisfy this. Its bandwidth depends on the <strong>roll-off factor</strong> <span class="math notranslate nohighlight">\(\alpha\)</span> (0 to 1):</p>
+<div class="math notranslate nohighlight">
+\[B = \frac{1+\alpha}{2T_s}\]</div>
+<p>A rectangular pulse is the extreme case that doesn’t satisfy the criterion cleanly in a bandlimited channel — its spectrum has long, slowly-decaying sidelobes that leak into neighboring channels, which is exactly what you’ll see in the comparison below. A smaller <span class="math notranslate nohighlight">\(\alpha\)</span> saves bandwidth but makes the pulse decay more slowly in time (harder to implement, more sensitive to timing error) — you’ll feel that tradeoff again in Lab 6 and 7’s real-time symbol timing recovery.</p>
+<ol class="arabic simple">
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">digital/simulation/pulse/rect_v_RRC.slx</span></code> to compare a rectangular pulse against a root-raised-cosine (RRC) shaped pulse, in both time and frequency.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">digital/simulation/pulse/raised_cosine_pulses.slx</span></code> and <code class="docutils literal notranslate"><span class="pre">digital/simulation/pulse/sqrt_raised_cosine_pulses.slx</span></code> to see the shaped pulses in the time domain.</p></li>
+<li><p>Confirm for yourself that each pulse crosses zero exactly at the neighboring symbols’ sampling instants, per the criterion above.</p></li>
+<li><p>Try increasing and decreasing the roll-off factor <span class="math notranslate nohighlight">\(\alpha\)</span> and note how the pulse’s time-domain decay and frequency-domain bandwidth trade off against each other.</p></li>
+</ol>
+<p><em>For more detail on pulse shaping and the Nyquist ISI criterion, see Sec. 11.2 in SDR textbook.</em></p>
+</section>
+<section id="activity-4-a-real-captured-signal">
+<h2>Activity 4: A Real Captured Signal<a class="headerlink" href="#activity-4-a-real-captured-signal" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Load <code class="docutils literal notranslate"><span class="pre">digital/rtlsdr_rx/rec_data/qpsk_raised_cosine.mat</span></code> into <code class="docutils literal notranslate"><span class="pre">digital/rtlsdr_rx/rtlsdr_QPSK_raised_cosine.slx</span></code> (set the model to play back the recorded file instead of live hardware — check the source block’s mode).</p></li>
+<li><p>Run it. This is an actual over-the-air RTL-SDR capture recorded for this textbook, not a simulation.</p></li>
+<li><p>Look at the resulting constellation and note what it looks like: it likely will <em>not</em> look clean yet, since this file hasn’t gone through the frequency and timing correction you’ll build in Lab 6.</p></li>
+</ol>
+<p><em>For more detail on real-time QPSK receiver models, see Sec. 12.1 in SDR textbook.</em></p>
+</section>
+<section id="assignment">
+<h2>Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h2>
+<p>Submit a single PDF to Gradescope containing:</p>
+<ol class="arabic simple">
+<li><p>Constellation screenshots for QPSK and 16-QAM at two comparable noise levels, with 2-3 sentences comparing their sensitivity to noise.</p></li>
+<li><p>The rectangular vs. RRC pulse spectrum comparison from Activity 3, with 1-2 sentences on which one you’d rather transmit next to another signal, and why.</p></li>
+<li><p>Your constellation screenshot from the real recorded QPSK capture in Activity 4, with a one-sentence prediction of what you think is wrong with it (you’ll find out for real in Lab 6).</p></li>
+<li><p>Your documentation statement.</p></li>
+</ol>
 </section>
 </section>
 
@@ -495,20 +529,20 @@ document.write(`
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="../HW/HW5.html"
+       href="../HW/HW3.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Homework 5</p>
+        <p class="prev-next-title">Homework 3</p>
       </div>
     </a>
     <a class="right-next"
-       href="../HW/HW6.html"
+       href="../HW/HW4.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Homework 6</p>
+        <p class="prev-next-title">Homework 4</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -528,11 +562,14 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-6-nov-lesson-32-by-2359-on-gradescope">Due NLT 6 Nov (Lesson 32) by 2359 on Gradescope</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dqpsk-communication-system">DQPSK Communication System</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-math-symbol-mapping-and-minimum-distance">Some Math: Symbol Mapping and Minimum Distance</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-1-bits-to-symbols">Activity 1: Bits to Symbols</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-2-constellations-under-noise">Activity 2: Constellations Under Noise</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-3-pulse-shaping-the-nyquist-isi-criterion">Activity 3: Pulse Shaping — the Nyquist ISI Criterion</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-4-a-real-captured-signal">Activity 4: A Real Captured Signal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
   </nav></div>
 

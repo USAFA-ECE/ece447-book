@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Lab 8: Digital Packet Radio – APRS &#8212; ECE447 Course Webpage</title>
+    <title>Lab 8: Capstone — Image Transmission with an Integrity Check &#8212; ECE447 Course Webpage</title>
   
   
   
@@ -62,10 +62,13 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'labs/Lab8';</script>
     <link rel="shortcut icon" href="../_static/favicon.ico"/>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Homework 8" href="../HW/HW8.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -128,8 +131,6 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-        
-      
       <div class="bd-sidebar-primary bd-sidebar">
         
 
@@ -184,23 +185,24 @@ const thebe_selector_output = ".output, .cell_output"
 <li class="toctree-l1"><a class="reference internal" href="../downloads.html">Slides and Downloads</a></li>
 </ul>
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
-<ul class="nav bd-sidenav">
+<ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../HW/SkillsReview.html">Skills Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab1.html">Lab 1: SDR Setup and Spectrum Exploration with MATLAB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW1.html">Homework 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab2.html">Lab 2: Complex Signals and Spectra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab3.html">Lab 3: Amplitude Modulation — Receiving Real Air Band Traffic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW2.html">Homework 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab4.html">Lab 4: Frequency Modulation — Receiving Commercial FM Radio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW3.html">Homework 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab4.html">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: Digital Modulation Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW4.html">Homework 4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW5.html">Homework 5</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab5.html">Lab 5: QPSK Modulation and Demodulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: QPSK Transmission and Reception over Real Hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW6.html">Homework 6</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW7.html">Homework 7</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab6.html">Lab 6: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: A Digital Communications Protocol — ASCII Messaging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../HW/HW8.html">Homework 8</a></li>
-<li class="toctree-l1"><a class="reference internal" href="Lab7.html">Lab 7: Digital Wireless System using MATLAB</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 8: Capstone — Image Transmission with an Integrity Check</a></li>
 </ul>
 
     </div>
@@ -386,7 +388,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 8: Digital Packet Radio – APRS</h1>
+    <h1>Lab 8: Capstone — Image Transmission with an Integrity Check</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -396,25 +398,13 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-aprs">Structure of APRS</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-transforming-aprs-rf-signals-into-bits">Part 1: Transforming APRS RF Signals into Bits</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-decoding-aprs-packets">Part 2: Decoding APRS Packets</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-aprs-rf-decoding">Part 1: APRS RF Decoding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-sychronous-detection">Non-Sychronous Detection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-extraction">Timing Extraction</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Part 2: Decoding APRS packets</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-encoding">Line Encoding</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronization">Synchronization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bit-stuffing">Bit Stuffing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-packets">Additional Packets</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-1-receive-and-reconstruct-the-image">Activity 1: Receive and Reconstruct the Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-math-why-a-sum-isn-t-enough-and-what-crc-does-instead">Some Math: Why a Sum Isn’t Enough, and What CRC Does Instead</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-2-a-basic-integrity-check">Activity 2: A Basic Integrity Check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
             </nav>
         </div>
@@ -426,233 +416,69 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-8-digital-packet-radio-aprs">
-<h1>Lab 8: Digital Packet Radio – APRS<a class="headerlink" href="#lab-8-digital-packet-radio-aprs" title="Permalink to this heading">#</a></h1>
-<p>(Adapted from Dr. John Pauly’s Stanford University EE179 course website: <a class="reference external" href="https://web.stanford.edu/class/ee179/Homework.html.">https://web.stanford.edu/class/ee179/Homework.html.</a>)</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-8-capstone-image-transmission-with-an-integrity-check">
+<h1>Lab 8: Capstone — Image Transmission with an Integrity Check<a class="headerlink" href="#lab-8-capstone-image-transmission-with-an-integrity-check" title="Permalink to this heading">#</a></h1>
+<p>(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, &amp; A. G. Broadhurst, <a class="reference external" href="https://www.desktopsdr.com/download-files"><em>Software Defined Radio using MATLAB &amp; Simulink and the RTL-SDR</em></a>, 2nd Ed., Strathclyde Academic Media, 2022, Ch. 12.8.)</p>
 <section id="overview">
 <h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<p>This lab is a condensed version of a final project from a previous quarter. In it, we will capture and decode digital packet radio signals. The specific system we will look at is the Automatic Packet Reporting System, or APRS. This is an amateur radio combination of Twitter and Find My Friends.</p>
-<p>The idea behind APRS is that an APRS user can transmit a digital radio packet anywhere in the world, with a payload of 256 bytes. This will be retransmitted by digital repeaters (digipeaters) for a specified number of hops. This allows direct digital radio connections over long distances, such as most of northern California.</p>
-<p>Beyond this, internet nodes (i-gates) pick up the packets and forward them to a web site where they can be viewed with a browser (<a class="reference external" href="http://aprs.fi">aprs.fi</a>). This provides global coverage. If you want to have some independent device to report from somewhere out in the world, this a a great resource. One common device is a weather station. Another group that uses APRS is high altitude balloons. You can also make a tracker for your bike, so that you can find it when it is stolen!</p>
-<p>A map of active APRS sites on 5-24-17 in our area looks like this:</p>
-<p><img alt="" src="labs/aprs_AB.png" /></p>
-<p>People who fly high altitude balloons also often rely on APRS. The 256 byte payload allows reporting of position, altitude, temperature, battery status, among others. These are all available at the <a class="reference external" href="http://habhub.org">habhub.org</a> web site. The balloons that are up over North America on a typical day are shown here</p>
-<p><img alt="" src="labs/habhub.png" /></p>
-<p>Some days are busier than others. Can you guess what was happening on this day?</p>
-<p><img alt="" src="labs/Eclipse_Balloons.png" /></p>
-<p>If you want make a small device that you can send out into the world, so that you can track it and receive data from it, APRS is a very inexpensive (free) and capable solution. For example, there are arduino shields that do APRS. Anything you do with an ardiuno can be tracked and accessed anywhere in the world.</p>
-<p>In this lab we will look at the APRS packet network, and examine how to decode APRS packets.</p>
-<section id="structure-of-aprs">
-<h3>Structure of APRS<a class="headerlink" href="#structure-of-aprs" title="Permalink to this heading">#</a></h3>
-<p>APRS is based on a shared frequency. Packets are all sent asychronously, and can interfere, just as in baseband ethernet. In the U.S. the frequency is 144.39 MHz. With ethernet, collisions are detected, and packets retransmitted. With APRS the receivers are all varying distances from the source. Most packets are picked up by some station, and the overall packet loss is low. Packets are either detected or lost.</p>
+<p>This is your capstone SDR lab: the instructor’s PLUTO will transmit an actual image over the air using the same QPSK link you’ve been building since Lab 5, and you’ll receive and reconstruct it on your own RTL-SDR. We’re also adding a short integrity-check exercise of our own, tying back to the parity/CRC/Hamming code lecture — the SDR textbook’s exercise stops at “did the image come through,” and we’re extending it to “how would you know if it didn’t.”</p>
+<p>As with Labs 6 and 7, only the instructor transmits; the whole class receives independently.</p>
 </section>
-<section id="part-1-transforming-aprs-rf-signals-into-bits">
-<h3>Part 1: Transforming APRS RF Signals into Bits<a class="headerlink" href="#part-1-transforming-aprs-rf-signals-into-bits" title="Permalink to this heading">#</a></h3>
-<p>In the first part of the lab, we will look at turning the APRS RF waveform into bits. The APRS packets are transmitted using the Bell 202 1200 bit/second modem protocol. This uses a standard called AFSK1200, for Audio Frequency Shift Keying, 1200 baud. The packet itself is encoding using the AX.25 protocol. This is an RF extension of the X.25 protocol which is an ITU standard, and an alternative to IP. In the first part of the this lab we will detect the bits that are transmitted in a packet.</p>
-</section>
-<section id="part-2-decoding-aprs-packets">
-<h3>Part 2: Decoding APRS Packets<a class="headerlink" href="#part-2-decoding-aprs-packets" title="Permalink to this heading">#</a></h3>
-<p>In the second part of the lab, we will look at decoding the bit stream from the first part, and turning this into digital ascii data that we can interpret.</p>
-</section>
-</section>
-<section id="part-1-aprs-rf-decoding">
-<h2>Part 1: APRS RF Decoding<a class="headerlink" href="#part-1-aprs-rf-decoding" title="Permalink to this heading">#</a></h2>
-<p>APRS uses the Bell 202 standard for sending bits over a bandwidth limited line. At the simplest level, a ’1’ is sent as a tone at 1200 Hz, and a ’0’ as a tone at 2200 Hz. At 1200 bits/second, each bit is 0.83 ms, and a ’1’ goes through 1 cycle over one bit at 1200 Hz, and a ’0’ 1.8 cycles over one bit at 2200 Hz. This is enough to be able to distinguish the bit pattern of the input waveform.</p>
-<p>If we use an rtl_sdr, we can acquire APRS data</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">rtl_sdr</span> <span class="o">-</span><span class="n">f</span> <span class="mi">144390000</span> <span class="o">-</span><span class="n">n</span> <span class="mi">41920000</span> <span class="o">-</span><span class="n">g</span> <span class="mi">30</span> <span class="n">aprs</span><span class="o">.</span><span class="n">dat</span>
-
-</pre></div>
-</div>
-<p>This is centered on the APRS frequency, and collects 20 s of data with a receiver gain of 30 dB. However, the devices that produce APRS packets are quite variable, and some packets are much more difficult to decode than others. To get started, use this sample file acquired at 2.048 MHz is</p>
-<p><span class="xref myst">aprs23.dat</span></p>
-<p>This has two well defined, well separated packets to look at. First load the data, and decimate by a factor of 64 to 32 kHz.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="n">dd</span> <span class="o">=</span> <span class="n">decimate</span><span class="p">(</span><span class="n">decimate</span><span class="p">(</span><span class="n">loadFile</span><span class="p">(</span><span class="s1">&#39;aprs23.dat&#39;</span><span class="p">),</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;fir&#39;</span><span class="p">),</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;fir&#39;</span><span class="p">);</span>
-<span class="o">&gt;</span> <span class="n">dd</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> 					<span class="o">%</span> <span class="n">suppress</span> <span class="n">transient</span>
-
-</pre></div>
-</div>
-<p>This reduces the sampling rate to 2048000/64 = 32000 Hz. The result looks like</p>
-<p><img alt="" src="labs/dd23.png" /></p>
-<p>We can extract the first packet with</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">dp</span> <span class="o">=</span> <span class="n">dd</span><span class="p">(</span><span class="mf">3.8e5</span><span class="o">+</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="mi">16384</span><span class="p">));</span>
-<span class="o">&gt;&gt;</span> <span class="n">dp</span> <span class="o">=</span> <span class="n">dp</span> <span class="o">-</span> <span class="nb">sum</span><span class="p">(</span><span class="n">dp</span><span class="p">)</span><span class="o">/</span><span class="n">length</span><span class="p">(</span><span class="n">dp</span><span class="p">);</span>
-
-</pre></div>
-</div>
-<p>This extracts the packet, and then subtracts off the DC bias (this was acquired right on the APRS frequency).</p>
-<p>Since we ultimately want to sample at 1200 bits/second, we want to resample at some multiple of that rate. We will choose 24000 samples per second, so that each physical sample will be 20 samples of the RF waveform. Since we are already sampled at 32000 samples/second, We then need to downsample by a factor of 3/4.</p>
-<p>&gt;&gt; dps = resample(dp,3,4);</p>
-<p>At this point, we can use narrowband FM decoding to resolve the input signal into two frequencies</p>
-<p>Plotting the result for the whole waveform on the left, and the first part on the right:</p>
-<p><img alt="" src="labs/dpfW.png" /> <img alt="" src="labs/dpfZ.png" /></p>
-<p>You can easily see the two different frequencies for the two different bits.</p>
-<section id="non-sychronous-detection">
-<h3>Non-Sychronous Detection<a class="headerlink" href="#non-sychronous-detection" title="Permalink to this heading">#</a></h3>
-<p>An efficient way to do the decoding is to use matched filters for the two different waveforms we are looking for</p>
-<p><img alt="" src="labs/MF_aprs.png" /></p>
-<p>One matched filter is one cycle of a complex exponential over 20 samples (the 1200 Hz Bit) and the other is 1.8 cycles over 20 samples (the 2200 Hz bit).</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">t20</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span><span class="o">/</span><span class="mi">20</span><span class="p">;</span>
-<span class="o">&gt;&gt;</span> <span class="n">mf1200</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">t20</span><span class="o">*</span><span class="mf">1.0</span><span class="p">);</span>
-<span class="o">&gt;&gt;</span> <span class="n">mf2200</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">t20</span><span class="o">*</span><span class="mf">1.8</span><span class="p">);</span>
-
-</pre></div>
-</div>
-<p>If we convolve the input signal with each of these, and take the absolute value afterwards, we can isolate the two cases. One of the two channels may be sufficient, but combining the two by subtracting improves noise performance.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">d12</span> <span class="o">=</span> <span class="n">conv</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">mf1200</span><span class="p">,</span><span class="s1">&#39;same&#39;</span><span class="p">);</span>
-<span class="o">&gt;&gt;</span> <span class="n">d22</span> <span class="o">=</span> <span class="n">conv</span><span class="p">(</span><span class="n">df</span><span class="p">,</span><span class="n">mf2200</span><span class="p">,</span><span class="s1">&#39;same&#39;</span><span class="p">);</span>
-<span class="o">&gt;&gt;</span> <span class="n">ddif</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">d12</span><span class="p">)</span><span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">d22</span><span class="p">);</span>
-
-</pre></div>
-</div>
-<p>The result is shown below, where the top plot shows the entire packet, and the bottom plot zooms on on the beginning of the packet:</p>
-<p><img alt="" src="labs/aprs_sigs.png" /></p>
-</section>
-<section id="timing-extraction">
-<h3>Timing Extraction<a class="headerlink" href="#timing-extraction" title="Permalink to this heading">#</a></h3>
-<p>A major concern is synchronization with the individual symbols. We want to make sure we sample when we can best discriminate between the two symbols. In practice we want this to be done automatically, but for this lab we’ll just do it by hand using the eye diagram.</p>
-<p>We choose a starting sample in the framing bytes, and an ending sample somewhere in the packet</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">n1</span> <span class="o">=</span> <span class="mi">2000</span><span class="p">;</span>
-<span class="o">&gt;&gt;</span> <span class="n">n2</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="mi">20</span><span class="o">*</span><span class="mi">256</span> <span class="o">-</span> <span class="mi">1</span>
-
-</pre></div>
-</div>
-<p>Choose n2 to be an integer number of samples into the packet (here 256). We can then make an eye diagram with</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">boff</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:</span><span class="mi">9</span><span class="p">];</span>
-<span class="o">&gt;&gt;</span> <span class="n">eyed</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">ddif</span><span class="p">((</span><span class="n">n1</span><span class="p">:</span><span class="n">n2</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span><span class="p">),</span><span class="mi">20</span><span class="p">,</span><span class="mi">256</span><span class="p">);</span>
-<span class="o">&gt;&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="n">boff</span><span class="p">,</span><span class="n">eyed</span><span class="p">);</span>
-
-</pre></div>
-</div>
-<p>The -10 shifts the bits to the center of the plot. You will see something like the plot below on the left,</p>
-<p><img alt="" src="labs/eye_diag.png" /></p>
-<p>Shifting six samples earlier lines the eye up directly in the middle, shown in the plot above on the right.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">eyedm6</span> <span class="o">=</span> <span class="n">reshape</span><span class="p">(</span><span class="n">ddif</span><span class="p">((</span><span class="n">n1</span><span class="p">:</span><span class="n">n2</span><span class="p">)</span><span class="o">-</span><span class="mi">10</span><span class="o">-</span><span class="mi">6</span><span class="p">),</span><span class="mi">20</span><span class="p">,</span><span class="mi">256</span><span class="p">);</span>
-<span class="o">&gt;&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="n">boff</span><span class="p">,</span><span class="n">eyedm6</span><span class="p">);</span>
-
-</pre></div>
-</div>
-<p>This shows that we have a timing tolerance of about +/- 5 samples at a decision level of 0. This also shows that synchronization isn’t an issue, or the eye would be blurred, and the opening would close. The sampled bits are then</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">bts</span> <span class="o">=</span> <span class="n">ddif</span><span class="p">((</span><span class="mi">7</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="n">end</span><span class="p">)</span><span class="o">-</span><span class="mi">6</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">;</span>
-
-</pre></div>
-</div>
-<p>We’ve dropped the -10 so that we will sample in the middle of the symbol.</p>
-<p>If you plot the first 250 samples, you should see something like this:</p>
-<p><img alt="" src="labs/bts.png" /></p>
-<p>There are some initial bits where the radio is powering up, then a sequence of frame bytes for synchronization, followed by the data bytes.</p>
-</section>
-</section>
-<section id="id1">
-<h2>Part 2: Decoding APRS packets<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>APRS packets are encoded as a sequence of bits, grouped into 8 bit bytes. Each byte is an ascii character. To decode the stream of bits we have detected in part 1, we have to process them to undo the line encoding used, synchronize with frame bytes, undo bit stuffing, group the bits into bytes, and then find the characters.</p>
-<p>In order to skip some of the obscure details of APRS, we will give you an m-file that does the APRS packet decoding</p>
-<p><span class="xref myst">aprs_decode.m</span></p>
-<p>This calls several m-files that implement key elements of the protocol that you will need to write. These are described below.</p>
-<section id="line-encoding">
-<h3>Line Encoding<a class="headerlink" href="#line-encoding" title="Permalink to this heading">#</a></h3>
-<p>The APRS packets use a non-return to zero, inverted (NRZI) line encoding. Output bits are decoded by</p>
+<section id="aims-of-the-lab">
+<h2>Aims of the Lab<a class="headerlink" href="#aims-of-the-lab" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
-<li><p>If the input bit is the same as the previous input bit, “11” or “00”, the output is 1.</p></li>
-<li><p>If the input bit is different than the previous bit, “01” or “10”, the output is 0.</p></li>
-<li><p>Start with an input bit of “0” for one of the timing frames</p></li>
+<li><p>Receive and reconstruct a real image transmitted live over RF.</p></li>
+<li><p>Implement a simple checksum comparison to verify data integrity, connecting back to the error-detection concepts from lecture.</p></li>
+<li><p>Reflect on how this lab’s receiver builds on everything from Lab 1 through Lab 7.</p></li>
 </ul>
-<p>This is best illustrated with the timing frame bytes at the beginning of the packet. The bits before NRZI encoding are “01111110”. The specification says there should be one byte like this at the start and the end of the packet, but usually there are several at the start, and often none at the end. The result of NRZI encoding is shown below, as well as the decoding,</p>
-<p><img alt="" src="labs/NRZI_decode.png" /></p>
-<p>Write an mfile</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="p">[</span> <span class="n">db</span> <span class="p">]</span> <span class="o">=</span> <span class="n">decode_NRZI</span><span class="p">(</span> <span class="n">bts</span> <span class="p">)</span>
-<span class="o">%</span>
-<span class="o">%</span> <span class="n">Decode</span> <span class="n">an</span> <span class="n">NRZI</span> <span class="n">bits</span> <span class="n">stream</span> <span class="n">bts</span>
-<span class="o">%</span>
-
-</pre></div>
-</div>
-<p>Then apply it to the bit stream from the first part.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">db</span> <span class="o">=</span> <span class="n">decode_NRZI</span><span class="p">(</span><span class="n">bts</span><span class="p">);</span>
-
-</pre></div>
-</div>
-<p>You should get something that looks like this</p>
-<p><img alt="" src="labs/NRZI_decoded_bits.png" /></p>
-<p>You can clearly see the frame bytes at the beginning. Make sure there are six ones, with zeros on either end (so there are two zeros in a row for adjacent frames).</p>
 </section>
-<section id="synchronization">
-<h3>Synchronization<a class="headerlink" href="#synchronization" title="Permalink to this heading">#</a></h3>
-<p>In the first part we used the eye diagram to synchronize with the individual bits. Here we use the frame bytes to find the beginning of the packet. The frame bytes are [0 1 1 1 1 1 1 0 ] after the NRZI decoding. We can tell if a frame byte starts at a position kk by</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">fb</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">1</span> <span class="mi">0</span><span class="p">]</span><span class="s1">&#39;;</span>
-<span class="o">&gt;&gt;</span> <span class="nb">sum</span><span class="p">(</span><span class="o">~</span><span class="n">xor</span><span class="p">(</span><span class="n">db</span><span class="p">(</span><span class="n">kk</span><span class="p">:</span><span class="n">kk</span><span class="o">+</span><span class="mi">7</span><span class="p">),</span> <span class="n">fb</span><span class="p">))</span> <span class="o">==</span> <span class="mi">8</span>
-
-</pre></div>
-</div>
-<p>If we do this for the first part of the packet, the result is</p>
-<p><img alt="" src="labs/frame_bytes.png" /></p>
-<p>The packet data starts with the first data byte after the last frame byte.</p>
-<p>Write an m-file to synchronize to the frame bytes</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="p">[</span> <span class="n">dbs</span> <span class="p">]</span> <span class="o">=</span> <span class="n">frame_byte_sync</span><span class="p">(</span> <span class="n">db</span> <span class="p">)</span>
-<span class="o">%</span>
-<span class="o">%</span> <span class="n">Take</span> <span class="n">a</span> <span class="n">packet</span> <span class="n">that</span> <span class="n">has</span> <span class="n">been</span> <span class="n">NRZI</span> <span class="n">decoded</span><span class="p">,</span> <span class="ow">and</span> <span class="n">synchronize</span> <span class="n">to</span> <span class="n">the</span> <span class="n">frame</span> <span class="nb">bytes</span>
-<span class="o">%</span>    <span class="n">Find</span> <span class="n">the</span> <span class="n">first</span> <span class="n">frame</span> <span class="n">byte</span>
-<span class="o">%</span>    <span class="n">Skip</span> <span class="n">over</span> <span class="nb">all</span> <span class="n">of</span> <span class="n">the</span> <span class="n">following</span> <span class="n">frame</span> <span class="nb">bytes</span>
-<span class="o">%</span>    <span class="n">Return</span> <span class="n">the</span> <span class="n">bit</span> <span class="n">stream</span> <span class="n">following</span> <span class="n">the</span> <span class="n">last</span> <span class="n">frame</span> <span class="nb">bytes</span>
-<span class="o">%</span>
-
-</pre></div>
-</div>
-<p>This will find the first frame byte by scanning a bit at a time, and then eliminate subsequent frame bytes a byte at a time. It returns the bit sequence starting at the first bit of the packet.</p>
+<section id="setup">
+<h2>Setup<a class="headerlink" href="#setup" title="Permalink to this heading">#</a></h2>
+<p>The instructor will announce a transmit frequency and run <code class="docutils literal notranslate"><span class="pre">digital/pluto_tx/pluto_QPSK_image_transfer.slx</span></code>, transmitting one of the sample images from the <code class="docutils literal notranslate"><span class="pre">rtlsdr_book_library/</span></code> folder (<code class="docutils literal notranslate"><span class="pre">image1.mat</span></code> through <code class="docutils literal notranslate"><span class="pre">image7.mat</span></code>, e.g. <code class="docutils literal notranslate"><span class="pre">rtlsdr_book_library/image3.mat</span></code>).</p>
 </section>
-<section id="bit-stuffing">
-<h3>Bit Stuffing<a class="headerlink" href="#bit-stuffing" title="Permalink to this heading">#</a></h3>
-<p>The APRS packets also limit the number of “1”’s that can be transmitted in sequence to 5 bits. After 5 bits are transmitted, an extra zero is forced into the bit stream. During encoding, this is done before NRZI encoding is done. As a result, we have to throw away those extra zeros at this point.</p>
-<p>Bit stuffing is illustrated below. In the original bit sequence we want to transmit there are 8 “1” bits in a row. Since we can only transmit 5 “1” bits in a row, a stuffed “0” is inserted, and all of the subsequent bits delayed by 1 sample.</p>
-<p><img alt="" src="labs/stuffed_bit.png" /></p>
-<p>When we receive the bit stream, we need to detect when 5 “1”’s in a row were sent, so we can delete the bit stuffed “0”, and move all the subsequent bits up by one bit.</p>
-<p>If we look at the NRZI decoded bit stream from the previous section, and convolve it with five ones</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&gt;&gt;</span> <span class="n">plot</span><span class="p">(</span><span class="n">conv</span><span class="p">(</span><span class="n">dbs</span><span class="p">,</span><span class="n">ones</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">));</span>
-
-</pre></div>
-</div>
-<p>We get this</p>
-<p><img alt="" src="labs/debitstuff.png" /></p>
-<p>This effectively adds every set of five bits, and outputs a 5 if they are all ones. We see several times where there are 5 bits in a row, where we are going to have to eliminate bit-stuffed zeros. There are two samples that are 6 bits in a row towards the end of the packed (the convolution is 5 for two adjacent samples). These are frame bytes that are sent out to indicate the end of the packet.</p>
-<p>Write an mfile to do this</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="p">[</span> <span class="n">dbsd</span> <span class="p">]</span> <span class="o">=</span> <span class="n">de_bit_stuff</span><span class="p">(</span> <span class="n">dbs</span> <span class="p">)</span>
-<span class="o">%</span>
-<span class="o">%</span> <span class="n">Take</span> <span class="n">a</span> <span class="n">bit</span> <span class="n">stuffed</span> <span class="n">sequence</span> <span class="n">of</span> <span class="n">bits</span><span class="p">,</span> <span class="ow">and</span> <span class="n">eliminate</span> <span class="n">the</span> <span class="n">stuffed</span> <span class="n">zero</span> <span class="n">bits</span>
-<span class="o">%</span>
-
-</pre></div>
-</div>
-<p>At this point we have decoded the packet bits. We just need to collect them into bytes, and convert them to characters. The bits are transmitted least significant bit first. If 8 bits are in an array b, the byte value, and the ascii character are</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">bv</span> <span class="o">=</span> <span class="n">b</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="mi">1</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="mi">2</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">*</span><span class="mi">4</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">*</span><span class="mi">8</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">*</span><span class="mi">16</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span><span class="o">*</span><span class="mi">32</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span><span class="o">*</span><span class="mi">64</span> <span class="o">+</span> <span class="n">b</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span><span class="o">*</span><span class="mi">128</span><span class="p">;</span>
-<span class="n">c</span> <span class="o">=</span> <span class="n">char</span><span class="p">(</span><span class="n">bv</span><span class="p">);</span>
-
-</pre></div>
-</div>
-<p>Write an mfile that takes your decoded bitstream and returns the ascii string that the packet decodes to,</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="p">[</span> <span class="n">cs</span> <span class="p">]</span> <span class="o">=</span> <span class="n">bits_to_char</span><span class="p">(</span> <span class="n">b</span> <span class="p">)</span>
-<span class="o">%</span>
-<span class="o">%</span> <span class="n">Take</span> <span class="n">a</span> <span class="n">bit</span> <span class="n">stream</span> <span class="ow">and</span> <span class="n">convert</span> <span class="n">it</span> <span class="n">to</span> <span class="n">ascii</span> <span class="n">characters</span>
-<span class="o">%</span>
-
-</pre></div>
-</div>
-<p>You can tell if you are close when you start seeing call signs (KD7LED for example). Some of the payloads are actually numeric values, that give you funny characters. If you are getting mostly real characters, you are probably doing everything right. Include what you find with your report.</p>
+<section id="activity-1-receive-and-reconstruct-the-image">
+<h2>Activity 1: Receive and Reconstruct the Image<a class="headerlink" href="#activity-1-receive-and-reconstruct-the-image" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Run <code class="docutils literal notranslate"><span class="pre">digital/rtlsdr_rx/rtlsdr_QPSK_image_transfer.slx</span></code>. This receiver reuses the same synchronization techniques from Lab 6 and the same framing approach from Lab 7, just with image bytes in the payload instead of ASCII text.</p></li>
+<li><p>Once it locks on, confirm you see the transmitted image rendered in MATLAB.</p></li>
+<li><p>Open <code class="docutils literal notranslate"><span class="pre">rtlsdr_book_library/image_receive.m</span></code> if you want to see the supporting reconstruction code — how the received bytes are reshaped back into an image.</p></li>
+<li><p><strong>If your reception is unreliable</strong>, fall back to one of <code class="docutils literal notranslate"><span class="pre">digital/rtlsdr_rx/rec_data/dqpsk_image1.mat</span></code>, <code class="docutils literal notranslate"><span class="pre">digital/rtlsdr_rx/rec_data/dqpsk_image2.mat</span></code>, or <code class="docutils literal notranslate"><span class="pre">digital/rtlsdr_rx/rec_data/dqpsk_image7.mat</span></code> to complete the assignment.</p></li>
+</ol>
+<p><em>For more detail on transmitting images across the desktop link, see Sec. 12.8 in SDR textbook.</em></p>
 </section>
-<section id="additional-packets">
-<h3>Additional Packets<a class="headerlink" href="#additional-packets" title="Permalink to this heading">#</a></h3>
-<p>Another capture with two packets is here</p>
-<p><span class="xref myst">aprs22.dat</span></p>
-<p>These are longer, and a little more interesting. There is a web site in the first packet, and a location in the second packet.</p>
+<section id="some-math-why-a-sum-isn-t-enough-and-what-crc-does-instead">
+<h2>Some Math: Why a Sum Isn’t Enough, and What CRC Does Instead<a class="headerlink" href="#some-math-why-a-sum-isn-t-enough-and-what-crc-does-instead" title="Permalink to this heading">#</a></h2>
+<p>Our checksum, chk = (sum of all bytes) mod 256, is blind to a specific, common failure: if one byte increases by some amount <span class="math notranslate nohighlight">\(k\)</span> (mod 256) due to a bit error, and any other byte decreases by exactly <span class="math notranslate nohighlight">\(k\)</span>, the total sum — and therefore the checksum — is completely unchanged. Two independent bit errors can silently cancel out.</p>
+<p>A <strong>CRC</strong> (cyclic redundancy check) closes that gap by working in a different algebraic structure entirely. Treat the message bits as the coefficients of a polynomial <span class="math notranslate nohighlight">\(M(x)\)</span> over <span class="math notranslate nohighlight">\(GF(2)\)</span> (binary field arithmetic, where addition is XOR), and agree on a fixed generator polynomial <span class="math notranslate nohighlight">\(G(x)\)</span> of degree <span class="math notranslate nohighlight">\(r\)</span>. The transmitter computes the remainder of <span class="math notranslate nohighlight">\(M(x)\cdot x^r\)</span> divided by <span class="math notranslate nohighlight">\(G(x)\)</span> (using mod-2 polynomial division) and appends it as <span class="math notranslate nohighlight">\(r\)</span> check bits, so that the full transmitted codeword <span class="math notranslate nohighlight">\(T(x)\)</span> divides evenly by <span class="math notranslate nohighlight">\(G(x)\)</span> with zero remainder. The receiver simply repeats that division on whatever it received: a nonzero remainder means an error occurred somewhere.</p>
+<p>The payoff of choosing <span class="math notranslate nohighlight">\(G(x)\)</span> carefully (a well-chosen, primitive polynomial) is that CRC is guaranteed to catch every single-bit error, every error burst shorter than <span class="math notranslate nohighlight">\(r\)</span> bits, and the overwhelming majority of longer bursts and multi-bit patterns, specifically because an undetected error would require the error pattern itself to be an exact multiple of <span class="math notranslate nohighlight">\(G(x)\)</span>, which random noise essentially never produces. That’s a much stronger guarantee than our simple sum can offer.</p>
 </section>
+<section id="activity-2-a-basic-integrity-check">
+<h2>Activity 2: A Basic Integrity Check<a class="headerlink" href="#activity-2-a-basic-integrity-check" title="Permalink to this heading">#</a></h2>
+<p>Real digital systems don’t just hope the data arrived correctly — they check.</p>
+<ol class="arabic simple">
+<li><p>Add a simple checksum to your receiver:</p></li>
+</ol>
+<div class="highlight-matlab notranslate"><div class="highlight"><pre><span></span><span class="c">% After reconstructing the received image bytes into rxBytes:</span>
+<span class="n">rxChecksum</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">mod</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="nb">uint32</span><span class="p">(</span><span class="n">rxBytes</span><span class="p">)),</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span>
+</pre></div>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Wait for the instructor to announce the correct checksum value for the transmitted image at the end of class.</p></li>
+<li><p>Compare your <code class="docutils literal notranslate"><span class="pre">rxChecksum</span></code> against it and note whether they match.</p></li>
+<li><p>Think through the blind-spot scenario from the math above (two errors that cancel in the sum) and be ready to describe one for the write-up.</p></li>
+<li><p>If you want to see a step closer to a real implementation, look up <code class="docutils literal notranslate"><span class="pre">comm.CRCGenerator</span></code> and <code class="docutils literal notranslate"><span class="pre">comm.CRCDetector</span></code> in MATLAB’s documentation and try replacing your checksum with an actual CRC.</p></li>
+</ol>
+<p>This sum-based checksum is a deliberately simple stand-in for the CRC/Hamming techniques above — good enough to catch a clean, uncorrupted transfer, but with the blind spot described above. (This checksum/CRC exercise is our own addition tying back to lecture — it isn’t in the SDR textbook’s version of this lab.)</p>
 </section>
-<section id="lab-report">
-<h2>Lab Report<a class="headerlink" href="#lab-report" title="Permalink to this heading">#</a></h2>
-<p>For your report include</p>
-<ul class="simple">
-<li><p>Your m-files for the NRZI decoding, frame synchronization, bit destuffing, and converting bits to characters</p></li>
-<li><p>A plot of the first 200 bits of your packet after NRZI, synchronization, and bit destuffing,</p></li>
-<li><p>The decoded packet characters for this packet,</p></li>
-<li><p>Your decode of one of the packets in aprs22.mat above.</p></li>
-</ul>
+<section id="assignment">
+<h2>Assignment<a class="headerlink" href="#assignment" title="Permalink to this heading">#</a></h2>
+<p>Submit a single PDF to Gradescope containing:</p>
+<ol class="arabic simple">
+<li><p>The image you reconstructed, alongside a note of whether your checksum matched the instructor’s announced value.</p></li>
+<li><p>2-3 sentences on a bit-error scenario a simple sum-based checksum would fail to catch, and how CRC or a parity/Hamming code would do better.</p></li>
+<li><p>A short paragraph (5-8 sentences) reflecting on the semester’s SDR labs: which piece of the receiver chain (spectrum viewing, complex baseband, AM/FM demodulation, symbol synchronization, framing, or error checking) did you find hardest to get working, and why?</p></li>
+<li><p>Your documentation statement.</p></li>
+</ol>
 </section>
 </section>
 
@@ -686,6 +512,15 @@ document.write(`
                 <footer class="prev-next-footer d-print-none">
                   
 <div class="prev-next-area">
+    <a class="left-prev"
+       href="../HW/HW8.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Homework 8</p>
+      </div>
+    </a>
 </div>
                 </footer>
               
@@ -702,25 +537,13 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#structure-of-aprs">Structure of APRS</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-transforming-aprs-rf-signals-into-bits">Part 1: Transforming APRS RF Signals into Bits</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#part-2-decoding-aprs-packets">Part 2: Decoding APRS Packets</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#part-1-aprs-rf-decoding">Part 1: APRS RF Decoding</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#non-sychronous-detection">Non-Sychronous Detection</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#timing-extraction">Timing Extraction</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Part 2: Decoding APRS packets</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#line-encoding">Line Encoding</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#synchronization">Synchronization</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bit-stuffing">Bit Stuffing</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#additional-packets">Additional Packets</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-report">Lab Report</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aims-of-the-lab">Aims of the Lab</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup">Setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-1-receive-and-reconstruct-the-image">Activity 1: Receive and Reconstruct the Image</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#some-math-why-a-sum-isn-t-enough-and-what-crc-does-instead">Some Math: Why a Sum Isn’t Enough, and What CRC Does Instead</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activity-2-a-basic-integrity-check">Activity 2: A Basic Integrity Check</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#assignment">Assignment</a></li>
 </ul>
   </nav></div>
 

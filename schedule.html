@@ -186,21 +186,22 @@ const thebe_selector_output = ".output, .cell_output"
 <p aria-level="2" class="caption" role="heading"><span class="caption-text">Assignments and Labs</span></p>
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="HW/SkillsReview.html">Skills Review</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/Lab1.html">Lab 1: Installing SDR Receivers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/Lab1.html">Lab 1: SDR Setup and Spectrum Exploration with MATLAB</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW/HW1.html">Homework 1</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/Lab2.html">Lab 2: Capturing Signals and Displaying Signals</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/Lab3.html">Lab 3: Scanning for Signals, Modulation, and Decimation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/Lab2.html">Lab 2: Complex Signals and Spectra</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/Lab3.html">Lab 3: Amplitude Modulation — Receiving Real Air Band Traffic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW/HW2.html">Homework 2</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/Lab4.html">Lab 4: Frequency Modulation — Receiving Commercial FM Radio</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW/HW3.html">Homework 3</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/Lab4.html">Lab 4: GNU Radio</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/Lab5.html">Lab 5: Digital Modulation Fundamentals</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW/HW4.html">Homework 4</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW/HW5.html">Homework 5</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/Lab5.html">Lab 5: QPSK Modulation and Demodulation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/Lab6.html">Lab 6: QPSK Transmission and Reception over Real Hardware</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW/HW6.html">Homework 6</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW/HW7.html">Homework 7</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/Lab6.html">Lab 6: Automatic Dependent Surveillance-Broadcast (ADS-B)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/Lab7.html">Lab 7: A Digital Communications Protocol — ASCII Messaging</a></li>
 <li class="toctree-l1"><a class="reference internal" href="HW/HW8.html">Homework 8</a></li>
-<li class="toctree-l1"><a class="reference internal" href="labs/Lab7.html">Lab 7: Digital Wireless System using MATLAB</a></li>
+<li class="toctree-l1"><a class="reference internal" href="labs/Lab8.html">Lab 8: Capstone — Image Transmission with an Integrity Check</a></li>
 </ul>
 
     </div>
@@ -412,7 +413,7 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="course-schedule">
 <h1>Course Schedule<a class="headerlink" href="#course-schedule" title="Permalink to this heading">#</a></h1>
-<p>This is meant to serve an a <em>notional</em> schedule for ECE447. We will keep this up to date throughout the semester, so come back to this page (not your syllabus) for the schedule closest to reality. If there is a discrepancy between this schedule and a due date on Gradescope, use the due date on Gradescope. Readings are primarily from the course textbook by Lathi and Ding (L&amp;D). Each software-defined radio (SDR) lab has one or more deliverables due approximately one week from the lab’s assignment date.</p>
+<p>This is meant to serve an a <em>notional</em> schedule for ECE447. We will keep this up to date throughout the semester, so come back to this page (not your syllabus) for the schedule closest to reality. If there is a discrepancy between this schedule and a due date on Gradescope, use the due date on Gradescope. Readings are primarily from the course textbook by Lathi and Ding (L&amp;D). Each software-defined radio (SDR) lab has one or more deliverables due approximately one week from the lab’s assignment date. Labs 1 and 6 each run across two class periods.</p>
 <section id="introduction-and-background">
 <h2>Introduction and Background<a class="headerlink" href="#introduction-and-background" title="Permalink to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -438,34 +439,34 @@ document.write(`
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>3</p></td>
-<td><p>SDR Lab</p></td>
+<td><p>SDR Lab (Day 1 of 2)</p></td>
 <td><p><a class="reference internal" href="labs/Lab1.html"><span class="doc std std-doc">Lab 1 Description</span></a></p></td>
 <td><p>Lab 1</p></td>
 <td><p><a class="reference internal" href="HW/SkillsReview.html"><span class="doc std std-doc">Skills Review</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p>4</p></td>
+<td><p>SDR Lab (Day 2 of 2)</p></td>
+<td><p><a class="reference internal" href="labs/Lab1.html"><span class="doc std std-doc">Lab 1 Description</span></a></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
 <td><p>Signals and signal space</p></td>
 <td><p>L&amp;D 2</p></td>
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>5</p></td>
+<tr class="row-odd"><td><p>6</p></td>
 <td><p>Analysis and transmission of signals</p></td>
 <td><p>L&amp;D 3</p></td>
 <td><p><a class="reference internal" href="HW/HW1.html"><span class="doc std std-doc">HW1</span></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>6</p></td>
+<tr class="row-even"><td><p>7</p></td>
 <td><p>SDR Lab</p></td>
 <td><p><a class="reference internal" href="labs/Lab2.html"><span class="doc std std-doc">Lab 2 Description</span></a></p></td>
 <td><p>Lab 2</p></td>
 <td><p>Lab 1</p></td>
-</tr>
-<tr class="row-even"><td><p>7</p></td>
-<td><p>No Class</p></td>
-<td><p>Down Day!</p></td>
-<td><p></p></td>
-<td><p></p></td>
 </tr>
 </tbody>
 </table>
@@ -520,9 +521,9 @@ document.write(`
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>14</p></td>
-<td><p>Flex day</p></td>
-<td><p></p></td>
-<td><p></p></td>
+<td><p>SDR Lab</p></td>
+<td><p><a class="reference internal" href="labs/Lab4.html"><span class="doc std std-doc">Lab 4 Description</span></a></p></td>
+<td><p>Lab 4</p></td>
 <td><p>Lab 3</p></td>
 </tr>
 <tr class="row-odd"><td><p>15</p></td>
@@ -563,7 +564,7 @@ document.write(`
 <td><p>Signal sampling and reconstruction</p></td>
 <td><p>L&amp;D 5.1</p></td>
 <td><p><a class="reference internal" href="HW/HW3.html"><span class="doc std std-doc">HW3</span></a></p></td>
-<td><p></p></td>
+<td><p>Lab 4</p></td>
 </tr>
 <tr class="row-odd"><td><p>19</p></td>
 <td><p>Pulse code modulation</p></td>
@@ -578,9 +579,9 @@ document.write(`
 <td><p><a class="reference internal" href="HW/HW3.html"><span class="doc std std-doc">HW3</span></a></p></td>
 </tr>
 <tr class="row-odd"><td><p>21</p></td>
-<td><p>GNU Radio Lab</p></td>
-<td><p><a class="reference internal" href="labs/Lab4.html"><span class="doc std std-doc">Lab 4 Description</span></a></p></td>
-<td><p><a class="reference internal" href="labs/Lab4.html"><span class="doc std std-doc">Lab 4</span></a>, <a class="reference internal" href="HW/HW4.html"><span class="doc std std-doc">HW4</span></a></p></td>
+<td><p>SDR Lab</p></td>
+<td><p><a class="reference internal" href="labs/Lab5.html"><span class="doc std std-doc">Lab 5 Description</span></a></p></td>
+<td><p><a class="reference internal" href="labs/Lab5.html"><span class="doc std std-doc">Lab 5</span></a>, <a class="reference internal" href="HW/HW4.html"><span class="doc std std-doc">HW4</span></a></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-even"><td><p>22</p></td>
@@ -605,97 +606,103 @@ document.write(`
 <td><p>Digital receivers: timing &amp; detection, eye diagrams</p></td>
 <td><p>L&amp;D 6.5.2-6.5.3, 6.6</p></td>
 <td><p></p></td>
-<td><p><a class="reference internal" href="labs/Lab4.html"><span class="doc std std-doc">Lab 4</span></a></p></td>
+<td><p><a class="reference internal" href="labs/Lab5.html"><span class="doc std std-doc">Lab 5</span></a></p></td>
 </tr>
 <tr class="row-even"><td><p>26</p></td>
-<td><p>GNU Radio Lab</p></td>
-<td><p><a class="reference internal" href="labs/Lab5.html"><span class="doc std std-doc">Lab 5 Description</span></a></p></td>
-<td><p><a class="reference internal" href="labs/Lab5.html"><span class="doc std std-doc">Lab 5</span></a></p></td>
+<td><p>SDR Lab (Day 1 of 2)</p></td>
+<td><p><a class="reference internal" href="labs/Lab6.html"><span class="doc std std-doc">Lab 6 Description</span></a></p></td>
+<td><p><a class="reference internal" href="labs/Lab6.html"><span class="doc std std-doc">Lab 6</span></a></p></td>
 <td><p></p></td>
 </tr>
 <tr class="row-odd"><td><p>27</p></td>
+<td><p>SDR Lab (Day 2 of 2)</p></td>
+<td><p><a class="reference internal" href="labs/Lab6.html"><span class="doc std std-doc">Lab 6 Description</span></a></p></td>
+<td><p></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p>28</p></td>
 <td><p>M-ary digital modulation</p></td>
 <td><p>L&amp;D 6.7</p></td>
 <td><p></p></td>
 <td><p><a class="reference internal" href="HW/HW5.html"><span class="doc std std-doc">HW5</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p>28</p></td>
+<tr class="row-odd"><td><p>29</p></td>
 <td><p>Digital carrier modulation</p></td>
 <td><p>L&amp;D 6.8-6.9</p></td>
 <td><p><a class="reference internal" href="HW/HW6.html"><span class="doc std std-doc">HW6</span></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>29</p></td>
+<tr class="row-even"><td><p>30</p></td>
 <td><p>Probability, Part 1</p></td>
 <td><p>L&amp;D 7.1-7.3</p></td>
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>30</p></td>
+<tr class="row-odd"><td><p>31</p></td>
 <td><p>Probability, Part 2</p></td>
 <td><p>L&amp;D 7.4-7.7</p></td>
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>31</p></td>
+<tr class="row-even"><td><p>32</p></td>
 <td><p>Random processes</p></td>
 <td><p>L&amp;D 8-8.4 (at least)</p></td>
 <td><p><a class="reference internal" href="HW/HW7.html"><span class="doc std std-doc">HW7</span></a></p></td>
 <td><p><a class="reference internal" href="HW/HW6.html"><span class="doc std std-doc">HW6</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p>32</p></td>
-<td><p>SDR Lab</p></td>
-<td><p>Lab 6 Description</p></td>
-<td><p><a class="reference internal" href="labs/Lab6.html"><span class="doc std std-doc">Lab 6</span></a></p></td>
-<td><p><a class="reference internal" href="labs/Lab5.html"><span class="doc std std-doc">Lab 5</span></a></p></td>
-</tr>
 <tr class="row-odd"><td><p>33</p></td>
+<td><p>SDR Lab</p></td>
+<td><p><a class="reference internal" href="labs/Lab7.html"><span class="doc std std-doc">Lab 7 Description</span></a></p></td>
+<td><p><a class="reference internal" href="labs/Lab7.html"><span class="doc std std-doc">Lab 7</span></a></p></td>
+<td><p><a class="reference internal" href="labs/Lab6.html"><span class="doc std std-doc">Lab 6</span></a></p></td>
+</tr>
+<tr class="row-even"><td><p>34</p></td>
 <td><p>GR2 Review Day</p></td>
 <td><p></p></td>
 <td><p></p></td>
 <td><p><a class="reference internal" href="HW/HW7.html"><span class="doc std std-doc">HW7</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p>34</p></td>
+<tr class="row-odd"><td><p>35</p></td>
 <td><p>GR 2</p></td>
-<td><p>Covering Lsns 18-30 (Chapters 5-7)</p></td>
+<td><p>Covering Lsns 18-32 (Chapters 5-7)</p></td>
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>35</p></td>
+<tr class="row-even"><td><p>36</p></td>
 <td><p>Matched filters &amp; binary system performance, Part 1</p></td>
 <td><p>L&amp;D 9.1-9.2</p></td>
 <td><p><a class="reference internal" href="HW/HW8.html"><span class="doc std std-doc">HW8</span></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>36</p></td>
+<tr class="row-odd"><td><p>37</p></td>
 <td><p>Binary system performance, Part 2</p></td>
 <td><p>L&amp;D 9.2, 9.3.3</p></td>
 <td><p></p></td>
-<td><p><a class="reference internal" href="labs/Lab6.html"><span class="doc std std-doc">Lab 6</span></a></p></td>
+<td><p><a class="reference internal" href="labs/Lab7.html"><span class="doc std std-doc">Lab 7</span></a></p></td>
 </tr>
-<tr class="row-odd"><td><p>37</p></td>
+<tr class="row-even"><td><p>38</p></td>
 <td><p>Error correction: parity, CRC, &amp; Hamming codes</p></td>
 <td><p>L&amp;D 12.3.2, 13.1-13.3</p></td>
 <td><p></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-even"><td><p>38</p></td>
-<td><p>MATLAB Lab</p></td>
-<td><p>Lab 7 Description</p></td>
-<td><p><a class="reference internal" href="labs/Lab7.html"><span class="doc std std-doc">Lab 7</span></a></p></td>
+<tr class="row-odd"><td><p>39</p></td>
+<td><p>SDR Lab (Capstone)</p></td>
+<td><p><a class="reference internal" href="labs/Lab8.html"><span class="doc std std-doc">Lab 8 Description</span></a></p></td>
+<td><p><a class="reference internal" href="labs/Lab8.html"><span class="doc std std-doc">Lab 8</span></a></p></td>
 <td><p></p></td>
 </tr>
-<tr class="row-odd"><td><p>39</p></td>
-<td><p>OFDM, MIMO, CDMA</p></td>
+<tr class="row-even"><td><p>40</p></td>
+<td><p>Advanced topics: OFDM, MIMO, &amp; CDMA</p></td>
 <td><p>None</p></td>
 <td><p></p></td>
 <td><p><a class="reference internal" href="HW/HW8.html"><span class="doc std std-doc">HW8</span></a></p></td>
 </tr>
-<tr class="row-even"><td><p>40</p></td>
+<tr class="row-odd"><td><p>41</p></td>
 <td><p>Course review</p></td>
 <td><p></p></td>
 <td><p></p></td>
-<td><p><a class="reference internal" href="labs/Lab7.html"><span class="doc std std-doc">Lab 7</span></a></p></td>
+<td><p><a class="reference internal" href="labs/Lab8.html"><span class="doc std std-doc">Lab 8</span></a></p></td>
 </tr>
 </tbody>
 </table>
