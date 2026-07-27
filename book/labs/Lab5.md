@@ -1,55 +1,76 @@
-# Lab 5: QPSK Modulation and Demodulation
+# Lab 5: Digital Modulation Fundamentals
 
-## Due NLT 6 Nov (Lesson 32) by 2359 on Gradescope
+(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, Ch. 11.1-11.2.)
 
 ## Overview
 
-So far we've looked at AM and FM signals and completed some basic GNU Radio Companion tutorials to help us better understand filtering and sample rates. In this lab we will shift to a digital modulation technique called Differential Quadrature Phase Shift Keying (DQPSK). We will again use one of the tutorials from the GNU Radio Wiki page. This tutorial walks you through most of the communication chain from source to sink, with a special emphasis on signal distortion and channel impairments. You have been learning about ISI and timing errors in the past few lessons. In this lab you will implement a system that incorporates those errors _and_ ways to address them. You will also use eye diagrams to subjectively evaluate the system's effectiveness.
+This lab is entirely simulation-based — no live transmission needed — and sets up everything you'll need for the hands-on hardware labs that follow. You'll map bits to symbols, look at constellations under noise, and see why we shape pulses instead of just switching amplitudes on and off. To ground it in something real, you'll finish by loading an actual RTL-SDR capture of a QPSK signal recorded for the SDR textbook, straight from your course files.
 
 ## Aims of the Lab
 
-The goals of this lab are to:
-    
-- Understand why signal distortion (e.g., inter-symbol interference, or ISI) occurs and how to counter it.
-- Understand channel effects on a signal and how to accurately recover the signal at the receiver.
-- Provide experience using eye diagrams.
+- Write down the QPSK and 16-QAM symbol-mapping equations and use them to explain, quantitatively, why higher-order constellations are more fragile to noise.
+- See how noise degrades a constellation, and connect what you see to minimum distance between constellation points.
+- Derive the Nyquist ISI criterion and the bandwidth-vs-rolloff tradeoff for pulse shaping.
+- View a real captured QPSK signal for the first time.
 
-## DQPSK Communication System
+## Some Math: Symbol Mapping and Minimum Distance
 
-Navigate to the tutorial at this link: https://wiki.gnuradio.org/index.php?title=QPSK_Mod_and_Demod. You will work through thsi tutorial to build a "complete" system from bits, to transmitted waveform through a channel, to a receiver accomplishing time synchronization and equalization, to decoding, and back to bits again. As you work through the tutorial, make sure you read everything and build the flowgraph from scratch for practice (don't just download the completed product!). Also, you must accomplish the following additional tasks and answer the following questions.
+QPSK maps every 2 bits onto one of 4 symbols, each a point on the unit circle at one of four phases:
 
-1. In the Constellation Modulator hierarchical block, there is a parameter called Excess Bandwidth. This is equivalent to the roll-off factor $r$ we learned about in class. Because the block uses extra samples per symbol, you divide the sample rate $R_b$ by the number of samples/symbol to get a symbol rate $R_s$. Then you can use $R_s$ just like we would use $R_b$ in the textbook to find total transmit bandwidth $B_T$ (Eq. 6.33 in the textbook). 
+$$s_k = \sqrt{E_s}\, e^{j(\pi/4 + k\pi/2)}, \qquad k = 0,1,2,3$$
 
-    Calculate $B_T$ for each of the five excess bandwidth values used in the Excess Bandwidth section of the tutorial. Do your results match what is shown in the tutorial's QT GUI Plot? Include the answers in your lab write up.
+or equivalently in I/Q form, $s_k \in \{\pm 1 \pm j\}\sqrt{E_s/2}$. In general, an $M$-ary constellation carries $k=\log_2 M$ bits per symbol, so for a fixed bit rate $R_b$, the symbol rate is $R_s = R_b/k$ — this is exactly why higher-order modulation (more bits/symbol) lets you fit more data into the same symbol rate (and therefore the same bandwidth).
 
-2. What is an RRC filter? Where do we use it in the communication system described in the tutorial? Why?
+That efficiency has a cost, though. For a fixed *average symbol energy* $E_s$ (roughly, fixed transmit power), packing more points into the same I/Q area means each pair of adjacent points is closer together — their **minimum distance** $d_{min}$ shrinks as $M$ grows. Since additive noise pushes a received point around by some random amount, a smaller $d_{min}$ means a much higher chance that a noise-corrupted point crosses into a neighboring symbol's decision region and gets decoded wrong. That's the precise, quantitative version of "16-QAM is more fragile than QPSK" you'll observe in Activity 2.
 
-3. List the three channel impairments added by the Channel Model block.
+## Activity 1: Bits to Symbols
 
-4. When you get to the Polyphase Clock Sync block, jump down to the **Using the Symbol Sync block** section at the bottom of the tutorial. Click on the [Symbol_Sync](https://wiki.gnuradio.org/index.php?title=Symbol_Sync) hyperlink to read through the 4 functions the block performs.
+1. Open `digital/simulation/modulation/QPSK_map_demap.slx` and `digital/simulation/modulation/QPSK_map_demap_IQ.slx`. These implement the QPSK mapping equation above.
+2. Confirm that mapping then demapping recovers your original bits with no noise present.
+3. Identify which of the four constellation points corresponds to which 2-bit pair, and check it against the $s_k$ equation above (which phase does $k=0$ land at?).
 
-5. Jump back to just after the Polyphase Clock Sync section, and pick up where you left off with the Multipath section.
+*For more detail on symbol mapping, see Sec. 11.1 in SDR textbook.*
 
-6. Note how the flowgraph uses Virtual Sink and Virtual Source to make the flowgraph cleaner and easy to follow. 
+## Activity 2: Constellations Under Noise
 
-7. Why does the constellation diagram at the output of the equalizer look like a circle instead of the four, distinct symbols we started off with?
+1. Open `digital/simulation/modulation/QPSK_constellation_noise.slx` and `digital/simulation/modulation/QAM16_constellation_noise.slx`.
+2. Sweep the noise level up on both and compare: at what noise level does QPSK's constellation start to look "fuzzy," versus 16-QAM's? You should see 16-QAM degrade first — its $d_{min}$ is smaller for the same average energy, exactly as the math above predicts.
+3. Open `digital/simulation/modulation/QAM16_constellation_IQ.slx`, which breaks the same 16-QAM signal into separate I and Q views, if you want to see the components individually.
 
-8. The Costas Loop is a PLL (phase locked loop)-based circuit used for carrier frequency recovery and is especially useful for DSB-SC or phase modulated signals.
+*For more detail on constellation noise sensitivity, see Sec. 11.1 in SDR textbook.*
 
-9. After the Constellation Decoder, Differential Decoder, and Map, you are ready to unpack your received bits. The flowgraph provided in the tutorial graphically displays the received bits (Data 0) with the transmitted bits (Data 1). Do the two perfectly line up? Why not? What value of delay leads to perfect alignment? (Hint: it isn't what the tutorial says it is!)
+## Activity 3: Pulse Shaping — the Nyquist ISI Criterion
 
-10. Insert a QT GUI Eye Sink and connect it to the Costas Loop output. Set Samples per Symbol to 1 and turn on the Autoscale. Run your flowgraph and see how changing the Noise Voltage, Timing Offset, and Frequency Offset affects the eye in your diagram. 
+A pulse shape $p(t)$ avoids inter-symbol interference (ISI) if it satisfies the **Nyquist ISI criterion**: sampled at the symbol rate, it must be zero at every neighboring symbol instant and 1 at its own center,
 
-    - Change the values for time_offset to start at 0.7 and stop at 1.1 in increments of 0.01. What do you notice about the system performance as you sweep through these time offset values? 
-    - Return the noise and time offset values back to their original values. Now just change the frequency offset values. At what frequency offset value (plus or minus) does your eye completely close?
-    - Comment on the importance of time and frequency synchronization in a digital communication system.
+$$p(nT_s) = \begin{cases}1 & n=0 \\ 0 & n \ne 0\end{cases}$$
 
-11. Include a screenshot of your final flowgraph in your writeup.
+so that when pulses from neighboring symbols overlap in time (which shaped pulses do), they contribute exactly zero at the instant you sample the symbol you care about. The raised-cosine family of pulses is built specifically to satisfy this. Its bandwidth depends on the **roll-off factor** $\alpha$ (0 to 1):
 
-12. Summarize in a short paragraph what Dr. Rogers covered in class.
+$$B = \frac{1+\alpha}{2T_s}$$
 
-## Lab Report
+A rectangular pulse is the extreme case that doesn't satisfy the criterion cleanly in a bandlimited channel — its spectrum has long, slowly-decaying sidelobes that leak into neighboring channels, which is exactly what you'll see in the comparison below. A smaller $\alpha$ saves bandwidth but makes the pulse decay more slowly in time (harder to implement, more sensitive to timing error) — you'll feel that tradeoff again in Lab 6 and 7's real-time symbol timing recovery.
 
-Submit a neat, single PDF to Gradescope addressing all of the questions and directions listed above.
+1. Open `digital/simulation/pulse/rect_v_RRC.slx` to compare a rectangular pulse against a root-raised-cosine (RRC) shaped pulse, in both time and frequency.
+2. Open `digital/simulation/pulse/raised_cosine_pulses.slx` and `digital/simulation/pulse/sqrt_raised_cosine_pulses.slx` to see the shaped pulses in the time domain.
+3. Confirm for yourself that each pulse crosses zero exactly at the neighboring symbols' sampling instants, per the criterion above.
+4. Try increasing and decreasing the roll-off factor $\alpha$ and note how the pulse's time-domain decay and frequency-domain bandwidth trade off against each other.
 
+*For more detail on pulse shaping and the Nyquist ISI criterion, see Sec. 11.2 in SDR textbook.*
 
+## Activity 4: A Real Captured Signal
+
+1. Load `digital/rtlsdr_rx/rec_data/qpsk_raised_cosine.mat` into `digital/rtlsdr_rx/rtlsdr_QPSK_raised_cosine.slx` (set the model to play back the recorded file instead of live hardware — check the source block's mode).
+2. Run it. This is an actual over-the-air RTL-SDR capture recorded for this textbook, not a simulation.
+3. Look at the resulting constellation and note what it looks like: it likely will *not* look clean yet, since this file hasn't gone through the frequency and timing correction you'll build in Lab 6.
+
+*For more detail on real-time QPSK receiver models, see Sec. 12.1 in SDR textbook.*
+
+## Assignment
+
+Submit a single PDF to Gradescope containing:
+
+1. Constellation screenshots for QPSK and 16-QAM at two comparable noise levels, with 2-3 sentences comparing their sensitivity to noise.
+2. The rectangular vs. RRC pulse spectrum comparison from Activity 3, with 1-2 sentences on which one you'd rather transmit next to another signal, and why.
+3. Your constellation screenshot from the real recorded QPSK capture in Activity 4, with a one-sentence prediction of what you think is wrong with it (you'll find out for real in Lab 6).
+4. Your documentation statement.

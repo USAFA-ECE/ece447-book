@@ -2,7 +2,7 @@
 
 Chapter 6 (6.7-6.9)
 
-## Due NLT 4 Nov (Lesson 31) by 2359 on Gradescope
+## Due NLT Lesson 32, 2359 on Gradescope
 
 ## Directions: 
 - Collaboration is authorized as noted in the syllabus Collaboration policy. 

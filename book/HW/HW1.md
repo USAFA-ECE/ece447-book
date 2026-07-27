@@ -2,7 +2,7 @@
 
 Chapter 3
 
-## Due NLT 27 Aug (M8) by 2359 on Gradescope
+## Due NLT Lesson 8, 2359 on Gradescope
 
 ## Directions: 
 - Collaboration is authorized as noted in the syllabus Collaboration policy. 
