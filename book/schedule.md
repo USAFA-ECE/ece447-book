@@ -19,7 +19,7 @@ Last class day is Lesson 41, Wed 9 Dec; Fri 11 Dec is a study day.
 | Lesson | Date | Topic | Reading | Assigned | Due |
 |----------|----------|----------|----------|----------|----------|
 | 1 | Thu 6 Aug | Course Intro | L&D 1 | [Skills Review](HW/SkillsReview.md) |  |
-| 2 | Mon 10 Aug | Modern communication systems | L&D 1 |  | [Skills Review](HW/SkillsReview.md) Part D |
+| 2 | Mon 10 Aug | Modern communication systems | L&D 1 |  |  |
 | 3 | Wed 12 Aug | SDR Lab (Day 1 of 2) | [Lab 1 Description](labs/Lab1) |  Lab 1  | [Skills Review](HW/SkillsReview.md) |
 | 4 | Fri 14 Aug | SDR Lab (Day 2 of 2) | [Lab 1 Description](labs/Lab1) |  |  |
 | 5 | Tue 18 Aug | Signals and signal space | L&D 2 |    |  |

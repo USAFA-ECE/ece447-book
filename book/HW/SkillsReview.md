@@ -3,8 +3,9 @@
 ## Due NLT Lesson 3, at the start of class, on Gradescope
 
 ```{important}
-**Part D (MATLAB & RTL-SDR setup) is due NLT Lesson 2.** Lab 1 starts in Lesson 3 and you
-will not be able to participate without a working toolchain. Do not leave it until the night before.
+**Do Part D (MATLAB & RTL-SDR setup) first, not last.** Lab 1 starts the same period this
+assignment is due, and you will not be able to participate without a working toolchain.
+If something won't install, you need time to get help before then.
 ```
 
 ## Purpose
@@ -151,9 +152,10 @@ Let $x(t) = \cos\left(2\pi (7000) t\right)$, sampled at $f_s = 10$ kHz.
 
 ---
 
-## Part D — MATLAB and RTL-SDR readiness **[NEW]** — due NLT Lesson 2
+## Part D — MATLAB and RTL-SDR readiness **[NEW]**
 
-Lab 1 begins in Lesson 3. This part exists so that installation problems surface now, not then.
+Lab 1 begins in Lesson 3, the period this assignment is due. This part exists so that
+installation problems surface now, not then. Start here.
 
 1. Confirm you have **MATLAB R2021a or later** with the **Communications Toolbox**. Run:
 
