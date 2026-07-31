@@ -1,0 +1,9 @@
+# Environment for the "live code" (Thebe) and "Binder" launch buttons on the
+# course site. Binder prefers this file over the repository-root one, so it
+# holds only what the notebooks in book/ actually import - no jupyter-book,
+# no pre-commit - which keeps session start-up fast.
+numpy
+scipy
+matplotlib
+pyldpc          # chapter13: LDPC encoding/decoding
+jupyterlab

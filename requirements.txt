@@ -2,3 +2,12 @@ jupyter-book<1.0
 pre-commit
 # Uncomment if using mermaid diagrams
 # sphinxcontrib.mermaid
+
+# Needed to execute the Python computer exercises in book/chapter*.ipynb.
+# This file is what the GitHub Pages workflow installs and what Binder uses
+# to build the live-code environment, so the exercises' dependencies belong
+# here as well as in book/requirements.txt.
+numpy
+scipy
+matplotlib
+pyldpc          # chapter13: LDPC encoding/decoding

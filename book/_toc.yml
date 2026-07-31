@@ -11,6 +11,18 @@ parts:
   - caption: Course Downloads
     chapters:
       - file: downloads
+  - caption: Python Computer Exercises
+    chapters:
+      - file: chapter02
+      - file: chapter03
+      - file: chapter04
+      - file: chapter05
+      - file: chapter06
+      - file: chapter09
+      - file: chapter10
+      - file: chapter11
+      - file: chapter12
+      - file: chapter13
   - caption: Assignments and Labs
     chapters:
       - file: HW/SkillsReview
