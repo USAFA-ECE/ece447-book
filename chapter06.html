@@ -256,7 +256,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://colab.research.google.com/github/usafa-ece/jupyterbook-template/blob/main/book/chapter06.ipynb" target="_blank"
+      <li><a href="https://colab.research.google.com/github/USAFA-ECE/ece447-book/blob/main/book/chapter06.ipynb" target="_blank"
    class="btn btn-sm dropdown-item"
    title="Launch onColab"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -287,7 +287,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/usafa-ece/jupyterbook-template" target="_blank"
+      <li><a href="https://github.com/USAFA-ECE/ece447-book" target="_blank"
    class="btn btn-sm btn-source-repository-button dropdown-item"
    title="Source repository"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -304,7 +304,7 @@ const thebe_selector_output = ".output, .cell_output"
       
       
       
-      <li><a href="https://github.com/usafa-ece/jupyterbook-template/issues/new?title=Issue%20on%20page%20%2Fchapter06.html&body=Your%20issue%20content%20here." target="_blank"
+      <li><a href="https://github.com/USAFA-ECE/ece447-book/issues/new?title=Issue%20on%20page%20%2Fchapter06.html&body=Your%20issue%20content%20here." target="_blank"
    class="btn btn-sm btn-source-issues-button dropdown-item"
    title="Open an issue"
    data-bs-placement="left" data-bs-toggle="tooltip"
@@ -467,6 +467,9 @@ document.write(`
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> \
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> |
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
 </pre></div>
 </div>
@@ -483,7 +486,9 @@ document.write(`
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>?25hCollecting numpy (from scikit-commpy)
-  Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (62 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting scipy (from scikit-commpy)
@@ -495,19 +500,25 @@ document.write(`
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting sympy (from scikit-commpy)
-  Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading sympy-1.14.0-py3-none-any.whl.metadata (12 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting contourpy&gt;=1.0.1 (from matplotlib-&gt;scikit-commpy)
-  Downloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.5 kB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting cycler&gt;=0.10 (from matplotlib-&gt;scikit-commpy)
-  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.5 kB)
+Collecting cycler&gt;=0.10 (from matplotlib-&gt;scikit-commpy)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting fonttools&gt;=4.22.0 (from matplotlib-&gt;scikit-commpy)
-  Downloading fonttools-4.63.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (118 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading fonttools-4.63.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (118 kB)
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting kiwisolver&gt;=1.3.1 (from matplotlib-&gt;scikit-commpy)
@@ -517,58 +528,67 @@ Requirement already satisfied: packaging&gt;=20.0 in /opt/hostedtoolcache/Python
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pillow&gt;=8 (from matplotlib-&gt;scikit-commpy)
   Downloading pillow-12.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
-Collecting pyparsing&gt;=3 (from matplotlib-&gt;scikit-commpy)
-  Downloading pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/hostedtoolcache/Python/3.10.20/x64/lib/python3.10/site-packages (from matplotlib-&gt;scikit-commpy) (2.9.0.post0)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Collecting pyparsing&gt;=3 (from matplotlib-&gt;scikit-commpy)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading pyparsing-3.3.2-py3-none-any.whl.metadata (5.8 kB)
+Requirement already satisfied: python-dateutil&gt;=2.7 in /opt/hostedtoolcache/Python/3.10.20/x64/lib/python3.10/site-packages (from matplotlib-&gt;scikit-commpy) (2.9.0.post0)
 Requirement already satisfied: six&gt;=1.5 in /opt/hostedtoolcache/Python/3.10.20/x64/lib/python3.10/site-packages (from python-dateutil&gt;=2.7-&gt;matplotlib-&gt;scikit-commpy) (1.17.0)
 Collecting mpmath&lt;1.4,&gt;=1.1.0 (from sympy-&gt;scikit-commpy)
-  Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>  Downloading mpmath-1.3.0-py3-none-any.whl.metadata (8.6 kB)
 Downloading matplotlib-3.10.9-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (8.8 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/8.8 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">8.8/8.8 MB</span> <span class=" -Color -Color-Red">92.7 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (325 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">8.8/8.8 MB</span> <span class=" -Color -Color-Red">58.5 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading contourpy-1.3.2-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (325 kB)
 Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
-Downloading fonttools-4.63.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.9 MB)
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading fonttools-4.63.0-cp310-cp310-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (4.9 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/4.9 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.9/4.9 MB</span> <span class=" -Color -Color-Red">203.8 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25h
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">4.9/4.9 MB</span> <span class=" -Color -Color-Red">129.4 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading kiwisolver-1.5.0-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading kiwisolver-1.5.0-cp310-cp310-manylinux_2_12_x86_64.manylinux2010_x86_64.whl (1.6 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/1.6 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.6/1.6 MB</span> <span class=" -Color -Color-Red">107.5 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">1.6/1.6 MB</span> <span class=" -Color -Color-Red">280.3 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
 ?25hDownloading numpy-2.2.6-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (16.8 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/16.8 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">16.8/16.8 MB</span> <span class=" -Color -Color-Red">110.7 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading pillow-12.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
-?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/6.9 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">16.8/16.8 MB</span> <span class=" -Color -Color-Red">344.1 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25h
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.9/6.9 MB</span> <span class=" -Color -Color-Red">124.9 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
-?25hDownloading pyparsing-3.3.2-py3-none-any.whl (122 kB)
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading pillow-12.3.0-cp310-cp310-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (6.9 MB)
+?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/6.9 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.9/6.9 MB</span> <span class=" -Color -Color-Red">281.0 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+?25h
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Downloading pyparsing-3.3.2-py3-none-any.whl (122 kB)
 Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (37.7 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/37.7 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸ <span class=" -Color -Color-Green">37.5/37.7 MB</span> <span class=" -Color -Color-Red">664.0 MB/s</span> eta <span class=" -Color -Color-Cyan">0:00:01</span>
-</pre></div>
-</div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">37.7/37.7 MB</span> <span class=" -Color -Color-Red">121.8 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">37.7/37.7 MB</span> <span class=" -Color -Color-Red">275.6 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
 ?25hDownloading sympy-1.14.0-py3-none-any.whl (6.3 MB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/6.3 MB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.3/6.3 MB</span> <span class=" -Color -Color-Red">128.8 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">6.3/6.3 MB</span> <span class=" -Color -Color-Red">304.3 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
 ?25hDownloading mpmath-1.3.0-py3-none-any.whl (536 kB)
 ?25l   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">0.0/536.2 kB</span> <span class=" -Color -Color-Red">?</span> eta <span class=" -Color -Color-Cyan">-:--:--</span>
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">536.2/536.2 kB</span> <span class=" -Color -Color-Red">54.0 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">536.2/536.2 kB</span> <span class=" -Color -Color-Red">112.5 MB/s</span>  <span class=" -Color -Color-Yellow">0:00:00</span>
 ?25h
 </pre></div>
 </div>
@@ -579,7 +599,7 @@ Downloading scipy-1.15.3-cp310-cp310-manylinux_2_17_x86_64.manylinux2014_x86_64.
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span> done
-?25h  Created wheel for scikit-commpy: filename=scikit_commpy-0.8.0-py3-none-any.whl size=115097 sha256=5f00d884ffe69e9a91a611aa4a3258f795106ae13ef46435da8dff1cd4ff0bdc
+?25h  Created wheel for scikit-commpy: filename=scikit_commpy-0.8.0-py3-none-any.whl size=115097 sha256=ddd0d044423f411f5f104228cf518b4c2409fde53648dc1e4c36bbda6149d8f5
   Stored in directory: /home/runner/.cache/pip/wheels/36/eb/56/f0bffa07ed968244dac624cfc6dee75474b7b451299bf54950
 Successfully built scikit-commpy
 </pre></div>
@@ -666,7 +686,22 @@ Successfully built scikit-commpy
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 1/12</span> [sympy]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/12</span> [pillow]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 1/12</span> [sympy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 1/12</span> [sympy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 1/12</span> [sympy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 1/12</span> [sympy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 1/12</span> [sympy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━╸━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 2/12</span> [pyparsing]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 3/12</span> [pillow]
@@ -699,7 +734,10 @@ Successfully built scikit-commpy
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 4/12</span> [numpy]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 6/12</span> [fonttools]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 4/12</span> [numpy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 4/12</span> [numpy]
 </pre></div>
 </div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 6/12</span> [fonttools]
@@ -711,6 +749,18 @@ Successfully built scikit-commpy
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 6/12</span> [fonttools]
 </pre></div>
 </div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 6/12</span> [fonttools]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━╺━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 6/12</span> [fonttools]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/12</span> [scipy]
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/12</span> [scipy]
+</pre></div>
+</div>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━━━━━━━━━━━ <span class=" -Color -Color-Green"> 8/12</span> [scipy]
 </pre></div>
 </div>
@@ -786,7 +836,8 @@ Successfully built scikit-commpy
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╺━━━━━━ <span class=" -Color -Color-Green">10/12</span> [matplotlib]
 </pre></div>
 </div>
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12/12</span> [scikit-commpy]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╸━━━ <span class=" -Color -Color-Green">11/12</span> [scikit-commpy]
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ <span class=" -Color -Color-Green">12/12</span> [scikit-commpy]
 ?25h
 Successfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.63.0 kiwisolver-1.5.0 matplotlib-3.10.9 mpmath-1.3.0 numpy-2.2.6 pillow-12.3.0 pyparsing-3.3.2 scikit-commpy-0.8.0 scipy-1.15.3 sympy-1.14.0
 
@@ -929,8 +980,8 @@ Successfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.63.0 kiwisolver
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/479a9b6125b263a5c8afe1f9f88e91dd56c0fe19629f1bc64e9e153d0f80d5ce.png" src="_images/479a9b6125b263a5c8afe1f9f88e91dd56c0fe19629f1bc64e9e153d0f80d5ce.png" />
-<img alt="_images/0c6ae26b7548833a9a8f259e8d1d8ff3fd9b67412139e535f9fe3d62f83036b6.png" src="_images/0c6ae26b7548833a9a8f259e8d1d8ff3fd9b67412139e535f9fe3d62f83036b6.png" />
+<img alt="_images/8234bfd650879561b7800bc7a930e772570a69ea7dded2f9b908e1c90de5a861.png" src="_images/8234bfd650879561b7800bc7a930e772570a69ea7dded2f9b908e1c90de5a861.png" />
+<img alt="_images/6d9a9a7c3d1ef270d0fd82c20a5b67c3c8547ff8b1a64a294d74e27cccc80058.png" src="_images/6d9a9a7c3d1ef270d0fd82c20a5b67c3c8547ff8b1a64a294d74e27cccc80058.png" />
 </div>
 </div>
 <img src="images/Fig6_39.png" width="600" />
@@ -972,9 +1023,9 @@ Successfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.63.0 kiwisolver
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0.5, 1.0, &#39;Raised-cosine eye diagram&#39;)
 </pre></div>
 </div>
-<img alt="_images/315c76daa1919037592b0a08b9f2d54d6142b4ace33c407dba9034e45c4f4922.png" src="_images/315c76daa1919037592b0a08b9f2d54d6142b4ace33c407dba9034e45c4f4922.png" />
-<img alt="_images/84f482831ee88a1483c40432b1515bd5bef09295abb6986cc052eab10990d8c4.png" src="_images/84f482831ee88a1483c40432b1515bd5bef09295abb6986cc052eab10990d8c4.png" />
-<img alt="_images/1ac02302570267675f540f4ffc176aed900bb3f1ead4ff435916cc837ece00dd.png" src="_images/1ac02302570267675f540f4ffc176aed900bb3f1ead4ff435916cc837ece00dd.png" />
+<img alt="_images/619c67550adb3c102040f203b663b48b99a13b384d5ae18f03e79257c09fb7f9.png" src="_images/619c67550adb3c102040f203b663b48b99a13b384d5ae18f03e79257c09fb7f9.png" />
+<img alt="_images/69e6bb0c238276f8d7910d0c9796a647fbfa8afe4d3fed346b11afb9e71fc269.png" src="_images/69e6bb0c238276f8d7910d0c9796a647fbfa8afe4d3fed346b11afb9e71fc269.png" />
+<img alt="_images/734eb48ee1ed42e5f822078c107989c3d7b58720052f0b9ebf869c063a42c2b5.png" src="_images/734eb48ee1ed42e5f822078c107989c3d7b58720052f0b9ebf869c063a42c2b5.png" />
 </div>
 </div>
 </section>
@@ -1072,9 +1123,9 @@ Successfully installed contourpy-1.3.2 cycler-0.12.1 fonttools-4.63.0 kiwisolver
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/125e6370548b12dd7c994b5ab500dceb8ae90db451e4b1a172639c6048089003.png" src="_images/125e6370548b12dd7c994b5ab500dceb8ae90db451e4b1a172639c6048089003.png" />
-<img alt="_images/be7f87e29e35a091e7e465bd8dbf23ed77cea3c9e5ff925a4618705f0dbb9474.png" src="_images/be7f87e29e35a091e7e465bd8dbf23ed77cea3c9e5ff925a4618705f0dbb9474.png" />
-<img alt="_images/6562e6be9c44c12cf36f6935ae81503ad77ac6fb83f026d5aa528163cb2c7383.png" src="_images/6562e6be9c44c12cf36f6935ae81503ad77ac6fb83f026d5aa528163cb2c7383.png" />
+<img alt="_images/77e55b75bd4044a9813004b959c72878ff7f55a069fb243b1d2f2af6a6864e96.png" src="_images/77e55b75bd4044a9813004b959c72878ff7f55a069fb243b1d2f2af6a6864e96.png" />
+<img alt="_images/469fcd1e70f66c3535cbd90ac6b9b3ea3a4e5f8ce99af4e16b0d7c5e9024d2a4.png" src="_images/469fcd1e70f66c3535cbd90ac6b9b3ea3a4e5f8ce99af4e16b0d7c5e9024d2a4.png" />
+<img alt="_images/54d32b83e3a05803a141b7bff9eaa134eb153bf1e522dd06baeb3259d6d03c1e.png" src="_images/54d32b83e3a05803a141b7bff9eaa134eb153bf1e522dd06baeb3259d6d03c1e.png" />
 </div>
 </div>
 <img src="images/Fig6_41.png" width="600" />
