@@ -29,9 +29,9 @@ _Lab entries link to the SDR lab write-ups. Slide file names keep their original
 | 11 | [Angle Modulation, Part 1](_static/ECE447_Lesson11.pdf) |
 | 12 | [Angle Modulation, Part 2](_static/ECE447_Lesson12.pdf) |
 | 13 | [Angle Modulation, Part 3](_static/ECE447_Lesson13.pdf) |
-| 14 | [SDR Lab 4](labs/Lab4) |
-| 15 | GR1 Review day |
-| 16 | GR 1 |
+| 14 | GR1 Review day |
+| 15 | GR 1 |
+| 16 | [SDR Lab 4](labs/Lab4) |
 | 17 | GR Review/Feedback |
 | 18 | [Signal Sampling and Reconstruction](_static/ECE447_Lesson18.pdf) |
 | 19 | [Pulse Code Modulation (PCM)](_static/ECE447_Lesson19.pdf) |
