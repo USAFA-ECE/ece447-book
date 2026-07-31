@@ -1,11 +1,11 @@
-﻿# Slides and Downloads
+# Slides and Downloads
 
 ## Course Support Files
 
 The labs use the Simulink models, MATLAB scripts, and recorded data that accompany the desktopSDR textbook. See [Lab 1](labs/Lab1) for one-time MATLAB setup.
 
-- **Models & scripts** (small â€” start here): [support_files.zip](labs/support_files.zip). Unzip and use the folder as your support files root.
-- **Recorded signal captures** (Labs 5-8; 100-240 MB each, too large for this site): download from the course Teams folder â€” [ECE447-Fall2026 > Class Materials > desktopSDR_supportFiles](https://usafa0.sharepoint.com/:f:/r/teams/ECE447-Fall2026/Class%20Materials/desktopSDR_supportFiles_v2_0__2021a?csf=1&web=1&e=qckp9s) â€” under `digital/rtlsdr_rx/rec_data/`.
+- **Models & scripts** (small — start here): [support_files.zip](labs/support_files.zip). Unzip and use the folder as your support files root.
+- **Recorded signal captures** (Labs 5-8; 100-240 MB each, too large for this site): download from the course Teams folder — [ECE447-Fall2026 > Class Materials > desktopSDR_supportFiles](https://usafa0.sharepoint.com/:f:/r/teams/ECE447-Fall2026/Class%20Materials/desktopSDR_supportFiles_v2_0__2021a?csf=1&web=1&e=qckp9s) — under `digital/rtlsdr_rx/rec_data/`.
 - **Complete package / upstream source:** a single zip of everything (plus a PDF of the book) is available from [desktopsdr.com](https://www.desktopsdr.com/download-files).
 
 ## Slides
@@ -18,8 +18,8 @@ _Lab entries link to the SDR lab write-ups. Slide file names keep their original
 |:----------:|:----------:|
 | 1  | [Course Overview](_static/ECE447_Lesson1.pdf) |
 | 2  | [Communication Systems Overview](_static/ECE447_Lesson2.pdf) |
-| 3  | [SDR Lab 1](labs/Lab1) â€” Day 1 of 2 |
-| 4  | [SDR Lab 1](labs/Lab1) â€” Day 2 of 2 |
+| 3  | [SDR Lab 1](labs/Lab1) — Day 1 of 2 |
+| 4  | [SDR Lab 1](labs/Lab1) — Day 2 of 2 |
 | 5  | [Signals and Signal Space](_static/ECE447_Lesson4.pdf) |
 | 6  | [Analysis and Transmission of Signals](_static/ECE447_Lesson5.pdf) |
 | 7  | [SDR Lab 2](labs/Lab2) |
@@ -41,8 +41,8 @@ _Lab entries link to the SDR lab write-ups. Slide file names keep their original
 | 23 | [Digital Communication and Line Coding (cont'd)](_static/ECE447_Lesson22.pdf) |
 | 24 | [Pulse Shaping & Intersymbol Interference (ISI)](_static/ECE447_Lesson24.pdf) |
 | 25 | [Digital Receivers: Timing & Detection, Eye Diagrams](_static/ECE447_Lesson25.pdf) |
-| 26 | [SDR Lab 6](labs/Lab6) â€” Day 1 of 2 |
-| 27 | [SDR Lab 6](labs/Lab6) â€” Day 2 of 2 |
+| 26 | [SDR Lab 6](labs/Lab6) — Day 1 of 2 |
+| 27 | [SDR Lab 6](labs/Lab6) — Day 2 of 2 |
 | 28 | [M-ary Digital Modulation](_static/ECE447_Lesson27.pdf) |
 | 29 | [Digital Carrier Modulation](_static/ECE447_Lesson28.pdf) |
 | 30 | [Probability, Part 1](_static/ECE447_Lesson29.pdf) |
