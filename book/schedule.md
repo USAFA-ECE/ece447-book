@@ -11,7 +11,6 @@ Day (Fri 11 Sep), Fall VALEX (begins after classes Thu 17 Sep; no classes Fri 18
 Columbus Day (Mon 12 Oct), Veterans Day (Wed 11 Nov), and Thanksgiving break (begins LMD
 Tue 24 Nov; cadet wing returns 1900 Mon 30 Nov).
 
-**Final exam: Saturday 12 December 2026** (finals block for periods 1, 2 & 3).
 Last class day is Lesson 41, Wed 9 Dec; Fri 11 Dec is a study day.
 ```
 
