@@ -55,8 +55,8 @@ Last class day is Lesson 41, Wed 9 Dec; Fri 11 Dec is a study day.
 | 27 | Fri 23 Oct | Digital carrier modulation | L&D 6.8-6.9 | [HW6](HW/HW6) | [HW5](HW/HW5) |
 | 28 | Tue 27 Oct | SDR Lab (Day 1 of 2) | [Lab 6 Description](labs/Lab6) | [Lab 6](labs/Lab6) |  |
 | 29 | Thu 29 Oct | SDR Lab (Day 2 of 2) | [Lab 6 Description](labs/Lab6) |  |  |
-| 30 | Mon 2 Nov | Probability, Part 1 | L&D 7.1-7.3 |  | [Lab 6](labs/Lab6) |
-| 31 | Wed 4 Nov | Probability, Part 2 | L&D 7.4-7.7 |  | [HW6](HW/HW6) |
+| 30 | Mon 2 Nov | Probability, Part 1 | L&D 7.1-7.3 |  | [HW6](HW/HW6) |
+| 31 | Wed 4 Nov | Probability, Part 2 | L&D 7.4-7.7 |  | [Lab 6](labs/Lab6) |
 | 32 | Fri 6 Nov | Random processes | L&D 8-8.4 (at least) | [HW7](HW/HW7) |  |
 | 33 | Tue 10 Nov | SDR Lab | [Lab 7 Description](labs/Lab7) | [Lab 7](labs/Lab7) |  |
 | 34 | Fri 13 Nov | GR2 Review Day |  |  | [HW7](HW/HW7) |
