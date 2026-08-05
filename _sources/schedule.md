@@ -2,17 +2,7 @@
 
 This is meant to serve an a _notional_ schedule for ECE447. We will keep this up to date throughout the semester, so come back to this page (not your syllabus) for the schedule closest to reality. If there is a discrepancy between this schedule and a due date on Gradescope, use the due date on Gradescope. Readings are primarily from the course textbook by Lathi and Ding (L&D). Each software-defined radio (SDR) lab has one or more deliverables due approximately one week from the lab's assignment date. Labs 1 and 6 each run across two class periods.
 
-Dates below are **Fall 2026, M-day** (this course meets periods M1 and M2). The academic
-calendar gives exactly 41 M-days, which matches the 41 lessons here.
 
-```{note}
-**No-class days that fall inside the semester:** Labor Day (Mon 7 Sep), Commandant's Training
-Day (Fri 11 Sep), Fall VALEX (begins after classes Thu 17 Sep; no classes Fri 18 Sep),
-Columbus Day (Mon 12 Oct), Veterans Day (Wed 11 Nov), and Thanksgiving break (begins LMD
-Tue 24 Nov; cadet wing returns 1900 Mon 30 Nov).
-
-Last class day is Lesson 41, Wed 9 Dec; Fri 11 Dec is a study day.
-```
 
  ## Introduction and Background
 | Lesson | Date | Topic | Reading | Assigned | Due |
