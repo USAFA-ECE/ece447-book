@@ -401,7 +401,7 @@ document.write(`
                 <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-lesson-4-at-the-start-of-class-on-gradescope">Due NLT Lesson 4, at the start of class, on Gradescope</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-lab-1-matlab-and-rtl-sdr-setup">Before Lab 1: MATLAB and RTL-SDR setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-in-ece-447-decibels">New in ECE 447: decibels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decibels">Decibels</a></li>
 </ul>
             </nav>
         </div>
@@ -426,19 +426,17 @@ lesson that builds on it, and the last page tells you what to review if you come
 not a single statement for the whole assignment. Problems missing a documentation statement
 will not be graded.</p>
 </div>
-<embed src="HW/Skills_Review_F26.pdf" width="100%" height="600px" type="application/pdf">
-<p>If you have trouble viewing, you can download the PDF <span class="xref myst">here</span>.</p>
+<embed src="Skills_Review_F26.pdf" width="100%" height="600px" type="application/pdf">
+<p>If you have trouble viewing, you can download the PDF <a class="reference download internal" download="" href="../_downloads/ffd66b4f876f4ca052d0fc80399f1ad7/Skills_Review_F26.pdf"><span class="xref download myst">here</span></a>.</p>
 <hr class="docutils" />
-<p>The two sections below are <strong>not part of the graded Skills Review</strong>. They cover material
-ECE 333 does not, and you will need both early. Work through them on your own.</p>
+<p>The two sections below are <strong>not part of the graded Skills Review</strong>. The first one is to make sure you are ready for Lab 1. The second covers decibels in more detail than you may have received in previous courses. Work through both sections on your own.</p>
 </section>
 <section id="before-lab-1-matlab-and-rtl-sdr-setup">
 <h2>Before Lab 1: MATLAB and RTL-SDR setup<a class="headerlink" href="#before-lab-1-matlab-and-rtl-sdr-setup" title="Permalink to this heading">#</a></h2>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p><strong>Do this first, not last.</strong> Lab 1 begins on <strong>Lesson 3</strong> – before this assignment is even
-due – and you cannot participate without a working toolchain. If something will not install,
-you need time to get help beforehand.</p>
+<p>Lab 1 begins on <strong>Lesson 3</strong> – before this assignment is even
+due – and you cannot participate in the lab without a working toolchain. If something will not install, you need time to get help beforehand.</p>
 </div>
 <ol class="arabic">
 <li><p>Confirm you have <strong>MATLAB R2021a or later</strong> with the <strong>Communications Toolbox, DSP System Toolbox, and Signal Processing Toolbox</strong>. Type in the following command in MATLAB:</p>
@@ -464,11 +462,11 @@ to EI <strong>before Lesson 3</strong>.</p>
 <p>If you cannot get hardware working before Lesson 3, come see me early.</p>
 </div>
 </section>
-<section id="new-in-ece-447-decibels">
-<h2>New in ECE 447: decibels<a class="headerlink" href="#new-in-ece-447-decibels" title="Permalink to this heading">#</a></h2>
-<p>Decibels are not covered in ECE 333, but every lab, link budget, and SNR calculation in
-ECE 447 uses them. Read the dB units section in L&amp;D, or any standard reference, and then work
-these four for yourself. They are not collected.</p>
+<section id="decibels">
+<h2>Decibels<a class="headerlink" href="#decibels" title="Permalink to this heading">#</a></h2>
+<p>Decibels are in every lab, link budget, and SNR calculation in
+ECE 447. Read the dB primer below, and then work
+through the problems below that. They are not collected.</p>
 <ol class="arabic simple">
 <li><p>A receiver delivers 2 mW into a load. Express this power in <strong>dBm</strong>.</p></li>
 <li><p>That signal passes through an amplifier with 12 dB of gain, then a cable with 3 dB of loss.
@@ -476,6 +474,8 @@ Give the output power in <strong>dBm</strong> and in <strong>mW</strong>.</p></l
 <li><p>The noise power at the same point is <span class="math notranslate nohighlight">\(-85\)</span> dBm. What is the SNR <strong>in dB</strong>?</p></li>
 <li><p>Why do engineers add dB values instead of multiplying ratios?</p></li>
 </ol>
+<embed src="ydi_understandingdb.pdf" width="100%" height="600px" type="application/pdf">
+<p>If you have trouble viewing, you can download the PDF <a class="reference download internal" download="" href="../_downloads/e00dd325e9aeac0d5d03c968aa08dc90/ydi_understandingdb.pdf"><span class="xref download myst">here</span></a>.</p>
 <details class="sd-sphinx-override sd-dropdown sd-card sd-mb-3">
 <summary class="sd-summary-title sd-card-header">
 Check your answers<div class="sd-summary-down docutils">
@@ -560,7 +560,7 @@ Cascaded gains and losses add, which turns a link budget into arithmetic.</p></l
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#due-nlt-lesson-4-at-the-start-of-class-on-gradescope">Due NLT Lesson 4, at the start of class, on Gradescope</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#before-lab-1-matlab-and-rtl-sdr-setup">Before Lab 1: MATLAB and RTL-SDR setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#new-in-ece-447-decibels">New in ECE 447: decibels</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#decibels">Decibels</a></li>
 </ul>
   </nav></div>
 
