@@ -2,7 +2,7 @@
 
 ## Due NLT Lesson 4, at the start of class, on Gradescope
 
-ECE 447 builds directly on ECE 333. This diagnostic is a graded assessment of the
+ECE 447 builds directly on ECE 333 and other courses. This diagnostic is a graded assessment of the
 prerequisite skills the first several lessons assume. Each section names the ECE 447
 lesson that builds on it, and the last page tells you what to review if you come up short.
 
