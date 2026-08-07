@@ -20,7 +20,7 @@ If you have trouble viewing, you can download the PDF [here](Skills_Review_F26.p
 
 The two sections below are **not part of the graded Skills Review**. The first one is to make sure you are ready for Lab 1. The second covers decibels in more detail than you may have received in previous courses. Work through both sections on your own.
 
-## Before Lab 1: MATLAB and RTL-SDR setup
+## Before Lab 1 on Lesson 3: MATLAB and RTL-SDR setup
 
 ```{warning}
 Lab 1 begins on **Lesson 3** -- before this assignment is even
