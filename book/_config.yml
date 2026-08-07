@@ -12,6 +12,20 @@ copyright: '2025'
 execute:
   execute_notebooks: force
 
+# Sphinx builds every source file it finds, whether or not _toc.yml lists it.
+# The L&D Python computer exercises (chapter*.ipynb) are not integrated yet and
+# do not execute cleanly, so keep them out of the published build -- otherwise
+# every deploy spends ~100 s running them and publishes their tracebacks under
+# /reports/. Work on them on the python-exercises-interactive branch, which
+# drops this entry; delete it here once they are ready to go live.
+# NOTE: this list replaces jupyter-book's defaults, so they are repeated here.
+exclude_patterns:
+  - _build
+  - Thumbs.db
+  - .DS_Store
+  - "**.ipynb_checkpoints"
+  - chapter*.ipynb
+
 # Add a "Launch on Google Colab" button to .ipynb files
 launch_buttons:
   colab_url: "https://colab.research.google.com"

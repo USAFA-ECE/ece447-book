@@ -12,9 +12,9 @@ not a single statement for the whole assignment. Problems missing a documentatio
 will not be graded.
 ```
 
-<embed src="Skills_Review_F26.pdf" width="100%" height="600px" type="application/pdf">
+<embed src="../_static/Skills_Review_F26.pdf" width="100%" height="600px" type="application/pdf">
 
-If you have trouble viewing, you can download the PDF [here](Skills_Review_F26.pdf).
+If you have trouble viewing, you can download the PDF [here](../_static/Skills_Review_F26.pdf).
 
 ---
 
@@ -66,9 +66,9 @@ through the problems below that. They are not collected.
 3. The noise power at the same point is $-85$ dBm. What is the SNR **in dB**?
 4. Why do engineers add dB values instead of multiplying ratios?
 
-<embed src="ydi_understandingdb.pdf" width="100%" height="600px" type="application/pdf">
+<embed src="../_static/ydi_understandingdb.pdf" width="100%" height="600px" type="application/pdf">
 
-If you have trouble viewing, you can download the PDF [here](ydi_understandingdb.pdf).
+If you have trouble viewing, you can download the PDF [here](../_static/ydi_understandingdb.pdf).
 
 ```{dropdown} Check your answers
 1. $10\log_{10}(2) = 3.0$ dBm
