@@ -60,15 +60,15 @@ Decibels are in every lab, link budget, and SNR calculation in
 ECE 447. Read the dB primer below, and then work
 through the problems below that. They are not collected.
 
+<embed src="../_static/ydi_understandingdb.pdf" width="100%" height="600px" type="application/pdf">
+
+If you have trouble viewing, you can download the PDF [here](../_static/ydi_understandingdb.pdf).
+
 1. A receiver delivers 2 mW into a load. Express this power in **dBm**.
 2. That signal passes through an amplifier with 12 dB of gain, then a cable with 3 dB of loss.
    Give the output power in **dBm** and in **mW**.
 3. The noise power at the same point is $-85$ dBm. What is the SNR **in dB**?
 4. Why do engineers add dB values instead of multiplying ratios?
-
-<embed src="../_static/ydi_understandingdb.pdf" width="100%" height="600px" type="application/pdf">
-
-If you have trouble viewing, you can download the PDF [here](../_static/ydi_understandingdb.pdf).
 
 ```{dropdown} Check your answers
 1. $10\log_{10}(2) = 3.0$ dBm
