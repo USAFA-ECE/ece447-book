@@ -9,8 +9,8 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 |----------|----------|----------|----------|----------|----------|
 | 1 | Thu 6 Aug | Course Intro | L&D 1 | [Skills Review](HW/SkillsReview.md) |  |
 | 2 | Mon 10 Aug | Modern communication systems | L&D 1 |  |  |
-| 3 | Wed 12 Aug | SDR Lab (Day 1 of 2) | [Lab 1 Description](labs/Lab1) |  Lab 1  | [Skills Review](HW/SkillsReview.md) |
-| 4 | Fri 14 Aug | SDR Lab (Day 2 of 2) | [Lab 1 Description](labs/Lab1) |  |  |
+| 3 | Wed 12 Aug | SDR Lab (Day 1 of 2) | [Lab 1 Description](labs/Lab1) |  Lab 1  |  |
+| 4 | Fri 14 Aug | SDR Lab (Day 2 of 2) | [Lab 1 Description](labs/Lab1) |  | [Skills Review](HW/SkillsReview.md) |
 | 5 | Tue 18 Aug | Signals and signal space | L&D 2 |    |  |
 | 6 | Thu 20 Aug | Analysis and transmission of signals | L&D 3 |  [HW1](HW/HW1)  |  |
 | 7 | Mon 24 Aug | SDR Lab | [Lab 2 Description](labs/Lab2) |  Lab 2  | Lab 1 |
