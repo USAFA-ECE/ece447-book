@@ -15,6 +15,17 @@ execute:
   timeout: 300           # seconds per cell; the BER simulations need > default 30
   allow_errors: false    # a broken exercise should fail the build, not ship
 
+# Sphinx builds every source file it finds, whether or not _toc.yml lists it.
+# chapter*.ipynb used to be excluded here because the exercises did not execute
+# cleanly; they do now and are listed in _toc.yml, so that entry is gone.
+# NOTE: this list replaces jupyter-book's defaults rather than extending them,
+# so the defaults are repeated. Add to it, never overwrite it.
+exclude_patterns:
+  - _build
+  - Thumbs.db
+  - .DS_Store
+  - "**.ipynb_checkpoints"
+
 # Buttons at the top of each notebook page: open it in Colab or Binder, or run
 # the cells in place with Thebe.
 launch_buttons:

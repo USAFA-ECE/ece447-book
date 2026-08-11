@@ -6,21 +6,32 @@ on:
   push:
     branches:
       - main
-  pull_request: # allow for testing build artifcats before merge
+  pull_request: # allow for testing build artifacts before merge
 
-# This job installs dependencies, builds the book, and pushes it to `gh-pages`
+# Required by actions/deploy-pages: id-token for the OIDC handshake with Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Queue deploys rather than cancelling one that is already publishing
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
-  deploy-book:
+  # Build the book and hand the HTML to the Pages artifact store
+  build:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }} # only run one of these jobs at a time
     steps:
       - uses: actions/checkout@v4
+      # 3.11+, so pip resolves the same scipy/matplotlib the exercises were
+      # verified against. On 3.10 it caps at scipy 1.15 / matplotlib 3.10,
+      # which nothing here has been executed on.
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.11'
+          cache: pip
 
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -38,18 +49,31 @@ jobs:
       - name: Build the book
         run: jupyter-book build book/
 
+      # Browsable copy, for checking a PR build before merging it
       - name: Upload book as artifact
+        if: ${{ github.event_name == 'pull_request' }}
         uses: actions/upload-artifact@v4
         with:
           name: book
           path: book/_build/html/
           retention-days: 1
 
-      # Push the book's HTML to github-pages
-      - name: GitHub Pages action
-        uses: peaceiris/actions-gh-pages@v4.0.0
-        # Only publish if the main branch
-        if: ${{ github.ref == 'refs/heads/main' }}
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./book/_build/html
+          path: book/_build/html
+
+  # Publish to GitHub Pages.
+  # Requires Settings -> Pages -> Build and deployment -> Source: GitHub Actions
+  deploy:
+    needs: build
+    # Only publish if the main branch
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
