@@ -33,8 +33,16 @@ jobs:
           python-version: '3.11'
           cache: pip
 
+      # pyldpc (chapter13) publishes no wheel, and its setup.py imports numpy
+      # at build time. PEP 517 builds in an isolated env that has no numpy, so
+      # a plain `pip install -r requirements.txt` fails resolving it. Install
+      # the build deps first, then build against them. Pinning down to 0.7.6
+      # (the last version with a wheel) is NOT an option -- its decoder is
+      # broken on numpy 2.x.
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          pip install numpy setuptools wheel
+          pip install --no-build-isolation -r requirements.txt
 
       # The Python computer exercises are executed at build time. Reuse the
       # jupyter-cache between runs so only changed notebooks are re-executed.

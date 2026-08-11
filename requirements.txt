@@ -8,6 +8,15 @@ pre-commit
 # the exercises import at build time belongs here. The live-code (Thebe) and
 # Binder buttons do NOT use this file -- binder/requirements.txt takes
 # precedence for them, and deliberately omits pyldpc.
+#
+# NOTE: pyldpc publishes no wheel and its setup.py imports numpy, so a plain
+# `pip install -r requirements.txt` fails on a clean environment. Install with:
+#
+#     pip install numpy setuptools wheel
+#     pip install --no-build-isolation -r requirements.txt
+#
+# which is what .github/workflows/deploy.yml does. Do not pin pyldpc down to
+# 0.7.6 to get a wheel -- that version's decoder is broken on numpy 2.x.
 numpy
 scipy
 matplotlib
