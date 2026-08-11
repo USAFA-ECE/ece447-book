@@ -4,9 +4,10 @@ pre-commit
 # sphinxcontrib.mermaid
 
 # Needed to execute the Python computer exercises in book/chapter*.ipynb.
-# This file is what the GitHub Pages workflow installs and what Binder uses
-# to build the live-code environment, so the exercises' dependencies belong
-# here as well as in book/requirements.txt.
+# This file is what the GitHub Pages workflow installs, so every dependency
+# the exercises import at build time belongs here. The live-code (Thebe) and
+# Binder buttons do NOT use this file -- binder/requirements.txt takes
+# precedence for them, and deliberately omits pyldpc.
 numpy
 scipy
 matplotlib
