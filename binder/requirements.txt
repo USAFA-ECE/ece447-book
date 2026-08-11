@@ -1,0 +1,15 @@
+# Environment for the "live code" (Thebe) and "Binder" launch buttons on the
+# course site. Binder prefers this file over the repository-root one, so it
+# holds only what the notebooks in book/ actually import - no jupyter-book,
+# no pre-commit - which keeps session start-up fast.
+#
+# pyldpc is deliberately NOT here. Only chapter13 needs it, and it drags in
+# numba + llvmlite, which dominate the image build and slow the first launch
+# for everyone. chapter13's import cell pip-installs it on demand instead, so
+# only students who open that one notebook pay the cost. It IS in the
+# repository-root requirements.txt, so the figures published on the site are
+# still generated at build time.
+numpy
+scipy
+matplotlib
+jupyterlab
