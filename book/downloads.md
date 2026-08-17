@@ -12,16 +12,16 @@ The labs use the Simulink models, MATLAB scripts, and recorded data that accompa
 
 The slides on this page will be updated throughout the semester and posted as we go. It is recommended you download files just prior to the lecture for which the material pertains.
 
-_Lab entries link to the SDR lab write-ups. Slide file names keep their original lesson numbering, which does not always match the current schedule; each row below is aligned to the current schedule by topic, so a lesson number and its slide file name may differ._
+_Lab entries link to the SDR lab write-ups. Each slide file is named for the lesson it is taught on, matching the [course schedule](schedule.md)._
 
 | Lesson | Slides / Lab |
 |:----------:|:----------:|
-| 1  | [Course Overview](_static/ECE447_Lesson1.pdf) |
+| 1  | [Course Introduction](_static/ECE447_Lesson1.pdf) |
 | 2  | [Communication Systems Overview](_static/ECE447_Lesson2.pdf) |
 | 3  | [SDR Lab 1](labs/Lab1) — Day 1 of 2 |
 | 4  | [SDR Lab 1](labs/Lab1) — Day 2 of 2 |
-| 5  | [Signals and Signal Space](_static/ECE447_Lesson4.pdf) |
-| 6  | [Analysis and Transmission of Signals](_static/ECE447_Lesson5.pdf) |
+| 5  | [Signals and Signal Space](_static/ECE447_Lesson5.pdf) |
+| 6  | [Analysis and Transmission of Signals](_static/ECE447_Lesson6.pdf) |
 | 7  | [SDR Lab 2](labs/Lab2) |
 | 8  | [Amplitude Modulation, Part 1](_static/ECE447_Lesson8.pdf) |
 | 9  | [Amplitude Modulation, Part 2](_static/ECE447_Lesson9.pdf) |
@@ -40,20 +40,20 @@ _Lab entries link to the SDR lab write-ups. Slide file names keep their original
 | 22 | [Digital Communication and Line Coding](_static/ECE447_Lesson22.pdf) |
 | 23 | [Digital Communication and Line Coding (cont'd)](_static/ECE447_Lesson22.pdf) |
 | 24 | [Pulse Shaping & Intersymbol Interference (ISI)](_static/ECE447_Lesson24.pdf) |
-| 25 | [Digital Receivers: Timing & Detection, Eye Diagrams](_static/ECE447_Lesson25.pdf) |
-| 26 | [SDR Lab 6](labs/Lab6) — Day 1 of 2 |
-| 27 | [SDR Lab 6](labs/Lab6) — Day 2 of 2 |
-| 28 | [M-ary Digital Modulation](_static/ECE447_Lesson27.pdf) |
-| 29 | [Digital Carrier Modulation](_static/ECE447_Lesson28.pdf) |
-| 30 | [Probability, Part 1](_static/ECE447_Lesson29.pdf) |
-| 31 | [Probability, Part 2](_static/ECE447_Lesson30.pdf) |
-| 32 | [Random Processes](_static/ECE447_Lesson31.pdf) |
+| 25 | [Digital Receivers: Timing, Detection, & Eye Diagrams](_static/ECE447_Lesson25.pdf) |
+| 26 | [M-ary Baseband Signaling](_static/ECE447_Lesson26.pdf) |
+| 27 | [Digital Carrier Modulation](_static/ECE447_Lesson27.pdf) |
+| 28 | [SDR Lab 6](labs/Lab6) — Day 1 of 2 |
+| 29 | [SDR Lab 6](labs/Lab6) — Day 2 of 2 |
+| 30 | [Probability, Part 1](_static/ECE447_Lesson30.pdf) |
+| 31 | [Probability, Part 2](_static/ECE447_Lesson31.pdf) |
+| 32 | [Random Processes](_static/ECE447_Lesson32.pdf) |
 | 33 | [SDR Lab 7](labs/Lab7) |
-| 34 | [GR 2 Review](_static/ECE447_Lesson33.pdf) |
+| 34 | [GR 2 Review](_static/ECE447_Lesson34.pdf) |
 | 35 | GR 2 |
-| 36 | [Matched Filters & Binary System Performance, Part 1](_static/ECE447_Lesson35.pdf) |
-| 37 | [Binary System Performance, Part 2](_static/ECE447_Lesson36.pdf) |
-| 38 | [Error Correction](_static/ECE447_Lesson37.pdf) |
+| 36 | [Matched Filters & Binary System Performance, Part 1](_static/ECE447_Lesson36.pdf) |
+| 37 | [Binary System Performance, Part 2](_static/ECE447_Lesson37.pdf) |
+| 38 | [Error Correction](_static/ECE447_Lesson38.pdf) |
 | 39 | [SDR Lab 8 (Capstone)](labs/Lab8) |
-| 40 | [Advanced Topics: OFDM, MIMO, & CDMA](_static/ECE447_Lesson39.pdf) |
+| 40 | [Advanced Topics: OFDM, MIMO, & CDMA](_static/ECE447_Lesson40.pdf) |
 | 41 | Course review |
