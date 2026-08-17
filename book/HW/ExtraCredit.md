@@ -1,6 +1,6 @@
 # Extra Credit: Wireless Communications Onramp
 
-## Due NLT Lesson 40, 2359 on Gradescope
+## Due NLT Lesson 41, 2359 on Gradescope
 
 Complete MathWorks' free, self-paced [**Wireless Communications Onramp**](https://matlabacademy.mathworks.com/en/details/wireless-communications-onramp/wireless) and show proof of completion for **5 points added to your lowest GR score**.
 
@@ -8,7 +8,7 @@ The Onramp is browser-based -- nothing to install, and it runs MATLAB for you in
 
 ## Why this one
 
-It covers the same chain you built by hand across the semester -- modulation, pulse shaping, channel impairments, and recovering a signal at the receiver -- but as a guided, interactive walkthrough. It pairs well with the OFDM/MIMO/CDMA topics on Lesson 40, and it is a credential you can point to outside this course.
+It covers the same chain you built by hand across the semester -- modulation, pulse shaping, channel impairments, and recovering a signal at the receiver -- but as a guided, interactive walkthrough. It pairs well with the OFDM/MIMO/CDMA topics from Lesson 40.
 
 ## What to do
 
@@ -18,7 +18,7 @@ It covers the same chain you built by hand across the semester -- modulation, pu
 4. Submit that single PDF or image to the Extra Credit assignment on Gradescope.
 
 ```{tip}
-You can start this at any point in the semester -- it is self-paced and does not depend on how far we have gotten in class. Do not save it for the last week.
+You can start this at any point in the semester -- it is self-paced and does not depend on how far we have gotten in class.
 ```
 
 ```{important}
