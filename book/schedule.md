@@ -54,5 +54,5 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 37 | Mon 23 Nov | Binary system performance, Part 2 | L&D 9.2, 9.3.3 | [Lab 8](labs/Lab8) preview | [Lab 7](labs/Lab7) |
 | 38 | Tue 1 Dec | Error correction: parity, CRC, & Hamming codes | L&D 12.3.2, 13.1-13.3 |  |  |
 | 39 | Thu 3 Dec | SDR Lab (Capstone) | [Lab 8 Description](labs/Lab8) | [Lab 8](labs/Lab8) | [HW8](HW/HW8) |
-| 40 | Mon 7 Dec | Advanced topics: OFDM, MIMO, & CDMA | None |  | [Extra Credit](HW/ExtraCredit) (optional) |
-| 41 | Wed 9 Dec | Course review |  |  | [Lab 8](labs/Lab8) |
+| 40 | Mon 7 Dec | Advanced topics: OFDM, MIMO, & CDMA | None |  |  |
+| 41 | Wed 9 Dec | Course review |  |  | [Lab 8](labs/Lab8), [Extra Credit](HW/ExtraCredit) (optional) |
