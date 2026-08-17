@@ -30,6 +30,7 @@ parts:
       - file: labs/Lab7
       - file: HW/HW8
       - file: labs/Lab8
+      - file: HW/ExtraCredit
   - caption: Python Computer Exercises
     chapters:
       - file: chapter02
