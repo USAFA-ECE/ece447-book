@@ -10,3 +10,10 @@ venv/
 
 # vscode
 .vscode/
+
+# MATLAB / Simulink build artifacts
+# Regenerated on demand when a model is opened or compiled
+*.slxc
+*.asv
+*.autosave
+slprj/
