@@ -14,5 +14,4 @@ Chapter 3
 ## Problems:
 - 3.4-4 --> Signal transmission through an LTI system. Part(a): include both the magnitude and phase plots for each sketch. Part (b): just plot the magnitude and comment on the phase. Ensure plots are easily readable, with important values labeled
 - 3.7-5 --> Energy spectral density and essential bandwidth
-- 3.7-6 --> More ESD 
 - Autocorrelation problem - TBD
