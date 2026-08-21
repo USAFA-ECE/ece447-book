@@ -60,9 +60,13 @@ A rectangular pulse is the extreme case that doesn't satisfy the criterion clean
 
 ## Activity 4: A Real Captured Signal
 
-1. Load `digital/rtlsdr_rx/rec_data/qpsk_raised_cosine.mat` into `digital/rtlsdr_rx/rtlsdr_QPSK_raised_cosine.slx` (set the model to play back the recorded file instead of live hardware — check the source block's mode).
-2. Run it. This is an actual over-the-air RTL-SDR capture recorded for this textbook, not a simulation.
-3. Look at the resulting constellation and note what it looks like: it likely will *not* look clean yet, since this file hasn't gone through the frequency and timing correction you'll build in Lab 6.
+1. Download `qpsk_raised_cosine.mat` from the course Teams folder (see the [Downloads](../downloads.md) page) and put it in `digital/rtlsdr_rx/rec_data/`.
+2. Open `digital/rtlsdr_rx/rtlsdr_QPSK_raised_cosine.slx`. It ships wired for **live** hardware: the `RTL-SDR Receiver` block is active and the `Import RTL-SDR Data` block next to it is greyed out (commented out). You need to swap which one feeds the receiver:
+    - Right-click `RTL-SDR Receiver` and choose **Comment Out**.
+    - Right-click the greyed-out `Import RTL-SDR Data` block and choose **Comment In**. Its filename is already set to `rec_data\qpsk_raised_cosine.mat`.
+    - Draw signal lines from the `Import RTL-SDR Data` output to the two places the `RTL-SDR Receiver` output used to go: the `Raised Cosine Receive Filter` and the `Matrix Concatenate` block.
+3. Run it. This is an actual over-the-air RTL-SDR capture recorded for the SDR textbook, not a simulation — so you do **not** need your dongle plugged in for this activity.
+4. Look at the resulting constellation and note what it looks like: it likely will *not* look clean yet, since this file hasn't gone through the frequency and timing correction you'll build in Lab 6.
 
 *For more detail on real-time QPSK receiver models, see Sec. 12.1 in SDR textbook.*
 

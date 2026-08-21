@@ -39,9 +39,10 @@ The catch: this only works if your local oscillator's phase matches the transmit
 
 ## Activity 1: DSB-LC in Simulation
 
-1. Open `am/simulation/am_dsb_tc.slx` and run it at the default modulation index to see a DSB-LC signal generated and demodulated entirely in simulation, so you know what a clean result should look like before you fight real noise and fading.
-2. Identify the envelope detector stage in the model and confirm the recovered message matches the original, minus the $A_c$ DC offset.
-3. Push the modulation index above $\mu=1$ (increase $m(t)$'s amplitude relative to $A_c$) and re-run. Confirm you see the distortion the math above predicts, and explain in your own words why it happens.
+1. Open `am/simulation/am_dsb_tc.slx` and run it at the default modulation index. This model *generates* a DSB-LC signal in simulation — it is a transmitter, not a receiver — so you can see what a clean modulated waveform and its spectrum look like before you go fight real noise and fading.
+2. On the time-domain scope, confirm you can see the message riding on the carrier's envelope: the outline of the modulated waveform traces $A_c + m(t)$. That outline is exactly what the envelope detector in Activity 2 will pull back out.
+3. On the spectrum, find the carrier spike at $f_c$ and the sidebands on either side of it. Note that the carrier itself carries no information — that is the transmit power DSB-LC "wastes" in exchange for a simple receiver.
+4. Push the modulation index above $\mu=1$ (increase $m(t)$'s amplitude relative to $A_c$) and re-run. Confirm the envelope now crosses through zero and folds over, and explain in your own words why that makes the message unrecoverable by envelope detection.
 
 *For more detail on DSB-LC and envelope detection, see Sec. 6.3 and 6.8 in SDR textbook.*
 
@@ -64,10 +65,11 @@ $$s(t) = I(t)\cos(2\pi f_c t) - Q(t)\sin(2\pi f_c t)$$
 
 where $I(t)$ and $Q(t)$ each carry their own independent stream of bits. A coherent receiver separates them by multiplying by $\cos(2\pi f_c t)$ and $\sin(2\pi f_c t)$ respectively (each recovers one component, by the same coherent-detection math as DSB-SC above — try writing out $s(t)\cos(2\pi f_c t)$ and $s(t)\sin(2\pi f_c t)$ and low-pass filtering each). Notice that an envelope detector can't do any of this: it only reports $\sqrt{I(t)^2+Q(t)^2}$, throwing away exactly the phase information that tells $I$ and $Q$ apart.
 
-1. Open `complex/qam_mod_demod.slx`. This maps bits onto a QAM constellation, modulates, adds a bit of noise, and demodulates.
-2. Change the constellation order (e.g., 4-QAM vs 16-QAM) and observe how the points get packed closer together.
-3. Sweep the noise level and observe how a denser constellation gets noticeably more fragile as noise increases — with more points packed into the same I/Q plane, a smaller noise nudge is enough to cross a decision boundary into the wrong symbol.
-4. You'll come back to this exact tradeoff — and to QPSK specifically — in the digital communications unit.
+1. Open `digital/simulation/modulation/QAM16_constellation_noise.slx`. This maps random bits onto a 16-QAM constellation, passes them through a noisy channel, and demodulates — you'll see a transmit constellation and a received one side by side.
+2. Run it and compare the two constellation diagrams. The transmitted points sit exactly on the grid; the received ones scatter around those ideal positions by an amount set by the channel noise.
+3. Open the AWGN Channel block and raise the noise (lower the SNR / raise the noise power), then re-run. Watch the received clusters spread until they start crossing the halfway line between neighbouring points — that is the moment symbols start being decoded wrong.
+4. For a direct comparison, open `digital/simulation/modulation/QPSK_constellation_noise.slx` and run it at the *same* noise setting. QPSK has only 4 points spread over the same I/Q plane, so its points sit much farther apart and tolerate far more noise before they smear together.
+5. You'll come back to this exact tradeoff — and to QPSK specifically — in the digital communications unit.
 
 *For more detail on QAM, see Sec. 5.4 in SDR textbook.*
 
@@ -76,5 +78,5 @@ where $I(t)$ and $Q(t)$ each carry their own independent stream of bits. A coher
 Submit a single PDF to Gradescope containing:
 
 1. A screenshot of your envelope detector output (spectrum and, if you can capture it, a note on what you heard) while receiving live Air Band traffic, with the frequency you tuned to and a description of the traffic (tower/ground/approach, if you could tell).
-2. A screenshot of a QAM constellation at two different noise levels, with 2-3 sentences comparing them and explaining, in terms of $I(t)$ and $Q(t)$, why a DSB-LC envelope detector wouldn't work for demodulating a QAM signal.
+2. Screenshots of the received 16-QAM constellation at two different noise levels, plus the QPSK constellation at the higher of those two settings. In 2-3 sentences, compare how much noise each tolerates, and explain in terms of $I(t)$ and $Q(t)$ why a DSB-LC envelope detector could not demodulate either of them.
 3. Your documentation statement.

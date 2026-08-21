@@ -61,8 +61,8 @@ $$m_{MPX}(t) = (L+R)(t) \;+\; \underbrace{A_p\cos(2\pi \cdot 19\text{kHz}\cdot t
 That last term should look familiar: $(L-R)(t)$ riding on a 38 kHz subcarrier is exactly a **DSB-SC** signal, the same as in Lab 3. The 19 kHz pilot tone exists purely so the receiver can double it to regenerate a phase-locked 38 kHz reference for coherent detection — solving the exact "you need the transmitter's carrier phase" problem from Lab 3's DSB-SC math, without needing to send the full-power 38 kHz carrier itself.
 
 1. Open `fm/rtlsdr_rx/rtlsdr_fm_discrim_stereo_demod.slx` and see if you can separate left and right channels on your station.
-2. Stereo separation is more sensitive to signal strength than mono — if you're not getting clean separation, try `fm/rtlsdr_rx/rtlsdr_fm_pll_stereo_demod.slx` or `fm/rtlsdr_rx/rtlsdr_fm_slope_stereo_demod.slx`, which use different techniques to lock onto the pilot tone.
-3. You don't need to understand the internals of all three — just compare which one works best on your captured signal.
+2. Find the 19 kHz pilot tone on the MPX spectrum display. The receiver has to lock onto that pilot to regenerate the 38 kHz reference, so if the pilot is buried in noise, stereo separation will fail even when the mono audio sounds fine.
+3. Stereo separation is much more sensitive to signal strength than mono. If you can't get clean separation, improve the signal rather than switching models: re-check your antenna length and ground plane from Lab 1, move closer to the window, and re-run. Note what finally worked (or what still limited you) — you'll report that in the assignment.
 
 *For more detail on stereo MPX transmission and reception, see Sec. 10.3-10.4 in SDR textbook.*
 
