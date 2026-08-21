@@ -77,7 +77,7 @@ So far every tone has produced one clean spike. Now change that.
 
 1. Go back to `complex/time_to_frequency_domain_cosines1.m` and find the parameters `fs`, `Nfft`, and the three tone frequencies `f1`, `f2`, `f3`.
 2. Change `f1` from 100 to **105** Hz. Leave everything else alone. Re-run the script and look carefully at the magnitude spectrum around 105 Hz. Describe exactly what the 105 Hz tone looks like now compared with the 200 and 300 Hz tones, which you did not touch.
-3. Try a few more values for `f1` — say 101, 102.5, 107.5, and then back to exactly 110. Note which values give you a clean single spike and which do not.
+3. Try a few more values for `f1` — say 101, 102.5, 107.5, and then to exactly 110. Note which values give you a clean single spike and which do not.
 4. Now work out the pattern. Compute $f_s/N_{\text{fft}}$ for this script. Compare that number against the values of `f1` that behaved cleanly and the ones that didn't. What is special about the clean ones?
 5. **Answer for your write-up:** state what happened to the spectrum when you moved the tone off 100 Hz, and explain *why* it happened. Your explanation should account for both what you saw at 105 Hz and what you saw at 110 Hz.
 
