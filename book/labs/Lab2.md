@@ -82,7 +82,7 @@ So far every tone has produced one clean spike. Now change that.
 5. **Answer for your write-up:** state what happened to the spectrum when you moved the tone off 100 Hz, and explain *why* it happened. Your explanation should account for both what you saw at 105 Hz and what you saw at 110 Hz.
 
 ```{note}
-The signal itself is still a perfect single-frequency cosine in all of these runs -- nothing has been added to it, and nothing is wrong with your dongle or with MATLAB. What changed is the FFT's ability to represent that particular frequency.
+The signal itself is still a perfect single-frequency cosine in all of these runs -- nothing has been added to it, and nothing is wrong with MATLAB. What changed is the FFT's ability to represent that particular frequency.
 ```
 
 *For more detail on real vs. complex spectra, see Sec. 5.1-5.2 in SDR textbook.*
