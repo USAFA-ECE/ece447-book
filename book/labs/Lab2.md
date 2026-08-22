@@ -82,7 +82,8 @@ If you would rather see this built as a block diagram than as a script, open the
 1. Open and run `complex/three_cosines_complex_spectra_plot.m`. This one is different in two ways: the tones now start at different **phase** offsets, and the script plots the spectrum **four** ways — magnitude, phase, the real part, and the imaginary part.
 2. Compare the magnitude plot against the real-part and imaginary-part plots. The spikes do not have the same heights, and the energy of a single tone is split across the real and imaginary plots in a way that changes from tone to tone.
 3. Now look at the phase plot alongside the magnitude plot, and find where the $\pi/4$ and $\pi/6$ starting phases in the source code show up.
-4. **Answer for your write-up:** why do the real/imaginary pair and the magnitude/phase pair look so different, when both are complete descriptions of the very same spectrum? Which pair would you rather hand an engineer who has been asked "which tones are present, and how strong is each one?" — and why?
+4. **Put all four spectrum plots in a single figure.** As written, the script scatters them: `figure(502)` holds the magnitude, `figure(503)` the phase, and `figure(504)` the real and imaginary parts as a 2x1 subplot. Edit the script so all four land in one figure as a 2x2 grid — that is, replace those three `figure(...)` calls with a single figure and four `subplot(2,2,n)` calls, keeping each plot's own `title`, `xlabel`, `ylabel`, and `axis` line. Copy that one combined figure into your write-up.
+5. **Answer for your write-up:** why do the real/imaginary pair and the magnitude/phase pair look so different, when both are complete descriptions of the very same spectrum? Which pair would you rather hand an engineer who has been asked "which tones are present, and how strong is each one?" — and why?
 
 ### Exercise 4: When a tone lands between the cracks
 
@@ -92,7 +93,8 @@ So far every tone has produced one clean spike. Now change that.
 2. Change `f1` from 100 to **105** Hz. Leave everything else alone. Re-run the script and look carefully at the magnitude spectrum around 105 Hz. Describe exactly what the 105 Hz tone looks like now compared with the 200 and 300 Hz tones, which you did not touch.
 3. Try a few more values for `f1` — say 101, 102.5, 107.5, and then to exactly 110. Note which values give you a clean single spike and which do not.
 4. Now work out the pattern. Compute $f_s/N_{\text{fft}}$ for this script. Compare that number against the values of `f1` that behaved cleanly and the ones that didn't. What is special about the clean ones?
-5. **Answer for your write-up:** state what happened to the spectrum when you moved the tone off 100 Hz, and explain *why* it happened. Your explanation should account for both what you saw at 105 Hz and what you saw at 110 Hz.
+5. Copy the magnitude spectrum figure for `f1 = 105` Hz, and the one for the original `f1 = 100` Hz, into your write-up so the two sit side by side. Two copied figures, nothing else — no screenshots.
+6. **Answer for your write-up:** state what happened to the spectrum when you moved the tone off 100 Hz, and explain *why* it happened. Your explanation should account for both what you saw at 105 Hz and what you saw at 110 Hz.
 
 ```{note}
 The signal itself is still a perfect single-frequency cosine in all of these runs -- nothing has been added to it, and nothing is wrong with MATLAB. What changed is the FFT's ability to represent that particular frequency.
@@ -126,7 +128,7 @@ The RTL2832U chip only accepts sample rates of 225-300 kHz or 0.9-3.2 MHz, so th
 2. Leave `ppm_applied = 0` and run the script. It captures five seconds of the station, demodulates it, and **plays the audio through your speakers** — listen for the synthesised weather voice. That is your proof you are actually on the station before you trust any number it prints.
 3. Once playback finishes, the script averages the double-sided spectrum you learned to read in Activity 1, finds the carrier, and reports how far that carrier landed from 0 Hz — in hertz, and as a ppm figure.
 4. Look at the plot. Because the script narrows the view to ±24 kHz, you can see the shape of the narrowband FM signal itself rather than a spike lost in a wide empty span. Confirm the detected peak really is the station and not a spur — if you heard nothing and the trace looks like noise, check your antenna, your gain, and your location before trusting the number.
-5. **Save this plot.** It is your "before" figure, and it should clearly show the carrier sitting off centre. Note the ppm value the script reports.
+5. **Copy this plot into your write-up** (Edit > Copy Figure, not a screenshot). It is your "before" figure, and it should clearly show the carrier sitting off centre. Note the ppm value the script reports.
 
 ```{tip}
 NOAA broadcasts continuous synthesised speech. The carrier is cleanest during the short pauses between words, which is why the script averages several spectra rather than taking a single snapshot.
@@ -136,7 +138,7 @@ NOAA broadcasts continuous synthesised speech. The carrier is cleanest during th
 
 1. Take the ppm value the script reported and type it into `ppm_applied` at the top of the script.
 2. Run it again. The script now spins the samples by that much before measuring, using the $s(t)\,e^{-j2\pi \Delta f t}$ phasor from the maths section. The carrier should land very close to 0 Hz, and the "error still left" figure should be a small fraction of what it was.
-3. **Save this plot too.** It is your "after" figure. The title records the correction that was applied, so the two plots tell the story on their own.
+3. **Copy this plot into your write-up too**, the same way. It is your "after" figure. The title records the correction that was applied, so the two plots tell the story on their own.
 4. If the offset got *bigger* instead of smaller, flip the sign of your ppm value and run once more.
 5. **The value now in `ppm_applied` is your dongle's calibration figure — record it, along with which NOAA frequency you measured it against.** Write it on your dongle if it is one you keep using.
 6. Using the ppm relationship from the maths section, work out by hand what your dongle's error amounts to **in hertz at 162.475 MHz**, and what the same ppm error would cost you **in hertz at 100 MHz**. Show the arithmetic.
@@ -157,10 +159,19 @@ Communications Toolbox ships an example called [Frequency Offset Calibration for
 
 ## Assignment
 
+```{important}
+**Copy your figures, do not screenshot them.** For every figure below, use
+**Edit > Copy Figure** in the MATLAB figure window (or run `copygraphics(gcf)`
+at the command line) and paste it straight into your document. That gives you
+the plot at full resolution with the axes, tick labels, and titles sharp.
+Phone photographs of a monitor, cropped screen grabs, and blurry captures make
+the plots unreadable and will lose credit.
+```
+
 Submit a single PDF to Gradescope containing:
 
 1. **Activity 1, Exercises 1-2:** your magnitude spectrum from Exercise 1 and your double-sided spectrum from Exercise 2, with 2-3 sentences explaining where the extra three spikes in Exercise 2 came from and why a real-valued signal must have them.
-2. **Activity 1, Exercise 3:** the four-plot figure, with your written answer to why the real/imaginary pair and the magnitude/phase pair look so different, and which pair is more useful for identifying the tones in a signal. Justify your choice.
-3. **Activity 1, Exercise 4:** a screenshot of the spectrum with `f1 = 105` Hz alongside the original `f1 = 100` Hz spectrum. State what happened to the 105 Hz tone, and explain why it happened and why 110 Hz behaved differently.
-4. **Activity 2:** your dongle's measured frequency correction in **ppm**, and the NOAA frequency you measured it against. Include **both** plots -- the first run with the carrier off centre, and the second run with your correction applied and the carrier centred. Then show your arithmetic converting that ppm figure into an error in hertz at 162.475 MHz, and into an error in hertz at 100 MHz.
+2. **Activity 1, Exercise 3:** your combined 2x2 figure holding all four spectrum plots, with your written answer to why the real/imaginary pair and the magnitude/phase pair look so different, and which pair is more useful for identifying the tones in a signal. Justify your choice.
+3. **Activity 1, Exercise 4:** the two copied spectrum figures — `f1 = 105` Hz and the original `f1 = 100` Hz — placed side by side. State what happened to the 105 Hz tone, and explain why it happened and why 110 Hz behaved differently.
+4. **Activity 2:** *your own* dongle's measured frequency correction in **ppm**, and the NOAA frequency you measured it against. Include **both** copied plots -- the first run with the carrier off centre, and the second run with your correction applied and the carrier centred. Then show your arithmetic converting that ppm figure into an error in hertz at 162.475 MHz, and into an error in hertz at 100 MHz.
 5. Your documentation statement.
