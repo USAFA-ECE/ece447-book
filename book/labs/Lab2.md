@@ -2,6 +2,19 @@
 
 (Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, Ch. 5.1-5.2.)
 
+```{note}
+**Updating your support files.** Lab 2 uses one script that was added after the
+Lab 1 download: `rtlsdr_ppm_calibration.m`. If you already unzipped the support
+files for Lab 1, you do not need to download the whole package again -- just grab
+[**rtlsdr_ppm_calibration.m**](support_files/complex/rtlsdr_ppm_calibration.m)
+and save it into your support files at `support_files/complex/rtlsdr_ppm_calibration.m`
+-- the `complex` folder you already have, next to `three_cosines_complex_spectra_plot.m`.
+
+Everything else you need for this lab is already in the copy you downloaded. If
+you would rather start fresh, the full [support_files.zip](support_files.zip) on
+the [Downloads](../downloads.md) page already contains it.
+```
+
 ## Overview
 
 Every receiver you built in Lab 1 was secretly working with **complex (I/Q) samples**, even though the spectrum display looked like an ordinary real-valued plot. This lab makes that explicit: you'll see why real signals produce mirror-image (symmetric) spectra, why complex signals don't, and why that distinction matters once your RTL-SDR hands you IQ data instead of a single real-valued stream. Then you'll use a real off-air signal to measure exactly how far off frequency your own dongle is.
@@ -111,8 +124,9 @@ The RTL2832U chip only accepts sample rates of 225-300 kHz or 0.9-3.2 MHz, so th
 
 1. Set `f_nominal` in the script to a NOAA channel. Around Colorado Springs, try **162.475 MHz** first, then **162.550 MHz**. (The full set of channels is 162.400 to 162.550 MHz in 25 kHz steps — if neither of the first two comes in, work along the list.)
 2. Leave `ppm_applied = 0` and run the script. It captures five seconds of the station, demodulates it, and **plays the audio through your speakers** — listen for the synthesised weather voice. That is your proof you are actually on the station before you trust any number it prints.
-3. Once playback finishes, the script averages the double-sided spectrum you learned to read in Activity 1, finds the carrier, and reports how far that carrier landed from 0 Hz.
+3. Once playback finishes, the script averages the double-sided spectrum you learned to read in Activity 1, finds the carrier, and reports how far that carrier landed from 0 Hz — in hertz, and as a ppm figure.
 4. Look at the plot. Because the script narrows the view to ±24 kHz, you can see the shape of the narrowband FM signal itself rather than a spike lost in a wide empty span. Confirm the detected peak really is the station and not a spur — if you heard nothing and the trace looks like noise, check your antenna, your gain, and your location before trusting the number.
+5. **Save this plot.** It is your "before" figure, and it should clearly show the carrier sitting off centre. Note the ppm value the script reports.
 
 ```{tip}
 NOAA broadcasts continuous synthesised speech. The carrier is cleanest during the short pauses between words, which is why the script averages several spectra rather than taking a single snapshot.
@@ -120,23 +134,19 @@ NOAA broadcasts continuous synthesised speech. The carrier is cleanest during th
 
 ### Exercise 2: Apply it and prove it worked
 
-1. Take the ppm value the script prints and put it into `ppm_applied` at the top of the script.
-2. Run it again. The carrier should now land very close to 0 Hz and the reported residual error should be far smaller than before.
-3. **If the offset got bigger instead of smaller, flip the sign** of your ppm value and run once more. Sign conventions are easy to get backwards; the measurement tells you which way is right.
-4. Repeat until the residual is small and stable. **The value in `ppm_applied` at that point is your dongle's calibration figure — record it, and record which NOAA frequency you used.** Write it on your dongle if it is one you keep using.
-5. From now on, any script you write can carry this correction by passing it to the receiver:
-
-   ```matlab
-   rx = comm.SDRRTLReceiver('0', ...
-       'CenterFrequency', 162.550e6, ...
-       'SampleRate', 250e3, ...
-       'FrequencyCorrection', 27);   % <-- your measured ppm here
-   ```
-
-6. Sanity-check the size of your answer against the math above: convert your ppm figure back into an error in hertz at 162.55 MHz, and then work out what that same ppm error would cost you in hertz at 100 MHz.
+1. Take the ppm value the script reported and type it into `ppm_applied` at the top of the script.
+2. Run it again. The script now spins the samples by that much before measuring, using the $s(t)\,e^{-j2\pi \Delta f t}$ phasor from the maths section. The carrier should land very close to 0 Hz, and the "error still left" figure should be a small fraction of what it was.
+3. **Save this plot too.** It is your "after" figure. The title records the correction that was applied, so the two plots tell the story on their own.
+4. If the offset got *bigger* instead of smaller, flip the sign of your ppm value and run once more.
+5. **The value now in `ppm_applied` is your dongle's calibration figure — record it, along with which NOAA frequency you measured it against.** Write it on your dongle if it is one you keep using.
+6. Using the ppm relationship from the maths section, work out by hand what your dongle's error amounts to **in hertz at 162.475 MHz**, and what the same ppm error would cost you **in hertz at 100 MHz**. Show the arithmetic.
 
 ```{note}
 Every dongle is different, and the same dongle will read differently cold than warm. Your number will not match your classmates', and that is the point -- this is a property of the hardware in your hand.
+```
+
+```{warning}
+The radio object also has a `FrequencyCorrection` property, and you may be tempted to use it instead. It accepts **whole numbers of ppm only**, and on this hardware a correction of a few ppm is often quantised away when the tuner retunes -- you ask for 3 ppm and the carrier does not move. Correcting in software, as this script does, avoids both problems.
 ```
 
 ```{dropdown} Optional: how MathWorks does it
@@ -152,5 +162,5 @@ Submit a single PDF to Gradescope containing:
 1. **Activity 1, Exercises 1-2:** your magnitude spectrum from Exercise 1 and your double-sided spectrum from Exercise 2, with 2-3 sentences explaining where the extra three spikes in Exercise 2 came from and why a real-valued signal must have them.
 2. **Activity 1, Exercise 3:** the four-plot figure, with your written answer to why the real/imaginary pair and the magnitude/phase pair look so different, and which pair is more useful for identifying the tones in a signal. Justify your choice.
 3. **Activity 1, Exercise 4:** a screenshot of the spectrum with `f1 = 105` Hz alongside the original `f1 = 100` Hz spectrum. State what happened to the 105 Hz tone, and explain why it happened and why 110 Hz behaved differently.
-4. **Activity 2:** your dongle's measured frequency correction in **ppm**, the NOAA frequency you measured it against, and your before/after plots showing the carrier off centre and then corrected. Include the error in hertz at 162.55 MHz and what the same ppm error would be at 100 MHz.
+4. **Activity 2:** your dongle's measured frequency correction in **ppm**, and the NOAA frequency you measured it against. Include **both** plots -- the first run with the carrier off centre, and the second run with your correction applied and the carrier centred. Then show your arithmetic converting that ppm figure into an error in hertz at 162.475 MHz, and into an error in hertz at 100 MHz.
 5. Your documentation statement.
