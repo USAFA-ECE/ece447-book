@@ -103,11 +103,16 @@ To measure the error you need a transmitter that is genuinely where it says it i
 2. As in Lab 1, you will need a window or the southeast corner of Fairchild for usable reception.
 3. Open `complex/rtlsdr_ppm_calibration.m` from the course support files and read the header comments.
 
+```{note}
+The RTL2832U chip only accepts sample rates of 225-300 kHz or 0.9-3.2 MHz, so the script cannot simply ask the hardware for a narrow rate. It captures at 240 kHz and then low-pass filters and decimates by 5 in software, giving a 48 kHz baseband. That is why the spectrum you get spans only ±24 kHz -- wide enough to hold a ~16 kHz narrowband FM signal comfortably, narrow enough to actually see its shape.
+```
+
 ### Exercise 1: Measure the error
 
-1. Set `f_nominal` in the script to a NOAA channel. Around Colorado Springs, try **162.550 MHz** first, then **162.475 MHz**. (The full set of channels is 162.400 to 162.550 MHz in 25 kHz steps — if neither of the first two comes in, work along the list.)
-2. Leave `ppm_applied = 0` and run the script. It captures live samples, averages the double-sided spectrum you learned to read in Activity 1, finds the carrier, and reports how far that carrier landed from 0 Hz.
-3. Look at the plot. You should see a narrow FM voice signal near the centre, with the detected carrier marked. Confirm the detected peak really is the station and not a spur — if the trace looks like noise, check your antenna, your gain, and your location before trusting the number.
+1. Set `f_nominal` in the script to a NOAA channel. Around Colorado Springs, try **162.475 MHz** first, then **162.550 MHz**. (The full set of channels is 162.400 to 162.550 MHz in 25 kHz steps — if neither of the first two comes in, work along the list.)
+2. Leave `ppm_applied = 0` and run the script. It captures five seconds of the station, demodulates it, and **plays the audio through your speakers** — listen for the synthesised weather voice. That is your proof you are actually on the station before you trust any number it prints.
+3. Once playback finishes, the script averages the double-sided spectrum you learned to read in Activity 1, finds the carrier, and reports how far that carrier landed from 0 Hz.
+4. Look at the plot. Because the script narrows the view to ±24 kHz, you can see the shape of the narrowband FM signal itself rather than a spike lost in a wide empty span. Confirm the detected peak really is the station and not a spur — if you heard nothing and the trace looks like noise, check your antenna, your gain, and your location before trusting the number.
 
 ```{tip}
 NOAA broadcasts continuous synthesised speech. The carrier is cleanest during the short pauses between words, which is why the script averages several spectra rather than taking a single snapshot.
