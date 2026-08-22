@@ -58,7 +58,7 @@ which slides the spectrum back where it belongs. Your RTL-SDR does this for you 
 
 ## Activity 1: Real vs. Complex Spectra
 
-All four exercises use scripts in the `complex/` folder of the course support files. Each one runs as-is — your job is to read the plots, not to write code.
+All four exercises use scripts in the `complex/` folder of the course support files. The only code you will *have* to write is to rearrange the plots in Activity 1, Exercise 3 - but you are always encouraged to modify the scripts and learn more about it!
 
 ### Exercise 1: A real signal, one side of the spectrum
 
@@ -93,7 +93,7 @@ So far every tone has produced one clean spike. Now change that.
 2. Change `f1` from 100 to **105** Hz. Leave everything else alone. Re-run the script and look carefully at the magnitude spectrum around 105 Hz. Describe exactly what the 105 Hz tone looks like now compared with the 200 and 300 Hz tones, which you did not touch.
 3. Try a few more values for `f1` — say 101, 102.5, 107.5, and then to exactly 110. Note which values give you a clean single spike and which do not.
 4. Now work out the pattern. Compute $f_s/N_{\text{fft}}$ for this script. Compare that number against the values of `f1` that behaved cleanly and the ones that didn't. What is special about the clean ones?
-5. Copy the magnitude spectrum figure for `f1 = 105` Hz, and the one for the original `f1 = 100` Hz, into your write-up so the two sit side by side. Two copied figures, nothing else — no screenshots.
+5. Copy the magnitude spectrum figure for `f1 = 105` Hz, and the one for the original `f1 = 100` Hz, into your write-up..
 6. **Answer for your write-up:** state what happened to the spectrum when you moved the tone off 100 Hz, and explain *why* it happened. Your explanation should account for both what you saw at 105 Hz and what you saw at 110 Hz.
 
 ```{note}
@@ -165,7 +165,7 @@ Communications Toolbox ships an example called [Frequency Offset Calibration for
 at the command line) and paste it straight into your document. That gives you
 the plot at full resolution with the axes, tick labels, and titles sharp.
 Phone photographs of a monitor, cropped screen grabs, and blurry captures make
-the plots unreadable and will lose credit.
+the plots unreadable.
 ```
 
 Submit a single PDF to Gradescope containing:
