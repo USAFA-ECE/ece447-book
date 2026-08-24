@@ -2,7 +2,7 @@
 
 Chapter 4
 
-## Due NLT Lesson 15, 2359 on Gradescope
+## Due NLT Lesson 11, 2359 on Gradescope
 
 ## Directions: 
 - Collaboration is authorized as noted in the syllabus Collaboration policy. 
