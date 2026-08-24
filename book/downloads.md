@@ -16,44 +16,44 @@ _Lab entries link to the SDR lab write-ups. Each slide file is named for the les
 
 | Lesson | Slides / Lab |
 |:----------:|:----------:|
-| 1  | [Course Introduction](_static/ECE447_Lesson1.pdf) |
-| 2  | [Communication Systems Overview](_static/ECE447_Lesson2.pdf) |
+| 1  | [Course Introduction](_static/slides/Lsn01_Introduction.pdf) |
+| 2  | [Communication Systems Overview](_static/slides/Lsn02_CommSysOverview.pdf) |
 | 3  | [SDR Lab 1](labs/Lab1) — Day 1 of 2 |
 | 4  | [SDR Lab 1](labs/Lab1) — Day 2 of 2 |
-| 5  | [Signals and Signal Space](_static/ECE447_Lesson5.pdf) |
-| 6  | [Analysis and Transmission of Signals](_static/ECE447_Lesson6.pdf) |
+| 5  | [Signals and Signal Space](_static/slides/Lsn05_Signals.pdf) |
+| 6  | [Analysis and Transmission of Signals](_static/slides/Lsn06_Chp3.pdf) |
 | 7  | [SDR Lab 2](labs/Lab2) |
-| 8  | [Amplitude Modulation, Part 1](_static/ECE447_Lesson8.pdf) |
-| 9  | [Amplitude Modulation, Part 2](_static/ECE447_Lesson9.pdf) |
+| 8  | [Amplitude Modulation, Part 1](_static/slides/Lsn08_AM_Part1.pdf) |
+| 9  | [Amplitude Modulation, Part 2](_static/slides/Lsn09_AM_Part2.pdf) |
 | 10 | [SDR Lab 3](labs/Lab3) |
-| 11 | [Angle Modulation, Part 1](_static/ECE447_Lesson11.pdf) |
-| 12 | [Angle Modulation, Part 2](_static/ECE447_Lesson12.pdf) |
-| 13 | [Angle Modulation, Part 3](_static/ECE447_Lesson13.pdf) |
+| 11 | [Angle Modulation, Part 1](_static/slides/Lsn11_AngleMod_Part1.pdf) |
+| 12 | [Angle Modulation, Part 2](_static/slides/Lsn12_AngleMod_Part2.pdf) |
+| 13 | [Angle Modulation, Part 3](_static/slides/Lsn13_AngleMod_Part3.pdf) |
 | 14 | GR1 Review day |
 | 15 | GR 1 |
 | 16 | [SDR Lab 4](labs/Lab4) |
 | 17 | GR Review/Feedback |
-| 18 | [Signal Sampling and Reconstruction](_static/ECE447_Lesson18.pdf) |
-| 19 | [Pulse Code Modulation (PCM)](_static/ECE447_Lesson19.pdf) |
-| 20 | [PCM (cont'd) and Pulse Modulations](_static/ECE447_Lesson20.pdf) |
+| 18 | [Signal Sampling and Reconstruction](_static/slides/Lsn18_Sampling.pdf) |
+| 19 | [Pulse Code Modulation (PCM)](_static/slides/Lsn19_PCM.pdf) |
+| 20 | [PCM (cont'd) and Pulse Modulations](_static/slides/Lsn20_PulseModulations.pdf) |
 | 21 | [SDR Lab 5](labs/Lab5) |
-| 22 | [Digital Communication and Line Coding](_static/ECE447_Lesson22.pdf) |
-| 23 | [Digital Communication and Line Coding (cont'd)](_static/ECE447_Lesson22.pdf) |
-| 24 | [Pulse Shaping & Intersymbol Interference (ISI)](_static/ECE447_Lesson24.pdf) |
-| 25 | [Digital Receivers: Timing, Detection, & Eye Diagrams](_static/ECE447_Lesson25.pdf) |
-| 26 | [M-ary Baseband Signaling](_static/ECE447_Lesson26.pdf) |
-| 27 | [Digital Carrier Modulation](_static/ECE447_Lesson27.pdf) |
+| 22 | [Digital Communication and Line Coding](_static/slides/Lsn22_DigiCommLineCodes.pdf) |
+| 23 | [Digital Communication and Line Coding (cont'd)](_static/slides/Lsn22_DigiCommLineCodes.pdf) |
+| 24 | [Pulse Shaping & Intersymbol Interference (ISI)](_static/slides/Lsn24_PulseShaping.pdf) |
+| 25 | [Digital Receivers: Timing, Detection, & Eye Diagrams](_static/slides/Lsn25_EyeDiagrams.pdf) |
+| 26 | [M-ary Baseband Signaling](_static/slides/Lsn26_M-aryBaseband.pdf) |
+| 27 | [Digital Carrier Modulation](_static/slides/Lsn27_DigiCarrier.pdf) |
 | 28 | [SDR Lab 6](labs/Lab6) — Day 1 of 2 |
 | 29 | [SDR Lab 6](labs/Lab6) — Day 2 of 2 |
-| 30 | [Probability, Part 1](_static/ECE447_Lesson30.pdf) |
-| 31 | [Probability, Part 2](_static/ECE447_Lesson31.pdf) |
-| 32 | [Random Processes](_static/ECE447_Lesson32.pdf) |
+| 30 | [Probability, Part 1](_static/slides/Lsn30_Probability1.pdf) |
+| 31 | [Probability, Part 2](_static/slides/Lsn31_Probability2.pdf) |
+| 32 | [Random Processes](_static/slides/Lsn32_RandomProcesses.pdf) |
 | 33 | [SDR Lab 7](labs/Lab7) |
-| 34 | [GR 2 Review](_static/ECE447_Lesson34.pdf) |
+| 34 | [GR 2 Review](_static/slides/Lsn34_ReviewDay.pdf) |
 | 35 | GR 2 |
-| 36 | [Matched Filters & Binary System Performance, Part 1](_static/ECE447_Lesson36.pdf) |
-| 37 | [Binary System Performance, Part 2](_static/ECE447_Lesson37.pdf) |
-| 38 | [Error Correction](_static/ECE447_Lesson38.pdf) |
+| 36 | [Matched Filters & Binary System Performance, Part 1](_static/slides/Lsn36_BinaryPerf1.pdf) |
+| 37 | [Binary System Performance, Part 2](_static/slides/Lsn37_BinaryPerf2.pdf) |
+| 38 | [Error Correction](_static/slides/Lsn38_ErrorCorrection.pdf) |
 | 39 | [SDR Lab 8 (Capstone)](labs/Lab8) |
-| 40 | [Advanced Topics: OFDM, MIMO, & CDMA](_static/ECE447_Lesson40.pdf) |
+| 40 | [Advanced Topics: OFDM, MIMO, & CDMA](_static/slides/Lsn40_AdvancedTopics.pdf) |
 | 41 | Course review |
