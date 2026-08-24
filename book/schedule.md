@@ -37,7 +37,7 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 20 | Fri 2 Oct | PCM (cont'd) & pulse modulations | L&D 5.7 |  | [HW4](HW/HW4) |
 | 21 | Tue 6 Oct | SDR Lab | [Lab 5 Description](labs/Lab5) |  [Lab 5](labs/Lab5), [HW5](HW/HW5)  |  |
 | 22 | Thu 8 Oct | Digital comm & line coding | L&D 6.1-6.2 |  |  |
-| 23 | Tue 13 Oct | Digital comm & line coding (cont'd) | L&D 6.1-6.2 |  | [HW45(HW/HW5) |
+| 23 | Tue 13 Oct | Digital comm & line coding (cont'd) | L&D 6.1-6.2 |  | [HW5](HW/HW5) |
 | 24 | Thu 15 Oct | Pulse shaping & intersymbol interference (ISI) | L&D 6.3.1-6.3.3 | [HW6](HW/HW6) | [Lab 5](labs/Lab5) |
 | 25 | Mon 19 Oct | Digital receivers: timing & detection, eye diagrams | L&D 6.5.2-6.5.3, 6.6 | |  |
 | 26 | Wed 21 Oct | M-ary digital modulation | L&D 6.7 |  |  |
