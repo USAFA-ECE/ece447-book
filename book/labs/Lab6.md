@@ -30,13 +30,20 @@ where $s[n]$ is the transmitted QPSK symbol from Lab 5's mapping, $T_s$ is your 
 
 ## Setup
 
-The instructor will announce a transmit frequency at the start of class and run these models in order, pausing briefly between each:
+The instructor will announce a transmit frequency at the start of each class period and run the transmit model that matches the activity you're on, pausing between stages:
 
-1. `digital/pluto_tx/pluto_QPSK_raised_cosine.slx`
-2. `digital/pluto_tx/pluto_QPSK_coarse_synch.slx`
-3. `digital/pluto_tx/pluto_QPSK_carrier_timing.slx`
+**Day 1**
+1. `digital/pluto_tx/pluto_QPSK_raised_cosine.slx` — for Activity 1
+2. `digital/pluto_tx/pluto_QPSK_coarse_synch.slx` — for Activity 2
+
+**Day 2**
+3. `digital/pluto_tx/pluto_QPSK_carrier_timing.slx` — for Activity 3
 
 You'll run the matching receiver model at each stage.
+
+```{note}
+If the live signal is weak or breaks up from where you're sitting, there is a recorded capture for **every** stage of this lab so you can still finish — the file list is in Activity 3, step 4. You can fall back at any point, including on Day 1.
+```
 
 ## Activity 1: Raw Constellation
 
@@ -58,8 +65,8 @@ You'll run the matching receiver model at each stage.
 
 1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing.slx`. This adds fine carrier tracking and symbol timing recovery on top of the coarse correction.
 2. Confirm you now see four tight, distinct constellation points.
-3. If you want additional scope views of the internal tracking loops, open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing_plots.slx`, which adds instrumentation without changing the core receiver.
-4. **If the live transmission is weak or interrupted from your seat in the room**, use the matching recorded capture as a fallback for each stage so you can still complete the assignment: `digital/rtlsdr_rx/rec_data/qpsk_raised_cosine.mat`, `digital/rtlsdr_rx/rec_data/qpsk_coarse_synch.mat`, or `digital/rtlsdr_rx/rec_data/qpsk_carrier_timing.mat`.
+3. If you want additional scope views of the internal tracking loops, open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing_plots.slx`, which adds logging and scope instrumentation on top of the same synchronization chain (it drops the base model's symbol-decision/printout branch, which you don't need just to view the constellation).
+4. **If the live transmission is weak or interrupted from your seat in the room**, use the matching recorded capture as a fallback for each stage so you can still complete the assignment: `digital/rtlsdr_rx/rec_data/qpsk_raised_cosine.mat`, `digital/rtlsdr_rx/rec_data/qpsk_coarse_synch.mat`, or `digital/rtlsdr_rx/rec_data/qpsk_carrier_timing.mat`. To switch a receiver model from live hardware to a recorded file, use the same block swap you did in [Lab 5](Lab5), Activity 4.
 
 *For more detail on carrier and timing synchronization, see Sec. 11.5-11.7 and 12.3 in SDR textbook.*
 

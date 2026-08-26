@@ -22,8 +22,8 @@ The instructor will announce a transmit frequency and run `digital/pluto_tx/plut
 
 1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_image_transfer.slx`. This receiver reuses the same synchronization techniques from Lab 6 and the same framing approach from Lab 7, just with image bytes in the payload instead of ASCII text.
 2. Once it locks on, confirm you see the transmitted image rendered in MATLAB.
-3. Open `rtlsdr_book_library/image_receive.m` if you want to see the supporting reconstruction code — how the received bytes are reshaped back into an image.
-4. **If your reception is unreliable**, fall back to one of `digital/rtlsdr_rx/rec_data/dqpsk_image1.mat`, `digital/rtlsdr_rx/rec_data/dqpsk_image2.mat`, or `digital/rtlsdr_rx/rec_data/dqpsk_image7.mat` to complete the assignment.
+3. If you want to see how the payload is put back together, the frame/protocol parameters (preamble, frame length, header fields) are defined in `rtlsdr_book_library/image_receive.m`, and the actual byte-to-pixel reconstruction lives in the **Image Reconstruction** MATLAB Function block inside the shared `rtlsdr_book_library.slx` library.
+4. **If your reception is unreliable**, fall back to one of `digital/rtlsdr_rx/rec_data/dqpsk_image1.mat`, `digital/rtlsdr_rx/rec_data/dqpsk_image2.mat`, or `digital/rtlsdr_rx/rec_data/dqpsk_image7.mat` to complete the assignment. To switch a receiver model from live hardware to a recorded file, use the same block swap you did in [Lab 5](Lab5), Activity 4.
 
 *For more detail on transmitting images across the desktop link, see Sec. 12.8 in SDR textbook.*
 
@@ -42,8 +42,10 @@ Real digital systems don't just hope the data arrived correctly — they check.
 1. Add a simple checksum to your receiver:
 
 ```matlab
-% After reconstructing the received image bytes into rxBytes:
-rxChecksum = mod(sum(uint32(rxBytes)), 256);
+% The receiver publishes the reconstructed image to the base workspace as `image`,
+% a 100x100 array of pixel values 0-255. The (:) flattens it so sum() returns a
+% single number rather than one sum per column.
+rxChecksum = mod(sum(uint32(image(:))), 256);
 ```
 
 2. Wait for the instructor to announce the correct checksum value for the transmitted image at the end of class.

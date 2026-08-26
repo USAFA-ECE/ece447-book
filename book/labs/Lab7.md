@@ -26,8 +26,8 @@ The instructor will announce a transmit frequency and run `digital/pluto_tx/plut
 ## Activity 1: Frame Synchronization
 
 1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_ascii_message.slx`. Internally, this receiver computes exactly the $R[n]$ correlation above against the known sync word.
-2. Locate the correlation peak / frame detection indicator in the model.
-3. Confirm it's triggering — once it finds a strong correlation peak, the receiver knows exactly where the message frame begins and can start decoding from that point.
+2. The model doesn't display the frame-sync signal by default, so add a readout yourself: open the **Frame Synchronisation** subsystem, right-click the **Frame Strobe** output signal, and connect a Scope (or enable signal logging) to it. You can do the same on the Matched Filter Correlator's **Correlation Amplitudes** output to watch the correlation itself.
+3. Run the model and confirm the strobe is firing — each pulse is the receiver declaring "a sync word lines up here," which is what tells it where the message frame begins. That scope is the screenshot you'll submit.
 
 *For more detail on data and frame synchronization, see Sec. 12.6 in SDR textbook.*
 
@@ -36,7 +36,7 @@ The instructor will announce a transmit frequency and run `digital/pluto_tx/plut
 1. With frame sync locked, let the receiver decode the received symbols into ASCII characters.
 2. Confirm you can read the transmitted text.
 3. If the instructor changes the message partway through class, confirm your receiver picks up the new text too.
-4. **If you're not receiving a clean decode**, fall back to `digital/rtlsdr_rx/rec_data/qpsk_ascii_msg.mat` (or `digital/rtlsdr_rx/rec_data/dqpsk_ascii_msg.mat` for the differentially-encoded version) to complete the assignment.
+4. **If you're not receiving a clean decode**, fall back to `digital/rtlsdr_rx/rec_data/qpsk_ascii_msg.mat` to complete the assignment. There is also a differentially-encoded capture, `digital/rtlsdr_rx/rec_data/dqpsk_ascii_msg.mat` — if you use that one, you must also open the **Demodulation & Phase Ambiguity Correction** subsystem and flip its Manual Switch from the QPSK demodulator to the **DQPSK Demodulator Baseband**, or the text will decode as garbage. To switch a receiver model from live hardware to a recorded file, use the same block swap you did in [Lab 5](Lab5), Activity 4.
 
 *For more detail on ASCII encoding and message transmission, see Sec. 12.5 and 12.7 in SDR textbook.*
 
@@ -50,7 +50,7 @@ $$\hat{a}[n] = r[n]\, r^*[n-1]$$
 
 If the whole received constellation is rotated by some unknown ambiguity $\theta_0$ — i.e. $r[n] = b[n]e^{j\theta_0}$ for every $n$ — then $\hat{a}[n] = b[n]e^{j\theta_0}\, \big(b[n-1]e^{j\theta_0}\big)^* = b[n]b^*[n-1] = a[n]$: the $e^{j\theta_0}$ terms cancel exactly, regardless of what $\theta_0$ is. That's why differential encoding is immune to phase ambiguity.
 
-If you finish early, try `digital/simulation/differential_coding/QPSK_diff_encode_decode.slx` and confirm this cancellation for yourself by introducing a constellation rotation and checking that the decoded bits are unaffected.
+If you finish early, open `digital/simulation/differential_coding/QPSK_diff_encode_decode.slx`. It has a Manual Switch that swaps the normally-received sequence for one carrying a built-in 180° phase ambiguity. Flip it back and forth and confirm the decoded bits come out identical either way — the rotation cancels, exactly as the algebra above predicts.
 
 *For more detail on phase ambiguity and differential encoding, see Sec. 11.9-11.10 in SDR textbook.*
 
