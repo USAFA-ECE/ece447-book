@@ -72,9 +72,19 @@ If the live signal is weak or breaks up from where you're sitting, there is a re
 
 ## Assignment
 
+```{important}
+**Copy your figures, do not screenshot them.** In a MATLAB figure window use
+**Edit > Copy Figure** (or run `copygraphics(gcf)` at the command line). In a
+Simulink scope or Spectrum Analyzer, use that scope's own **File > Print to
+Figure**, then copy the figure it creates. Paste straight into your document.
+That gives you the plot at full resolution with the axes, tick labels, and
+titles sharp. Phone photographs of a monitor, cropped screen grabs, and blurry
+captures make the plots unreadable.
+```
+
 Submit a single PDF to Gradescope containing:
 
-1. Three constellation screenshots — raw, coarse-corrected, and fully synchronized — clearly labeled.
+1. Three constellation figures — raw, coarse-corrected, and fully synchronized — clearly labeled.
 2. 2-3 sentences for each stage explaining what changed and why (in your own words, not copied from the book).
 3. A note on whether you used the live signal or a recorded fallback file, and if the latter, why.
 4. Your documentation statement.

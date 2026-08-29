@@ -132,10 +132,20 @@ We are not covering multi-dongle setups (Sec. 3.12 in the SDR textbook) in this 
 
 ## Assignment
 
+```{important}
+**Copy your figures, do not screenshot them.** In a MATLAB figure window use
+**Edit > Copy Figure** (or run `copygraphics(gcf)` at the command line). In a
+Simulink scope or Spectrum Analyzer, use that scope's own **File > Print to
+Figure**, then copy the figure it creates. Paste straight into your document.
+That gives you the plot at full resolution with the axes, tick labels, and
+titles sharp. Phone photographs of a monitor, cropped screen grabs, and blurry
+captures make the plots unreadable.
+```
+
 Submit a single PDF to Gradescope containing:
 
 1. Your full-range sweep plot from Activity 4, with at least 2 features labeled (e.g., "FM broadcast band", "cell/LTE band").
-2. A screenshot of the spectrum display tuned to one interesting narrowband signal you found in Activity 3 (not the FM broadcast band), with a 2-3 sentence description of what you believe it is and why.
+2. The spectrum display tuned to one interesting narrowband signal you found in Activity 3 (not the FM broadcast band), with a 2-3 sentence description of what you believe it is and why.
 3. Your documentation statement.
 
 **Note**: GenAI Level 3 encompasses Level 2 which permits AI as a consultation tool for idea generation, i.e., you can use AI to help you identify what you are seeing in your plots.
