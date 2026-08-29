@@ -29,6 +29,7 @@ parts:
       - file: HW/HW7
       - file: labs/Lab7
       - file: HW/HW8
+      - file: HW/HW9
       - file: labs/Lab8
       - file: HW/ExtraCredit
   - caption: Python Computer Exercises

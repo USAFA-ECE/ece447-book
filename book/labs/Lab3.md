@@ -92,6 +92,15 @@ where $I(t)$ and $Q(t)$ each carry their own independent stream of bits. A coher
 
 Submit a single PDF to Gradescope containing:
 
-1. A screenshot of your envelope detector output (spectrum and, if you can capture it, a note on what you heard) while receiving live Air Band traffic, with the frequency you tuned to and a description of the traffic (tower/ground/approach, if you could tell).
-2. Two screenshots from Activity 3 — the 16-QAM/QPSK pair at a low-noise setting and at a setting where 16-QAM is visibly breaking up — with the $E_b/N_0$ and error counts visible. In 2-3 sentences, state roughly where 16-QAM started making errors while QPSK did not, why that is, and explain in terms of $I(t)$ and $Q(t)$ why a DSB-LC envelope detector could not demodulate either of them.
+1. Your envelope detector output (spectrum, and a note on what you heard) while receiving live Air Band traffic, with the frequency you tuned to and a description of the traffic (tower/ground/approach, if you could tell).
+2. Two figures from Activity 3 — the 16-QAM/QPSK pair at a low-noise setting and at a setting where 16-QAM is visibly breaking up — with the $E_b/N_0$ and error counts legible. In 2-3 sentences, state roughly where 16-QAM started making errors while QPSK did not, why that is, and explain in terms of $I(t)$ and $Q(t)$ why a DSB-LC envelope detector could not demodulate either of them.
 3. Your documentation statement.
+
+```{important}
+**Copy your figures, don't screenshot them.** In a MATLAB figure window, use
+**Edit > Copy Figure**, then paste straight into your document. You get the real
+plot -- crisp at any zoom, with readable axis labels and titles -- instead of a
+blurry crop of your monitor. Simulink scopes and the Spectrum Analyzer have the
+same option under their own **Edit** (or **File > Print to Figure**, then copy
+that figure). Figures that are unreadable at normal zoom may lose credit.
+```
