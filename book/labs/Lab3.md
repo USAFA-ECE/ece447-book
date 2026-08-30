@@ -74,17 +74,83 @@ The catch: this only works if your local oscillator's phase matches the transmit
 
 ## Activity 3: A First Look at QAM (Simulation)
 
-QAM is what you get from packing *two* DSB-SC signals into the same bandwidth, 90 degrees out of phase with each other:
+```{note}
+**This one is a preview.** QAM, constellations, symbols, and $E_b/N_0$ all belong to the
+digital communications block later in the semester. You are not expected to have seen any
+of it yet, and this lab does not test the details. It sits here because QAM falls straight
+out of the DSB-SC math you just did -- it is literally two DSB-SC signals stacked on the
+same carrier -- so this is the cheapest possible moment to look at it.
+```
+
+### Four ideas you need for today
+
+**1. Digital systems send *symbols*, not one bit at a time.** Everything so far in this lab
+carried a continuous message $m(t)$. A digital transmitter instead sends bits, and it is
+wasteful to send them one at a time. So group them: 2 bits have 4 possible combinations,
+4 bits have 16. Pick one waveform for each combination and send it for a fixed slice of
+time. That slice is a **symbol**. Four bits per symbol means four times the data rate of
+one bit per symbol, in the same bandwidth -- which is the entire reason anyone bothers.
+
+**2. A *constellation* is the map of the allowed symbols.** Each symbol is just a choice of
+$I$ and $Q$ amplitudes, so plot $I$ across and $Q$ up: every symbol becomes a **point** on
+that plane, and the set of all allowed points is the constellation. **QPSK** uses 4 points
+(2 bits each); **16-QAM** uses 16 points (4 bits each). The receiver's job is simply to
+decide which point was sent, by picking whichever one the received sample landed nearest to.
+
+**3. Noise is what makes that decision hard.** Noise nudges each received point off its
+ideal position. As long as it stays nearer its own point than any neighbour, the receiver
+still decides correctly and no error occurs. Push it past the halfway line to a neighbour
+and the receiver reads out the wrong bits -- a **symbol error**. Cramming 16 points into
+the same plane as 4 leaves each point much less elbow room, which is the whole experiment
+below.
+
+**4. $E_b/N_0$ is the noise knob.** Read it as "signal quality per bit" -- **higher means
+cleaner, lower means noisier**. It is a per-*bit* measure rather than a per-symbol one,
+which is what makes it a fair way to compare two schemes that carry different numbers of
+bits per symbol. For today, just turn the knob and watch.
+
+### Where QAM comes from
+
+QAM is what you get from packing *two* DSB-SC signals into the same bandwidth, 90 degrees
+out of phase with each other:
 
 $$s(t) = I(t)\cos(2\pi f_c t) - Q(t)\sin(2\pi f_c t)$$
 
-where $I(t)$ and $Q(t)$ each carry their own independent stream of bits. A coherent receiver separates them by multiplying by $\cos(2\pi f_c t)$ and $\sin(2\pi f_c t)$ respectively (each recovers one component, by the same coherent-detection math as DSB-SC above — try writing out $s(t)\cos(2\pi f_c t)$ and $s(t)\sin(2\pi f_c t)$ and low-pass filtering each). Notice that an envelope detector can't do any of this: it only reports $\sqrt{I(t)^2+Q(t)^2}$, throwing away exactly the phase information that tells $I$ and $Q$ apart.
+where $I(t)$ and $Q(t)$ each carry their own independent stream of bits. A coherent receiver
+separates them by multiplying by $\cos(2\pi f_c t)$ and $\sin(2\pi f_c t)$ respectively (each
+recovers one component, by the same coherent-detection math as DSB-SC above -- try writing
+out $s(t)\cos(2\pi f_c t)$ and $s(t)\sin(2\pi f_c t)$ and low-pass filtering each). Notice
+that an envelope detector can't do any of this: it only reports $\sqrt{I(t)^2+Q(t)^2}$,
+throwing away exactly the phase information that tells $I$ and $Q$ apart.
 
-1. Open `digital/simulation/modulation/qam_qpsk_constellation_noise.m` (the script from the download note at the top of this lab) and run it as-is. It sends 5000 random symbols through a noisy channel twice — once as **16-QAM**, once as **QPSK** — at the *same* $E_b/N_0$, and plots both received constellations side by side. Red crosses mark where the symbols were supposed to land; blue dots are what actually arrived.
+### Where you have already used QAM today
+
+Almost every high-rate link you touch runs some flavour of QAM:
+
+- **Wi-Fi** -- up to 1024-QAM (Wi-Fi 6) and 4096-QAM (Wi-Fi 7)
+- **4G LTE and 5G** -- commonly up to 256-QAM
+- **Cable internet (DOCSIS) and digital cable TV** -- 256-QAM up to 4096-QAM
+- **Satellite and microwave backhaul links**
+
+And the experiment you are about to run explains something you have felt: your router and
+phone *change* QAM order on the fly. Close to the access point, the signal is clean, so the
+link uses a dense constellation and you get high throughput. Walk away, noise wins, and the
+link falls back to fewer points per symbol -- slower, but decodable. You are about to watch
+that same tradeoff happen on your own screen.
+
+1. Open `digital/simulation/modulation/qam_qpsk_constellation_noise.m` (the script from the download note at the top of this lab) and run it as-is. It sends 5000 random symbols through a noisy channel twice -- once as **16-QAM**, once as **QPSK** -- at the *same* $E_b/N_0$, and plots both received constellations side by side. Red crosses mark where the symbols were supposed to land; blue dots are what actually arrived.
 2. Note the symbol-error count printed in each subplot title. At the starting value of `EbNo_dB = 15` both should be clean or nearly so.
 3. Now add noise: change `EbNo_dB` near the top of the script to 10, re-run, then 8, then 5. Watch the clusters spread. Find roughly the value at which **16-QAM starts making errors while QPSK is still error-free**, and record it.
-4. Explain what you found using the constellations themselves: both modulations are held to the same average power, so packing 16 points into the I/Q plane instead of 4 leaves each point with much less room before noise carries it across a decision boundary.
-5. You'll come back to this exact tradeoff — and to QPSK specifically — in the digital communications unit.
+4. Explain what you found using the constellations themselves: both modulations are held to the same average power, so packing 16 points into the I/Q plane instead of 4 leaves each point much less room before noise carries it across a decision boundary.
+5. You'll come back to this exact tradeoff -- and to QPSK specifically -- in the digital communications block, where we work out *how much* noise each constellation can take before it breaks.
+
+```{seealso}
+If you want to see the underlying modulation and demodulation worked out in code, the
+Chapter 4 computer exercise
+[4.12.4 QAM modulation and demodulation](https://usafa-ece.github.io/ece447-book/chapter04.html#qam-modulation-and-demodulation)
+builds a QAM signal and pulls the two messages back out. Optional -- we will cover this
+properly in the digital communications block.
+```
 
 *For more detail on QAM, see Sec. 5.4 in SDR textbook.*
 
