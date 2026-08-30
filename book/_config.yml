@@ -60,3 +60,13 @@ html:
 # sphinx:
   # extra_extensions:
     # - sphinxcontrib.mermaid
+
+# Generate slug anchors for headings down to level 3.
+# NOTE: with myst-parser 0.18.x (what jupyter-book<1.0 pins) this does NOT enable
+# cross-file links of the form (../other.ipynb#anchor) -- that needs myst-parser
+# 1.x or later. Sphinx already emits section ids on its own, so today this setting
+# changes nothing in the output; it is here so heading anchors behave predictably
+# if the toolchain is upgraded. Link to another page's section by full URL for now.
+sphinx:
+  config:
+    myst_heading_anchors: 3
