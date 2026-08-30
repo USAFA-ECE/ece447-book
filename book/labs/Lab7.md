@@ -27,7 +27,7 @@ The instructor will announce a transmit frequency and run `digital/pluto_tx/plut
 
 1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_ascii_message.slx`. Internally, this receiver computes exactly the $R[n]$ correlation above against the known sync word.
 2. The model doesn't display the frame-sync signal by default, so add a readout yourself: open the **Frame Synchronisation** subsystem, right-click the **Frame Strobe** output signal, and connect a Scope (or enable signal logging) to it. You can do the same on the Matched Filter Correlator's **Correlation Amplitudes** output to watch the correlation itself.
-3. Run the model and confirm the strobe is firing — each pulse is the receiver declaring "a sync word lines up here," which is what tells it where the message frame begins. That scope is the screenshot you'll submit.
+3. Run the model and confirm the strobe is firing — each pulse is the receiver declaring "a sync word lines up here," which is what tells it where the message frame begins. That scope is the figure you'll submit.
 
 *For more detail on data and frame synchronization, see Sec. 12.6 in SDR textbook.*
 
@@ -56,9 +56,19 @@ If you finish early, open `digital/simulation/differential_coding/QPSK_diff_enco
 
 ## Assignment
 
+```{important}
+**Copy your figures, do not screenshot them.** In a MATLAB figure window use
+**Edit > Copy Figure** (or run `copygraphics(gcf)` at the command line). In a
+Simulink scope or Spectrum Analyzer, use that scope's own **File > Print to
+Figure**, then copy the figure it creates. Paste straight into your document.
+That gives you the plot at full resolution with the axes, tick labels, and
+titles sharp. Phone photographs of a monitor, cropped screen grabs, and blurry
+captures make the plots unreadable.
+```
+
 Submit a single PDF to Gradescope containing:
 
-1. A screenshot showing your frame synchronization indicator locking on (e.g., the correlation peak or sync flag).
+1. The scope showing your frame synchronization indicator locking on (e.g., the correlation peak or sync flag).
 2. The decoded ASCII message text you received.
 3. 2-3 sentences: what would your receiver see if the frame sync word were never found (e.g., due to a very weak signal)? Would it decode garbage, nothing at all, or something else?
 4. Your documentation statement.

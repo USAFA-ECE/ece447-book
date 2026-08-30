@@ -2,6 +2,21 @@
 
 (Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, highlights of Ch. 5.3-8.3.)
 
+```{note}
+**Download this before you start.** Activity 3 uses one script that was added after
+the Lab 1 download: `qam_qpsk_constellation_noise.m`. If you already unzipped the
+support files, you do not need to download the whole package again -- just grab
+[**qam_qpsk_constellation_noise.m**](support_files/digital/simulation/modulation/qam_qpsk_constellation_noise.m)
+and save it into your support files at
+`support_files/digital/simulation/modulation/qam_qpsk_constellation_noise.m`
+-- the `digital/simulation/modulation` folder you already have, next to
+`QAM16_constellation_noise.slx`.
+
+Everything else you need for this lab is already in the copy you downloaded. If
+you would rather start fresh, the full [support_files.zip](support_files.zip) on
+the [Downloads](../downloads.md) page already contains it.
+```
+
 ## Overview
 
 Aircraft communications still use plain old amplitude modulation (DSB-LC, the same scheme as commercial AM broadcast) on the Air Band, 108-137 MHz — conveniently right in your RTL-SDR's tuning range, unlike commercial mediumwave AM. That makes today's lab genuinely off-the-air: you'll receive and demodulate real USAFA airfield traffic, not a simulated or instructor-transmitted signal.
@@ -65,18 +80,28 @@ $$s(t) = I(t)\cos(2\pi f_c t) - Q(t)\sin(2\pi f_c t)$$
 
 where $I(t)$ and $Q(t)$ each carry their own independent stream of bits. A coherent receiver separates them by multiplying by $\cos(2\pi f_c t)$ and $\sin(2\pi f_c t)$ respectively (each recovers one component, by the same coherent-detection math as DSB-SC above — try writing out $s(t)\cos(2\pi f_c t)$ and $s(t)\sin(2\pi f_c t)$ and low-pass filtering each). Notice that an envelope detector can't do any of this: it only reports $\sqrt{I(t)^2+Q(t)^2}$, throwing away exactly the phase information that tells $I$ and $Q$ apart.
 
-1. Open `digital/simulation/modulation/QAM16_constellation_noise.slx`. This maps random bits onto a 16-QAM constellation, passes them through a noisy channel, and demodulates — you'll see a transmit constellation and a received one side by side.
-2. Run it and compare the two constellation diagrams. The transmitted points sit exactly on the grid; the received ones scatter around those ideal positions by an amount set by the channel noise.
-3. Open the AWGN Channel block and raise the noise (lower the SNR / raise the noise power), then re-run. Watch the received clusters spread until they start crossing the halfway line between neighbouring points — that is the moment symbols start being decoded wrong.
-4. For a direct comparison, open `digital/simulation/modulation/QPSK_constellation_noise.slx` and run it at the *same* noise setting. QPSK has only 4 points spread over the same I/Q plane, so its points sit much farther apart and tolerate far more noise before they smear together.
+1. Open `digital/simulation/modulation/qam_qpsk_constellation_noise.m` (the script from the download note at the top of this lab) and run it as-is. It sends 5000 random symbols through a noisy channel twice — once as **16-QAM**, once as **QPSK** — at the *same* $E_b/N_0$, and plots both received constellations side by side. Red crosses mark where the symbols were supposed to land; blue dots are what actually arrived.
+2. Note the symbol-error count printed in each subplot title. At the starting value of `EbNo_dB = 15` both should be clean or nearly so.
+3. Now add noise: change `EbNo_dB` near the top of the script to 10, re-run, then 8, then 5. Watch the clusters spread. Find roughly the value at which **16-QAM starts making errors while QPSK is still error-free**, and record it.
+4. Explain what you found using the constellations themselves: both modulations are held to the same average power, so packing 16 points into the I/Q plane instead of 4 leaves each point with much less room before noise carries it across a decision boundary.
 5. You'll come back to this exact tradeoff — and to QPSK specifically — in the digital communications unit.
 
 *For more detail on QAM, see Sec. 5.4 in SDR textbook.*
 
 ## Assignment
 
+```{important}
+**Copy your figures, do not screenshot them.** In a MATLAB figure window use
+**Edit > Copy Figure** (or run `copygraphics(gcf)` at the command line). In a
+Simulink scope or Spectrum Analyzer, use that scope's own **File > Print to
+Figure**, then copy the figure it creates. Paste straight into your document.
+That gives you the plot at full resolution with the axes, tick labels, and
+titles sharp. Phone photographs of a monitor, cropped screen grabs, and blurry
+captures make the plots unreadable.
+```
+
 Submit a single PDF to Gradescope containing:
 
-1. A screenshot of your envelope detector output (spectrum and, if you can capture it, a note on what you heard) while receiving live Air Band traffic, with the frequency you tuned to and a description of the traffic (tower/ground/approach, if you could tell).
-2. Screenshots of the received 16-QAM constellation at two different noise levels, plus the QPSK constellation at the higher of those two settings. In 2-3 sentences, compare how much noise each tolerates, and explain in terms of $I(t)$ and $Q(t)$ why a DSB-LC envelope detector could not demodulate either of them.
+1. Your envelope detector output (spectrum, and a note on what you heard) while receiving live Air Band traffic, with the frequency you tuned to and a description of the traffic (tower/ground/approach, if you could tell).
+2. Two figures from Activity 3 — the 16-QAM/QPSK pair at a low-noise setting and at a setting where 16-QAM is visibly breaking up — with the $E_b/N_0$ and error counts legible. In 2-3 sentences, state roughly where 16-QAM started making errors while QPSK did not, why that is, and explain in terms of $I(t)$ and $Q(t)$ why a DSB-LC envelope detector could not demodulate either of them.
 3. Your documentation statement.

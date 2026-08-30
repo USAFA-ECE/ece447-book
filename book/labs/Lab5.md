@@ -72,9 +72,19 @@ A rectangular pulse is the extreme case that doesn't satisfy the criterion clean
 
 ## Assignment
 
+```{important}
+**Copy your figures, do not screenshot them.** In a MATLAB figure window use
+**Edit > Copy Figure** (or run `copygraphics(gcf)` at the command line). In a
+Simulink scope or Spectrum Analyzer, use that scope's own **File > Print to
+Figure**, then copy the figure it creates. Paste straight into your document.
+That gives you the plot at full resolution with the axes, tick labels, and
+titles sharp. Phone photographs of a monitor, cropped screen grabs, and blurry
+captures make the plots unreadable.
+```
+
 Submit a single PDF to Gradescope containing:
 
-1. Constellation screenshots for QPSK and 16-QAM at two comparable noise levels, with 2-3 sentences comparing their sensitivity to noise.
+1. Constellation figures for QPSK and 16-QAM at two comparable noise levels, with 2-3 sentences comparing their sensitivity to noise.
 2. The rectangular vs. RRC pulse spectrum comparison from Activity 3, with 1-2 sentences on which one you'd rather transmit next to another signal, and why.
-3. Your constellation screenshot from the real recorded QPSK capture in Activity 4, with a one-sentence prediction of what you think is wrong with it (you'll find out for real in Lab 6).
+3. Your constellation figure from the real recorded QPSK capture in Activity 4, with a one-sentence prediction of what you think is wrong with it (you'll find out for real in Lab 6).
 4. Your documentation statement.

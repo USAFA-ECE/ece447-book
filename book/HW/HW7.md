@@ -1,4 +1,4 @@
-# Homework 6
+# Homework 7
 
 Chapter 6 (6.7-6.9)
 
