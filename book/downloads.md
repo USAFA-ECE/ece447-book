@@ -8,6 +8,12 @@ The labs use the Simulink models, MATLAB scripts, and recorded data that accompa
 - **Recorded signal captures** (Labs 5-8; 100-240 MB each, too large for this site): download from the course Teams folder — [ECE447-Fall2026 > Class Materials > desktopSDR_supportFiles](https://usafa0.sharepoint.com/:f:/r/teams/ECE447-Fall2026/Class%20Materials/desktopSDR_supportFiles_v2_0__2021a?csf=1&web=1&e=qckp9s) — under `digital/rtlsdr_rx/rec_data/`.
 - **Complete package / upstream source:** a single zip of everything (plus a PDF of the book) is available from [desktopsdr.com](https://www.desktopsdr.com/download-files).
 
+## Equation Sheet
+
+This two-page reference sheet is handed out with the GR — nothing on it needs to be memorized. Page 1 collects the course equations; page 2 is the Fourier transform pairs and properties (Lathi & Ding Tables 3.1 and 3.2), written in the f (hertz) convention used throughout ECE 447.
+
+- **Equation sheet:** [ECE447_EquationSheet.pdf](_static/ECE447_EquationSheet.pdf)
+
 ## Slides
 
 The slides on this page will be updated throughout the semester and posted as we go. It is recommended you download files just prior to the lecture for which the material pertains.
@@ -29,7 +35,7 @@ _Lab entries link to the SDR lab write-ups. Each slide file is named for the les
 | 11 | [Angle Modulation, Part 1](_static/slides/Lsn11_AngleMod_Part1.pdf) |
 | 12 | [Angle Modulation, Part 2](_static/slides/Lsn12_AngleMod_Part2.pdf) |
 | 13 | [Angle Modulation, Part 3](_static/slides/Lsn13_AngleMod_Part3.pdf) |
-| 14 | GR1 Review day |
+| 14 | [GR1 Review day](_static/slides/Lsn14_GR1Review.pdf) |
 | 15 | GR 1 |
 | 16 | [SDR Lab 4](labs/Lab4) |
 | 17 | GR Review/Feedback |
