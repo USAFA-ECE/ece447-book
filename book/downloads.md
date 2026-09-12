@@ -10,7 +10,7 @@ The labs use the Simulink models, MATLAB scripts, and recorded data that accompa
 
 ## Equation Sheet
 
-This two-page reference sheet is handed out with the GR — nothing on it needs to be memorized. Page 1 collects the course equations; page 2 is the Fourier transform pairs and properties (Lathi & Ding Tables 3.1 and 3.2), written in the f (hertz) convention used throughout ECE 447.
+You will get this two-page reference sheet with the GRs. It is subject to update for GR2 and the Final Exam. All Fourier transform pairs and properties are in the f (hertz) convention used throughout ECE 447.
 
 - **Equation sheet:** [ECE447_EquationSheet.pdf](_static/ECE447_EquationSheet.pdf)
 
