@@ -11,7 +11,7 @@
 %      not - that gap is the whole point of the exercise.
 
 %% PARAMETERS  (this is the knob to turn)
-EbNo_dB = 15;        % <-- lower this for more noise (try 15, 10, 8, 5)
+EbNo_dB = 12;        % <-- lower this for more noise (try 15, 10, 8, 5)
 nSym    = 5000;      % symbols to simulate
 
 %% RUN BOTH MODULATIONS
