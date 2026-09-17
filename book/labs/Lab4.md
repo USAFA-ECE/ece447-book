@@ -4,7 +4,7 @@
 
 ## Overview
 
-Commercial FM broadcast is one of the strongest, easiest signals your RTL-SDR can receive, which makes it a great real-world testbed for FM demodulation. Today you'll build an FM receiver, get working mono audio out of a real local station, and then push into stereo decoding. As with Lab 3, we're keeping this receive-only — no PLUTO transmission needed, since there's already a strong, legal, real-world FM signal on the air for you to use.
+Commercial FM broadcast is one of the strongest, easiest signals your RTL-SDR can receive, which makes it a great real-world testbed for FM demodulation. Today you'll build an FM receiver, get working mono audio out of a real local station, and then push into stereo decoding. As with Lab 3, we're keeping this receive-only — no in-class transmission needed, since there's already a strong, legal, real-world FM signal on the air for you to use.
 
 ## Aims of the Lab
 
