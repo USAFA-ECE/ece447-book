@@ -32,7 +32,7 @@ rtlsdr_fs        = 2.4e6;                       % tuner sampling rate
 rtlsdr_ppm       = 0;                           % tuner parts per million correction
 rtlsdr_frmlen    = 256*25;                      % output data frame size (multiple of 5)
 rtlsdr_datatype  = 'single';                    % output data type
-deemph_region 	 = 'eu';                        % set to either eu or us
+deemph_region 	 = 'us';                        % set to either eu or us (US broadcast FM is 75us)
 audio_fs         = 48e3;                        % audio output sampling rate
 sim_time         = 60;                          % simulation time in seconds
 
