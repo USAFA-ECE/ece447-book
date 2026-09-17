@@ -25,7 +25,7 @@ Peak frequency deviation is $\Delta f = k_f \max|m(t)|$. **Carson's Rule** estim
 
 $$B_T \approx 2(\Delta f + f_m)$$
 
-For commercial WFM, $\Delta f \approx 75\text{ kHz}$ and $f_m \approx 15\text{ kHz}$ (plus multiplex content, in practice), giving the roughly 200 kHz channel width you'll measure on the spectrum analyzer in Activity 2 — go ahead and check your measured bandwidth against this estimate.
+For commercial WBFM, $\Delta f \approx 75\text{ kHz}$ and $f_m \approx 15\text{ kHz}$ (plus multiplex content, in practice), giving the roughly 200 kHz channel width you'll measure on the spectrum analyzer in Activity 2 — go ahead and check your measured bandwidth against this estimate.
 
 The **discriminator** recovers $m(t)$ by exploiting the same phase/frequency relationship you used for frequency correction in Lab 2: instantaneous frequency is the derivative of instantaneous phase, $f_i(t) = \frac{1}{2\pi}\frac{d\theta(t)}{dt}$, so differentiating the received phase and subtracting $f_c$ recovers $k_f m(t)$ directly. In discrete time, this derivative is approximated by comparing each complex baseband sample to the previous one:
 
