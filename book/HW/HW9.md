@@ -1,6 +1,6 @@
 # Homework 9
 
-Chapter 9
+Chapters 9 and 13
 
 ## Due NLT Lesson 40, 2359 to Gradescope
 
@@ -12,12 +12,5 @@ Chapter 9
 - Submit work to Gradescope with pages assigned to each problem. Scans/uploads must be legible and neat without excessive margins.
 
 ## Problems:
-- **Chapter 8**: Define each of the following terms and give an example of a random process that meets the definition of each one.
-
-    - Stationary
-    - Nonstationary
-    - Wide-sense stationary
-    - Ergodic wide-sense stationary
-
 - **9.2-1a and modified b**: For Part(b) assume equiprobable transmission of 0 or 1 (NOT what the problem states!). Find the BER as a function of $T_b$ and $\mathcal{N}$ (aka $N_0$).
 - **Error correction:** Write out the generator and parity check matrices for a Hamming (7,4) code. Show the codeword for a message of **1101**. Assuming there is a bit error in the 5th bit of the received codeword **_r_**, find the syndrome and show how the bit error would be corrected.

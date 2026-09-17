@@ -34,25 +34,25 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 |----------|----------|----------|----------|----------|----------|
 | 18 | Mon 28 Sep | Signal sampling and reconstruction | L&D 5.1 | [HW4](HW/HW4) |  |
 | 19 | Wed 30 Sep | Pulse code modulation | L&D 5.2 |  | Lab 4 |
-| 20 | Fri 2 Oct | PCM (cont'd) & pulse modulations | L&D 5.7 |  | [HW4](HW/HW4) |
-| 21 | Tue 6 Oct | SDR Lab | [Lab 5 Description](labs/Lab5) |  [Lab 5](labs/Lab5), [HW5](HW/HW5)  |  |
+| 20 | Fri 2 Oct | PCM (cont'd) & pulse modulations | L&D 5.7 |  |  |
+| 21 | Tue 6 Oct | SDR Lab | [Lab 5 Description](labs/Lab5) |  [Lab 5](labs/Lab5), [HW5](HW/HW5)  | [HW4](HW/HW4) |
 | 22 | Thu 8 Oct | Digital comm & line coding | L&D 6.1-6.2 |  |  |
 | 23 | Tue 13 Oct | Digital comm & line coding (cont'd) | L&D 6.1-6.2 |  | [HW5](HW/HW5) |
 | 24 | Thu 15 Oct | Pulse shaping & intersymbol interference (ISI) | L&D 6.3.1-6.3.3 | [HW6](HW/HW6) | [Lab 5](labs/Lab5) |
 | 25 | Mon 19 Oct | Digital receivers: timing & detection, eye diagrams | L&D 6.5.2-6.5.3, 6.6 | |  |
-| 26 | Wed 21 Oct | M-ary digital modulation | L&D 6.7 |  |  |
-| 27 | Fri 23 Oct | Digital carrier modulation | L&D 6.8-6.9 | [HW7](HW/HW7) | [HW6](HW/HW6) |
-| 28 | Tue 27 Oct | SDR Lab (Day 1 of 2) | [Lab 6 Description](labs/Lab6) | [Lab 6](labs/Lab6) |  |
+| 26 | Wed 21 Oct | M-ary digital modulation | L&D 6.7 | [HW7](HW/HW7) |  |
+| 27 | Fri 23 Oct | Digital carrier modulation | L&D 6.8-6.9 |  |  |
+| 28 | Tue 27 Oct | SDR Lab (Day 1 of 2) | [Lab 6 Description](labs/Lab6) | [Lab 6](labs/Lab6) | [HW6](HW/HW6) |
 | 29 | Thu 29 Oct | SDR Lab (Day 2 of 2) | [Lab 6 Description](labs/Lab6) |  |  |
-| 30 | Mon 2 Nov | Probability, Part 1 | L&D 7.1-7.3 |  | [HW7](HW/HW7) |
-| 31 | Wed 4 Nov | Probability, Part 2 | L&D 7.4-7.7 |  | [Lab 6](labs/Lab6) |
-| 32 | Fri 6 Nov | Random processes | L&D 8-8.4 (at least) | [HW8](HW/HW8) |  |
+| 30 | Mon 2 Nov | Probability, Part 1 | L&D 7.1-7.3 |  |  |
+| 31 | Wed 4 Nov | Probability, Part 2 | L&D 7.4-7.7 | [HW8](HW/HW8) | [Lab 6](labs/Lab6) |
+| 32 | Fri 6 Nov | Random processes | L&D 8-8.4 (at least) |  | [HW7](HW/HW7) |
 | 33 | Tue 10 Nov | SDR Lab | [Lab 7 Description](labs/Lab7) | [Lab 7](labs/Lab7) |  |
 | 34 | Fri 13 Nov | GR2 Review Day |  |  | [HW8](HW/HW8) |
 | 35 | Tue 17 Nov | GR 2 | Covering Lsns 18-32 (Chapters 5-7) |  |  |
 | 36 | Thu 19 Nov | Matched filters & binary system performance, Part 1 | L&D 9.1-9.2 | [HW9](HW/HW9) |  |
 | 37 | Mon 23 Nov | Binary system performance, Part 2 | L&D 9.2, 9.3.3 | [Lab 8](labs/Lab8) preview | [Lab 7](labs/Lab7) |
 | 38 | Tue 1 Dec | Error correction: parity, CRC, & Hamming codes | L&D 12.3.2, 13.1-13.3 |  |  |
-| 39 | Thu 3 Dec | SDR Lab (Capstone) | [Lab 8 Description](labs/Lab8) | [Lab 8](labs/Lab8) | [HW9](HW/HW9) |
-| 40 | Mon 7 Dec | Advanced topics: OFDM, MIMO, & CDMA | None |  |  |
+| 39 | Thu 3 Dec | SDR Lab (Capstone) | [Lab 8 Description](labs/Lab8) | [Lab 8](labs/Lab8) |  |
+| 40 | Mon 7 Dec | Advanced topics: OFDM, MIMO, & CDMA | None |  | [HW9](HW/HW9) |
 | 41 | Wed 9 Dec | Course review |  |  | [Lab 8](labs/Lab8), [Extra Credit](HW/ExtraCredit) (optional) |
