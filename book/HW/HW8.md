@@ -1,6 +1,6 @@
 # Homework 8
 
-Chapter 7
+Chapters 7 and 8
 
 ## Due NLT Lesson 34, 2359 on Gradescope
 
@@ -17,3 +17,9 @@ Chapter 7
 - **7.2-5**  
 - **7.3-2**  
 - **7.7-1**  
+- **Chapter 8**: Define each of the following terms and give an example of a random process that meets the definition of each one.
+
+    - Stationary
+    - Nonstationary
+    - Wide-sense stationary
+    - Ergodic wide-sense stationary
