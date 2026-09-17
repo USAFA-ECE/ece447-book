@@ -12,7 +12,6 @@ Chapters 7 and 8
 - Submit work to Gradescope with pages assigned to each problem. Scans/uploads must be legible and neat without excessive margins.
 
 ## Problems:
-- **7.1-15**
 - **7.2-1abd (no Part (c))** 
 - **7.2-5**  
 - **7.3-2**  
