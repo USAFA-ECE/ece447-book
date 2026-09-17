@@ -26,7 +26,7 @@ Chapter 5
 
     ---------------------
 
-    While clearly you will be copying *some* parts of the text, try to put your explanations in your own words as much as possible. The intent of this problem is to ensure you understand the mathematical relationship between SNR and the number of quantization bits.
+    While clearly you will be copying *some* parts of the text, you *must* insert explanations **in your own words** as much as possible. The intent of this problem is to ensure you understand the mathematical relationship between SNR and the number of quantization bits.
 
 - 5.2-2 --> In Part (b) when it asks for the "number of binary pulses required" it simply means the number of bits.
 - 5.2-3 --> Reference Example 5.2 for a similar problem (not exactly the same, but similar!)
