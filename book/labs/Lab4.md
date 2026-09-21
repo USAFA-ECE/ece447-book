@@ -25,7 +25,7 @@ Peak frequency deviation is $\Delta f = k_f \max|m(t)|$. **Carson's Rule** estim
 
 $$B_T \approx 2(\Delta f + f_m)$$
 
-For commercial WBFM, $\Delta f \approx 75\text{ kHz}$ and $f_m \approx 15\text{ kHz}$ (plus multiplex content, in practice), giving the roughly 200 kHz channel width you'll measure on the spectrum analyzer in Activity 2 — go ahead and check your measured bandwidth against this estimate.
+For commercial WBFM, $\Delta f \approx 75\text{ kHz}$ and $f_m \approx 15\text{ kHz}$ (plus multiplex content, in practice). Work $B_T$ out for yourself — you will need that number in Activity 1 and again in the assignment. One caution before you do: the FCC allocates commercial FM stations on a 200 kHz channel grid, and that spacing deliberately includes guard band on either side of the signal. The channel spacing is an allocation decision, not a Carson's Rule result, so do not assume the two are the same number.
 
 The **discriminator** recovers $m(t)$ by exploiting the same phase/frequency relationship you used for frequency correction in Lab 2: instantaneous frequency is the derivative of instantaneous phase, $f_i(t) = \frac{1}{2\pi}\frac{d\theta(t)}{dt}$, so differentiating the received phase and subtracting $f_c$ recovers $k_f m(t)$ directly. In discrete time, this derivative is approximated by comparing each complex baseband sample to the previous one:
 
@@ -38,7 +38,7 @@ $$\hat{m}[n] \propto \angle\big(x[n]\,x^*[n-1]\big)$$
 > **Set up your antenna and your location first.** This whole lab runs on real off-air FM, and Fairchild's interior blocks it — head for a window or the southeast corner of the building, as in [Lab 1](Lab1). Set your whip to a quarter wavelength for the FM band — about **77 cm** at 98 MHz — and give it a ground plane, either a magnetic base on a large metal surface or three or four radials cut to that same length. See Lab 1, Activity 2, step 1 if you need the details again.
 
 1. Tune to a strong local FM station using the spectrum tools from Lab 1.
-2. Measure its occupied bandwidth directly off the spectrum display.
+2. Measure its occupied bandwidth off the spectrum display, using the **Channel Measurements** settings specified in the assignment (Occupied BW, 98%, 400 kHz channel span centered on the station). Get this working in class — it is the same measurement you have to submit.
 3. Compare your measurement against the Carson's Rule estimate above ($\Delta f \approx 75$ kHz, $f_m \approx 15$ kHz).
 4. Note how much wider the FM signal is than the DSB-LC Air Band signal from Lab 3 — this is why your RTL-SDR's ~1.8-2.4 MHz sample rate only fits a handful of FM stations at once.
 
@@ -80,6 +80,33 @@ captures make the plots unreadable.
 
 Submit a single PDF to Gradescope containing:
 
-1. Your mono FM receiver's spectrum and a short note confirming you heard clean audio, with the station frequency.
+1. **The spectrum of the FM signal your mono receiver is demodulating**, copied
+   from the spectrum analyzer, along with the station frequency and a short note
+   confirming you heard clean audio. Then, on that same spectrum:
+   - Measure the occupied bandwidth with the Spectrum Analyzer's own measurement
+     tool rather than by eye, so that every measurement in the class means the
+     same thing. Open **Channel Measurements** in the scope window — the
+     **Measurements** tab of the toolstrip in recent releases, the
+     **Measurements** side panel in older ones. Set the measurement to
+     **Occupied BW**; change **Occupied BW %** from its default of 99% to
+     **98%**; and set the channel to **span and center frequency**, with center
+     **0 Hz** and span **400 kHz** — wide enough to hold the whole signal, narrow
+     enough to keep a neighboring station out of it. Report the number the scope
+     prints, and leave the measurement panel visible in the figure you copy.
+   - Take that measurement on a **full-rate** display: the `Spectrum Analyzer
+     Modulated` window of `rtlsdr_fm_discrim_demod_matlab.m`, which shows the raw
+     2.4 MHz-wide tuner output, or the wideband spectrum tool you used in
+     Activity 1. Do **not** measure on the `Spectrum Analyzer Modulated` window
+     of the Simulink model: that scope sits downstream of a decimator that has
+     already low-pass filtered the signal into a 240 kHz span, so it shows you
+     the filter's edges rather than the signal's. Record the span and RBW you
+     used.
+   - Compute $B_T$ from Carson's Rule using the $\Delta f$ and $f_m$ given in the
+     math section above. Show the arithmetic, not just the result.
+   - State whether your measured bandwidth agrees with your computed $B_T$. Be
+     careful not to talk yourself into the 200 kHz FM channel spacing here: that
+     is a spectrum allocation with guard band built in, and it is not what
+     Carson's Rule predicts. If your measurement and your $B_T$ disagree by more
+     than a few tens of kHz, say what you think accounts for the difference.
 2. Your stereo decoding attempt, and 2-3 sentences on whether you achieved clean L/R separation and, if not, what you think limited it (signal strength, multipath, etc.).
 3. Your documentation statement.
