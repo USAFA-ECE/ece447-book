@@ -54,7 +54,7 @@ $$\hat{m}[n] \propto \angle\big(x[n]\,x^*[n-1]\big)$$
 4. **Set up the bandwidth measurement.** In the `Spectrum Analyzer Modulated` window, open the **Channel Measurements** tab and set:
     - Measurement: **Occupied BW**
     - **Occupied BW %**: **98%**
-    - Channel span: **300 kHz**, centered at **0 Hz**
+    - Channel span: **200 kHz**, centered at **0 Hz** (note: the table at the bottom incorrectly shows the Occupied Bandwidth in MHz, but it is in kHz)
 
 5. Let the model run and watch the **Occupied Bandwidth** reading. It moves around with the program material, because the station's deviation depends on what it is transmitting moment to moment — quiet passages modulate less and read narrower. Let it run long enough to see the loud passages, and capture the plot at the **largest** value you can. That is the number you submit.
 
