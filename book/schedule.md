@@ -56,3 +56,7 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 39 | Thu 3 Dec | SDR Lab (Capstone) | [Lab 8 Description](labs/Lab8) | [Lab 8](labs/Lab8) |  |
 | 40 | Mon 7 Dec | Advanced topics: OFDM, MIMO, & CDMA | None |  | [HW9](HW/HW9) |
 | 41 | Wed 9 Dec | Course review |  |  | [Lab 8](labs/Lab8), [Extra Credit](HW/ExtraCredit) (optional) |
+
+## Final Exam
+
+The Final Exam is scheduled for **0730-1120 on Saturday, 12 December**.
