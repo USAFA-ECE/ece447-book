@@ -73,13 +73,12 @@ If the live signal is weak or breaks up from where you're sitting, there is a re
 ## Assignment
 
 ```{important}
-**Copy your figures, do not screenshot them.** In a MATLAB figure window use
-**Edit > Copy Figure** (or run `copygraphics(gcf)` at the command line). In a
-Simulink scope or Spectrum Analyzer, use that scope's own **File > Print to
-Figure**, then copy the figure it creates. Paste straight into your document.
-That gives you the plot at full resolution with the axes, tick labels, and
-titles sharp. Phone photographs of a monitor, cropped screen grabs, and blurry
-captures make the plots unreadable.
+**Copy your figures, do not screenshot them.** For MATLAB figure windows, use
+**Edit > Copy Figure** (or run `copygraphics(gcf)` at the command line). If a
+Simulink Scope or Spectrum Analyzer cannot be copied in your MATLAB release,
+maximize the scope window and capture just that window with **Win+Shift+S**.
+Either way, make sure the axis labels and tick values are readable in your
+document.
 ```
 
 Submit a single PDF to Gradescope containing:

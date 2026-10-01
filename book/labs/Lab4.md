@@ -77,20 +77,16 @@ That last term should look familiar: $(L-R)(t)$ riding on a 38 kHz subcarrier is
 ## Assignment
 
 ```{important}
-**Copy your figures, do not screenshot them.** In a MATLAB figure window use
-**Edit > Copy Figure** (or run `copygraphics(gcf)` at the command line). In a
-Simulink scope or Spectrum Analyzer, use that scope's own **File > Print to
-Figure**, then copy the figure it creates. Paste straight into your document.
-That gives you the plot at full resolution with the axes, tick labels, and
-titles sharp. Phone photographs of a monitor, cropped screen grabs, and blurry
-captures make the plots unreadable.
+**Copy your figures, do not screenshot them.** For MATLAB figure windows, use
+**Edit > Copy Figure** (or run `copygraphics(gcf)` at the command line). If a
+Simulink Scope or Spectrum Analyzer cannot be copied in your MATLAB release,
+maximize the scope window and capture just that window with **Win+Shift+S**.
+Either way, make sure the axis labels and tick values are readable in your
+document.
 
-**One exception.** Item 1 below asks for a screenshot, because **Print to
-Figure** exports only the spectrum axes and leaves the Channel Measurements
-table behind — and that table holds the number you are being graded on. For
-that item, take a clean capture of the whole scope window (on Windows,
-**Alt+PrtScn** grabs just the active window) so that the spectrum and the
-measurement table are both readable. Still no phone photographs.
+**For item 1 below**, the capture must show the **Channel Measurements** table
+as well as the spectrum — that table holds the number you are being graded on,
+and it is not part of the plot itself.
 ```
 
 Submit a single PDF to Gradescope containing:
