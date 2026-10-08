@@ -1,6 +1,6 @@
 # Lab 5: Digital Modulation Fundamentals
 
-(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, Ch. 11.1-11.2.)
+(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, Ch. 11-12.)
 
 ## Overview
 
@@ -29,7 +29,19 @@ That efficiency has a cost, though. For a fixed *average symbol energy* $E_s$ (r
 2. Confirm that mapping then demapping recovers your original bits with no noise present.
 3. Identify which of the four constellation points corresponds to which 2-bit pair, and check it against the $s_k$ equation above (which phase does $k=0$ land at?).
 
-*For more detail on symbol mapping, see Sec. 11.1 in SDR textbook.*
+```{warning}
+**In `QPSK_map_demap_IQ.slx`, the bit traces and the I/Q traces are two symbols
+apart.** The `Delay` block shifts the transmitted bits by 4 bits so that the two
+traces of `Time Scope Tx Rx` line up with each other — the demodulated bits come
+out late, because of the Unbuffer/Buffer pair the model uses to split I from Q.
+Nothing applies that same shift to `Time Scope IQ` or to the constellation. So the
+bit pair on screen at any instant belongs to the symbol that appeared on the
+constellation **two symbol periods earlier**. Step through the simulation comparing
+the two windows directly and a perfectly good mapping will look random. Read the
+mapping off the constellation diagram, which is not delayed.
+```
+
+*For more detail on symbol mapping, see Exercises 11.1 and 11.2 in SDR textbook.*
 
 ## Activity 2: Constellations Under Noise
 
@@ -37,7 +49,7 @@ That efficiency has a cost, though. For a fixed *average symbol energy* $E_s$ (r
 2. Sweep the noise level up on both and compare: at what noise level does QPSK's constellation start to look "fuzzy," versus 16-QAM's? You should see 16-QAM degrade first — its $d_{min}$ is smaller for the same average energy, exactly as the math above predicts.
 3. Open `digital/simulation/modulation/QAM16_constellation_IQ.slx`, which breaks the same 16-QAM signal into separate I and Q views, if you want to see the components individually.
 
-*For more detail on constellation noise sensitivity, see Sec. 11.1 in SDR textbook.*
+*For more detail on constellation noise sensitivity, see Exercises 11.3, 11.4 and 11.5 in SDR textbook.*
 
 ## Activity 3: Pulse Shaping — the Nyquist ISI Criterion
 
@@ -56,7 +68,7 @@ A rectangular pulse is the extreme case that doesn't satisfy the criterion clean
 3. Confirm for yourself that each pulse crosses zero exactly at the neighboring symbols' sampling instants, per the criterion above.
 4. Try increasing and decreasing the roll-off factor $\alpha$ and note how the pulse's time-domain decay and frequency-domain bandwidth trade off against each other.
 
-*For more detail on pulse shaping and the Nyquist ISI criterion, see Sec. 11.2 in SDR textbook.*
+*For more detail on pulse shaping and the Nyquist ISI criterion, see Exercises 11.6, 11.7 and 11.8 in SDR textbook.*
 
 ## Activity 4: A Real Captured Signal
 
@@ -65,10 +77,14 @@ A rectangular pulse is the extreme case that doesn't satisfy the criterion clean
     - Right-click `RTL-SDR Receiver` and choose **Comment Out**.
     - Right-click the greyed-out `Import RTL-SDR Data` block and choose **Comment In**. Its filename is already set to `rec_data\qpsk_raised_cosine.mat`.
     - Draw signal lines from the `Import RTL-SDR Data` output to the two places the `RTL-SDR Receiver` output used to go: the `Raised Cosine Receive Filter` and the `Matrix Concatenate` block.
-3. Run it. This is an actual over-the-air RTL-SDR capture recorded for the SDR textbook, not a simulation — so you do **not** need your dongle plugged in for this activity.
-4. Look at the resulting constellation and note what it looks like: it likely will *not* look clean yet, since this file hasn't gone through the frequency and timing correction you'll build in Lab 6.
+3. Set the simulation **Stop Time** to `30` and the simulation mode to **Normal**. The model ships in *Accelerator* mode, which is meant for running against live hardware.
+4. Run it. This is an actual over-the-air RTL-SDR capture recorded for the SDR textbook, not a simulation — so you do **not** need your dongle plugged in for this activity.
+5. This model has a single display, `Spectrum Analyzer Receive`, and it shows **two traces**. The `Matrix Concatenate` block feeds it the received signal both before and after the matched RRC filter, so you are looking at the same signal either side of that filter. Compare the two: note where the matched filter has pulled down energy outside the signal band, and estimate how wide the QPSK signal is.
+6. There is deliberately **no constellation diagram** in this model, and if you add one you will not get four clean points. Two separate reasons, and Lab 6 fixes both:
+    - The receive filter is set to **Input samples per symbol = 20** with **Decimation factor = 1**, so its output still carries 20 samples for every symbol — 19 of which land partway between constellation points. A Constellation Diagram block assumes 1 sample per symbol unless you tell it otherwise, so it plots all 20 and you get a smear rather than four clusters. The decimation is left at 1 on purpose, so that the higher sample rate is still available to the synchronization blocks you will add in Lab 6.
+    - Nothing here corrects the carrier frequency offset between the transmitter and your dongle. Even sampled at exactly the right instants, the constellation would rotate continuously.
 
-*For more detail on real-time QPSK receiver models, see Sec. 12.1 in SDR textbook.*
+*For more detail on this receiver model, see Exercise 12.2 in SDR textbook.*
 
 ## Assignment
 
@@ -85,5 +101,5 @@ Submit a single PDF to Gradescope containing:
 
 1. Constellation figures for QPSK and 16-QAM at two comparable noise levels, with 2-3 sentences comparing their sensitivity to noise.
 2. The rectangular vs. RRC pulse spectrum comparison from Activity 3, with 1-2 sentences on which one you'd rather transmit next to another signal, and why.
-3. Your constellation figure from the real recorded QPSK capture in Activity 4, with a one-sentence prediction of what you think is wrong with it (you'll find out for real in Lab 6).
+3. Your `Spectrum Analyzer Receive` figure from Activity 4 showing both traces, with 2-3 sentences comparing the received signal before and after the matched RRC filter. Tie it back to the raised cosine pulse from Activity 3: the transmitter shaped this signal with an RRC filter and the receiver applies a matched one, so what does the cascade of the two give you, and why is that the pulse shape you wanted?
 4. Your documentation statement.
