@@ -101,5 +101,5 @@ Submit a single PDF to Gradescope containing:
 
 1. Constellation figures for QPSK and 16-QAM at two comparable noise levels, with 2-3 sentences comparing their sensitivity to noise.
 2. The rectangular vs. RRC pulse spectrum comparison from Activity 3, with 1-2 sentences on which one you'd rather transmit next to another signal, and why.
-3. Your `Spectrum Analyzer Receive` figure from Activity 4 showing both traces, with 1-2 sentences on what the matched filter changed, and one sentence on why this model cannot yet show you a clean constellation (you'll fix both causes in Lab 6).
+3. Your `Spectrum Analyzer Receive` figure from Activity 4 showing both traces, with 2-3 sentences comparing the received signal before and after the matched RRC filter. Tie it back to the raised cosine pulse from Activity 3: the transmitter shaped this signal with an RRC filter and the receiver applies a matched one, so what does the cascade of the two give you, and why is that the pulse shape you wanted?
 4. Your documentation statement.
