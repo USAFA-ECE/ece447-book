@@ -4,9 +4,9 @@
 
 ## Overview
 
-Today the classroom becomes a real digital radio link. The instructor's ADALM-PLUTO will transmit a live QPSK signal from the front of the room; every student receives it independently on their own RTL-SDR. This is the same real-hardware chain from Lab 5, but now with an actual live-transmitted signal instead of a recording, and now built to fully synchronize instead of just observing a raw constellation.
+Today the classroom becomes a real digital radio link. The instructor will transmit a live QPSK signal from the front of the room; every student receives it independently on their own RTL-SDR. This is the same real-hardware chain from Lab 5, but now with an actual live-transmitted signal instead of a recording, and now built to fully synchronize instead of just observing a raw constellation.
 
-**Only the instructor transmits.** We don't have a PLUTO for every student, and HackRF units aren't well-supported for transmit through MATLAB in a way we could reliably get running across a whole class in 53 minutes — so this lab, and Labs 7 and 8, all use one instructor transmitter with the whole class receiving simultaneously.
+**Only the instructor transmits.** We don't have a transmit-capable radio for every student, and getting one working reliably across a whole class in 53 minutes isn't something we could count on — so this lab, and Labs 7 and 8, all use one instructor transmitter with the whole class receiving simultaneously.
 
 ## Aims of the Lab
 
@@ -30,14 +30,11 @@ where $s[n]$ is the transmitted QPSK symbol from Lab 5's mapping, $T_s$ is your 
 
 ## Setup
 
-The instructor will announce a transmit frequency at the start of each class period and run the transmit model that matches the activity you're on, pausing between stages:
+The instructor will announce a transmit frequency at the start of each class period and transmit the signal for the activity you're on, pausing between stages:
 
-**Day 1**
-1. `digital/pluto_tx/pluto_QPSK_raised_cosine.slx` — for Activity 1
-2. `digital/pluto_tx/pluto_QPSK_coarse_synch.slx` — for Activity 2
+**Day 1** — Activities 1 and 2
 
-**Day 2**
-3. `digital/pluto_tx/pluto_QPSK_carrier_timing.slx` — for Activity 3
+**Day 2** — Activity 3
 
 You'll run the matching receiver model at each stage.
 

@@ -73,7 +73,7 @@ Every lab this semester opens Simulink models and MATLAB scripts from a shared *
 
 ## Activity 1: First Contact
 
-> Fairchild Hall blocks broadcast FM almost completely, so you won't find a real station from inside the classroom. For this activity your instructor is looping a **recorded FM broadcast** into the room from an ADALM-PLUTO (`fm/pluto_tx/pluto_fm_capture_replay.m`) and will announce the frequency. That's your known-good signal to tune to - no need to leave the room.
+> Fairchild Hall blocks broadcast FM almost completely, so you won't find a real station from inside the classroom. For this activity your instructor is transmitting a **recorded FM broadcast** into the room and will announce the frequency. That's your known-good signal to tune to - no need to leave the room.
 
 1. Open `intro/rtlsdr_rx_startup_simulink.slx` from the course support files. Before running it, double-click the RTL-SDR Receiver block and take a look at its parameters - note where the center frequency, sample rate, and gain are set. You'll be adjusting these directly in later activities.
 2. Run the model. You should see IQ samples streaming into a scope with no errors - this is your smoke test that the whole chain (driver, HSP, hardware) is actually working before you build anything more complex.

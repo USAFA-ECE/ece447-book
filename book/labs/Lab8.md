@@ -4,7 +4,7 @@
 
 ## Overview
 
-This is your capstone SDR lab: the instructor's PLUTO will transmit an actual image over the air using the same QPSK link you've been building since Lab 5, and you'll receive and reconstruct it on your own RTL-SDR. We're also adding a short integrity-check exercise of our own, tying back to the parity/CRC/Hamming code lecture — the SDR textbook's exercise stops at "did the image come through," and we're extending it to "how would you know if it didn't."
+This is your capstone SDR lab: the instructor will transmit an actual image over the air using the same QPSK link you've been building since Lab 5, and you'll receive and reconstruct it on your own RTL-SDR. We're also adding a short integrity-check exercise of our own, tying back to the parity/CRC/Hamming code lecture — the SDR textbook's exercise stops at "did the image come through," and we're extending it to "how would you know if it didn't."
 
 As with Labs 6 and 7, only the instructor transmits; the whole class receives independently.
 
@@ -16,7 +16,7 @@ As with Labs 6 and 7, only the instructor transmits; the whole class receives in
 
 ## Setup
 
-The instructor will announce a transmit frequency and run `digital/pluto_tx/pluto_QPSK_image_transfer.slx`, transmitting one of the sample images from the `rtlsdr_book_library/` folder (`image1.mat` through `image7.mat`, e.g. `rtlsdr_book_library/image3.mat`).
+The instructor will announce a transmit frequency and transmit one of the sample images from the `rtlsdr_book_library/` folder (`image1.mat` through `image7.mat`, e.g. `rtlsdr_book_library/image3.mat`).
 
 ## Activity 1: Receive and Reconstruct the Image
 

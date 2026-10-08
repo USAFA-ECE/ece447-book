@@ -4,7 +4,7 @@
 
 ## Overview
 
-A synchronized QPSK link (Lab 6) only gets you a clean stream of symbols — it doesn't tell you where a message starts. Today you'll receive a live, framed, ASCII-encoded message from the instructor's PLUTO and decode actual text out of the air. As in Lab 6, only the instructor transmits; the whole class receives simultaneously on individual RTL-SDRs.
+A synchronized QPSK link (Lab 6) only gets you a clean stream of symbols — it doesn't tell you where a message starts. Today you'll receive a live, framed, ASCII-encoded message from the instructor and decode actual text out of the air. As in Lab 6, only the instructor transmits; the whole class receives simultaneously on individual RTL-SDRs.
 
 ## Aims of the Lab
 
@@ -21,7 +21,7 @@ When the window is aligned exactly with the transmitted sync word, every term in
 
 ## Setup
 
-The instructor will announce a transmit frequency and run `digital/pluto_tx/pluto_QPSK_ascii_message.slx`, which repeatedly transmits a short text message framed with a known sync word.
+The instructor will announce a transmit frequency and repeatedly transmit a short text message framed with a known sync word.
 
 ## Activity 1: Frame Synchronization
 
