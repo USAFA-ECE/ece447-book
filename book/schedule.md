@@ -38,10 +38,10 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 21 | Tue 6 Oct | SDR Lab | [Lab 5 Description](labs/Lab5) |  [Lab 5](labs/Lab5), [HW5](HW/HW5)  | [HW4](HW/HW4) |
 | 22 | Thu 8 Oct | Digital comm & line coding | L&D 6.1-6.2 |  |  |
 | 23 | Tue 13 Oct | Digital comm & line coding (cont'd) | L&D 6.1-6.2 |  | [HW5](HW/HW5) |
-| 24 | Thu 15 Oct | Pulse shaping & intersymbol interference (ISI) | L&D 6.3.1-6.3.3 | [HW6](HW/HW6) | [Lab 5](labs/Lab5) |
+| 24 | Thu 15 Oct | Pulse shaping & intersymbol interference (ISI) | L&D 6.3.1-6.3.3 | [HW6](HW/HW6) |  |
 | 25 | Mon 19 Oct | Digital receivers: timing & detection, eye diagrams | L&D 6.5.2-6.5.3, 6.6 | |  |
 | 26 | Wed 21 Oct | M-ary digital modulation | L&D 6.7 | [HW7](HW/HW7) |  |
-| 27 | Fri 23 Oct | Digital carrier modulation | L&D 6.8-6.9 |  |  |
+| 27 | Fri 23 Oct | Digital carrier modulation | L&D 6.8-6.9 |  | [Lab 5](labs/Lab5) |
 | 28 | Tue 27 Oct | SDR Lab (Day 1 of 2) | [Lab 6 Description](labs/Lab6) | [Lab 6](labs/Lab6) | [HW6](HW/HW6) |
 | 29 | Thu 29 Oct | SDR Lab (Day 2 of 2) | [Lab 6 Description](labs/Lab6) |  |  |
 | 30 | Mon 2 Nov | Probability, Part 1 | L&D 7.1-7.3 |  |  |
