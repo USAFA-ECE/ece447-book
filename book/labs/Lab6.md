@@ -55,13 +55,23 @@ This is the same model you ran on a recording in Lab 5, Activity 4 — now point
 
 ## Activity 2: Coarse Frequency Correction
 
+**Why this stage exists at all.** The fine carrier synchronizer you'll run in Activity 3 is a phase-locked loop, and a PLL can only pull in an offset that is already fairly small — on the order of a kilohertz. Your dongle's crystal can easily be further off than that, and a PLL handed too large an offset simply never locks. So a *coarse* stage runs first: drag the signal to within the PLL's reach, then let the PLL clean up what's left. Coarse gets you close, fine gets you exact.
+
+**How the model makes that measurable.** Three design choices are worth understanding before you run it.
+
+- **The offset is injected deliberately, and you control it.** The `Additional Freq Offset (Hz)` block holds `400`, and it is *summed with* `QPSK Signal Frequency (Hz)` before driving the `RTL-SDR Receiver`. The model mistunes your dongle on purpose, by a known amount, on top of whatever error your crystal already contributes. That gives you a ground truth to check the estimator against — and a knob to turn.
+- **The signal is decimated hard before the estimator: 240 kHz, then ÷5 to 48 kHz, then ÷6 to 8 kHz.** The estimator works by taking an FFT of the 4th-power signal and picking the largest bin, so the precision of its answer is the FFT bin spacing, $f_{FFT} = f_s/N_{FFT}$. Dropping $f_s$ shrinks the bins and sharpens the estimate. What stops you decimating further is that the tone sits at $4\Delta f$, so $f_s$ must stay **at least 8 times the largest offset you intend to handle**. At 8 kHz that caps you near $\pm$1 kHz — comfortably above the 400 Hz being injected.
+- **Correction happens before the matched filter here**, the reverse of the Activity 1 model. The order is decimate → estimate and correct → RRC filter.
+
 1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_coarse_synch.slx` once the instructor starts the matching transmitter.
 2. This model has **no constellation diagram either**. What it gives you is `Spectrum Analyzer - Coarse Synch`, carrying three traces that walk through the 4th-power trick from the math section above:
-    - **Decimated signal** — the signal as received, sitting off-center by $\Delta f$.
-    - **Induced Peak** — the result of raising it to the 4th power. The modulation cancels and you are left with a single tone at $4\Delta f$.
-    - **Corrected signal** — the received signal shifted by the estimated offset, now centered on 0 Hz.
-3. Find the induced peak and read its frequency. Divide by 4 and compare against the `Calculated Frequency Offset (Hz)` display, which shows what the model's own estimator worked out. They should agree.
-4. `Spectrum Analyzer - Received Signal` and `Spectrum Analyzer - RRC Filtered` show earlier points in the chain if you want to trace the signal through.
+    - **Decimated signal** — the 8 kHz signal going into the estimator, sitting off-center by $\Delta f$.
+    - **Induced Peak** — that same signal raised to the 4th power. The QPSK modulation cancels and you are left with a single tone at $4\Delta f$.
+    - **Corrected signal** — the input shifted by the estimate, now centered on 0 Hz.
+3. Read the frequency of the induced peak and divide by 4. Compare against the `Calculated Frequency Offset (Hz)` display, which shows what the model's own estimator computed. They should agree closely.
+4. **Turn the knob.** Change `Additional Freq Offset (Hz)` to something else — try 250, then 700 — and re-run each time. Confirm that the induced peak moves to 4x whatever you set, that the displayed estimate follows it, and that the corrected trace stays centered on 0 Hz regardless. That is the entire algorithm working in front of you.
+5. **Now break it.** Set the offset past what an 8 kHz sample rate can support — try 1500 — and re-run. The estimate should come back wrong. Work out what happened to the $4\Delta f$ tone, using the 8x rule above, and be ready to explain it.
+6. `Spectrum Analyzer - Received Signal` and `Spectrum Analyzer - RRC Filtered` show earlier points in the chain if you want to trace the signal through.
 
 *For more detail on coarse frequency synchronization, see Exercises 12.3 and 12.4 in SDR textbook.*
 
