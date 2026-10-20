@@ -1,10 +1,10 @@
 # Lab 6: QPSK Transmission and Reception over Real Hardware
 
-(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, Ch. 12.1-12.3.)
+(Adapted from R. W. Stewart, K. W. Barlee, D. S. W. Atkinson, L. H. Crockett, & A. G. Broadhurst, [*Software Defined Radio using MATLAB & Simulink and the RTL-SDR*](https://www.desktopsdr.com/download-files), 2nd Ed., Strathclyde Academic Media, 2022, Ch. 12.)
 
 ## Overview
 
-Today the classroom becomes a real digital radio link. The instructor will transmit a live QPSK signal from the front of the room; every student receives it independently on their own RTL-SDR. This is the same real-hardware chain from Lab 5, but now with an actual live-transmitted signal instead of a recording, and now built to fully synchronize instead of just observing a raw constellation.
+Today the classroom becomes a real digital radio link. The instructor will transmit a live QPSK signal from the front of the room; every student receives it independently on their own RTL-SDR. This is the same real-hardware chain from Lab 5, but now with an actual live-transmitted signal instead of a recording, and now built to fully synchronize rather than just confirming the signal is there on the spectrum.
 
 **Only the instructor transmits.** We don't have a transmit-capable radio for every student, and getting one working reliably across a whole class in 53 minutes isn't something we could count on — so this lab, and Labs 7 and 8, all use one instructor transmitter with the whole class receiving simultaneously.
 
@@ -42,30 +42,40 @@ You'll run the matching receiver model at each stage.
 If the live signal is weak or breaks up from where you're sitting, there is a recorded capture for **every** stage of this lab so you can still finish — the file list is in Activity 3, step 4. You can fall back at any point, including on Day 1.
 ```
 
-## Activity 1: Raw Constellation
+## Activity 1: Acquire the Live Signal
+
+This is the same model you ran on a recording in Lab 5, Activity 4 — now pointed at a live transmission. Its only display is `Spectrum Analyzer Receive`, which shows the signal before and after the matched RRC filter. **There is no constellation diagram in this model**; you get your first constellation in Activity 3.
 
 1. Tune to the announced frequency.
-2. Run `digital/rtlsdr_rx/rtlsdr_QPSK_raised_cosine.slx`.
-3. With no correction applied, expect the constellation to look rotated, smeared, or slowly spinning — this is the combined effect of your RTL-SDR's crystal frequency offset and unknown symbol timing, both of which Lab 5 warned you about. Confirm you can see this before moving on.
+2. Run `digital/rtlsdr_rx/rtlsdr_QPSK_raised_cosine.slx` with the `RTL-SDR Receiver` block active (the reverse of the block swap you did in Lab 5).
+3. Find the instructor's signal on the spectrum and adjust `Tuner Gain (dB)` until it stands clearly above the noise floor without flattening off at the top. Getting the gain right here saves you trouble in Activity 3, where the synchronizer will not lock on a signal that is too weak.
+4. Note how wide the signal is and where it sits relative to 0 Hz. It will not be exactly centered — that offset is the $\Delta f$ you are about to measure.
 
-*For more detail on this real-time QPSK receiver model, see Sec. 12.1 in SDR textbook.*
+*For more detail on this receiver model, see Exercise 12.2 in SDR textbook.*
 
 ## Activity 2: Coarse Frequency Correction
 
 1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_coarse_synch.slx` once the instructor starts the matching transmitter.
-2. Confirm the constellation stops spinning, though it likely still won't be crisp.
-3. If a spectrum analyzer view is available in the model, locate the $4\Delta f$ tone described above and connect it back to the 4th-power trick.
+2. This model has **no constellation diagram either**. What it gives you is `Spectrum Analyzer - Coarse Synch`, carrying three traces that walk through the 4th-power trick from the math section above:
+    - **Decimated signal** — the signal as received, sitting off-center by $\Delta f$.
+    - **Induced Peak** — the result of raising it to the 4th power. The modulation cancels and you are left with a single tone at $4\Delta f$.
+    - **Corrected signal** — the received signal shifted by the estimated offset, now centered on 0 Hz.
+3. Find the induced peak and read its frequency. Divide by 4 and compare against the `Calculated Frequency Offset (Hz)` display, which shows what the model's own estimator worked out. They should agree.
+4. `Spectrum Analyzer - Received Signal` and `Spectrum Analyzer - RRC Filtered` show earlier points in the chain if you want to trace the signal through.
 
-*For more detail on coarse frequency synchronization, see Sec. 11.8 and 12.2 in SDR textbook.*
+*For more detail on coarse frequency synchronization, see Exercises 12.3 and 12.4 in SDR textbook.*
 
 ## Activity 3: Full Carrier and Timing Synchronization
 
-1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing.slx`. This adds fine carrier tracking and symbol timing recovery on top of the coarse correction.
-2. Confirm you now see four tight, distinct constellation points.
-3. If you want additional scope views of the internal tracking loops, open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing_plots.slx`, which adds logging and scope instrumentation on top of the same synchronization chain (it drops the base model's symbol-decision/printout branch, which you don't need just to view the constellation).
+1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing.slx`. This adds fine carrier tracking and symbol timing recovery on top of the coarse correction. **This is the model with the constellation diagrams** — three of them, tapping the signal at three points in the chain:
+    - **`Rx Before AGC`** — straight off the matched filter, before any gain control or synchronization. This is your uncorrected view. Use it to judge signal strength: if the cluster is squeezed tight around the origin or sprawling off the edges, change `Tuner Gain (dB)` and re-run, because the synchronizer will struggle at either extreme.
+    - **`Rx Timing`** — after AGC and symbol timing recovery. You should see four clusters here, but expect them to still be **spinning**, clockwise or anti-clockwise depending on the sign of your carrier offset.
+    - **`Rx Rotated`** — after carrier synchronization. Despite the name, this is the **fully corrected** output: four clusters sitting still around the reference markers.
+2. Confirm you can see that progression across the three scopes. The ordering is the point — timing recovery gives you distinguishable clusters, and only carrier synchronization stops them moving.
+3. If you want additional scope views of the internal tracking loops, open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing_plots.slx`, which adds logging and scope instrumentation on top of the same synchronization chain (it drops the base model's symbol-decision/printout branch, which you don't need just to view the constellation). Note that its recorded fallback is a different file from the one listed in step 4 and is not on Teams, so use the base model if you need to fall back.
 4. **If the live transmission is weak or interrupted from your seat in the room**, use the matching recorded capture as a fallback for each stage so you can still complete the assignment: `digital/rtlsdr_rx/rec_data/qpsk_raised_cosine.mat`, `digital/rtlsdr_rx/rec_data/qpsk_coarse_synch.mat`, or `digital/rtlsdr_rx/rec_data/qpsk_carrier_timing.mat`. To switch a receiver model from live hardware to a recorded file, use the same block swap you did in [Lab 5](Lab5), Activity 4.
 
-*For more detail on carrier and timing synchronization, see Sec. 11.5-11.7 and 12.3 in SDR textbook.*
+*For more detail on carrier and timing synchronization, see Exercises 12.5 and 12.6 in SDR textbook.*
 
 ## Assignment
 
@@ -80,7 +90,7 @@ document.
 
 Submit a single PDF to Gradescope containing:
 
-1. Three constellation figures — raw, coarse-corrected, and fully synchronized — clearly labeled.
-2. 2-3 sentences for each stage explaining what changed and why (in your own words, not copied from the book).
+1. The three constellation figures from Activity 3 — `Rx Before AGC`, `Rx Timing`, and `Rx Rotated` — clearly labeled, plus your `Spectrum Analyzer - Coarse Synch` figure from Activity 2 with the induced peak visible.
+2. 2-3 sentences for each stage explaining what changed and why (in your own words, not copied from the book). For Activity 2, state the frequency you read off the induced peak, the $\Delta f$ you got by dividing it by 4, and how that compares to the model's own `Calculated Frequency Offset (Hz)` display.
 3. A note on whether you used the live signal or a recorded fallback file, and if the latter, why.
 4. Your documentation statement.
