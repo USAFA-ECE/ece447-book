@@ -76,9 +76,15 @@ function usrp_transmit(which, secs, gain_db, txdir)
 %     block and set Platform and the serial to match, or findsdru will report
 %     "No devices found".
 %
-%   * First access after plugging in can fail with a UHD "No devices found"
-%     while the B200 loads its FPGA image. Just run it again. Do not start
-%     debugging configuration in front of a class.
+%   * UHD intermittently reports "No devices found" for a radio that is
+%     plainly attached. Usually it is the first access after plugging in,
+%     while the B200 loads its FPGA image, but it has also happened mid
+%     session after many successful runs. It clears by itself: the device
+%     showed Status OK in Windows and Success from findsdru immediately
+%     afterwards, and five consecutive opens then succeeded, including
+%     back to back with no gap. This function now retries automatically,
+%     so you should not see it. Do not start debugging configuration in
+%     front of a class.
 %
 %   * matlab -batch segfaults on exit after any session that opened the USRP
 %     (access violation in mnFullExitFcn). It happens strictly after all work
@@ -171,22 +177,42 @@ if ~isempty(tx)
         get_param(tx{1},'decimInterp'),     get_param(tx{1},'sampleRate'));
 end
 
-fprintf('[tx] ON AIR for %d s -- Ctrl+C to stop early\n', secs);
-t0 = tic;
-try
-    sim(mdl);
-    el = toc(t0);
-    fprintf('\n[tx] done: %.1f s wall for %d s simulated (%.2fx real time)\n', ...
-            el, secs, el/secs);
-    if el > secs*1.15 && secs >= 60
-        fprintf(['[tx] NOTE: slower than real time, so the radio underran. ' ...
-                 'The wall of U characters above is that. Close other work and retry.\n']);
-    elseif el > secs*1.15
-        fprintf(['[tx] (Short runs look slow because Accelerator compiles first. ' ...
-                 'Judge the rate on a run of a minute or more.)\n']);
+% UHD intermittently reports "No devices found" for a radio that is plainly
+% attached, usually on the first access after plug-in but occasionally mid
+% session. It clears by itself. Retry rather than dying in front of a class.
+MAX_TRIES = 4;
+for attempt = 1:MAX_TRIES
+    if attempt > 1
+        fprintf('[tx] retrying in 8 s (attempt %d of %d)\n', attempt, MAX_TRIES);
+        pause(8);
     end
-catch ME
-    fprintf('[tx] ERROR after %.1f s: %s\n', toc(t0), ME.message);
+    fprintf('[tx] ON AIR for %d s -- Ctrl+C to stop early\n', secs);
+    t0 = tic;
+    try
+        sim(mdl);
+        el = toc(t0);
+        fprintf('\n[tx] done: %.1f s wall for %d s simulated (%.2fx real time)\n', ...
+                el, secs, el/secs);
+        if el > secs*1.15 && secs >= 60
+            fprintf(['[tx] NOTE: slower than real time, so the radio underran. ' ...
+                     'The wall of U characters above is that. Close other work and retry.\n']);
+        elseif el > secs*1.15
+            fprintf(['[tx] (Short runs look slow because Accelerator compiles first. ' ...
+                     'Judge the rate on a run of a minute or more.)\n']);
+        end
+        break
+    catch ME
+        msg = regexprep(ME.message, '\s+', ' ');
+        transient = contains(msg,'No devices found') || contains(msg,'createDriver_c');
+        fprintf('[tx] ERROR after %.1f s: %s\n', toc(t0), msg);
+        if ~transient
+            fprintf('[tx] not a known transient - stopping.\n');
+            break
+        elseif attempt == MAX_TRIES
+            fprintf(['[tx] still not found after %d tries. Unplug the USRP, wait a few\n' ...
+                     '     seconds, plug it back in and run again.\n'], MAX_TRIES);
+        end
+    end
 end
 close_system(mdl, 0);     % discard: never re-save these models
 end
