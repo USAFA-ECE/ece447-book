@@ -60,7 +60,7 @@ This is the same model you ran on a recording in Lab 5, Activity 4 — now point
 **How the model makes that measurable.** Three design choices are worth understanding before you run it.
 
 - **The offset is injected deliberately, and you control it.** The `Additional Freq Offset (Hz)` block is *summed with* `QPSK Signal Frequency (Hz)` before driving the `RTL-SDR Receiver`. The model mistunes your dongle on purpose, by a known amount, on top of whatever error your crystal already contributes. That gives you a ground truth to check the estimator against — and a knob to turn. **Set it to `700`.** It ships at `400`, which is close enough to a typical dongle's own crystal error at this frequency that the two can very nearly cancel, leaving no offset to find and nothing to see.
-- **The signal is decimated hard before the estimator: 240 kHz, then ÷5 to 48 kHz, then ÷6 to 8 kHz.** The estimator works by taking an FFT of the 4th-power signal and picking the largest bin, so the precision of its answer is the FFT bin spacing, $f_{FFT} = f_s/N_{FFT}$. Dropping $f_s$ shrinks the bins and sharpens the estimate. What stops you decimating further is that the tone sits at $4\Delta f$, so $f_s$ must stay **at least 8 times the largest offset you intend to handle**. At 8 kHz that caps you near $\pm$1 kHz — comfortably above the 700 Hz you are injecting.
+- **The signal is decimated hard before the estimator: 240 kHz, then ÷5 to 48 kHz, then ÷6 to 8 kHz.** The estimator takes an FFT of the 4th-power signal and picks the largest bin, and the bins are $f_{FFT} = f_s/N_{FFT}$ apart, so dropping $f_s$ makes them finer. What stops you decimating further is that the tone sits at $4\Delta f$, so $f_s$ must stay **at least 8 times the largest offset you intend to handle**. At 8 kHz that caps you near $\pm$1 kHz — comfortably above the 700 Hz you are injecting.
 - **Correction happens before the matched filter here**, the reverse of the Activity 1 model. The order is decimate → estimate and correct → RRC filter.
 
 1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_coarse_synch.slx` and, before you run it, set two blocks:
@@ -69,8 +69,15 @@ This is the same model you ran on a recording in Lab 5, Activity 4 — now point
 2. Run it once the instructor starts the matching transmitter.
 3. This model has **no constellation diagram either**. What it gives you is `Spectrum Analyzer - Coarse Synch`, carrying three traces that walk through the 4th-power trick from the math section above:
     - **Decimated signal** — the 8 kHz signal going into the estimator, sitting off-center by $\Delta f$.
-    - **Induced Peak** — that same signal raised to the 4th power. The QPSK modulation cancels and you are left with a single tone at $4\Delta f$.
+    - **Induced Peak** — that same signal raised to the 4th power. The QPSK modulation cancels and leaves energy concentrated at $4\Delta f$.
     - **Corrected signal** — the input shifted by the estimate, now centered on 0 Hz.
+
+    **Expect a broad hump, not a clean spike.** The math says $s^4$ is a constant times a single phasor, so you might expect one sharp line. You will instead see a peak a few kilohertz wide, riding maybe 8 to 15 dB above its own skirts. Two reasons, and neither is a fault:
+
+    - **The modulation only cancels exactly at the symbol instants.** The estimator runs at 8 kHz on a 1 kSps signal, so seven of every eight samples land partway up a pulse, where the phase is still sweeping between constellation points. Those samples raised to the 4th power point in scattered directions and spread out into the pedestal; only the on-symbol samples build the peak. Sample this signal at exactly one sample per symbol and the hump collapses to a line — but you cannot do that yet, because sampling at the symbol instants requires the timing recovery that does not run until Activity 3.
+    - **Raising to the 4th power widens any spectrum by roughly four times**, since in the frequency domain it convolves the spectrum with itself four times. Your pulse-shaped signal is about 1.5 kHz wide to begin with, so the result is several kilohertz wide no matter how clean the signal is.
+
+    This also means the bin spacing above is a *floor* on the error, not the accuracy you actually get. The bins may be about 1 Hz apart, but you are locating the middle of a hump thousands of hertz wide, so realistic accuracy is on the order of a hundred hertz. That gap is the whole reason this stage is called *coarse* and why a PLL has to finish the job.
 4. Read the frequency of the induced peak and divide by 4. Compare against the `Calculated Frequency Offset (Hz)` display, which shows what the model's own estimator computed. They should agree closely.
 
     Do not expect to get exactly 700 Hz back. Your dongle's own crystal error adds to what you injected, so the measured figure lands somewhat off the number you set — a hundred hertz or two is normal. That difference *is* your dongle's error, which is the same quantity you measured a different way in Lab 2.
