@@ -48,7 +48,7 @@ This is the same model you ran on a recording in Lab 5, Activity 4 — now point
 
 1. Tune to the announced frequency.
 2. Run `digital/rtlsdr_rx/rtlsdr_QPSK_raised_cosine.slx` with the `RTL-SDR Receiver` block active (the reverse of the block swap you did in Lab 5).
-3. Find the instructor's signal on the spectrum and adjust `Tuner Gain (dB)` until it stands clearly above the noise floor without flattening off at the top. Getting the gain right here saves you trouble in Activity 3, where the synchronizer will not lock on a signal that is too weak.
+3. Find the instructor's signal on the spectrum and set `Tuner Gain (dB)` so it stands clearly above the noise floor without flattening off at the top. **Start at `40`** rather than the `10` the model ships with; somewhere in the 30-45 range usually works, and above about 45 the front end compresses. Getting the gain right here saves you real trouble in Activities 2 and 3, where too little gain stops the synchronizers working at all.
 4. Note how wide the signal is and where it sits relative to 0 Hz. It will not be exactly centered — that offset is the $\Delta f$ you are about to measure.
 
 *For more detail on this receiver model, see Exercise 12.2 in SDR textbook.*
@@ -59,21 +59,26 @@ This is the same model you ran on a recording in Lab 5, Activity 4 — now point
 
 **How the model makes that measurable.** Three design choices are worth understanding before you run it.
 
-- **The offset is injected deliberately, and you control it.** The `Additional Freq Offset (Hz)` block holds `400`, and it is *summed with* `QPSK Signal Frequency (Hz)` before driving the `RTL-SDR Receiver`. The model mistunes your dongle on purpose, by a known amount, on top of whatever error your crystal already contributes. That gives you a ground truth to check the estimator against — and a knob to turn.
-- **The signal is decimated hard before the estimator: 240 kHz, then ÷5 to 48 kHz, then ÷6 to 8 kHz.** The estimator works by taking an FFT of the 4th-power signal and picking the largest bin, so the precision of its answer is the FFT bin spacing, $f_{FFT} = f_s/N_{FFT}$. Dropping $f_s$ shrinks the bins and sharpens the estimate. What stops you decimating further is that the tone sits at $4\Delta f$, so $f_s$ must stay **at least 8 times the largest offset you intend to handle**. At 8 kHz that caps you near $\pm$1 kHz — comfortably above the 400 Hz being injected.
+- **The offset is injected deliberately, and you control it.** The `Additional Freq Offset (Hz)` block is *summed with* `QPSK Signal Frequency (Hz)` before driving the `RTL-SDR Receiver`. The model mistunes your dongle on purpose, by a known amount, on top of whatever error your crystal already contributes. That gives you a ground truth to check the estimator against — and a knob to turn. **Set it to `700`.** It ships at `400`, which is close enough to a typical dongle's own crystal error at this frequency that the two can very nearly cancel, leaving no offset to find and nothing to see.
+- **The signal is decimated hard before the estimator: 240 kHz, then ÷5 to 48 kHz, then ÷6 to 8 kHz.** The estimator works by taking an FFT of the 4th-power signal and picking the largest bin, so the precision of its answer is the FFT bin spacing, $f_{FFT} = f_s/N_{FFT}$. Dropping $f_s$ shrinks the bins and sharpens the estimate. What stops you decimating further is that the tone sits at $4\Delta f$, so $f_s$ must stay **at least 8 times the largest offset you intend to handle**. At 8 kHz that caps you near $\pm$1 kHz — comfortably above the 700 Hz you are injecting.
 - **Correction happens before the matched filter here**, the reverse of the Activity 1 model. The order is decimate → estimate and correct → RRC filter.
 
-1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_coarse_synch.slx` once the instructor starts the matching transmitter.
-2. This model has **no constellation diagram either**. What it gives you is `Spectrum Analyzer - Coarse Synch`, carrying three traces that walk through the 4th-power trick from the math section above:
+1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_coarse_synch.slx` and, before you run it, set two blocks:
+    - **`Tuner Gain (dB)` to `40`.** It ships at `10`, which is far too low for this activity. Your dongle puts a fixed DC spike at the centre of its output, and at gain 10 that spike sits roughly 28 dB above the signal, so the estimator finds the spike instead of the signal and reports an offset of 0 Hz. Raising the gain lifts the signal by about 20 dB while the spike barely moves, which is what makes the real tone findable. Above about 45 the front end starts to compress and it gets worse again.
+    - **`Additional Freq Offset (Hz)` to `700`**, per the note above.
+2. Run it once the instructor starts the matching transmitter.
+3. This model has **no constellation diagram either**. What it gives you is `Spectrum Analyzer - Coarse Synch`, carrying three traces that walk through the 4th-power trick from the math section above:
     - **Decimated signal** — the 8 kHz signal going into the estimator, sitting off-center by $\Delta f$.
     - **Induced Peak** — that same signal raised to the 4th power. The QPSK modulation cancels and you are left with a single tone at $4\Delta f$.
     - **Corrected signal** — the input shifted by the estimate, now centered on 0 Hz.
-3. Read the frequency of the induced peak and divide by 4. Compare against the `Calculated Frequency Offset (Hz)` display, which shows what the model's own estimator computed. They should agree closely.
-4. **Turn the knob — live reception only.** Change `Additional Freq Offset (Hz)` to something else — try 250, then 700 — and re-run each time. Confirm that the induced peak moves to 4x whatever you set, that the displayed estimate follows it, and that the corrected trace stays centered on 0 Hz regardless. That is the entire algorithm working in front of you.
+4. Read the frequency of the induced peak and divide by 4. Compare against the `Calculated Frequency Offset (Hz)` display, which shows what the model's own estimator computed. They should agree closely.
 
-    This step does nothing if you are running from a recorded file. The offset block is summed with `QPSK Signal Frequency (Hz)` and the result drives the `RTL-SDR Receiver` tuning port only, so with `Import RTL-SDR Data` active that whole branch is disconnected and the recording's own built-in offset is all you get. Skip to step 6 if you are on the fallback.
-5. **Now break it** (also live only). Set the offset past what an 8 kHz sample rate can support — try 1500 — and re-run. The estimate should come back wrong. Work out what happened to the $4\Delta f$ tone, using the 8x rule above, and be ready to explain it.
-6. `Spectrum Analyzer - Received Signal` and `Spectrum Analyzer - RRC Filtered` show earlier points in the chain if you want to trace the signal through.
+    Do not expect to get exactly 700 Hz back. Your dongle's own crystal error adds to what you injected, so the measured figure lands somewhat off the number you set — a hundred hertz or two is normal. That difference *is* your dongle's error, which is the same quantity you measured a different way in Lab 2.
+5. **Turn the knob — live reception only.** Change `Additional Freq Offset (Hz)` to something else — try 300, then 900 — and re-run each time. Confirm that the induced peak moves to 4x whatever you set, that the displayed estimate follows it, and that the corrected trace stays centered on 0 Hz regardless. That is the entire algorithm working in front of you.
+
+    This step does nothing if you are running from a recorded file. The offset block is summed with `QPSK Signal Frequency (Hz)` and the result drives the `RTL-SDR Receiver` tuning port only, so with `Import RTL-SDR Data` active that whole branch is disconnected and the recording's own built-in offset is all you get. Skip to step 7 if you are on the fallback.
+6. **Now break it** (also live only). Set the offset past what an 8 kHz sample rate can support — try 1500 — and re-run. The estimate should come back wrong. Work out what happened to the $4\Delta f$ tone, using the 8x rule above, and be ready to explain it.
+7. `Spectrum Analyzer - Received Signal` and `Spectrum Analyzer - RRC Filtered` show earlier points in the chain if you want to trace the signal through.
 
 ```{warning}
 **If the induced peak sits at exactly 0 Hz, the estimator has locked onto DC, not onto your signal.**
@@ -84,28 +89,32 @@ power leaves DC at DC, so that spike lands in the same FFT bin the estimator
 searches and competes with the real $4\Delta f$ tone. Win that contest and the
 reported offset is 0 Hz, which looks exactly like a broken model.
 
-The margin is thinner than you would expect, so this is easy to hit. Work
-through it in this order:
+Work through it in this order:
 
-1. **Check that the signal is actually there.** Look at `Spectrum Analyzer -
+1. **Raise `Tuner Gain (dB)` to about 40.** This is almost always the answer,
+   and it is why step 1 asks for it. The DC spike is roughly fixed no matter
+   what the gain is, while the signal rises with it, so turning the gain up
+   changes which of the two the estimator finds. At the shipped gain of 10 the
+   spike wins by around 28 dB and you get 0 Hz; by 30 to 40 the estimate settles
+   on a steady, believable number. Past about 45 the front end compresses and
+   you lose ground again.
+2. **Check that the signal is actually there.** Look at `Spectrum Analyzer -
    Received Signal` and confirm you can see the QPSK signal above the noise
    floor. If the transmitter is not running or you are out of its reach, you are
    feeding the estimator noise plus a DC spike, and 0 Hz is the only answer it
    can give.
-2. **Adjust `Tuner Gain (dB)` in both directions.** Too low and the signal
-   cannot out-compete DC; too high and LO leakage grows the DC spike. You are
-   after the signal clearly above the noise floor without the front end
-   compressing.
-3. **Improve the signal before you blame the model.** Re-aim or reposition as
-   you did in Lab 1. What matters here is the ratio of signal to DC, so anything
-   that strengthens the signal helps.
+3. **Then improve the signal itself.** Re-aim or reposition as you did in Lab 1.
+   What matters here is the ratio of signal to DC, so anything that strengthens
+   the signal helps.
 ```
 
 *For more detail on coarse frequency synchronization, see Exercises 12.3 and 12.4 in SDR textbook.*
 
 ## Activity 3: Full Carrier and Timing Synchronization
 
-1. Run `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing.slx`. This adds fine carrier tracking and symbol timing recovery on top of the coarse correction. **This is the model with the constellation diagrams** — three of them, tapping the signal at three points in the chain:
+1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing.slx` and **set `Tuner Gain (dB)` to `40` before running it**, for the same reason as Activity 2 — this model ships at `10` as well, and it carries the same coarse stage inside it. At gain 10 that stage locks onto your dongle's DC spike, reports an offset of 0 Hz, and everything downstream works on a signal that was never corrected. The three constellations then all look alike and the whole point of the activity is lost.
+
+    Run it once the instructor starts the matching transmitter. This model adds fine carrier tracking and symbol timing recovery on top of the coarse correction, and **it is the model with the constellation diagrams** — three of them, tapping the signal at three points in the chain:
     - **`Rx Before AGC`** — straight off the matched filter, before any gain control or synchronization. This is your uncorrected view. Use it to judge signal strength: if the cluster is squeezed tight around the origin or sprawling off the edges, change `Tuner Gain (dB)` and re-run, because the synchronizer will struggle at either extreme.
     - **`Rx Timing`** — after AGC and symbol timing recovery. You should see four clusters here, but expect them to still be **spinning**, clockwise or anti-clockwise depending on the sign of your carrier offset.
     - **`Rx Rotated`** — after carrier synchronization. Despite the name, this is the **fully corrected** output: four clusters sitting still around the reference markers.
