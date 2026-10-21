@@ -47,9 +47,12 @@ If the live signal is weak or breaks up from where you're sitting, there is a re
 This is the same model you ran on a recording in Lab 5, Activity 4 — now pointed at a live transmission. Its only display is `Spectrum Analyzer Receive`, which shows the signal before and after the matched RRC filter. **There is no constellation diagram in this model**; you get your first constellation in Activity 3.
 
 1. Tune to the announced frequency.
-2. Run `digital/rtlsdr_rx/rtlsdr_QPSK_raised_cosine.slx` with the `RTL-SDR Receiver` block active (the reverse of the block swap you did in Lab 5).
-3. Find the instructor's signal on the spectrum and set `Tuner Gain (dB)` so it stands clearly above the noise floor without flattening off at the top. **Start at `40`** rather than the `10` the model ships with; somewhere in the 30-45 range usually works, and above about 45 the front end compresses. Getting the gain right here saves you real trouble in Activities 2 and 3, where too little gain stops the synchronizers working at all.
-4. Note how wide the signal is and where it sits relative to 0 Hz. It will not be exactly centered — that offset is the $\Delta f$ you are about to measure.
+2. Open `digital/rtlsdr_rx/rtlsdr_QPSK_raised_cosine.slx` with the `RTL-SDR Receiver` block active (the reverse of the block swap you did in Lab 5).
+3. **Enter your dongle's ppm correction.** Double-click the `RTL-SDR Receiver` block and put the figure you measured in [Lab 2](Lab2) into **`Frequency correction (ppm)`**, rounded to a whole number — the field takes integers only, the same limitation you ran into in Lab 2. It ships at `0`.
+
+    Every model in this lab has its own copy of that block, so you will do this three times today. It barely matters here, but by Activity 3 it decides whether the receiver works at all: that activity runs at 1000 symbols per second, where an uncorrected dongle's error of a few hundred hertz is a sizeable fraction of a whole symbol. This is the Lab 2 number finally earning its keep.
+4. Find the instructor's signal on the spectrum and set `Tuner Gain (dB)` so it stands clearly above the noise floor without flattening off at the top. **Start at `40`** rather than the `10` the model ships with; somewhere in the 30-45 range usually works, and above about 45 the front end compresses. Getting the gain right here saves you real trouble in Activities 2 and 3, where too little gain stops the synchronizers working at all.
+5. Note how wide the signal is and where it sits relative to 0 Hz. It will still not be exactly centered, even with the ppm correction in — integer ppm cannot cancel your dongle's error exactly, and what is left over is the $\Delta f$ you are about to measure.
 
 *For more detail on this receiver model, see Exercise 12.2 in SDR textbook.*
 
@@ -63,7 +66,8 @@ This is the same model you ran on a recording in Lab 5, Activity 4 — now point
 - **The signal is decimated hard before the estimator: 240 kHz, then ÷5 to 48 kHz, then ÷6 to 8 kHz.** The estimator takes an FFT of the 4th-power signal and picks the largest bin, and the bins are $f_{FFT} = f_s/N_{FFT}$ apart, so dropping $f_s$ makes them finer. What stops you decimating further is that the tone sits at $4\Delta f$, so $f_s$ must stay **at least 8 times the largest offset you intend to handle**. At 8 kHz that caps you near $\pm$1 kHz — comfortably above the 700 Hz you are injecting.
 - **Correction happens before the matched filter here**, the reverse of the Activity 1 model. The order is decimate → estimate and correct → RRC filter.
 
-1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_coarse_synch.slx` and, before you run it, set two blocks:
+1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_coarse_synch.slx` and, before you run it, set three things:
+    - **`Frequency correction (ppm)` on the `RTL-SDR Receiver` block**, to your whole-number ppm figure from [Lab 2](Lab2), exactly as in Activity 1. This is a separate copy of the block, so it is back at `0` here.
     - **`Tuner Gain (dB)` to `40`.** It ships at `10`, which is far too low for this activity. Your dongle puts a fixed DC spike at the centre of its output, and at gain 10 that spike sits roughly 28 dB above the signal, so the estimator finds the spike instead of the signal and reports an offset of 0 Hz. Raising the gain lifts the signal by about 20 dB while the spike barely moves, which is what makes the real tone findable. Above about 45 the front end starts to compress and it gets worse again.
     - **`Additional Freq Offset (Hz)` to `700`**, per the note above.
 2. Run it once the instructor starts the matching transmitter.
@@ -128,7 +132,12 @@ Work through it in this order:
 
 ## Activity 3: Full Carrier and Timing Synchronization
 
-1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing.slx` and **set `Tuner Gain (dB)` to `40` before running it**, for the same reason as Activity 2 — this model ships at `10` as well, and it carries the same coarse stage inside it. At gain 10 that stage locks onto your dongle's DC spike, reports an offset of 0 Hz, and everything downstream works on a signal that was never corrected. The three constellations then all look alike and the whole point of the activity is lost.
+1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing.slx` and set two things before running it. **Both matter more here than anywhere else in the lab** — get either wrong and this activity does not work at all.
+
+    - **`Frequency correction (ppm)` on the `RTL-SDR Receiver` block**, to your whole-number ppm figure from [Lab 2](Lab2). Again a fresh copy of the block, so again it starts at `0`. This activity runs at 1000 symbols per second, and an uncorrected dongle is typically a few hundred hertz out at this frequency — well over half a symbol's worth of rotation every symbol. The timing and carrier loops cannot recover from that, and you get one slowly turning mass of points instead of four clusters. Put the correction in and the same signal resolves.
+    - **`Tuner Gain (dB)` to `40`**, for the same reason as Activity 2 — this model ships at `10` as well, and it carries the same coarse stage inside it. At gain 10 that stage locks onto your dongle's DC spike, reports an offset of 0 Hz, and everything downstream works on a signal that was never corrected.
+
+    If the constellations still look poor after both are set, give the dongle ten minutes to warm up and try again. Its crystal drifts while it reaches temperature, which moves the offset out from under the correction you just entered — the same warm-up effect Lab 2 warns about before taking a calibration reading.
 
     Run it once the instructor starts the matching transmitter. This model adds fine carrier tracking and symbol timing recovery on top of the coarse correction, and **it is the model with the constellation diagrams** — three of them, tapping the signal at three points in the chain:
     - **`Rx Before AGC`** — straight off the matched filter, before any gain control or synchronization. This is your uncorrected view. Use it to judge signal strength: if the cluster is squeezed tight around the origin or sprawling off the edges, change `Tuner Gain (dB)` and re-run, because the synchronizer will struggle at either extreme.
