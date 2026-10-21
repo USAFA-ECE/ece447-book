@@ -69,9 +69,37 @@ This is the same model you ran on a recording in Lab 5, Activity 4 — now point
     - **Induced Peak** — that same signal raised to the 4th power. The QPSK modulation cancels and you are left with a single tone at $4\Delta f$.
     - **Corrected signal** — the input shifted by the estimate, now centered on 0 Hz.
 3. Read the frequency of the induced peak and divide by 4. Compare against the `Calculated Frequency Offset (Hz)` display, which shows what the model's own estimator computed. They should agree closely.
-4. **Turn the knob.** Change `Additional Freq Offset (Hz)` to something else — try 250, then 700 — and re-run each time. Confirm that the induced peak moves to 4x whatever you set, that the displayed estimate follows it, and that the corrected trace stays centered on 0 Hz regardless. That is the entire algorithm working in front of you.
-5. **Now break it.** Set the offset past what an 8 kHz sample rate can support — try 1500 — and re-run. The estimate should come back wrong. Work out what happened to the $4\Delta f$ tone, using the 8x rule above, and be ready to explain it.
+4. **Turn the knob — live reception only.** Change `Additional Freq Offset (Hz)` to something else — try 250, then 700 — and re-run each time. Confirm that the induced peak moves to 4x whatever you set, that the displayed estimate follows it, and that the corrected trace stays centered on 0 Hz regardless. That is the entire algorithm working in front of you.
+
+    This step does nothing if you are running from a recorded file. The offset block is summed with `QPSK Signal Frequency (Hz)` and the result drives the `RTL-SDR Receiver` tuning port only, so with `Import RTL-SDR Data` active that whole branch is disconnected and the recording's own built-in offset is all you get. Skip to step 6 if you are on the fallback.
+5. **Now break it** (also live only). Set the offset past what an 8 kHz sample rate can support — try 1500 — and re-run. The estimate should come back wrong. Work out what happened to the $4\Delta f$ tone, using the 8x rule above, and be ready to explain it.
 6. `Spectrum Analyzer - Received Signal` and `Spectrum Analyzer - RRC Filtered` show earlier points in the chain if you want to trace the signal through.
+
+```{warning}
+**If the induced peak sits at exactly 0 Hz, the estimator has locked onto DC, not onto your signal.**
+
+Your dongle puts a DC spike at the center of its output — an artifact of LO
+leakage and ADC bias, not part of the transmission. Raising a signal to the 4th
+power leaves DC at DC, so that spike lands in the same FFT bin the estimator
+searches and competes with the real $4\Delta f$ tone. Win that contest and the
+reported offset is 0 Hz, which looks exactly like a broken model.
+
+The margin is thinner than you would expect, so this is easy to hit. Work
+through it in this order:
+
+1. **Check that the signal is actually there.** Look at `Spectrum Analyzer -
+   Received Signal` and confirm you can see the QPSK signal above the noise
+   floor. If the transmitter is not running or you are out of its reach, you are
+   feeding the estimator noise plus a DC spike, and 0 Hz is the only answer it
+   can give.
+2. **Adjust `Tuner Gain (dB)` in both directions.** Too low and the signal
+   cannot out-compete DC; too high and LO leakage grows the DC spike. You are
+   after the signal clearly above the noise floor without the front end
+   compressing.
+3. **Improve the signal before you blame the model.** Re-aim or reposition as
+   you did in Lab 1. What matters here is the ratio of signal to DC, so anything
+   that strengthens the signal helps.
+```
 
 *For more detail on coarse frequency synchronization, see Exercises 12.3 and 12.4 in SDR textbook.*
 
