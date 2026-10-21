@@ -78,10 +78,19 @@ This is the same model you ran on a recording in Lab 5, Activity 4 — now point
     - **Raising to the 4th power widens any spectrum by roughly four times**, since in the frequency domain it convolves the spectrum with itself four times. Your pulse-shaped signal is about 1.5 kHz wide to begin with, so the result is several kilohertz wide no matter how clean the signal is.
 
     This also means the bin spacing above is a *floor* on the error, not the accuracy you actually get. The bins may be about 1 Hz apart, but you are locating the middle of a hump thousands of hertz wide, so realistic accuracy is on the order of a hundred hertz. That gap is the whole reason this stage is called *coarse* and why a PLL has to finish the job.
-4. Read the frequency of the induced peak and divide by 4. Compare against the `Calculated Frequency Offset (Hz)` display, which shows what the model's own estimator computed. They should agree closely.
+4. **Get a number off the induced peak**, then divide it by 4 and compare against the `Calculated Frequency Offset (Hz)` display, which is what the model's own estimator computed.
 
-    Do not expect to get exactly 700 Hz back. Your dongle's own crystal error adds to what you injected, so the measured figure lands somewhat off the number you set — a hundred hertz or two is normal. That difference *is* your dongle's error, which is the same quantity you measured a different way in Lab 2.
+    Do not try to eyeball this. You are reading a hump, not a line, and judging its middle by eye from a moving trace is genuinely hard. Use one of the scope's measurement tools instead — both live under **Measurements** (the toolstrip tab in recent releases, the side panel in older ones):
+
+    - **Cursor Measurements** suits a hump best. Drag the two cursors to the points on either side where the hump climbs out of the pedestal, and take the midpoint of the two frequencies. You are deliberately estimating the centre rather than chasing the tallest point.
+    - **Peak Finder** gives you a number directly. Ask it for one peak, and raise its minimum-height setting above the pedestal so it reports the hump rather than whichever noise spike happens to be tallest.
+
+    Either way the reading wanders, typically by a hundred hertz or two, because the top of a broad hump moves around from update to update. Watch it for a few seconds and take a representative value rather than one snapshot. You are confirming the factor of 4, not measuring to the hertz.
+
+    Two reasons your answer will not come back as exactly 700 Hz, and both are worth understanding. The hump is wide, so locating its centre is only good to roughly a hundred hertz. And your dongle's own crystal error adds to the offset you injected — that difference *is* your dongle's error, the same quantity you measured a different way in Lab 2.
 5. **Turn the knob — live reception only.** Change `Additional Freq Offset (Hz)` to something else — try 300, then 900 — and re-run each time. Confirm that the induced peak moves to 4x whatever you set, that the displayed estimate follows it, and that the corrected trace stays centered on 0 Hz regardless. That is the entire algorithm working in front of you.
+
+    This is the more convincing evidence of the two, and the easier to see. Reading the hump's absolute position is fuzzy, but 300 Hz against 900 Hz puts it near 1200 Hz and then near 3600 Hz — a shift across most of the display that you cannot mistake. Watching it move is a better demonstration that the $4\Delta f$ relationship holds than any single reading.
 
     This step does nothing if you are running from a recorded file. The offset block is summed with `QPSK Signal Frequency (Hz)` and the result drives the `RTL-SDR Receiver` tuning port only, so with `Import RTL-SDR Data` active that whole branch is disconnected and the recording's own built-in offset is all you get. Skip to step 7 if you are on the fallback.
 6. **Now break it** (also live only). Set the offset past what an 8 kHz sample rate can support — try 1500 — and re-run. The estimate should come back wrong. Work out what happened to the $4\Delta f$ tone, using the 8x rule above, and be ready to explain it.
