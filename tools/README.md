@@ -23,11 +23,28 @@ usrp_transmit('lab7')            % Lab 7 ASCII message
 silent — measured undetectable at 6 ft, while ~50 dB works and 70 dB saturates the
 receiver. The wrapper defaults to 50.
 
-**Source frame size.** The Bernoulli generator ships at `SamplesPerFrame = 2`
-against `SampleTime = 1/100e3`, a 20 µs frame, forcing 50,000 Simulink steps per
-second to deliver 4 samples each. That starves the radio: 529 UHD underruns and
-2.6× slower than real time. Raising the frame to 2000 — same data rate — gave 14
-underruns and 4 dB more signal at the receiver.
+**Source frame size — Activity 1 only.** That model's Bernoulli generator ships at
+`SamplesPerFrame = 2` against `SampleTime = 1/100e3`, a 20 µs frame, forcing 50,000
+Simulink steps per second to deliver 4 samples each. That starves the radio: 529 UHD
+underruns and 2.6× slower than real time. Raising the frame to 2000 — same data rate
+— gave 14 underruns and 4 dB more signal at the receiver.
+
+**The other models must not get this treatment.** Their sources run 50× slower
+(`SampleTime = 1/2e3`), so the shipped 2-bit frame is already only 1000 steps/s and is
+fine. Forcing 2000 there would make a *one second* frame feeding a Tx Prep stage that
+already buffers 2.7 s — a good way to stop a receiver's timing and carrier loops ever
+settling. Labs 7 and 8 have no Bernoulli source at all.
+
+So the wrapper only touches the frame when a model's measured step rate exceeds its
+threshold, and then scales to a 20 ms frame rather than a fixed count. Measured
+behaviour:
+
+| model | source rate | action |
+|---|---:|---|
+| `raised_cosine` (Act 1) | 50,000 steps/s | frame 2 → 2000 |
+| `coarse_synch` (Act 2) | 1,000 steps/s | left alone |
+| `carrier_timing` (Act 3) | 1,000 steps/s | left alone |
+| `ascii_message`, `image_transfer` | no Bernoulli source | left alone |
 
 The wrapper also forces Accelerator mode; Normal mode cannot keep up.
 
@@ -38,9 +55,12 @@ radios share one machine fine.
 **The radio serial is baked into the models.** On a different USRP, open the SDRu
 Transmitter block and set Platform and serial to match.
 
-Verified 2026-10-21, B200 to RTL-SDR at 6 ft, MATLAB R2023b: all three Lab 6
-activities behave as the lab describes. Lab 7 and Lab 8 take the same treatment but
-were not tested on hardware.
+Verified 2026-10-21, B200 to RTL-SDR at 6 ft, MATLAB R2023b. Activity 1 received
+28.8 dB over the noise floor. Activity 2's coarse estimator recovered the injected
+offset, at **receive** tuner gain 40 — at the shipped 10 it reports 0 Hz. **Activity 3
+is not yet confirmed**: its constellations came back as one rotating mass rather than
+four clusters, on a run where the frame had wrongly been forced to 2000. Re-test it
+before relying on it. Labs 7 and 8 are untested.
 
 > Receiver gain is a separate trap. If a student leaves the receiving dongle at the
 > models' default `Tuner Gain (dB)` of 10, the coarse frequency estimator locks onto

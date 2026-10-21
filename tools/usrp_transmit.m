@@ -32,7 +32,7 @@ function usrp_transmit(which, secs, gain_db, txdir)
 %      not detectable at all, ~50 dB is the sweet spot, 70 dB saturates the
 %      receiver's front end into a forest of spurs. Default here is 50.
 %
-%   2. Source frame size. The Bernoulli Binary Generator ships with
+%   2. Source frame size, in ONE model only. The Activity 1 model ships with
 %      SamplesPerFrame = 2 against SampleTime = 1/100e3, i.e. a 20 us frame.
 %      That forces Simulink to execute 50,000 model steps per second to hand
 %      the radio 4 samples at a time, and the per-step overhead starves it.
@@ -41,17 +41,28 @@ function usrp_transmit(which, secs, gain_db, txdir)
 %      identical data rate, 50 steps/s instead of 50,000 -- cut that to 14
 %      underruns and put 4 dB more signal into the receiver.
 %
-%      Note the three Lab 6 models do not share a SampleTime, so a frame of
-%      2000 bits is 20 ms in the Activity 1 model and 1 s in the other two.
-%      Both were verified on air. The Lab 7 and Lab 8 models take the same
-%      treatment but have not been tested against hardware.
+%      The other models do NOT need this and must not get it. Their sources
+%      run 50x slower (SampleTime 1/2e3), so the shipped frame of 2 bits is
+%      already only 1000 steps/s. Applying 2000 there would make a ONE SECOND
+%      frame feeding a Tx Prep stage that already buffers 2.7 s, which is a
+%      good way to stop a receiver's timing and carrier loops ever settling.
+%      Labs 7 and 8 have no Bernoulli source at all.
+%
+%      So the frame is only touched when the model's measured step rate is
+%      above STEP_LIMIT, and then it is scaled to TARGET_FRAME rather than
+%      set to a fixed count. On the Activity 1 model that reproduces the 2000
+%      that was verified on air; everywhere else it is a no-op and says so.
 %
 %   It also forces Accelerator mode. Normal mode cannot keep up at all.
 %
 % VERIFIED 2026-10-21, USRP B200 to RTL-SDR at 6 ft, MATLAB R2023b:
 %   Lab 6 Activity 1  signal received 28.8 dB over the noise floor
-%   Lab 6 Activity 2  coarse estimator recovered the injected offset
-%   Lab 6 Activity 3  all three constellations behaved as the book describes
+%   Lab 6 Activity 2  coarse estimator recovered the injected offset at
+%                     receive tuner gain 40 (at the shipped 10 it reports 0)
+%   Lab 6 Activity 3  NOT yet confirmed. The three constellations came back
+%                     as one rotating mass rather than four clusters, with
+%                     the frame wrongly forced to 2000 as described above.
+%                     Re-test with this version before relying on it.
 %
 % THINGS THAT WILL BITE YOU
 %
@@ -122,18 +133,31 @@ end
 % --- fix 2: source frame size ----------------------------------------------
 % Same bit rate, far fewer model steps. SampleTime is per bit and is left
 % alone, so nothing about the transmitted signal changes.
+TARGET_FRAME = 0.020;      % s, the frame period we aim for when we do intervene
+STEP_LIMIT   = 10000;      % steps/s above which the radio starves
+
 b = find_system(mdl, 'SearchDepth', 1, 'Name', 'Bernoulli Binary Generator');
-if ~isempty(b)
+if isempty(b)
+    fprintf('[tx] no Bernoulli source in this model; frame size left alone\n');
+else
     st  = get_param(b{1}, 'SampleTime');
-    old = get_param(b{1}, 'SamplesPerFrame');
-    set_param(b{1}, 'SamplesPerFrame', '2000');
-    fp = NaN;
-    try, fp = 2000 * eval(st); catch, end        %#ok<EVLDIR> model's own parameter
-    if isfinite(fp)
-        fprintf('[tx] SamplesPerFrame %s -> 2000  (frame %.0f ms, %.0f model steps/s)\n', ...
-                old, fp*1e3, 1/fp);
+    old = str2double(get_param(b{1}, 'SamplesPerFrame'));
+    ts  = NaN;
+    try, ts = eval(st); catch, end           %#ok<EVLDIR> the model's own parameter
+    if ~isfinite(ts) || ~isfinite(old)
+        fprintf('[tx] cannot read the source rate (SampleTime %s); frame left alone\n', st);
     else
-        fprintf('[tx] SamplesPerFrame %s -> 2000  (SampleTime %s)\n', old, st);
+        steps = 1/(ts*old);
+        if steps <= STEP_LIMIT
+            fprintf('[tx] source runs at %.0f steps/s (frame %.1f ms) - fine, left alone\n', ...
+                    steps, ts*old*1e3);
+        else
+            new = max(2, 2*round(TARGET_FRAME/ts/2));   % even: QPSK takes bit pairs
+            set_param(b{1}, 'SamplesPerFrame', num2str(new));
+            fprintf('[tx] source runs at %.0f steps/s - too fast, starves the radio\n', steps);
+            fprintf('[tx] SamplesPerFrame %d -> %d  (frame %.1f ms, %.0f steps/s)\n', ...
+                    old, new, ts*new*1e3, 1/(ts*new));
+        end
     end
 end
 
