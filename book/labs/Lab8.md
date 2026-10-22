@@ -4,9 +4,9 @@
 
 ## Overview
 
-This is your capstone SDR lab: you'll reconstruct an actual image that was sent over the air using the same QPSK link you've been building since Lab 5. We're also adding a short integrity-check exercise of our own, tying back to the parity/CRC/Hamming code lecture — the SDR textbook's exercise stops at "did the image come through," and we're extending it to "how would you know if it didn't."
+This is your capstone SDR lab: the instructor will transmit an actual image over the air using the same QPSK link you've been building since Lab 5, and you'll receive and reconstruct it on your own RTL-SDR. We're also adding a short integrity-check exercise of our own, tying back to the parity/CRC/Hamming code lecture — the SDR textbook's exercise stops at "did the image come through," and we're extending it to "how would you know if it didn't."
 
-As in Lab 6, Activity 3 and Lab 7, the reconstruction you submit comes from a capture that ships with the SDR textbook. The instructor will also transmit live so you can see the signal arrive.
+As with Labs 6 and 7, only the instructor transmits; the whole class receives independently. This receiver is differentially encoded end to end — the same thing you switched on by hand in Lab 7 — so there is no demodulator switch to set here. It is already the version that works.
 
 ## Aims of the Lab
 
@@ -16,29 +16,41 @@ As in Lab 6, Activity 3 and Lab 7, the reconstruction you submit comes from a ca
 
 ## Setup
 
-Download one of `dqpsk_image1.mat`, `dqpsk_image2.mat` or `dqpsk_image7.mat` from the course Teams folder (see the [Downloads](../downloads.md) page) and put it in `digital/rtlsdr_rx/rec_data/`. Each is about 115 MB, so do this before class. The instructor will say which one to use, and will also transmit a live image at an announced frequency if you want to watch it arrive on the spectrum analyzer.
-
-Note that these captures are **differentially encoded** (hence the `dqpsk_` prefix) — this receiver is wired for DQPSK end to end and has no demodulator switch, so there is nothing to set.
+The instructor will announce a transmit frequency and transmit one of the sample images from the `rtlsdr_book_library/` folder (`image1.mat` through `image7.mat`), along with the correct checksum for it at the end of class.
 
 ## Activity 1: Receive and Reconstruct the Image
 
-1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_image_transfer.slx` and swap it from live hardware to your file — the same swap you did in [Lab 5](Lab5), Activity 4:
-    - Right-click `RTL-SDR Receiver` and choose **Comment Out**.
-    - Right-click the greyed-out `Import RTL-SDR Data` block and choose **Comment In**. **Check its filename** — it ships pointing at `rec_data/dqpsk_image2.mat`, so change it if you downloaded a different one.
-    - Draw signal lines from the `Import RTL-SDR Data` output to the **two** places the receiver's output used to go: `Decimation Stage` and `Spectrum Analyzer - Received Signal`.
-
-    Keep MATLAB's **Current Folder** on `digital/rtlsdr_rx`, since that filename is relative to it.
-2. Set the simulation mode to **Normal** and the **Stop Time** to `60`, the full length of the recording. You need most of it: the image is sent one pixel column per frame at about two frames a second, so a complete 100-column pass takes roughly 50 seconds.
-3. Run it. Watch the **Command Window**: it prints `Searching for first frame...` and then `Picture Column Number: 1`, `2`, `3` … as each column arrives. The image itself appears in a MATLAB figure, redrawn as it fills in, and starts out white because the receiver initializes all 100 columns to 255.
+1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_image_transfer.slx` and set three things before running it, the same three as Lab 7:
+    - **`QPSK Signal Frequency (Hz)`** to the announced frequency. It ships at `602e6`.
+    - **`Tuner Gain (dB)` to `40`.** This model ships at `20` — closer than the others, still not enough. The coarse frequency estimator inside it behaves the same way as Lab 6's.
+    - **`Frequency correction (ppm)`** on the `RTL-SDR Receiver` block, to your figure from [Lab 2](Lab2).
+2. Run it once the instructor starts transmitting, and **leave it running**. The image is sent one pixel column per frame at about two frames a second, so a complete 100-column pass takes roughly 50 seconds. The model's Stop Time ships at `60`, which is about right for one pass; raise it if you want more.
+3. Watch the **Command Window**: it prints `Searching for first frame...` and then `Picture Column Number: 46`, `47`, `48` … as each column arrives. Which number it starts from just depends on where in the image the transmitter happened to be when you started. The image itself appears in a MATLAB figure, redrawn as it fills in, and starts out white because the receiver initializes all 100 columns to 255.
 4. The receiver also publishes the reconstructed image to the base workspace as a 100×100 `uint8` variable named `image`. You'll use that in Activity 2.
-5. **Expect a column or two to be missing.** A frame whose header fails the integrity check is discarded rather than guessed at, and that column stays white. Count how many columns actually arrived:
+5. **Expect some columns to be missing**, especially if you started mid-pass. A frame whose header fails the integrity check is discarded rather than guessed at, and that column stays white. Count how many columns actually arrived:
 
 ```matlab
 % how many of the 100 columns are not still blank white?
 nArrived = sum(any(image ~= 255, 1))
 ```
 
+    Letting it run through a second pass fills in most of what the first one missed, since the receiver keeps the columns it already has.
 6. If you want to see how the payload is put back together, the frame/protocol parameters (preamble, frame length, header fields) are defined in `rtlsdr_book_library/image_receive.m`, and the actual byte-to-pixel reconstruction lives in the **Image Reconstruction** MATLAB Function block inside the shared `rtlsdr_book_library.slx` library.
+
+```{note}
+**If the live signal is too weak from where you're sitting**, fall back to one
+of `digital/rtlsdr_rx/rec_data/dqpsk_image1.mat`, `dqpsk_image2.mat` or
+`dqpsk_image7.mat` from the course Teams folder (see the
+[Downloads](../downloads.md) page). Use the same block swap as [Lab 5](Lab5),
+Activity 4, drawing lines from `Import RTL-SDR Data` to **both**
+`Decimation Stage` and `Spectrum Analyzer - Received Signal`, and set the
+simulation mode to **Normal**. Check the import block's filename — it ships
+pointing at `dqpsk_image2.mat`.
+
+On the fallback, the image is whichever one that capture contains, not the one
+the instructor transmitted, so the announced checksum won't apply. Say in your
+write-up that you used the fallback.
+```
 
 *For more detail on transmitting images across the desktop link, see Sec. 12.8 in SDR textbook.*
 

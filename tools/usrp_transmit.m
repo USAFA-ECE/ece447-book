@@ -84,15 +84,33 @@ function usrp_transmit(which, secs, gain_db, freq_hz, payload, txdir, mirror)
 %     * Tuner Gain (dB) -- ships at 10 or 20, needs to be about 40
 %     * Frequency correction (ppm) -- ships at 0, needs their Lab 2 figure
 %
-% MODULATION: LAB 7 IS QPSK, LAB 8 IS DQPSK
+% LAB 7 RUNS DIFFERENTIALLY, AND THAT IS NOT OPTIONAL
 %
 %   The Lab 7 transmit model has a Manual Switch choosing between a QPSK and
 %   a DQPSK modulator, and the student receiver has a matching switch. They
-%   must agree or the text decodes as garbage. Both ship on QPSK, and this
-%   function forces the transmit side to QPSK so a stray click cannot leave
-%   the class unable to decode. The Lab 8 chain is DQPSK end to end, with no
-%   switch on either side, which is why its fallback captures are named
-%   dqpsk_image*.mat.
+%   must agree or the text decodes as garbage. Both ship on QPSK -- and over
+%   the air, coherent QPSK does not frame at all. Measured:
+%
+%     coherent QPSK, both sides     preamble correlation 13-21, 0 strobes
+%     differential, both sides      correlation 39, 225 strobes, 225 lines
+%                                   of the transmitted message, twice out of
+%                                   two captures
+%
+%   Two separate things break the coherent path. Our transmit chain is I/Q
+%   mirrored relative to what the receivers expect (see fix 3 below), and even
+%   with that corrected the framing threshold is a signed ">= 33" test, so a
+%   carrier that locks 180 degrees out correlates at -39 and fails, while 90
+%   or 270 degrees correlates near zero. Differential encoding is immune to
+%   both, which is exactly what it is for -- and is the subject of Lab 7's own
+%   optional extension.
+%
+%   So 'lab7' sets the transmit switch to DQPSK, and the class must move their
+%   receiver's Manual Switch to the DQPSK Demodulator to match. The function
+%   prints that reminder in the announce block. 'lab7q' selects the coherent
+%   path for comparison, and will not decode.
+%
+%   Lab 8 is DQPSK end to end with no switch on either side, which is why its
+%   captures are named dqpsk_image*.mat -- and why it works live untouched.
 %
 % KEEP THE LAB 7 MESSAGE 12 CHARACTERS LONG
 %
@@ -110,15 +128,15 @@ function usrp_transmit(which, secs, gain_db, freq_hz, payload, txdir, mirror)
 %                     clusters on only 6 of 16 runs. That activity now runs
 %                     from the textbook's recorded capture instead; see
 %                     book/labs/Lab6.md.
-%   Lab 7             transmits correctly, and a live decode IS achievable --
-%                     88 frames of the transmitted message recovered -- but
-%                     only with a conjugate added on the RECEIVE side, and
-%                     only when the carrier happens to lock at 0 degrees
-%                     rather than 90, 180 or 270 (two of four captures). The
-%                     lab therefore runs from the recording. tools/README.md
-%                     has the measurements.
-%   Lab 8             same transmit chain and same framing; runs from the
-%                     recording for the same reason.
+%   Lab 7             WORKS LIVE on the differential path: correlation 39,
+%                     225 frame strobes and 225 decoded lines of the
+%                     transmitted message, on both of two captures. The
+%                     coherent path does not frame at all. Use 'lab7'.
+%   Lab 8             WORKS LIVE as the model ships: correlation 39, ~48
+%                     frame strobes per 25 s and sequential picture column
+%                     numbers, on three of three captures. It radiates at
+%                     -16.3 dBFS into a receiver 6 ft away, 1.05x real time,
+%                     10 underruns.
 %
 % THINGS THAT WILL BITE YOU
 %
@@ -166,8 +184,13 @@ models = struct('lab6a1','usrp_QPSK_raised_cosine', ...
                 'lab6a2','usrp_QPSK_coarse_synch', ...
                 'lab6a3','usrp_QPSK_carrier_timing', ...
                 'lab7',  'usrp_QPSK_ascii_message', ...
+                'lab7q', 'usrp_QPSK_ascii_message', ...
                 'lab8',  'usrp_QPSK_image_transfer');
 if isfield(models, which), mdl = models.(which); else, mdl = which; end
+% 'lab7' uses the DIFFERENTIAL path, because that is the one that works over
+% the air -- see "LAB 7 RUNS DIFFERENTIALLY" in the help above. 'lab7q' is the
+% coherent path, kept only for comparison; it does not frame.
+want_dqpsk = ~strcmpi(which, 'lab7q');
 
 if ~isfolder(txdir)
     error(['Cannot find the transmit models in:\n  %s\n' ...
@@ -356,13 +379,21 @@ switch mdl
                      '     counters are how they tell frames are arriving in order.\n'], msg, msg);
             announce_extra{end+1} = sprintf('Message being sent: "%s" (plus a frame counter)', msg);
         end
-        % keep the modulator switch on QPSK, to match the student receivers
+        % Set the modulator switch explicitly, so a stray click cannot leave
+        % the class unable to decode. sw='1' passes input 1, which is QPSK on
+        % both the transmit and receive sides (measured).
         sw = find_system(mdl, 'LookUnderMasks','all', 'FollowLinks','on', ...
                          'BlockType','ManualSwitch');
         for k = 1:numel(sw)
-            fprintf('[tx] modulator switch sw=%s (forcing QPSK to match the receivers)\n', ...
-                    get_param(sw{k},'sw'));
-            set_param(sw{k}, 'sw', '1');
+            set_param(sw{k}, 'sw', tern(want_dqpsk,'0','1'));
+            fprintf('[tx] modulator switch -> %s\n', tern(want_dqpsk,'DQPSK','QPSK'));
+        end
+        if want_dqpsk
+            fprintf(['[tx] the class must ALSO move their receiver''s Manual Switch to\n' ...
+                     '     the DQPSK Demodulator, inside Demodulation & Phase Ambiguity\n' ...
+                     '     Correction, or the text decodes as garbage.\n']);
+            announce_extra{end+1} = ...
+                'Set your receiver''s Manual Switch to the DQPSK Demodulator';
         end
 
     case 'usrp_QPSK_image_transfer'

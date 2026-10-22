@@ -41,7 +41,7 @@ often make a student's receiver look broken.
 | Lab 6 Activity 1 | `usrp_transmit('lab6a1', 900)` | |
 | Lab 6 Activity 2 | `usrp_transmit('lab6a2', 900)` | students also set `Additional Freq Offset (Hz)` to 700 |
 | Lab 6 Activity 3 | — | runs from a recording; no transmission needed |
-| Lab 7 | `usrp_transmit('lab7', 1800, [], [], 'Hello World!')` | 5th argument is the message — **keep it 12 characters** |
+| Lab 7 | `usrp_transmit('lab7', 1800, [], [], 'Hello World!')` | 5th arg is the message — **keep it 12 characters**. Selects DQPSK; the class must switch their receiver to match |
 | Lab 8 | `usrp_transmit('lab8', 1800, [], [], 'image3.mat')` | 5th argument picks the image |
 
 The empty `[]`s are gain and frequency, left at their defaults (50 dB, whatever the
@@ -120,21 +120,38 @@ Measured 2026-10-21, B200 → RTL-SDR at 6 ft, MATLAB R2023b.
 | Lab 6 Activity 1 | **works live.** Signal 28.8 dB over the noise floor. |
 | Lab 6 Activity 2 | **works live**, at *receive* tuner gain 40 and injected offset 700. At the shipped gain of 10 the estimator reports 0 Hz. |
 | Lab 6 Activity 3 | **runs from a recording.** Live acquisition resolved four clusters on only 6 of 16 validated runs; the recording locks every time. No transmission needed. |
-| Lab 7 | **runs from a recording.** Transmits correctly; a live decode works only with a receive-side conjugate *and* a lucky phase quadrant — see below. On `qpsk_ascii_msg.mat` the receiver decodes 460 frames cleanly. |
-| Lab 8 | **runs from a recording.** Same transmit chain, same framing, same reason. On `dqpsk_image1.mat` it reconstructed the image and published it to the base workspace. |
+| Lab 7 | **works live, on the differential path.** Correlation 39, 225 frame strobes, 225 decoded lines of the transmitted message, on both of two captures. The coherent path never frames at all — see below. Use `usrp_transmit('lab7', …)`, which selects DQPSK, and tell the class to move their receiver's Manual Switch to match. |
+| Lab 8 | **works live, as the model ships.** Correlation 39, ~48 strobes per 25 s and sequential picture column numbers, on three of three captures. DQPSK end to end with no switch on either side. |
 
 > Receiver gain is a separate trap. If a student leaves the receiving dongle at the
 > models' default `Tuner Gain (dB)` — 10 in most models, 20 in the Lab 8 one — the
 > coarse frequency estimator locks onto the dongle's DC spike and reports 0 Hz however
 > good the transmission is. The labs tell them to use about 40.
 
-### Why Labs 7 and 8 run from recordings: the I/Q mirror
+### Why Lab 7 has to run differentially
 
-**Symptom.** Over the air, the Lab 7 receiver produces a textbook-perfect
+**Short version: use `usrp_transmit('lab7', …)`, which sets the transmit side to
+DQPSK, and make sure the class moves their receiver's Manual Switch to the
+`DQPSK Demodulator Baseband` to match.** Both sides ship on coherent QPSK, and on
+coherent QPSK this lab does not work at all. Measured:
+
+| path | preamble correlation | frame strobes | decoded |
+|---|---:|---:|---|
+| coherent QPSK, both sides | 13–21 | 0 | nothing |
+| differential, both sides | **39** | **225** | **225 lines of the message, 2 of 2 captures** |
+
+**Symptom of getting it wrong.** The receiver produces a textbook-perfect
 constellation — `Rx Rotated` lock 0.984, EVM 6.4%, as good as the textbook's own
 recording — and decodes *nothing*. The frame strobe never fires once in 44,000
 symbols. Nothing on screen suggests a fault. This is the most misleading failure in
-the whole lab sequence, so it is worth knowing about even if you never fix it.
+the whole lab sequence, so it is worth being able to recognise.
+
+**Two independent causes, which is why it took a while to pin down.** The first is
+the I/Q mirror below. The second is QPSK's 90° phase ambiguity: the framing test is a
+*signed* `>= 33`, so a carrier that locks 180° out correlates at **−39** — framing
+working perfectly on an inverted preamble — and 90°/270° correlates near zero. Only a
+0° lock passes, which is one capture in four. Differential encoding is immune to both,
+which is exactly what it is for, and is the subject of Lab 7's own closing section.
 
 **Cause.** Our transmitted QPSK is conjugated (I and Q swapped) relative to what the
 textbook's receive models expect. Framing works by correlating against a known 39-bit
@@ -176,18 +193,10 @@ receiver's own frequency correction absorbs the sign flip that distinguishes the
 usrp_transmit('lab7', 600, 50, [], 'Hello World!', [], 'on')
 ```
 
-**A live decode is achievable**, and worth seeing once: with the conjugate on the
-received samples, correlation reached 39 and the receiver printed 88 lines of
-`Go Falcons! 026`, `028`, `030` … — the actual transmitted message.
-
-**But a second, independent problem gates it: QPSK's 90° phase ambiguity.** Of the four
-captures above, two correlated at **+39** and framed; one correlated at **−39**, the
-preamble inverted by a 180° carrier lock, which fails a `>= 33` threshold test; and one
-sat near zero, a 90°/270° lock. So even with the mirror corrected, framing succeeds
-only when the loop happens to settle at 0°. That is exactly the problem Lab 7's own
-optional extension describes, and exactly why the textbook ships differentially
-encoded captures. Two separate lotteries — carrier acquisition and then phase quadrant
-— is more than a 53-minute period can absorb, which is why the labs use the recordings.
+**None of this matters once you use the differential path**, which is immune to the
+mirror and the phase ambiguity alike — so the conjugate is a dead end, kept only as a
+record of what was measured. If you ever need the coherent path to work, the receive
+side is where the conjugate has to go.
 
 The Lab 6 models deliberately get no conjugate: nothing in that lab can see a mirror,
 since a mirrored constellation still shows four clusters and a mirrored spectrum still
