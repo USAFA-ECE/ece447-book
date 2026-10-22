@@ -7,21 +7,74 @@ here is built into the book — `_toc.yml` only covers `book/`.
 
 Only the instructor transmits in Labs 6, 7 and 8; students receive. The transmit
 models live with the desktopSDR support files under `digital/usrp_tx/`, not in this
-repo. They work, but two saved settings make them fail in ways that read as broken
-hardware, so this wrapper corrects both at run time and leaves the `.slx` files
-alone.
+repo. They work, but several saved settings make them fail in ways that read as broken
+hardware, so this wrapper corrects them at run time and leaves the `.slx` files
+alone — which also keeps them from being re-saved out of R2021a.
+
+### If you have never run this before, read this bit
+
+You need **two MATLAB sessions**: one transmits, one receives. MATLAB is single
+threaded, so the transmit call blocks. Both radios live on the same machine happily.
+
+In the transmit session:
 
 ```matlab
-addpath('tools')
-usrp_transmit('lab6a1')          % Activity 1, 120 s, gain 50
-usrp_transmit('lab6a2', 600)     % Activity 2 for ten minutes
-usrp_transmit('lab7')            % Lab 7 ASCII message
+addpath('C:\path\to\ece447-book\tools')
+usrp_transmit('lab6a1', 0)       % DRY RUN: prints what it would do, never transmits
+usrp_transmit('lab6a1', 900)     % for real, 15 minutes
 ```
+
+**`secs = 0` is a dry run.** It configures everything and reports it without touching
+the radio. Use it to check a setup before class, and to get the numbers you have to
+announce.
+
+Every call prints an `ANNOUNCE TO THE CLASS` block before going on air. Read it out —
+it carries the transmit frequency, and for Lab 8 the image checksum that the students
+are asked to compare against. It also reminds you to tell them to set `Tuner Gain (dB)`
+to about 40 and to enter their Lab 2 ppm figure, which are the two things that most
+often make a student's receiver look broken.
+
+### What to type, per lab
+
+| lab | command | notes |
+|---|---|---|
+| Lab 6 Activity 1 | `usrp_transmit('lab6a1', 900)` | |
+| Lab 6 Activity 2 | `usrp_transmit('lab6a2', 900)` | students also set `Additional Freq Offset (Hz)` to 700 |
+| Lab 6 Activity 3 | — | runs from a recording; no transmission needed |
+| Lab 7 | `usrp_transmit('lab7', 1800, [], [], 'Hello World!')` | 5th arg is the message — **keep it 12 characters**. Selects DQPSK; the class must switch their receiver to match |
+| Lab 8 | `usrp_transmit('lab8', 1800, [], [], 'image3.mat')` | 5th argument picks the image |
+
+The empty `[]`s are gain and frequency, left at their defaults (50 dB, whatever the
+model ships with, which is 433.5 MHz on all five). To move frequency — say the band is
+busy — pass it as the 4th argument: `usrp_transmit('lab7', 1800, 50, 915e6, 'Hi')`.
+
+For Lab 7 the generator appends a space and a three-digit frame counter to your
+message, so the class sees `Hello World! 001` … `Hello World! 100` repeating. Tell them
+so: consecutive counters are how a student confirms frames are arriving in order.
+
+**Keep the Lab 7 message twelve characters long.** The receiver decodes a fixed number
+of characters per frame, set from its own mask to match the shipped `Hello World!`. A
+shorter message still decodes but each line picks up a trailing junk character —
+measured, `Go Falcons!` (eleven) came back as `Go Falcons! 026?`. Harmless, but the
+class will ask about it.
+
+For Lab 8, **run it for at least ten minutes.** One image is 100 frames at about half
+a second each, so a complete pass takes ~50 s, and a student who starts late sees a
+part-white image until the next pass fills it in.
+
+### What it corrects at run time
 
 **Transmit gain.** The models ship at 10 dB. USRP gain counts *upward* (B200 range
 0–89.75), the opposite of the PLUTO these were converted from, so 10 dB is nearly
 silent — measured undetectable at 6 ft, while ~50 dB works and 70 dB saturates the
 receiver. The wrapper defaults to 50.
+
+The gain constant is **named differently between models**: `Transmitter Gain (dB)` in
+the Lab 6 models but `Transmit Power (dB)` in the Lab 7 and 8 ones. An earlier version
+of this wrapper matched on the name and so silently left Labs 7 and 8 transmitting at
+10 dB, i.e. not at all. It now finds the constant by following the wire into the
+radio's gain port. (The `Gain` on the SDRu block's own dialog — 25 in the Lab 7/8
+models — is ignored, because `gainSource` is `Input port`.)
 
 **Source frame size — Activity 1 only.** That model's Bernoulli generator ships at
 `SamplesPerFrame = 2` against `SampleTime = 1/100e3`, a 20 µs frame, forcing 50,000
@@ -48,24 +101,163 @@ behaviour:
 
 The wrapper also forces Accelerator mode; Normal mode cannot keep up.
 
+**Modulation, Lab 7.** That transmit model has a Manual Switch choosing a QPSK or a
+DQPSK modulator, and the student receiver has a matching switch. They must agree or
+the text decodes as garbage. Both ship on QPSK and the wrapper forces the transmit
+side there, so a stray click can't leave the class unable to decode. (Measured: on a
+Manual Switch, `sw = '1'` passes input 1, and input 1 is QPSK on both sides.) Lab 8 is
+DQPSK end to end with no switch on either side, which is why its captures are named
+`dqpsk_image*.mat`.
+
+**I/Q mirror, Labs 7 and 8.** See the section below — this is the one that matters.
+
+### Verified status
+
+Measured 2026-10-21, B200 → RTL-SDR at 6 ft, MATLAB R2023b.
+
+| | status |
+|---|---|
+| Lab 6 Activity 1 | **works live.** Signal 28.8 dB over the noise floor. |
+| Lab 6 Activity 2 | **works live**, at *receive* tuner gain 40 and injected offset 700. At the shipped gain of 10 the estimator reports 0 Hz. |
+| Lab 6 Activity 3 | **runs from a recording.** Live acquisition resolved four clusters on only 6 of 16 validated runs; the recording locks every time. No transmission needed. |
+| Lab 7 | **works live, on the differential path.** Correlation 39, 225 frame strobes, 225 decoded lines of the transmitted message, on both of two captures. The coherent path never frames at all — see below. Use `usrp_transmit('lab7', …)`, which selects DQPSK, and tell the class to move their receiver's Manual Switch to match. |
+| Lab 8 | **works live, as the model ships.** Correlation 39, ~48 strobes per 25 s and sequential picture column numbers, on three of three captures. DQPSK end to end with no switch on either side. |
+
+> Receiver gain is a separate trap. If a student leaves the receiving dongle at the
+> models' default `Tuner Gain (dB)` — 10 in most models, 20 in the Lab 8 one — the
+> coarse frequency estimator locks onto the dongle's DC spike and reports 0 Hz however
+> good the transmission is. The labs tell them to use about 40.
+
+### Why Lab 7 has to run differentially
+
+**Short version: use `usrp_transmit('lab7', …)`, which sets the transmit side to
+DQPSK, and make sure the class moves their receiver's Manual Switch to the
+`DQPSK Demodulator Baseband` to match.** Both sides ship on coherent QPSK, and on
+coherent QPSK this lab does not work at all. Measured:
+
+| path | preamble correlation | frame strobes | decoded |
+|---|---:|---:|---|
+| coherent QPSK, both sides | 13–21 | 0 | nothing |
+| differential, both sides | **39** | **225** | **225 lines of the message, 2 of 2 captures** |
+
+**Symptom of getting it wrong.** The receiver produces a textbook-perfect
+constellation — `Rx Rotated` lock 0.984, EVM 6.4%, as good as the textbook's own
+recording — and decodes *nothing*. The frame strobe never fires once in 44,000
+symbols. Nothing on screen suggests a fault. This is the most misleading failure in
+the whole lab sequence, so it is worth being able to recognise.
+
+**Two independent causes, which is why it took a while to pin down.** The first is
+the I/Q mirror below. The second is QPSK's 90° phase ambiguity: the framing test is a
+*signed* `>= 33`, so a carrier that locks 180° out correlates at **−39** — framing
+working perfectly on an inverted preamble — and 90°/270° correlates near zero. Only a
+0° lock passes, which is one capture in four. Differential encoding is immune to both,
+which is exactly what it is for, and is the subject of Lab 7's own closing section.
+
+**Cause.** Our transmitted QPSK is conjugated (I and Q swapped) relative to what the
+textbook's receive models expect. Framing works by correlating against a known 39-bit
+preamble and firing a strobe when the correlation reaches `preamble_len - 6` = 33.
+Conjugating a Gray-coded QPSK stream inverts one bit of every pair, and the correlator
+sums two matched filters over the even and odd bit streams, so one inverted stream
+turns +39 into roughly half of it. The constellation is untouched, because a mirrored
+QPSK constellation still shows four clean clusters.
+
+Measured, using the receive model itself as the oracle:
+
+| source | peak correlation | frame strobes | decodes |
+|---|---:|---:|---|
+| textbook `qpsk_ascii_msg.mat`, as recorded | **39** | 284 | yes |
+| the same recording, conjugated | 17 | 0 | no |
+| our live capture, as received | 13 | 0 | no |
+| our live capture, conjugated | **39** | 131 | framing restored |
+
+**It is not the radios.** A complex tone transmitted at +20019.5 Hz came back at
++20852 Hz — the 832 Hz being the dongle's ~2 ppm error. The hardware chain preserves
+handedness, so the conjugation is in the models, most likely from converting them off
+the PLUTO blocks they shipped on.
+
+**The fix has to go on the receive side.** Conjugating in the *transmit* chain is the
+obvious move — it would leave every student receiver untouched — and it **does not
+work**. Tested on four live captures that all locked cleanly:
+
+| capture | `Rx Rotated` lock | corr max | strobes | decoded |
+|---|---:|---:|---:|---|
+| with the transmit-side conjugate | 0.976 – 0.979 | 13, 13, 15, 21 | 0 | nothing |
+| with a conjugate on the received samples instead | 0.976 – 0.979 | **39, 39**, 19, 17 | **88, 87**, 0, 0 | **88 frames of the transmitted message** |
+
+The transmit-side result is indistinguishable from applying nothing at all, so it is
+now **off by default**. The 7th argument still turns it on for anyone who wants to work
+out why the two sides aren't equivalent — algebraically they should be, since the
+receiver's own frequency correction absorbs the sign flip that distinguishes them:
+
+```matlab
+usrp_transmit('lab7', 600, 50, [], 'Hello World!', [], 'on')
+```
+
+**None of this matters once you use the differential path**, which is immune to the
+mirror and the phase ambiguity alike — so the conjugate is a dead end, kept only as a
+record of what was measured. If you ever need the coherent path to work, the receive
+side is where the conjugate has to go.
+
+The Lab 6 models deliberately get no conjugate: nothing in that lab can see a mirror,
+since a mirrored constellation still shows four clusters and a mirrored spectrum still
+has the right bandwidth. The one visible trace is that Lab 6 Activity 2's coarse
+estimate comes back with the opposite sign to the induced peak's position.
+
+### If you want to re-measure any of this
+
+Capture to a file and run the receiver on it offline — the sim is then deterministic
+and you can test the same samples repeatedly. Format, per `import_rtlsdr_data.m`: save
+a variable `rtlsdr_data`, a `timeseries` whose `.data` is `[nFrames × frameSize]` and
+whose `TimeInfo.Increment` is `frameSize/fs`.
+
+Three cautions, each of which cost me real time:
+
+- **Don't judge the mirror by which side of DC the signal lands on.** The QPSK signal
+  sits on the carrier, so mirroring it about the carrier leaves it exactly where it
+  was. I ran that test, watched the signal stay at +10.7 kHz with the fix both off and
+  on, and concluded the fix did nothing — which was true, but not for that reason, and
+  the measurement couldn't have shown otherwise. Only an *offset* tone reveals the
+  chain's handedness; only the correlation, or the decode itself, reveals the mapping.
+- **Don't trust a single live capture.** Acquisition is marginal here as in Lab 6
+  Activity 3. A capture that didn't lock gives the same middling correlation whatever
+  you do to it and reads as a null result: one such capture (lock 0.393) wasted two
+  rounds of testing. Check `Rx Rotated` lock > 0.9 before believing anything.
+- **Check the sign of the correlation, not its magnitude.** `-39` means the framing is
+  working perfectly on an inverted preamble, which is a completely different problem
+  from `13`, and taking `abs()` hides the difference.
+
+### Traps that will bite you
+
 **Two MATLAB sessions.** MATLAB is single threaded, so a blocking transmit loop
 cannot also run a receiver. Transmit from one session, receive from another. Both
 radios share one machine fine.
 
 **The radio serial is baked into the models.** On a different USRP, open the SDRu
-Transmitter block and set Platform and serial to match.
+Transmitter block and set Platform and serial to match, or `findsdru` reports
+"No devices found".
 
-Verified 2026-10-21, B200 to RTL-SDR at 6 ft, MATLAB R2023b. Activity 1 received
-28.8 dB over the noise floor. Activity 2's coarse estimator recovered the injected
-offset, at **receive** tuner gain 40 — at the shipped 10 it reports 0 Hz. **Activity 3
-is not yet confirmed**: its constellations came back as one rotating mass rather than
-four clusters, on a run where the frame had wrongly been forced to 2000. Re-test it
-before relying on it. Labs 7 and 8 are untested.
+**UHD intermittently reports "No devices found"** for a radio that is plainly
+attached — usually the first access after plug-in, while the B200 loads its FPGA
+image, but it has happened mid-session too. It clears by itself, and the wrapper
+retries automatically. Don't start debugging configuration in front of a class.
 
-> Receiver gain is a separate trap. If a student leaves the receiving dongle at the
-> models' default `Tuner Gain (dB)` of 10, the coarse frequency estimator locks onto
-> the dongle's DC spike and reports 0 Hz however good the transmission is. Lab 6
-> tells them to use about 40.
+**`matlab -batch` segfaults on exit** after any session that opened the USRP (access
+violation in `mnFullExitFcn`, exit code 5). It happens strictly after all work and
+output, is harmless, and doesn't occur interactively. Check for the `[tx] done:` line
+to confirm the transmission itself completed — a healthy run reports about 1.02×
+real time.
+
+**Block names in these models carry leading spaces and embedded newlines** —
+`' ASCII Transfer Binary Source'`, `"RTL-SDR\nReceiver"`. An exact-name lookup
+(`find_system(...,'Name','RTL-SDR Receiver')`) silently returns nothing, which is how
+a script can report that it tuned a receiver while leaving it on the shipped 602 MHz.
+Match on the whitespace-collapsed, trimmed name.
+
+**All five receive models ship tuned to 602 MHz**, as do the textbook's original PLUTO
+transmit models and the pre-conversion `.slx.r2021a` backups. The 433.5 MHz in the
+current USRP transmit models came from our conversion. Note that 602–608 MHz is UHF
+TV channel 36, so which frequency is appropriate is a spectrum-authorization question,
+not a technical one.
 
 ## `build_slides.ps1` — rebuild the lesson slide PDFs
 
