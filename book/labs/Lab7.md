@@ -6,7 +6,7 @@
 
 A synchronized QPSK link (Lab 6) only gets you a clean stream of symbols — it doesn't tell you where a message starts. Today you'll receive a live, framed, ASCII-encoded message from the instructor and decode actual text out of the air. As in Lab 6, only the instructor transmits; the whole class receives simultaneously on individual RTL-SDRs.
 
-One thing is different from Lab 6, and it is the point of the lab's last section: **the link runs differentially encoded.** Coherent QPSK framing does not survive the carrier's 90° phase ambiguity — measured on this exact hardware, it never once located a frame — while the differential version does, every time. You'll switch one block to make that work, and the Optional Extension at the end explains why it is necessary.
+One thing is different from Lab 6, and it is the point of the lab's last section: **the link runs differentially encoded.** Coherent QPSK framing does not survive the carrier's 90° phase ambiguity — measured on this exact hardware, it never once located a frame — while the differential version does, every time. You'll switch one block to make that work, and the section *Why You Had to Switch to DQPSK* at the end explains why it is necessary.
 
 ## Aims of the Lab
 
@@ -42,7 +42,7 @@ healthy. Step 2 is what keeps you out of that situation, so don't skip it.
     - **`Frequency correction (ppm)`** on the `RTL-SDR Receiver` block, to your whole-number figure from [Lab 2](Lab2). It ships at `0`.
 2. **Switch the demodulator to DQPSK.** Open `Decimation, Demodulation, Frame Synch & ASCII Decoding`, then `Demodulation & Frame Synch`, then `Demodulation & Phase Ambiguity Correction`. Flip the **Manual Switch** from the `QPSK Demodulator Baseband` to the `DQPSK Demodulator Baseband`.
 
-    This is not optional and it is not a workaround — it is the lab's lesson arriving early. The transmission is differentially encoded, and with the coherent QPSK demodulator selected the correlation tops out around 20 and **not one frame is ever found**, however clean your constellation looks. The Optional Extension at the end of this lab is the algebra for why.
+    This is not optional and it is not a workaround — it is the lab's lesson arriving early. The transmission is differentially encoded, and with the coherent QPSK demodulator selected the correlation tops out around 20 and **not one frame is ever found**, however clean your constellation looks. The last section of this lab is the algebra for why.
 3. Run it once the instructor starts transmitting. The model doesn't display the frame-sync signal, so add a readout yourself. Those signals are deeper in the model than you might expect — inside `Decimation, Demodulation, Frame Synch & ASCII Decoding`, then `Demodulation & Frame Synch`, then `Frame Synchronisation`. In there:
     - right-click the **Frame Strobe** signal and connect a Scope (or enable signal logging on it);
     - do the same inside `Matched Filter Correlator` on its **Correlation Amplitudes** output, to watch the $R[n]$ correlation itself.
