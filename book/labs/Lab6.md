@@ -180,4 +180,4 @@ Submit a single PDF to Gradescope containing:
 1. The three constellation figures from Activity 3 — `Rx Before AGC`, `Rx Timing`, and `Rx Rotated` — clearly labeled, plus your `Spectrum Analyzer - Coarse Synch` figure from Activity 2 with the induced peak visible.
 2. 2-3 sentences for each stage explaining what changed and why (in your own words, not copied from the book). For Activity 2, state the frequency you read off the induced peak, the $\Delta f$ you got by dividing it by 4, and how that compares to the model's own `Calculated Frequency Offset (Hz)` display.
 3. A note on whether your Activity 2 figure came from the live signal or from the recorded fallback file, and if the latter, why. (Activity 3 is from a recording for everyone, so there is nothing to report there.)
-4. Your documentation statement.
+4. Your documentation statement. Make sure you give specifics to: 1. Who helped you? 2. On which part? 3. How did they help?
