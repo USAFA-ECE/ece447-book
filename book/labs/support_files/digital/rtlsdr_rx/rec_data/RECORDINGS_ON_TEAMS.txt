@@ -8,8 +8,10 @@ and place them in THIS folder:
 
 Files used by the labs:
   qpsk_raised_cosine.mat    Lab 5, Activity 4  (required)
-  qpsk_coarse_synch.mat     Lab 6  (live-reception fallback)
-  qpsk_carrier_timing.mat   Lab 6  (live-reception fallback)
+                            Lab 6, Activity 1  (live-reception fallback)
+  qpsk_coarse_synch.mat     Lab 6, Activity 2  (live-reception fallback)
+  qpsk_carrier_timing.mat   Lab 6, Activity 3  (REQUIRED - that activity runs
+                            from this file rather than the live transmission)
   qpsk_ascii_msg.mat        Lab 7  (live-reception fallback)
   dqpsk_ascii_msg.mat       Lab 7  (live-reception fallback)
   dqpsk_image1.mat          Lab 8  (live-reception fallback)
