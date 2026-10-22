@@ -41,7 +41,7 @@ often make a student's receiver look broken.
 | Lab 6 Activity 1 | `usrp_transmit('lab6a1', 900)` | |
 | Lab 6 Activity 2 | `usrp_transmit('lab6a2', 900)` | students also set `Additional Freq Offset (Hz)` to 700 |
 | Lab 6 Activity 3 | — | runs from a recording; no transmission needed |
-| Lab 7 | `usrp_transmit('lab7', 1800, [], [], 'Go Falcons!')` | 5th argument is the message, max 50 chars |
+| Lab 7 | `usrp_transmit('lab7', 1800, [], [], 'Hello World!')` | 5th argument is the message — **keep it 12 characters** |
 | Lab 8 | `usrp_transmit('lab8', 1800, [], [], 'image3.mat')` | 5th argument picks the image |
 
 The empty `[]`s are gain and frequency, left at their defaults (50 dB, whatever the
@@ -49,8 +49,14 @@ model ships with, which is 433.5 MHz on all five). To move frequency — say the
 busy — pass it as the 4th argument: `usrp_transmit('lab7', 1800, 50, 915e6, 'Hi')`.
 
 For Lab 7 the generator appends a space and a three-digit frame counter to your
-message, so the class sees `Go Falcons! 001` … `Go Falcons! 100` repeating. Tell them
+message, so the class sees `Hello World! 001` … `Hello World! 100` repeating. Tell them
 so: consecutive counters are how a student confirms frames are arriving in order.
+
+**Keep the Lab 7 message twelve characters long.** The receiver decodes a fixed number
+of characters per frame, set from its own mask to match the shipped `Hello World!`. A
+shorter message still decodes but each line picks up a trailing junk character —
+measured, `Go Falcons!` (eleven) came back as `Go Falcons! 026?`. Harmless, but the
+class will ask about it.
 
 For Lab 8, **run it for at least ten minutes.** One image is 100 frames at about half
 a second each, so a complete pass takes ~50 s, and a student who starts late sees a
@@ -114,8 +120,8 @@ Measured 2026-10-21, B200 → RTL-SDR at 6 ft, MATLAB R2023b.
 | Lab 6 Activity 1 | **works live.** Signal 28.8 dB over the noise floor. |
 | Lab 6 Activity 2 | **works live**, at *receive* tuner gain 40 and injected offset 700. At the shipped gain of 10 the estimator reports 0 Hz. |
 | Lab 6 Activity 3 | **runs from a recording.** Live acquisition resolved four clusters on only 6 of 16 validated runs; the recording locks every time. No transmission needed. |
-| Lab 7 | **runs from a recording.** The live link does not decode — see below. On `qpsk_ascii_msg.mat` the receiver decodes 460 frames cleanly. |
-| Lab 8 | **runs from a recording.** Same reason. On `dqpsk_image1.mat` it reconstructed the image and published it to the base workspace. |
+| Lab 7 | **runs from a recording.** Transmits correctly; a live decode works only with a receive-side conjugate *and* a lucky phase quadrant — see below. On `qpsk_ascii_msg.mat` the receiver decodes 460 frames cleanly. |
+| Lab 8 | **runs from a recording.** Same transmit chain, same framing, same reason. On `dqpsk_image1.mat` it reconstructed the image and published it to the base workspace. |
 
 > Receiver gain is a separate trap. If a student leaves the receiving dongle at the
 > models' default `Tuner Gain (dB)` — 10 in most models, 20 in the Lab 8 one — the
@@ -152,39 +158,64 @@ Measured, using the receive model itself as the oracle:
 handedness, so the conjugation is in the models, most likely from converting them off
 the PLUTO blocks they shipped on.
 
-**What the wrapper does about it.** For the Lab 7 and 8 models it inserts a conjugate
-on the baseband symbol path, at the transmit filter's input, so that student receivers
-would need no changes. Turn it off or on explicitly with the 7th argument:
+**The fix has to go on the receive side.** Conjugating in the *transmit* chain is the
+obvious move — it would leave every student receiver untouched — and it **does not
+work**. Tested on four live captures that all locked cleanly:
+
+| capture | `Rx Rotated` lock | corr max | strobes | decoded |
+|---|---:|---:|---:|---|
+| with the transmit-side conjugate | 0.976 – 0.979 | 13, 13, 15, 21 | 0 | nothing |
+| with a conjugate on the received samples instead | 0.976 – 0.979 | **39, 39**, 19, 17 | **88, 87**, 0, 0 | **88 frames of the transmitted message** |
+
+The transmit-side result is indistinguishable from applying nothing at all, so it is
+now **off by default**. The 7th argument still turns it on for anyone who wants to work
+out why the two sides aren't equivalent — algebraically they should be, since the
+receiver's own frequency correction absorbs the sign flip that distinguishes them:
 
 ```matlab
-usrp_transmit('lab7', 600, 50, [], 'Hi', [], 'off')   % as the model ships
-usrp_transmit('lab7', 600, 50, [], 'Hi', [], 'on')    % force the fix
+usrp_transmit('lab7', 600, 50, [], 'Hello World!', [], 'on')
 ```
 
-The Lab 6 models deliberately **don't** get it: nothing in that lab can see a mirror,
+**A live decode is achievable**, and worth seeing once: with the conjugate on the
+received samples, correlation reached 39 and the receiver printed 88 lines of
+`Go Falcons! 026`, `028`, `030` … — the actual transmitted message.
+
+**But a second, independent problem gates it: QPSK's 90° phase ambiguity.** Of the four
+captures above, two correlated at **+39** and framed; one correlated at **−39**, the
+preamble inverted by a 180° carrier lock, which fails a `>= 33` threshold test; and one
+sat near zero, a 90°/270° lock. So even with the mirror corrected, framing succeeds
+only when the loop happens to settle at 0°. That is exactly the problem Lab 7's own
+optional extension describes, and exactly why the textbook ships differentially
+encoded captures. Two separate lotteries — carrier acquisition and then phase quadrant
+— is more than a 53-minute period can absorb, which is why the labs use the recordings.
+
+The Lab 6 models deliberately get no conjugate: nothing in that lab can see a mirror,
 since a mirrored constellation still shows four clusters and a mirrored spectrum still
 has the right bandwidth. The one visible trace is that Lab 6 Activity 2's coarse
 estimate comes back with the opposite sign to the induced peak's position.
 
-**This fix has not yet been confirmed on air.** The lab text therefore runs Labs 7 and
-8 from the recordings, which are proven. If you want to confirm it, the honest test is:
-transmit with `'on'`, capture to a `.mat`, then run the receiver on that file offline
-and check whether it decodes *without* conjugating. Two cautions, both of which cost
-me hours:
+### If you want to re-measure any of this
 
-- **Don't test it by checking which side of DC the signal lands on.** The QPSK signal
+Capture to a file and run the receiver on it offline — the sim is then deterministic
+and you can test the same samples repeatedly. Format, per `import_rtlsdr_data.m`: save
+a variable `rtlsdr_data`, a `timeseries` whose `.data` is `[nFrames × frameSize]` and
+whose `TimeInfo.Increment` is `frameSize/fs`.
+
+Three cautions, each of which cost me real time:
+
+- **Don't judge the mirror by which side of DC the signal lands on.** The QPSK signal
   sits on the carrier, so mirroring it about the carrier leaves it exactly where it
-  was. That test looks decisive and proves nothing. Only an *offset* tone reveals the
+  was. I ran that test, watched the signal stay at +10.7 kHz with the fix both off and
+  on, and concluded the fix did nothing — which was true, but not for that reason, and
+  the measurement couldn't have shown otherwise. Only an *offset* tone reveals the
   chain's handedness; only the correlation, or the decode itself, reveals the mapping.
 - **Don't trust a single live capture.** Acquisition is marginal here as in Lab 6
-  Activity 3, so a capture that happens not to lock gives the same middling
-  correlation either way and reads as a null result. Check that `Rx Rotated` lock
-  exceeds 0.9 before believing anything, and prefer capturing once to a file and
-  re-running offline, which is deterministic.
-
-To capture to a file the models can read (format per `import_rtlsdr_data.m`): save a
-variable `rtlsdr_data`, a `timeseries` whose `.data` is `[nFrames × frameSize]` and
-whose `TimeInfo.Increment` is `frameSize/fs`.
+  Activity 3. A capture that didn't lock gives the same middling correlation whatever
+  you do to it and reads as a null result: one such capture (lock 0.393) wasted two
+  rounds of testing. Check `Rx Rotated` lock > 0.9 before believing anything.
+- **Check the sign of the correlation, not its magnitude.** `-39` means the framing is
+  working perfectly on an inverted preamble, which is a completely different problem
+  from `13`, and taking `abs()` hides the difference.
 
 ### Traps that will bite you
 

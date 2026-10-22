@@ -94,6 +94,14 @@ function usrp_transmit(which, secs, gain_db, freq_hz, payload, txdir, mirror)
 %   switch on either side, which is why its fallback captures are named
 %   dqpsk_image*.mat.
 %
+% KEEP THE LAB 7 MESSAGE 12 CHARACTERS LONG
+%
+%   The receiver decodes a fixed number of characters per frame, set from the
+%   model's own mask, and that number matches the shipped 'Hello World!' --
+%   twelve characters. A shorter message still decodes but every line picks up
+%   a trailing junk character: 'Go Falcons!' (eleven) came back as
+%   'Go Falcons! 026?'. Harmless, but students will ask. Pad to twelve.
+%
 % VERIFIED 2026-10-21, USRP B200 to RTL-SDR at 6 ft, MATLAB R2023b:
 %   Lab 6 Activity 1  signal received 28.8 dB over the noise floor
 %   Lab 6 Activity 2  coarse estimator recovered the injected offset at
@@ -102,7 +110,15 @@ function usrp_transmit(which, secs, gain_db, freq_hz, payload, txdir, mirror)
 %                     clusters on only 6 of 16 runs. That activity now runs
 %                     from the textbook's recorded capture instead; see
 %                     book/labs/Lab6.md.
-%   Labs 7 and 8      see tools/README.md for the measured results.
+%   Lab 7             transmits correctly, and a live decode IS achievable --
+%                     88 frames of the transmitted message recovered -- but
+%                     only with a conjugate added on the RECEIVE side, and
+%                     only when the carrier happens to lock at 0 degrees
+%                     rather than 90, 180 or 270 (two of four captures). The
+%                     lab therefore runs from the recording. tools/README.md
+%                     has the measurements.
+%   Lab 8             same transmit chain and same framing; runs from the
+%                     recording for the same reason.
 %
 % THINGS THAT WILL BITE YOU
 %
@@ -246,16 +262,21 @@ end
 % the textbook's own working capture through a conjugate reproduces exactly
 % the 17 seen over the air, with the constellation still locked at 0.98.
 %
-% Conjugating here, in the transmit chain, means every student receiver works
-% untouched -- which is the point, since they cannot be asked to patch their
-% models mid-lab.
-if nargin < 7 || isempty(mirror), mirror = 'auto'; end
+% Conjugating here, in the transmit chain, SHOULD mean every student receiver
+% works untouched. It does not, for reasons not yet understood -- see the
+% measurement below. The conjugate has to go on the receive side instead.
+% MEASURED 2026-10-21: inserting the conjugate HERE, on the transmit side, does
+% not work. Four live captures that all locked cleanly (Rx Rotated 0.976-0.979)
+% came back with preamble correlation 13, 13, 15 and 21 against the 33 needed,
+% zero frame strobes and no text -- indistinguishable from not applying it.
+% Conjugating the RECEIVED samples instead does work: the same four captures
+% gave correlation 39 on two of them, 88 frame strobes and 88 decoded lines of
+% the transmitted message. So the default is OFF; 'on' is left available only
+% for anyone who wants to investigate why the two sides are not equivalent.
+if nargin < 7 || isempty(mirror), mirror = 'off'; end
 switch lower(mirror)
     case 'on',  needs_conj = true;
-    case 'off', needs_conj = false;
-    otherwise
-        needs_conj = any(strcmp(mdl, {'usrp_QPSK_ascii_message', ...
-                                      'usrp_QPSK_image_transfer'}));
+    otherwise,  needs_conj = false;
 end
 % Applied on the baseband SYMBOL path, at the transmit filter's input, which
 % is the modulator's own output and is measurably complex (checked by logging
