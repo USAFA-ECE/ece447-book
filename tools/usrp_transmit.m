@@ -124,10 +124,12 @@ function usrp_transmit(which, secs, gain_db, freq_hz, payload, txdir, mirror)
 %   Lab 6 Activity 1  signal received 28.8 dB over the noise floor
 %   Lab 6 Activity 2  coarse estimator recovered the injected offset at
 %                     receive tuner gain 40 (at the shipped 10 it reports 0)
-%   Lab 6 Activity 3  does NOT acquire dependably over the air -- four
-%                     clusters on only 6 of 16 runs. That activity now runs
-%                     from the textbook's recorded capture instead; see
-%                     book/labs/Lab6.md.
+%   Lab 6 Activity 3  transmits fine, but acquires on only about one run in
+%                     three -- four clusters on 6 of 16 validated runs, with
+%                     failures bimodal rather than marginal. The lab runs it
+%                     live anyway and tells students to re-run a few times,
+%                     then fall back to the recorded capture. Transmit for
+%                     this activity like any other; see book/labs/Lab6.md.
 %   Lab 7             WORKS LIVE on the differential path: correlation 39,
 %                     225 frame strobes and 225 decoded lines of the
 %                     transmitted message, on both of two captures. The

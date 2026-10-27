@@ -40,7 +40,7 @@ often make a student's receiver look broken.
 |---|---|---|
 | Lab 6 Activity 1 | `usrp_transmit('lab6a1', 900)` | |
 | Lab 6 Activity 2 | `usrp_transmit('lab6a2', 900)` | students also set `Additional Freq Offset (Hz)` to 700 |
-| Lab 6 Activity 3 | — | runs from a recording; no transmission needed |
+| Lab 6 Activity 3 | `usrp_transmit('lab6a3', 900)` | expect ~1 run in 3 to lock; students fall back to the recording |
 | Lab 7 | `usrp_transmit('lab7', 1800, [], [], 'Hello World!')` | 5th arg is the message — **keep it 12 characters**. Selects DQPSK; the class must switch their receiver to match |
 | Lab 8 | `usrp_transmit('lab8', 1800, [], [], 'image3.mat')` | 5th argument picks the image |
 
@@ -119,7 +119,7 @@ Measured 2026-10-21, B200 → RTL-SDR at 6 ft, MATLAB R2023b.
 |---|---|
 | Lab 6 Activity 1 | **works live.** Signal 28.8 dB over the noise floor. |
 | Lab 6 Activity 2 | **works live**, at *receive* tuner gain 40 and injected offset 700. At the shipped gain of 10 the estimator reports 0 Hz. |
-| Lab 6 Activity 3 | **runs from a recording.** Live acquisition resolved four clusters on only 6 of 16 validated runs; the recording locks every time. No transmission needed. |
+| Lab 6 Activity 3 | **transmits fine, locks about one run in three.** See the note below — this one needs you to watch the room. |
 | Lab 7 | **works live, on the differential path.** Correlation 39, 225 frame strobes, 225 decoded lines of the transmitted message, on both of two captures. The coherent path never frames at all — see below. Use `usrp_transmit('lab7', …)`, which selects DQPSK, and tell the class to move their receiver's Manual Switch to match. |
 | Lab 8 | **works live, as the model ships.** Correlation 39, ~48 strobes per 25 s and sequential picture column numbers, on three of three captures. DQPSK end to end with no switch on either side. |
 
@@ -127,6 +127,34 @@ Measured 2026-10-21, B200 → RTL-SDR at 6 ft, MATLAB R2023b.
 > models' default `Tuner Gain (dB)` — 10 in most models, 20 in the Lab 8 one — the
 > coarse frequency estimator locks onto the dongle's DC spike and reports 0 Hz however
 > good the transmission is. The labs tell them to use about 40.
+
+### Lab 6 Activity 3: watch the room and call the switch
+
+**This is the one activity where the lab text deliberately does not tell students
+the odds, so you have to.** Measured here: the full synchronizer resolved four
+clusters on **6 of 16** validated runs. Failures are bimodal rather than
+marginal — successes score lock 0.90–0.985 at EVM 6–7%, failures 0.18–0.60 at
+EVM 37–46%, nothing in between — which means it is a loop *acquisition* problem,
+not signal strength, and there is no student-side setting that fixes it.
+Widening the loop bandwidth was tried and did not help.
+
+The student text says only that a recorded capture is available and that you
+will say if and when to use it. So:
+
+- Expect a meaningful fraction of the room to see a rotating mass rather than
+  four clusters, on a correctly configured receiver.
+- Before blaming acquisition, have them confirm the three settings in Activity
+  3 step 1 — announced frequency (models ship at 602 MHz), `Tuner Gain (dB)` 40
+  (ships at 10), and their Lab 2 ppm figure. Those account for most failures and
+  *are* student-fixable.
+- Re-running is cheap — under a minute per attempt, and outcomes are
+  independent. A few attempts is reasonable.
+- When it is clear a student is not going to get it, send them to Activity 3
+  step 6 and the recorded capture. It locks every time and the assignment
+  accepts it without penalty. Budget period time for this rather than letting
+  people troubleshoot a correctly configured receiver.
+- Make sure the class has `qpsk_carrier_timing.mat` downloaded *before* the
+  period. It is ~115 MB and the download will not go well twenty at a time.
 
 ### Why Lab 7 has to run differentially
 
