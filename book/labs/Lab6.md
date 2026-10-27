@@ -6,7 +6,7 @@
 
 Today the classroom becomes a real digital radio link. The instructor will transmit a live QPSK signal from the front of the room; every student receives it independently on their own RTL-SDR. This is the same real-hardware chain from Lab 5, but now with an actual live-transmitted signal instead of a recording, and now built to fully synchronize rather than just confirming the signal is there on the spectrum.
 
-All three activities work with that live signal. Activity 3 — the full synchronizer — is the one that may not lock on every run; a recorded capture is there as a fallback, and the note at the start of that activity explains when to reach for it.
+All three activities work with that live signal. Recorded captures of the same transmissions are available as a backup for every stage, and your instructor will tell you if and when to use one.
 
 **Only the instructor transmits.** We don't have a transmit-capable radio for every student, and getting one working reliably across a whole class in 53 minutes isn't something we could count on — so this lab, and Labs 7 and 8, all use one instructor transmitter with the whole class receiving simultaneously.
 
@@ -43,13 +43,13 @@ You'll run the matching receiver model at each stage, and set the frequency, `Tu
 ```{note}
 **Download the recorded captures before class**, from the course Teams folder (see the [Downloads](../downloads.md) page), into `digital/rtlsdr_rx/rec_data/`. There is one for every stage, and they are about 115 MB each:
 
-| file | stage | when you'd use it |
-|---|---|---|
-| `qpsk_raised_cosine.mat` | Activity 1 | live signal too weak from your seat |
-| `qpsk_coarse_synch.mat` | Activity 2 | same |
-| `qpsk_carrier_timing.mat` | Activity 3 | **may well be needed** — see Activity 3 |
+| file | stage |
+|---|---|
+| `qpsk_raised_cosine.mat` | Activity 1 |
+| `qpsk_coarse_synch.mat` | Activity 2 |
+| `qpsk_carrier_timing.mat` | Activity 3 |
 
-Switching a model from live hardware to a recorded file is the block swap you did in [Lab 5](Lab5), Activity 4, spelled out in Activity 3, step 7.
+Have all three on hand before class. Your instructor will tell you if and when to use one — switching a model from live hardware to a recorded file is the block swap you did in [Lab 5](Lab5), Activity 4, spelled out in Activity 3, step 6.
 
 One part does not survive the fallback: steps 5 and 6 of Activity 2 need the live signal, because they work by changing the dongle's tuning.
 ```
@@ -144,20 +144,12 @@ Work through it in this order:
 
 ## Activity 3: Full Carrier and Timing Synchronization
 
-```{important}
-**This one may not lock on the first run, and that is expected.** The full
-synchronizer is the most delicate stage in the lab — it has to acquire carrier
-phase and symbol timing at the same time on a 1000 symbols per second signal,
-and its loops only pull in over a narrow range. Measured on these same radios
-at close range, it resolved four clean clusters on roughly **one run in
-three**; the other runs showed one slowly turning mass instead.
-
-If that is what you get, it is not something you did wrong, and no setting will
-change it. The two outcomes look quite different rather than shading into each
-other, so you can tell at a glance which one you have. **Re-run it.** If three
-or four honest attempts with the settings in step 1 all give you a rotating
-mass, switch to the recorded capture in step 7 and carry on — it locks every
-time, and you lose nothing on the assignment by using it.
+```{note}
+This is the most demanding stage in the lab — it acquires carrier phase and
+symbol timing at the same time, on a 1000 symbols per second signal, and its
+loops pull in over a narrow range. A recorded capture of the same transmission
+is available as a backup. **Your instructor will tell you if and when to use
+it**; step 7 has the details.
 ```
 
 1. Open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing.slx` and set three things before running it. **All three matter more here than anywhere else in the lab** — get any of them wrong and this activity cannot work at all.
@@ -172,19 +164,16 @@ time, and you lose nothing on the assignment by using it.
     - **`Rx Timing`** — after AGC and symbol timing recovery. Four clusters should be distinguishable, but expect them to be **spinning**, clockwise or anti-clockwise depending on the sign of your carrier offset.
     - **`Rx Rotated`** — after carrier synchronization. Despite the name, this is the **fully corrected** output: four clusters sitting still around the reference markers.
 3. Confirm you can see that progression across the three scopes. The ordering is the point — timing recovery gives you distinguishable clusters, and only carrier synchronization stops them moving.
-4. **Judging what you got.** The two outcomes look quite different, so don't agonise over it:
-    - **Locked** — `Rx Rotated` shows four tight, clearly separated clusters sitting still on the reference markers. Capture it.
-    - **Not locked** — one diffuse mass rotating slowly, or four smears you have to squint to count. The clusters do not settle. Re-run.
 
-    If you catch a run that locks, grab all three figures before stopping it.
-5. Re-run as needed, up to three or four attempts. Each run costs under a minute, and the outcome is independent each time, so a few attempts is a reasonable use of the period.
-6. If you want additional scope views of the internal tracking loops, open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing_plots.slx`, which adds logging and scope instrumentation on top of the same synchronization chain (it drops the base model's symbol-decision/printout branch, which you don't need just to view the constellation). Its own recorded fallback is a different file, `rec_data/qpsk_carrier_timing_plots.mat`, which is not in the Teams folder — so treat this step as optional and use the base model for the assignment.
+    What you're after on `Rx Rotated` is four tight, clearly separated clusters sitting still on the reference markers. Once you have it, capture all three figures before stopping the run.
+4. Each run takes well under a minute, so re-running is cheap if you want another look. If the constellations don't resolve the way they're described above, check the three settings in step 1 first — those account for most of it — then let your instructor know.
+5. If you want additional scope views of the internal tracking loops, open `digital/rtlsdr_rx/rtlsdr_QPSK_carrier_timing_plots.slx`, which adds logging and scope instrumentation on top of the same synchronization chain (it drops the base model's symbol-decision/printout branch, which you don't need just to view the constellation). Its own recorded fallback is a different file, `rec_data/qpsk_carrier_timing_plots.mat`, which is not in the Teams folder — so treat this step as optional and use the base model for the assignment.
 
-### Step 7: The recorded fallback
+### Step 6: Running from the recorded capture
 
-**If several honest attempts have not locked, use this and move on.** It is a real over-the-air RTL-SDR capture recorded for the SDR textbook, not a simulation, and it locks within about a second of starting and holds for the whole run — so every part of the progression above is visible in it. Using it costs you nothing on the assignment; just say so in your write-up.
+**Use this if your instructor directs you to.** It is a real over-the-air RTL-SDR capture recorded for the SDR textbook, not a simulation, and every part of the progression above is visible in it — the clusters settle within about a second of starting and hold for the rest of the run. It is equally acceptable for the assignment; just note in your write-up which one you used.
 
-7. Download `qpsk_carrier_timing.mat` from the course Teams folder (see the [Downloads](../downloads.md) page) into `digital/rtlsdr_rx/rec_data/`. It is about 115 MB, so **do this before class**, not while the period is running.
+6. Download `qpsk_carrier_timing.mat` from the course Teams folder (see the [Downloads](../downloads.md) page) into `digital/rtlsdr_rx/rec_data/`. It is about 115 MB, so **do this before class**, not while the period is running.
     - Right-click `RTL-SDR Receiver o/p fs=240kHz` and choose **Comment Out**.
     - Right-click the greyed-out `Import RTL-SDR Data` block, sitting below the receiver, and choose **Comment In**. Its filename is already set to `rec_data/qpsk_carrier_timing.mat`.
     - Draw one signal line from the `Import RTL-SDR Data` output to the input of `FIR Decimation x5 o/p fs=48kHz`, which is where the receiver's output used to go. This is the same swap as [Lab 5](Lab5), Activity 4, and simpler here — one line instead of two.
@@ -211,5 +200,5 @@ Submit a single PDF to Gradescope containing:
 
 1. The three constellation figures from Activity 3 — `Rx Before AGC`, `Rx Timing`, and `Rx Rotated` — clearly labeled, plus your `Spectrum Analyzer - Coarse Synch` figure from Activity 2 with the induced peak visible.
 2. 2-3 sentences for each stage explaining what changed and why (in your own words, not copied from the book). For Activity 2, state the frequency you read off the induced peak, the $\Delta f$ you got by dividing it by 4, and how that compares to the model's own `Calculated Frequency Offset (Hz)` display.
-3. For each activity, a note on whether your figures came from the live signal or from a recorded fallback file, and if the latter, why. Using the fallback in Activity 3 is expected and costs you nothing — but say how many live attempts you made first.
+3. For each activity, a note on whether your figures came from the live signal or from a recorded capture. Either is fine; we just want to know which.
 4. Your documentation statement. Make sure you give specifics to: 1. Who helped you? 2. On which part? 3. How did they help? If you used generative AI: 4: Which AI did you use? 5: What was your prompt? 6: How did you modify the AI's response?
