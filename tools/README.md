@@ -40,7 +40,7 @@ often make a student's receiver look broken.
 |---|---|---|
 | Lab 6 Activity 1 | `usrp_transmit('lab6a1', 900)` | |
 | Lab 6 Activity 2 | `usrp_transmit('lab6a2', 900)` | students also set `Additional Freq Offset (Hz)` to 700 |
-| Lab 6 Activity 3 | — | runs from a recording; no transmission needed |
+| Lab 6 Activity 3 | `usrp_transmit('lab6a3', 900)` | expect ~1 run in 3 to lock; students fall back to the recording |
 | Lab 7 | `usrp_transmit('lab7', 1800, [], [], 'Hello World!')` | 5th arg is the message — **keep it 12 characters**. Selects DQPSK; the class must switch their receiver to match |
 | Lab 8 | `usrp_transmit('lab8', 1800, [], [], 'image3.mat')` | 5th argument picks the image |
 
@@ -119,7 +119,7 @@ Measured 2026-10-21, B200 → RTL-SDR at 6 ft, MATLAB R2023b.
 |---|---|
 | Lab 6 Activity 1 | **works live.** Signal 28.8 dB over the noise floor. |
 | Lab 6 Activity 2 | **works live**, at *receive* tuner gain 40 and injected offset 700. At the shipped gain of 10 the estimator reports 0 Hz. |
-| Lab 6 Activity 3 | **runs from a recording.** Live acquisition resolved four clusters on only 6 of 16 validated runs; the recording locks every time. No transmission needed. |
+| Lab 6 Activity 3 | **transmits fine, locks about one run in three.** Live acquisition resolved four clusters on 6 of 16 validated runs, with failures bimodal rather than marginal — it is an acquisition problem, not signal strength, and widening the loop bandwidth does not help. The lab runs live and tells students to re-run a few times, then fall back to `qpsk_carrier_timing.mat`, which locks every time. Budget period time for that. |
 | Lab 7 | **works live, on the differential path.** Correlation 39, 225 frame strobes, 225 decoded lines of the transmitted message, on both of two captures. The coherent path never frames at all — see below. Use `usrp_transmit('lab7', …)`, which selects DQPSK, and tell the class to move their receiver's Manual Switch to match. |
 | Lab 8 | **works live, as the model ships.** Correlation 39, ~48 strobes per 25 s and sequential picture column numbers, on three of three captures. DQPSK end to end with no switch on either side. |
 
