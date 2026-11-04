@@ -45,9 +45,9 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 28 | Tue 27 Oct | SDR Lab (Day 1 of 2) | [Lab 6 Description](labs/Lab6) | [Lab 6](labs/Lab6) | [HW6](HW/HW6) |
 | 29 | Thu 29 Oct | SDR Lab (Day 2 of 2) | [Lab 6 Description](labs/Lab6) |  |  |
 | 30 | Mon 2 Nov | Probability, Part 1 | L&D 7.1-7.3 |  |  |
-| 31 | Wed 4 Nov | Probability, Part 2 | L&D 7.4-7.7 | [HW8](HW/HW8) | [Lab 6](labs/Lab6) |
-| 32 | Fri 6 Nov | Random processes | L&D 8-8.4 (at least) |  | [HW7](HW/HW7) |
-| 33 | Tue 10 Nov | SDR Lab | [Lab 7 Description](labs/Lab7) | [Lab 7](labs/Lab7) |  |
+| 31 | Wed 4 Nov | Probability, Part 2 | L&D 7.4-7.7 | [HW8](HW/HW8) |  |
+| 32 | Fri 6 Nov | Random processes | L&D 8-8.4 (at least) |  |  |
+| 33 | Tue 10 Nov | SDR Lab | [Lab 7 Description](labs/Lab7) | [Lab 7](labs/Lab7) | [Lab 6](labs/Lab6) [HW7](HW/HW7)  |
 | 34 | Fri 13 Nov | GR2 Review Day |  |  | [HW8](HW/HW8) |
 | 35 | Tue 17 Nov | GR 2 | Covering Lsns 18-32 (Chapters 5-8) |  |  |
 | 36 | Thu 19 Nov | Matched filters & binary system performance, Part 1 | L&D 9.1-9.2 | [HW9](HW/HW9) |  |
