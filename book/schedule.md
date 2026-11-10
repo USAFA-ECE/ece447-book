@@ -48,8 +48,8 @@ This is meant to serve an a _notional_ schedule for ECE447. We will keep this up
 | 31 | Wed 4 Nov | Probability, Part 2 | L&D 7.4-7.7 | [HW8](HW/HW8) |  |
 | 32 | Fri 6 Nov | Random processes | L&D 8-8.4 (at least) |  |  |
 | 33 | Tue 10 Nov | SDR Lab | [Lab 7 Description](labs/Lab7) | [Lab 7](labs/Lab7) | [Lab 6](labs/Lab6) [HW7](HW/HW7)  |
-| 34 | Fri 13 Nov | GR2 Review Day |  |  | [HW8](HW/HW8) |
-| 35 | Tue 17 Nov | GR 2 | Covering Lsns 18-32 (Chapters 5-8) |  |  |
+| 34 | Fri 13 Nov | GR2 Review Day |  | [GR2 Review](./static/GR2%20Review%20and%20Worksheet.pdf)  | [HW8](HW/HW8) |
+| 35 | Tue 17 Nov | GR 2 | Covering Lsns 18-32 (Chapters 5-8) |  |  | 
 | 36 | Thu 19 Nov | Matched filters & binary system performance, Part 1 | L&D 9.1-9.2 | [HW9](HW/HW9) |  |
 | 37 | Mon 23 Nov | Binary system performance, Part 2 | L&D 9.2, 9.3.3 | [Lab 8](labs/Lab8) preview | [Lab 7](labs/Lab7) |
 | 38 | Tue 1 Dec | Error correction: parity, CRC, & Hamming codes | L&D 12.3.2, 13.1-13.3 |  |  |
