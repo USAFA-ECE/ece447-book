@@ -55,8 +55,8 @@ _Lab entries link to the SDR lab write-ups. Each slide file is named for the les
 | 31 | [Probability, Part 2](_static/slides/Lsn31_Probability2.pdf) |
 | 32 | [Random Processes](_static/slides/Lsn32_RandomProcesses.pdf) |
 | 33 | [SDR Lab 7](labs/Lab7) |
-| 34 | [GR 2 Review](_static/slides/Lsn34_ReviewDay.pdf) |
-| 34 | [GR 2 Review Solution] (_static/slides/Lsn34_Review_Solution.pdf)| 
+| 34 | [GR 2 Review](./_static/slides/Lsn34_ReviewDay.pdf) |
+| 34 | [GR 2 Review Solution] (./_static/slides/Lsn34_Review_Solution.pdf)| 
 | 35 | GR 2 |
 | 36 | [Matched Filters & Binary System Performance, Part 1](_static/slides/Lsn36_BinaryPerf1.pdf) |
 | 37 | [Binary System Performance, Part 2](_static/slides/Lsn37_BinaryPerf2.pdf) |
